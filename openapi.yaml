@@ -2531,6 +2531,7 @@ paths:
   /sources/{sourceId}/labels:
     post:
       summary: Add Labels to Source
+      x-speakeasy-entity-operation: LabelV1#create
       parameters:
         - in: path
           name: sourceId
@@ -2699,6 +2700,7 @@ paths:
             }
     put:
       summary: Replace Labels in Source
+      x-speakeasy-entity-operation: LabelV1#update
       parameters:
         - in: path
           name: sourceId
