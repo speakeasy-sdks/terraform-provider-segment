@@ -20,6 +20,8 @@ internal/sdk/transformations.go
 internal/sdk/warehouses.go
 internal/sdk/workspaces.go
 internal/sdk/sdk.go
+internal/provider/type_request_error.go
+internal/provider/type_label_v1.go
 examples/README.md
 go.mod
 go.sum
@@ -465,4 +467,7 @@ internal/sdk/pkg/models/shared/logosbeta.go
 USAGE.md
 internal/provider/provider.go
 examples/provider/provider.tf
+internal/provider/labelv1_resource.go
+internal/provider/labelv1_resource_sdk.go
+examples/resources/segment_label_v1/resource.tf
 .gitattributes

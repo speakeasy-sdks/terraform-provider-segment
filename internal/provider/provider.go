@@ -87,7 +87,9 @@ func (p *SegmentProvider) Configure(ctx context.Context, req provider.ConfigureR
 }
 
 func (p *SegmentProvider) Resources(ctx context.Context) []func() resource.Resource {
-	return []func() resource.Resource{}
+	return []func() resource.Resource{
+		NewLabelV1Resource,
+	}
 }
 
 func (p *SegmentProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
