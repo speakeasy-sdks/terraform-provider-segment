@@ -745,7 +745,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    AddLabelsToSourceV1Input input = AddLabelsToSourceV1Input.fromJson(\"{\\\"labels\\\":[{\\\"key\\\":\\\"type\\\",\\\"value\\\":\\\"web\\\"}]}\");\n    System.out.println(api.addLabelsToSource(\"rh5BDZp6QDHvXFCkibm1pR\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "AddLabelsToSourceV1Input#create"
       },
       "put": {
         "summary": "Replace Labels in Source",
@@ -964,7 +965,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    ReplaceLabelsInSourceV1Input input = ReplaceLabelsInSourceV1Input.fromJson(\n      \"{\\\"labels\\\":[{\\\"key\\\":\\\"environment\\\",\\\"value\\\":\\\"prod\\\"}]}\"\n    );\n    System.out.println(api.replaceLabelsInSource(\"rh5BDZp6QDHvXFCkibm1pR\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "ReplaceLabelsInSourceV1Input#update"
       }
     },
     "/users/{userId}/permissions": {
@@ -1240,7 +1242,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    AddPermissionsToUserV1Input input = AddPermissionsToUserV1Input.fromJson(\n      \"{\\\"permissions\\\":[{\\\"roleId\\\":\\\"1WDUuRLxv84rrfCNUwvkrRtkxnS\\\",\\\"resources\\\":[{\\\"id\\\":\\\"9aQ1Lj62S4bomZKLF4DPqW\\\",\\\"type\\\":\\\"WORKSPACE\\\"}]}]}\"\n    );\n    System.out.println(api.addPermissionsToUser(\"sgJDWk3K21k6LE3tLU9nRK\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "AddPermissionsToUserV1Input#create"
       },
       "put": {
         "summary": "Replace Permissions for User",
@@ -1502,7 +1505,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    ReplacePermissionsForUserV1Input input = ReplacePermissionsForUserV1Input.fromJson(\n      \"{\\\"permissions\\\":[{\\\"roleId\\\":\\\"1WDUuRLxv84rrfCNUwvkrRtkxnS\\\",\\\"resources\\\":[{\\\"id\\\":\\\"9aQ1Lj62S4bomZKLF4DPqW\\\",\\\"type\\\":\\\"WORKSPACE\\\"}]}]}\"\n    );\n    System.out.println(api.replacePermissionsForUser(\"sgJDWk3K21k6LE3tLU9nRK\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "ReplacePermissionsForUserV1Input#update"
       }
     },
     "/groups/{userGroupId}/permissions": {
@@ -1778,7 +1782,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    AddPermissionsToUserGroupV1Input input = AddPermissionsToUserGroupV1Input.fromJson(\n      \"{\\\"permissions\\\":[{\\\"roleId\\\":\\\"1WDUuRLxv84rrfCNUwvkrRtkxnS\\\",\\\"resources\\\":[{\\\"id\\\":\\\"9aQ1Lj62S4bomZKLF4DPqW\\\",\\\"type\\\":\\\"WORKSPACE\\\"}]}]}\"\n    );\n    System.out.println(api.addPermissionsToUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "AddPermissionsToUserGroupV1Input#create"
       },
       "put": {
         "summary": "Replace Permissions for User Group",
@@ -2040,7 +2045,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    ReplacePermissionsForUserGroupV1Input input = ReplacePermissionsForUserGroupV1Input.fromJson(\n      \"{\\\"permissions\\\":[{\\\"roleId\\\":\\\"1WDUuRLxv84rrfCNUwvkrRtkxnS\\\",\\\"resources\\\":[{\\\"id\\\":\\\"9aQ1Lj62S4bomZKLF4DPqW\\\",\\\"type\\\":\\\"WORKSPACE\\\"}]}]}\"\n    );\n    System.out.println(api.replacePermissionsForUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "ReplacePermissionsForUserGroupV1Input#update"
       }
     },
     "/tracking-plans/{trackingPlanId}/sources": {
@@ -2226,7 +2232,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    AddSourceToTrackingPlanV1Input input = AddSourceToTrackingPlanV1Input.fromJson(\"{\\\"sourceId\\\":\\\"qQEHquLrjRDN9j1ByrChyn\\\"}\");\n    System.out.println(api.addSourceToTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "AddSourceToTrackingPlanV1Input#create"
       },
       "get": {
         "summary": "List Sources from Tracking Plan",
@@ -2898,7 +2905,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    AddUsersToUserGroupV1Input input = AddUsersToUserGroupV1Input.fromJson(\"{\\\"emails\\\":[\\\"foo@example.com\\\"]}\");\n    System.out.println(api.addUsersToUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "AddUsersToUserGroupV1Input#create"
       },
       "get": {
         "summary": "List Users from User Group",
@@ -3473,7 +3481,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    CreateCloudSourceRegulationV1Input input = CreateCloudSourceRegulationV1Input.fromJson(\n      \"{\\\"regulationType\\\":\\\"SUPPRESS_ONLY\\\",\\\"subjectType\\\":\\\"OBJECT_ID\\\",\\\"subjectIds\\\":[\\\"test_object_id\\\"],\\\"collection\\\":\\\"some-app-collection\\\"}\"\n    );\n    System.out.println(api.createCloudSourceRegulation(\"qQEHquLrjRDN9j1ByrChyn\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateCloudSourceRegulationV1Input#create"
       }
     },
     "/destinations": {
@@ -3989,7 +3998,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationsApi api = new DestinationsApi();\n    CreateDestinationV1Input input = CreateDestinationV1Input.fromJson(\n      \"{\\\"sourceId\\\":\\\"rh5BDZp6QDHvXFCkibm1pR\\\",\\\"metadataId\\\":\\\"547610a5db31d978f14a5c4e\\\",\\\"name\\\":\\\"my destination v1\\\",\\\"settings\\\":{\\\"apiKey\\\":\\\"XYZ\\\",\\\"retarget\\\":true}}\"\n    );\n    System.out.println(api.createDestination(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateDestinationV1Input#create"
       },
       "get": {
         "summary": "List Destinations",
@@ -5273,7 +5283,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationFiltersApi api = new DestinationFiltersApi();\n    CreateFilterForDestinationV1Input input = CreateFilterForDestinationV1Input.fromJson(\n      \"{\\\"sourceId\\\":\\\"rh5BDZp6QDHvXFCkibm1pR\\\",\\\"title\\\":\\\"Filter \\\\\\\"Identify\\\\\\\" events\\\",\\\"description\\\":\\\"Drop Identify tracking from this destination\\\",\\\"if\\\":\\\"type = \\\\\\\"identify\\\\\\\"\\\",\\\"actions\\\":[{\\\"type\\\":\\\"DROP\\\"}],\\\"enabled\\\":true}\"\n    );\n    System.out.println(api.createFilterForDestination(\"fP7qoQw2HTWt9WdMr718gn\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateFilterForDestinationV1Input#create"
       },
       "get": {
         "summary": "List Filters from Destination",
@@ -5899,7 +5910,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    FunctionsApi api = new FunctionsApi();\n    CreateFunctionV1Input input = CreateFunctionV1Input.fromJson(\n      \"{\\\"code\\\":\\\"// Learn more about source functions API at https://segment.com/docs/connections/sources/source-functions\\\",\\\"settings\\\":[{\\\"name\\\":\\\"apiKey\\\",\\\"label\\\":\\\"api key\\\",\\\"type\\\":\\\"STRING\\\",\\\"description\\\":\\\"api key\\\",\\\"required\\\":false,\\\"sensitive\\\":false},{\\\"name\\\":\\\"mySecret\\\",\\\"label\\\":\\\"my secret key\\\",\\\"type\\\":\\\"STRING\\\",\\\"description\\\":\\\"secret key\\\",\\\"required\\\":false,\\\"sensitive\\\":true}],\\\"displayName\\\":\\\"PAPI Source Function\\\",\\\"resourceType\\\":\\\"SOURCE\\\",\\\"logoUrl\\\":\\\"https://placekitten.com/200/139\\\",\\\"description\\\":\\\"My source function\\\"}\"\n    );\n    System.out.println(api.createFunction(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateFunctionV1Input#create"
       },
       "get": {
         "summary": "List Functions",
@@ -6801,7 +6813,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    CreateInvitesV1Input input = CreateInvitesV1Input.fromJson(\n      \"{\\\"invites\\\":[{\\\"email\\\":\\\"foo@example.com\\\",\\\"permissions\\\":[{\\\"roleId\\\":\\\"1WDUuRLxv84rrfCNUwvkrRtkxnS\\\",\\\"resources\\\":[{\\\"id\\\":\\\"9aQ1Lj62S4bomZKLF4DPqW\\\",\\\"type\\\":\\\"WORKSPACE\\\"}]}]}]}\"\n    );\n    System.out.println(api.createInvites(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateInvitesV1Input#create"
       },
       "delete": {
         "summary": "Delete Invites",
@@ -7344,7 +7357,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    LabelsApi api = new LabelsApi();\n    CreateLabelV1Input input = CreateLabelV1Input.fromJson(\n      \"{\\\"label\\\":{\\\"key\\\":\\\"environment\\\",\\\"value\\\":\\\"yolo\\\",\\\"description\\\":\\\"an environment for courageous devs\\\"}}\"\n    );\n    System.out.println(api.createLabel(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateLabelV1Input#create"
       },
       "get": {
         "summary": "List Labels",
@@ -8397,7 +8411,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    CreateSourceV1Input input = CreateSourceV1Input.fromJson(\n      \"{\\\"slug\\\":\\\"my-test-source-rhpd18\\\",\\\"enabled\\\":true,\\\"metadataId\\\":\\\"IqDTy1TpoU\\\",\\\"settings\\\":{}}\"\n    );\n    System.out.println(api.createSource(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateSourceV1Input#create"
       },
       "get": {
         "summary": "List Sources",
@@ -8992,7 +9007,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    CreateSourceRegulationV1Input input = CreateSourceRegulationV1Input.fromJson(\n      \"{\\\"regulationType\\\":\\\"SUPPRESS_ONLY\\\",\\\"subjectType\\\":\\\"USER_ID\\\",\\\"subjectIds\\\":[\\\"test_user_id_1\\\"]}\"\n    );\n    System.out.println(api.createSourceRegulation(\"qQEHquLrjRDN9j1ByrChyn\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateSourceRegulationV1Input#create"
       },
       "get": {
         "summary": "List Regulations from Source",
@@ -9472,7 +9488,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    CreateTrackingPlanV1Input input = CreateTrackingPlanV1Input.fromJson(\"{\\\"name\\\":\\\"New TP\\\",\\\"type\\\":\\\"LIVE\\\"}\");\n    System.out.println(api.createTrackingPlan(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateTrackingPlanV1Input#create"
       },
       "get": {
         "summary": "List Tracking Plans",
@@ -10047,7 +10064,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TransformationsApi api = new TransformationsApi();\n    CreateTransformationV1Input input = CreateTransformationV1Input.fromJson(\n      \"{\\\"name\\\":\\\"Name of the new transformation\\\",\\\"sourceId\\\":\\\"qQEHquLrjRDN9j1ByrChyn\\\",\\\"enabled\\\":true,\\\"newEventName\\\":\\\"new-event-name\\\",\\\"propertyRenames\\\":[{\\\"oldName\\\":\\\"old-name\\\",\\\"newName\\\":\\\"new-name\\\"},{\\\"oldName\\\":\\\"another-name-old\\\",\\\"newName\\\":\\\"another-name-new\\\"}],\\\"propertyValueTransformations\\\":[{\\\"propertyPaths\\\":[\\\"properties.some-property\\\",\\\"context.some-property\\\"],\\\"propertyValue\\\":\\\"some property value\\\"}],\\\"if\\\":\\\"event = 'Example Event V1'\\\"}\"\n    );\n    System.out.println(api.createTransformation(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateTransformationV1Input#create"
       },
       "get": {
         "summary": "List Transformations",
@@ -10783,7 +10801,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    CreateUserGroupV1Input input = CreateUserGroupV1Input.fromJson(\"{\\\"name\\\":\\\"New User Group GS1qjmdtG9\\\"}\");\n    System.out.println(api.createUserGroup(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateUserGroupV1Input#create"
       },
       "get": {
         "summary": "List User Groups",
@@ -11223,7 +11242,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    CreateValidationInWarehouseV1Input input = CreateValidationInWarehouseV1Input.fromJson(\n      \"{\\\"metadataId\\\":\\\"55d3d3aea3c\\\",\\\"settings\\\":{\\\"hostname\\\":\\\"address.us-west-2.redshift.amazonaws.com\\\",\\\"port\\\":\\\"5439\\\",\\\"database\\\":\\\"db\\\",\\\"username\\\":\\\"user\\\",\\\"password\\\":\\\"test\\\"}}\"\n    );\n    System.out.println(api.createValidationInWarehouse(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateValidationInWarehouseV1Input#create"
       }
     },
     "/warehouses": {
@@ -11476,7 +11496,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    CreateWarehouseV1Input input = CreateWarehouseV1Input.fromJson(\"{\\\"metadataId\\\":\\\"CCIl4HLQPz\\\",\\\"settings\\\":{}}\");\n    System.out.println(api.createWarehouse(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateWarehouseV1Input#create"
       },
       "get": {
         "summary": "List Warehouses",
@@ -12231,7 +12252,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    CreateWorkspaceRegulationV1Input input = CreateWorkspaceRegulationV1Input.fromJson(\n      \"{\\\"regulationType\\\":\\\"SUPPRESS_ONLY\\\",\\\"subjectType\\\":\\\"USER_ID\\\",\\\"subjectIds\\\":[\\\"test_user_id_1\\\"]}\"\n    );\n    System.out.println(api.createWorkspaceRegulation(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "CreateWorkspaceRegulationV1Input#create"
       },
       "get": {
         "summary": "List Workspace Regulations",
@@ -16063,7 +16085,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationsApi api = new DestinationsApi();\n    UpdateDestinationV1Input input = UpdateDestinationV1Input.fromJson(\"{\\\"enabled\\\":false}\");\n    System.out.println(api.updateDestination(\"fP7qoQw2HTWt9WdMr718gn\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateDestinationV1Input#update"
       }
     },
     "/functions/{functionId}": {
@@ -16818,7 +16841,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    FunctionsApi api = new FunctionsApi();\n    UpdateFunctionV1Input input = UpdateFunctionV1Input.fromJson(\n      \"{\\\"code\\\":\\\"// Learn more about source functions API at https://segment.com/docs/connections/sources/source-functions\\\",\\\"logoUrl\\\":\\\"https://placekitten.com/200/139\\\"}\"\n    );\n    System.out.println(api.updateFunction(\"sfnc_wXzcDGFR3KmjLDrtSawNHf\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateFunctionV1Input#update"
       }
     },
     "/insert-function-instances/{instanceId}": {
@@ -18667,7 +18691,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    UpdateSourceV1Input input = UpdateSourceV1Input.fromJson(\"{\\\"name\\\":\\\"My updated source\\\",\\\"enabled\\\":false}\");\n    System.out.println(api.updateSource(\"piTVHEYNrRgBMM1uQGCPbK\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateSourceV1Input#update"
       }
     },
     "/tracking-plans/{trackingPlanId}": {
@@ -19199,7 +19224,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    UpdateTrackingPlanV1Input input = UpdateTrackingPlanV1Input.fromJson(\"{\\\"name\\\":\\\"Updated TP\\\"}\");\n    System.out.println(api.updateTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateTrackingPlanV1Input#update"
       }
     },
     "/transformations/{transformationId}": {
@@ -19913,7 +19939,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TransformationsApi api = new TransformationsApi();\n    UpdateTransformationV1Input input = UpdateTransformationV1Input.fromJson(\n      \"{\\\"name\\\":\\\"updated-name\\\",\\\"sourceId\\\":\\\"rh5BDZp6QDHvXFCkibm1pR\\\",\\\"enabled\\\":true,\\\"destinationMetadataId\\\":\\\"547610a5db31d978f14a5c4e\\\",\\\"if\\\":\\\"event=\\\\\\\"my-event\\\\\\\"\\\",\\\"newEventName\\\":\\\"my-updated-event\\\",\\\"propertyRenames\\\":[{\\\"newName\\\":\\\"new-property\\\",\\\"oldName\\\":\\\"old-property\\\"}],\\\"propertyValueTransformations\\\":[{\\\"propertyPaths\\\":[\\\"properties.another-property\\\"],\\\"propertyValue\\\":\\\"another property value\\\"}]}\"\n    );\n    System.out.println(api.updateTransformation(\"pHrD51Ds35Zjfka84yXQE6\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateTransformationV1Input#update"
       }
     },
     "/groups/{userGroupId}": {
@@ -20493,7 +20520,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    UpdateUserGroupV1Input input = UpdateUserGroupV1Input.fromJson(\"{\\\"name\\\":\\\"PAPI Example Group\\\"}\");\n    System.out.println(api.updateUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateUserGroupV1Input#update"
       }
     },
     "/users": {
@@ -21775,7 +21803,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    UpdateWarehouseV1Input input = UpdateWarehouseV1Input.fromJson(\n      \"{\\\"name\\\":\\\"Redshift Dev\\\",\\\"settings\\\":{\\\"host\\\":\\\"aws.redshift.dev\\\"}}\"\n    );\n    System.out.println(api.updateWarehouse(\"kjU72LCJexvrqL7G4TMHHN\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateWarehouseV1Input#update"
       }
     },
     "/sources/{sourceId}/edge-functions/disable": {
@@ -22740,7 +22769,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SelectiveSyncApi api = new SelectiveSyncApi();\n    ReplaceAdvancedSyncScheduleForWarehouseV1Input input = ReplaceAdvancedSyncScheduleForWarehouseV1Input.fromJson(\n      \"{\\\"enabled\\\":true,\\\"schedule\\\":{\\\"times\\\":[{\\\"enabled\\\":true,\\\"hourOfDay\\\":7},{\\\"enabled\\\":false,\\\"hourOfDay\\\":5},{\\\"enabled\\\":true,\\\"hourOfDay\\\":23}],\\\"timezone\\\":\\\"America/Vancouver\\\"}}\"\n    );\n    System.out.println(api.replaceAdvancedSyncScheduleForWarehouse(\"kjU72LCJexvrqL7G4TMHHN\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "ReplaceAdvancedSyncScheduleForWarehouseV1Input#update"
       }
     },
     "/spaces/{spaceId}/audiences/{id}": {
@@ -28284,7 +28314,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationFiltersApi api = new DestinationFiltersApi();\n    UpdateFilterForDestinationV1Input input = UpdateFilterForDestinationV1Input.fromJson(\n      \"{\\\"if\\\":\\\"!(type = \\\\\\\"track\\\\\\\")\\\",\\\"actions\\\":[{\\\"type\\\":\\\"DROP\\\"}],\\\"title\\\":\\\"Allow Track\\\",\\\"description\\\":\\\"Allows track calls through to the destination.\\\",\\\"enabled\\\":true}\"\n    );\n    System.out.println(api.updateFilterForDestination(\"fP7qoQw2HTWt9WdMr718gn\", \"xx6AySGeFExzdv2Gw2EuhV\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateFilterForDestinationV1Input#update"
       }
     },
     "/functions/{functionId}/versions/{versionId}": {
@@ -33899,7 +33930,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    ReplaceRulesInTrackingPlanV1Input input = ReplaceRulesInTrackingPlanV1Input.fromJson(\n      \"{\\\"rules\\\":[{\\\"key\\\":\\\"New Replaced Rule\\\",\\\"type\\\":\\\"TRACK\\\",\\\"version\\\":1,\\\"jsonSchema\\\":{}}]}\"\n    );\n    System.out.println(api.replaceRulesInTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "ReplaceRulesInTrackingPlanV1Input#update"
       },
       "patch": {
         "summary": "Update Rules in Tracking Plan",
@@ -34104,7 +34136,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    UpdateRulesInTrackingPlanV1Input input = UpdateRulesInTrackingPlanV1Input.fromJson(\n      \"{\\\"rules\\\":[{\\\"key\\\":\\\"New Rule\\\",\\\"type\\\":\\\"TRACK\\\",\\\"version\\\":1,\\\"jsonSchema\\\":{}}]}\"\n    );\n    System.out.println(api.updateRulesInTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateRulesInTrackingPlanV1Input#update"
       }
     },
     "/sources/{sourceId}/settings": {
@@ -34667,7 +34700,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    UpdateSchemaSettingsInSourceV1Input input = UpdateSchemaSettingsInSourceV1Input.fromJson(\n      \"{\\\"group\\\":{\\\"allowTraitsOnViolations\\\":false,\\\"allowUnplannedTraits\\\":false,\\\"commonEventOnViolations\\\":\\\"ALLOW\\\"},\\\"identify\\\":{\\\"allowTraitsOnViolations\\\":true,\\\"allowUnplannedTraits\\\":true,\\\"commonEventOnViolations\\\":\\\"BLOCK\\\"},\\\"track\\\":{\\\"allowEventOnViolations\\\":false,\\\"allowPropertiesOnViolations\\\":false,\\\"allowUnplannedEventProperties\\\":false,\\\"allowUnplannedEvents\\\":false,\\\"commonEventOnViolations\\\":\\\"OMIT_PROPERTIES\\\"},\\\"forwardingViolationsTo\\\":\\\"rh5BDZp6QDHvXFCkibm1pR\\\",\\\"forwardingBlockedEventsTo\\\":\\\"rh5BDZp6QDHvXFCkibm1pR\\\"}\"\n    );\n    System.out.println(api.updateSchemaSettingsInSource(\"qQEHquLrjRDN9j1ByrChyn\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateSchemaSettingsInSourceV1Input#update"
       }
     },
     "/warehouses/{warehouseId}/connected-sources/{sourceId}/selective-syncs": {
@@ -36336,7 +36370,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationFiltersApi api = new DestinationFiltersApi();\n    PreviewDestinationFilterV1Input input = PreviewDestinationFilterV1Input.fromJson(\n      \"{\\\"filter\\\":{\\\"if\\\":\\\"type = \\\\\\\"track\\\\\\\" AND event = \\\\\\\"Order Completed\\\\\\\"\\\",\\\"actions\\\":[{\\\"type\\\":\\\"ALLOW_PROPERTIES\\\",\\\"fields\\\":{\\\"product\\\":[\\\"event\\\",\\\"requestedFrom\\\"]}}]},\\\"payload\\\":{\\\"type\\\":\\\"track\\\",\\\"event\\\":\\\"Order Completed\\\",\\\"product\\\":{\\\"name\\\":\\\"Fake mustache\\\",\\\"requestedFrom\\\":\\\"/products/123/checkout\\\",\\\"referrer\\\":\\\"www.example.com\\\"}}}\"\n    );\n    System.out.println(api.previewDestinationFilter(input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "PreviewDestinationFilterV1Input#create"
       }
     },
     "/spaces/{spaceId}/profiles-warehouses/{warehouseId}": {
@@ -37002,7 +37037,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    ReplaceUsersInUserGroupV1Input input = ReplaceUsersInUserGroupV1Input.fromJson(\"{\\\"emails\\\":[\\\"foo@example.com\\\"]}\");\n    System.out.println(api.replaceUsersInUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "ReplaceUsersInUserGroupV1Input#update"
       }
     },
     "/spaces/{spaceId}/messaging-subscriptions": {
@@ -37402,7 +37438,8 @@
             "label": "Java",
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SelectiveSyncApi api = new SelectiveSyncApi();\n    UpdateSelectiveSyncForWarehouseV1Input input = UpdateSelectiveSyncForWarehouseV1Input.fromJson(\n      \"{\\\"syncOverrides\\\":[{\\\"sourceId\\\":\\\"rh5BDZp6QDHvXFCkibm1pR\\\",\\\"enabled\\\":true,\\\"collection\\\":\\\"checkout_started\\\",\\\"property\\\":\\\"context_ip\\\"}]}\"\n    );\n    System.out.println(api.updateSelectiveSyncForWarehouse(\"kjU72LCJexvrqL7G4TMHHN\", input).getData());\n  }\n}\n"
           }
-        ]
+        ],
+        "x-speakeasy-entity-operation": "UpdateSelectiveSyncForWarehouseV1Input#update"
       }
     }
   },
@@ -37438,7 +37475,8 @@
         "required": [
           "key",
           "value"
-        ]
+        ],
+        "x-speakeasy-entity": "AllowedLabelBeta"
       },
       "AuditEventV1": {
         "description": "Represents an Audit Trail event.",
@@ -37489,13 +37527,15 @@
           "resourceType",
           "timestamp",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "AuditEventV1"
       },
       "ListAuditEventsV1Input": {
         "description": "Retrieves all Audit Trail events for the current Workspace.",
         "title": "ListAuditEventsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListAuditEventsV1Input"
       },
       "ListAuditEventsV1Output": {
         "description": "Returns a list of Audit Trail events for the current Workspace.",
@@ -37522,7 +37562,8 @@
         },
         "required": [
           "events"
-        ]
+        ],
+        "x-speakeasy-entity": "ListAuditEventsV1Output"
       },
       "AudienceSummary": {
         "description": "Defines an Audience.",
@@ -37591,19 +37632,22 @@
           "spaceId",
           "updatedAt",
           "updatedBy"
-        ]
+        ],
+        "x-speakeasy-entity": "AudienceSummary"
       },
       "GetAudienceAlphaInput": {
         "description": "Input to get an audience.",
         "title": "GetAudienceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetAudienceAlphaInput"
       },
       "ListAudiencesAlphaInput": {
         "description": "Input to list audiences for a space id.",
         "title": "ListAudiencesAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListAudiencesAlphaInput"
       },
       "UpdateAudienceForSpaceInput": {
         "description": "Input to update an audience.",
@@ -37618,13 +37662,15 @@
         },
         "required": [
           "enabled"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateAudienceForSpaceInput"
       },
       "RemoveAudienceFromSpaceAlphaInput": {
         "description": "Input to delete an audience.",
         "title": "RemoveAudienceFromSpaceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveAudienceFromSpaceAlphaInput"
       },
       "UpdateAudienceForSpaceAlphaOutput": {
         "description": "Audience output for get.",
@@ -37643,7 +37689,8 @@
         },
         "required": [
           "audience"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateAudienceForSpaceAlphaOutput"
       },
       "GetAudienceAlphaOutput": {
         "description": "Audience output for update.",
@@ -37662,7 +37709,8 @@
         },
         "required": [
           "audience"
-        ]
+        ],
+        "x-speakeasy-entity": "GetAudienceAlphaOutput"
       },
       "ListAudiencesAlphaOutput": {
         "description": "List audiences endpoint output.",
@@ -37690,7 +37738,8 @@
         "required": [
           "audiences",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListAudiencesAlphaOutput"
       },
       "RemoveAudienceFromSpaceAlphaOutput": {
         "description": "Delete audience endpoint output.",
@@ -37708,7 +37757,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveAudienceFromSpaceAlphaOutput"
       },
       "ComputedTraitSummary": {
         "description": "Defines a Computed trait.",
@@ -37777,19 +37827,22 @@
           "spaceId",
           "updatedAt",
           "updatedBy"
-        ]
+        ],
+        "x-speakeasy-entity": "ComputedTraitSummary"
       },
       "GetComputedTraitAlphaInput": {
         "description": "Input to get a computed trait.",
         "title": "GetComputedTraitAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetComputedTraitAlphaInput"
       },
       "ListComputedTraitsAlphaInput": {
         "description": "Input to list computed traits for a space id.",
         "title": "ListComputedTraitsAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListComputedTraitsAlphaInput"
       },
       "UpdateComputedTraitForSpaceAlphaInput": {
         "description": "Input to update a computed trait.",
@@ -37804,13 +37857,15 @@
         },
         "required": [
           "enabled"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateComputedTraitForSpaceAlphaInput"
       },
       "RemoveComputedTraitFromSpaceAlphaInput": {
         "description": "Input to delete a computed trait.",
         "title": "RemoveComputedTraitFromSpaceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveComputedTraitFromSpaceAlphaInput"
       },
       "GetComputedTraitAlphaOutput": {
         "description": "Computed Trait output for get and update.",
@@ -37829,7 +37884,8 @@
         },
         "required": [
           "computedTrait"
-        ]
+        ],
+        "x-speakeasy-entity": "GetComputedTraitAlphaOutput"
       },
       "UpdateComputedTraitForSpaceAlphaOutput": {
         "description": "Computed Trait output for get and update.",
@@ -37848,7 +37904,8 @@
         },
         "required": [
           "computedTrait"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateComputedTraitForSpaceAlphaOutput"
       },
       "ListComputedTraitsAlphaOutput": {
         "description": "List computed traits endpoint output.",
@@ -37876,7 +37933,8 @@
         "required": [
           "computedTraits",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListComputedTraitsAlphaOutput"
       },
       "RemoveComputedTraitFromSpaceAlphaOutput": {
         "description": "Delete computed trait endpoint output.",
@@ -37894,25 +37952,29 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveComputedTraitFromSpaceAlphaOutput"
       },
       "ListFiltersFromDestinationV1Input": {
         "description": "Input for ListDestinationFiltersV1.",
         "title": "ListFiltersFromDestinationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListFiltersFromDestinationV1Input"
       },
       "GetFilterInDestinationV1Input": {
         "description": "Input for GetDestinationFilterV1.",
         "title": "GetFilterInDestinationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetFilterInDestinationV1Input"
       },
       "RemoveFilterFromDestinationV1Input": {
         "description": "Input for DeleteDestinationFilterV1.",
         "title": "RemoveFilterFromDestinationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveFilterFromDestinationV1Input"
       },
       "DestinationFilterActionV1": {
         "description": "Represents a Destination filter action.",
@@ -37949,7 +38011,8 @@
         },
         "required": [
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationFilterActionV1"
       },
       "CreateFilterForDestinationV1Input": {
         "description": "Input for CreateDestinationFilterV1.",
@@ -37996,7 +38059,8 @@
           "if",
           "sourceId",
           "title"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateFilterForDestinationV1Input"
       },
       "PreviewDestinationFilterV1": {
         "description": "A simplified Destination filter that includes the if and actions for a DestinationFilterV1.",
@@ -38020,7 +38084,8 @@
         "required": [
           "actions",
           "if"
-        ]
+        ],
+        "x-speakeasy-entity": "PreviewDestinationFilterV1"
       },
       "PreviewDestinationFilterV1Input": {
         "description": "Input of the Destination filter to preview.\nFor guidance on using FQL, see the Segment documentation site.",
@@ -38046,7 +38111,8 @@
         "required": [
           "filter",
           "payload"
-        ]
+        ],
+        "x-speakeasy-entity": "PreviewDestinationFilterV1Input"
       },
       "PreviewDestinationFilterV1Output": {
         "description": "Preview output from applying the Destination filter.\nSegment modifies or nullifies payloads depending on the provided filter actions.",
@@ -38069,7 +38135,8 @@
         "required": [
           "inputPayload",
           "result"
-        ]
+        ],
+        "x-speakeasy-entity": "PreviewDestinationFilterV1Output"
       },
       "DestinationFilterV1": {
         "description": "Represents a Destination filter.",
@@ -38140,7 +38207,8 @@
           "sourceId",
           "title",
           "updatedAt"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationFilterV1"
       },
       "ListFiltersFromDestinationV1Output": {
         "description": "Output for ListDestinationFiltersV1.",
@@ -38168,7 +38236,8 @@
         "required": [
           "filters",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListFiltersFromDestinationV1Output"
       },
       "GetFilterInDestinationV1Output": {
         "description": "Output for GetDestinationFiltersV1.",
@@ -38187,7 +38256,8 @@
         },
         "required": [
           "filter"
-        ]
+        ],
+        "x-speakeasy-entity": "GetFilterInDestinationV1Output"
       },
       "CreateFilterForDestinationV1Output": {
         "description": "Output for CreateDestinationFiltersV1.",
@@ -38206,7 +38276,8 @@
         },
         "required": [
           "filter"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateFilterForDestinationV1Output"
       },
       "RemoveFilterFromDestinationV1Output": {
         "description": "Output for DeleteDestinationFilterV1.",
@@ -38224,7 +38295,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveFilterFromDestinationV1Output"
       },
       "UpdateFilterForDestinationV1Input": {
         "description": "Input for UpdateDestinationFilterV1.",
@@ -38260,7 +38332,8 @@
             "type": "boolean",
             "title": "enabled"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateFilterForDestinationV1Input"
       },
       "UpdateFilterForDestinationV1Output": {
         "description": "Output for UpdateDestinationFilterV1.",
@@ -38279,7 +38352,8 @@
         },
         "required": [
           "filter"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateFilterForDestinationV1Output"
       },
       "DestinationMetadataV1": {
         "description": "Represents a Destination within Segment.\n\nA Destination is a target for Segment to forward data to, and represents a tool or storage Destination.",
@@ -38456,7 +38530,8 @@
           "supportedMethods",
           "supportedPlatforms",
           "website"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationMetadataV1"
       },
       "Contact": {
         "description": "The contact info for Integration Owners.",
@@ -38486,7 +38561,8 @@
         },
         "required": [
           "email"
-        ]
+        ],
+        "x-speakeasy-entity": "Contact"
       },
       "DestinationMetadataComponentV1": {
         "description": "Represents a component this Destination provides.",
@@ -38522,7 +38598,8 @@
         "required": [
           "code",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationMetadataComponentV1"
       },
       "DestinationMetadataMethodsV1": {
         "description": "Represents methods that a given Destination supports.",
@@ -38554,7 +38631,8 @@
             "type": "boolean",
             "title": "group"
           }
-        }
+        },
+        "x-speakeasy-entity": "DestinationMetadataMethodsV1"
       },
       "DestinationMetadataPlatformsV1": {
         "description": "Represents platforms that a given Destination supports.",
@@ -38576,7 +38654,8 @@
             "type": "boolean",
             "title": "mobile"
           }
-        }
+        },
+        "x-speakeasy-entity": "DestinationMetadataPlatformsV1"
       },
       "DestinationMetadataFeaturesV1": {
         "description": "Represents features that a given Destination supports.",
@@ -38621,7 +38700,8 @@
             "type": "boolean",
             "title": "browserUnbundlingPublic"
           }
-        }
+        },
+        "x-speakeasy-entity": "DestinationMetadataFeaturesV1"
       },
       "DestinationMetadataActionV1": {
         "description": "Represents an Action, a building block of behavior that can be performed by the Destination.",
@@ -38687,7 +38767,8 @@
           "name",
           "platform",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationMetadataActionV1"
       },
       "DestinationMetadataActionFieldV1": {
         "description": "Represents a field used in configuring an action.",
@@ -38780,7 +38861,8 @@
           "required",
           "sortOrder",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationMetadataActionFieldV1"
       },
       "DestinationMetadataSubscriptionPresetV1": {
         "description": "Represents a set of defaults for a Destination subscription.",
@@ -38814,13 +38896,15 @@
           "fields",
           "name",
           "trigger"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationMetadataSubscriptionPresetV1"
       },
       "GetDestinationsCatalogV1Input": {
         "description": "Contains filter parameters used for loading the Destinations public catalog.",
         "title": "GetDestinationsCatalogV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDestinationsCatalogV1Input"
       },
       "GetDestinationsCatalogV1Output": {
         "description": "Returns a list of all Destination catalog items contained within a given page.",
@@ -38848,13 +38932,15 @@
         "required": [
           "destinationsCatalog",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDestinationsCatalogV1Output"
       },
       "GetDestinationMetadataV1Input": {
         "description": "Loads a Destination catalog item by id.",
         "title": "GetDestinationMetadataV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDestinationMetadataV1Input"
       },
       "GetDestinationMetadataV1Output": {
         "description": "Returns a Destination catalog item.",
@@ -38873,7 +38959,8 @@
         },
         "required": [
           "destinationMetadata"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDestinationMetadataV1Output"
       },
       "DestinationSubscription": {
         "title": "DestinationSubscription",
@@ -38938,19 +39025,22 @@
           "name",
           "settings",
           "trigger"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationSubscription"
       },
       "DestinationSubscriptionFields": {
         "description": "Represents settings used to configure an action subscription.",
         "title": "DestinationSubscriptionFields",
         "type": "object",
-        "additionalProperties": {}
+        "additionalProperties": {},
+        "x-speakeasy-entity": "DestinationSubscriptionFields"
       },
       "ListSubscriptionsFromDestinationAlphaInput": {
         "description": "Input for ListDestinationSubscriptionsAlpha.",
         "title": "ListSubscriptionsFromDestinationAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSubscriptionsFromDestinationAlphaInput"
       },
       "ListSubscriptionsFromDestinationAlphaOutput": {
         "description": "Output for ListDestinationSubscriptionsAlpha.",
@@ -38977,13 +39067,15 @@
         },
         "required": [
           "subscriptions"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSubscriptionsFromDestinationAlphaOutput"
       },
       "GetSubscriptionFromDestinationAlphaInput": {
         "description": "Fetches a Destination subscription.",
         "title": "GetSubscriptionFromDestinationAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetSubscriptionFromDestinationAlphaInput"
       },
       "GetSubscriptionFromDestinationAlphaOutput": {
         "description": "Returns a subscription for a given subscription id.",
@@ -39002,7 +39094,8 @@
         },
         "required": [
           "subscription"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSubscriptionFromDestinationAlphaOutput"
       },
       "CreateDestinationSubscriptionAlphaInput": {
         "description": "The basic input parameters for creating a Destination subscription.",
@@ -39049,7 +39142,8 @@
           "enabled",
           "name",
           "trigger"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateDestinationSubscriptionAlphaInput"
       },
       "CreateDestinationSubscriptionAlphaOutput": {
         "description": "Returns a newly created Destination subscription.",
@@ -39068,7 +39162,8 @@
         },
         "required": [
           "destinationSubscription"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateDestinationSubscriptionAlphaOutput"
       },
       "DestinationSubscriptionUpdateInput": {
         "description": "The input parameters for updating a Destination subscription.",
@@ -39099,7 +39194,8 @@
               }
             ]
           }
-        }
+        },
+        "x-speakeasy-entity": "DestinationSubscriptionUpdateInput"
       },
       "UpdateSubscriptionForDestinationAlphaInput": {
         "description": "The basic input parameters for updating a Destination subscription.",
@@ -39118,7 +39214,8 @@
         },
         "required": [
           "input"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSubscriptionForDestinationAlphaInput"
       },
       "UpdateSubscriptionForDestinationAlphaOutput": {
         "description": "Returns the updated Destination subscription.",
@@ -39137,13 +39234,15 @@
         },
         "required": [
           "subscription"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSubscriptionForDestinationAlphaOutput"
       },
       "RemoveSubscriptionFromDestinationAlphaInput": {
         "description": "Deletes a Destination by id.",
         "title": "RemoveSubscriptionFromDestinationAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveSubscriptionFromDestinationAlphaInput"
       },
       "RemoveSubscriptionFromDestinationAlphaOutput": {
         "description": "Returns a Destination deletion flag.",
@@ -39161,13 +39260,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveSubscriptionFromDestinationAlphaOutput"
       },
       "ListDeliveryMetricsSummaryFromDestinationBetaInput": {
         "description": "Input to retrieve event delivery metrics summary for a Destination.",
         "title": "ListDeliveryMetricsSummaryFromDestinationBetaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListDeliveryMetricsSummaryFromDestinationBetaInput"
       },
       "ListDeliveryMetricsSummaryFromDestinationBetaOutput": {
         "description": "Output to retrieve event delivery metrics summary for a Destination.",
@@ -39186,7 +39287,8 @@
         },
         "required": [
           "deliveryMetricsSummary"
-        ]
+        ],
+        "x-speakeasy-entity": "ListDeliveryMetricsSummaryFromDestinationBetaOutput"
       },
       "DeliveryMetricsSummaryBeta": {
         "description": "Defines the summary of delivery metrics for a Destination.",
@@ -39216,7 +39318,8 @@
           "destinationMetadataId",
           "metrics",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "DeliveryMetricsSummaryBeta"
       },
       "MetricBeta": {
         "description": "The event delivery metric.",
@@ -39245,7 +39348,8 @@
         "required": [
           "metricName",
           "total"
-        ]
+        ],
+        "x-speakeasy-entity": "MetricBeta"
       },
       "BreakdownBeta": {
         "description": "The breakdown of a metric.",
@@ -39266,7 +39370,8 @@
         "required": [
           "metricName",
           "value"
-        ]
+        ],
+        "x-speakeasy-entity": "BreakdownBeta"
       },
       "DestinationV1": {
         "description": "Business tools or apps that you can connect to the data flowing through Segment.\n\nThis is equal to the Destination object in Config API, with the following fields omitted:\n- catalogId\n- createTime\n- updateTime\n- connectionMode.",
@@ -39315,13 +39420,15 @@
           "metadata",
           "settings",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationV1"
       },
       "ListDestinationsV1Input": {
         "description": "Loads all Destinations connected to the current Workspace.",
         "title": "ListDestinationsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListDestinationsV1Input"
       },
       "ListDestinationsV1Output": {
         "description": "Returns all Destinations connected to the current Workspace.",
@@ -39349,13 +39456,15 @@
         "required": [
           "destinations",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListDestinationsV1Output"
       },
       "GetDestinationV1Input": {
         "description": "Looks up a single Destination by its id.",
         "title": "GetDestinationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDestinationV1Input"
       },
       "GetDestinationV1Output": {
         "description": "Returns a single Destination by its id.",
@@ -39374,13 +39483,15 @@
         },
         "required": [
           "destination"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDestinationV1Output"
       },
       "DeleteDestinationV1Input": {
         "description": "Deletes a single Destination by its id.",
         "title": "DeleteDestinationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteDestinationV1Input"
       },
       "DeleteDestinationV1Output": {
         "description": "Returns the status of a Destination deletion.",
@@ -39398,7 +39509,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteDestinationV1Output"
       },
       "UpdateDestinationV1Output": {
         "description": "Returns the updated Destination.",
@@ -39417,7 +39529,8 @@
         },
         "required": [
           "destination"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateDestinationV1Output"
       },
       "UpdateDestinationV1Input": {
         "description": "Updates a single Destination by its id.",
@@ -39441,7 +39554,8 @@
             "additionalProperties": true,
             "title": "settings"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateDestinationV1Input"
       },
       "CreateDestinationV1Output": {
         "description": "Creates a new Destination.",
@@ -39460,7 +39574,8 @@
         },
         "required": [
           "destination"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateDestinationV1Output"
       },
       "CreateDestinationV1Input": {
         "description": "Creates a new Destination.",
@@ -39498,13 +39613,15 @@
           "metadataId",
           "settings",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateDestinationV1Input"
       },
       "EchoAlphaInput": {
         "description": "EchoAlphaInput and EchoAlphaOutput are needed by unit tests in the generated Go code.\n\nIf you change these, make sure `make clients` works locally, and generates the Go client correctly.\nEcho request with options.",
         "title": "EchoAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "EchoAlphaInput"
       },
       "EchoAlphaOutput": {
         "description": "Echo response.",
@@ -39536,13 +39653,15 @@
           "headers",
           "message",
           "method"
-        ]
+        ],
+        "x-speakeasy-entity": "EchoAlphaOutput"
       },
       "EchoV1Input": {
         "description": "Echo request with options.",
         "title": "EchoV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "EchoV1Input"
       },
       "EchoV1Output": {
         "description": "Echo response.",
@@ -39574,13 +39693,15 @@
           "headers",
           "message",
           "method"
-        ]
+        ],
+        "x-speakeasy-entity": "EchoV1Output"
       },
       "GenerateUploadURLForEdgeFunctionsAlphaInput": {
         "description": "Input for GenerateSignedUrl.",
         "title": "GenerateUploadURLForEdgeFunctionsAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GenerateUploadURLForEdgeFunctionsAlphaInput"
       },
       "GenerateUploadURLForEdgeFunctionsAlphaOutput": {
         "description": "Output for GenerateSignedUrl.",
@@ -39595,7 +39716,8 @@
         },
         "required": [
           "uploadURL"
-        ]
+        ],
+        "x-speakeasy-entity": "GenerateUploadURLForEdgeFunctionsAlphaOutput"
       },
       "CreateEdgeFunctionsAlphaInput": {
         "description": "Input for CreateEdgeFunctions.",
@@ -39610,7 +39732,8 @@
         },
         "required": [
           "uploadURL"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateEdgeFunctionsAlphaInput"
       },
       "CreateEdgeFunctionsAlphaOutput": {
         "description": "Output for CreateEdgeFunctions.",
@@ -39629,13 +39752,15 @@
         },
         "required": [
           "edgeFunctions"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateEdgeFunctionsAlphaOutput"
       },
       "GetLatestFromEdgeFunctionsAlphaInput": {
         "description": "Input for GetLatestFromEdgeFunctions.",
         "title": "GetLatestFromEdgeFunctionsAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetLatestFromEdgeFunctionsAlphaInput"
       },
       "GetLatestFromEdgeFunctionsAlphaOutput": {
         "description": "Output for GetLatestFromEdgeFunctions.",
@@ -39654,13 +39779,15 @@
         },
         "required": [
           "edgeFunctions"
-        ]
+        ],
+        "x-speakeasy-entity": "GetLatestFromEdgeFunctionsAlphaOutput"
       },
       "DisableEdgeFunctionsAlphaInput": {
         "description": "Input for DisableEdgeFunctions.",
         "title": "DisableEdgeFunctionsAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DisableEdgeFunctionsAlphaInput"
       },
       "DisableEdgeFunctionsAlphaOutput": {
         "description": "Output for DisableEdgeFunctions.",
@@ -39679,7 +39806,8 @@
         },
         "required": [
           "edgeFunctions"
-        ]
+        ],
+        "x-speakeasy-entity": "DisableEdgeFunctionsAlphaOutput"
       },
       "EdgeFunctionsAlpha": {
         "description": "Represents an Edge Function bundle.",
@@ -39724,13 +39852,15 @@
           "id",
           "sourceId",
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "EdgeFunctionsAlpha"
       },
       "ListFunctionVersionsAlphaInput": {
         "description": "Lists all versions of a Function.",
         "title": "ListFunctionVersionsAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListFunctionVersionsAlphaInput"
       },
       "ListFunctionVersionsAlphaOutput": {
         "description": "Lists Versions of a Function.",
@@ -39758,13 +39888,15 @@
         "required": [
           "pagination",
           "versions"
-        ]
+        ],
+        "x-speakeasy-entity": "ListFunctionVersionsAlphaOutput"
       },
       "GetFunctionVersionAlphaInput": {
         "description": "Gets a Function version.",
         "title": "GetFunctionVersionAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetFunctionVersionAlphaInput"
       },
       "GetFunctionVersionAlphaOutput": {
         "description": "Get Function version output.",
@@ -39783,7 +39915,8 @@
         },
         "required": [
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "GetFunctionVersionAlphaOutput"
       },
       "RestoreFunctionVersionAlphaInput": {
         "description": "Restore a given Function version.",
@@ -39798,7 +39931,8 @@
         },
         "required": [
           "versionId"
-        ]
+        ],
+        "x-speakeasy-entity": "RestoreFunctionVersionAlphaInput"
       },
       "RestoreFunctionVersionAlphaOutput": {
         "description": "Restore version output.",
@@ -39817,7 +39951,8 @@
         },
         "required": [
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "RestoreFunctionVersionAlphaOutput"
       },
       "InsertFunctionInstanceAlpha": {
         "title": "InsertFunctionInstanceAlpha",
@@ -39873,7 +40008,8 @@
           "integrationId",
           "settings",
           "updatedAt"
-        ]
+        ],
+        "x-speakeasy-entity": "InsertFunctionInstanceAlpha"
       },
       "CreateInsertFunctionInstanceAlphaInput": {
         "description": "Creates an insert Function instance.",
@@ -39912,7 +40048,8 @@
           "integrationId",
           "name",
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateInsertFunctionInstanceAlphaInput"
       },
       "CreateInsertFunctionInstanceAlphaOutput": {
         "description": "Creates an insert Function instance.",
@@ -39931,13 +40068,15 @@
         },
         "required": [
           "insertFunctionInstance"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateInsertFunctionInstanceAlphaOutput"
       },
       "ListInsertFunctionInstancesAlphaInput": {
         "description": "List all insert Function instances connected to the insert Function.",
         "title": "ListInsertFunctionInstancesAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListInsertFunctionInstancesAlphaInput"
       },
       "ListInsertFunctionInstancesAlphaOutput": {
         "description": "Returns a list of insert Function instances connected to the insert Function.",
@@ -39965,7 +40104,8 @@
         "required": [
           "instances",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListInsertFunctionInstancesAlphaOutput"
       },
       "UpdateInsertFunctionInstanceAlphaInput": {
         "description": "Updates an insert Function instance.",
@@ -39991,7 +40131,8 @@
         },
         "required": [
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateInsertFunctionInstanceAlphaInput"
       },
       "UpdateInsertFunctionInstanceAlphaOutput": {
         "description": "Returns the updated insert Function instance.",
@@ -40010,13 +40151,15 @@
         },
         "required": [
           "insertFunctionInstance"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateInsertFunctionInstanceAlphaOutput"
       },
       "DeleteInsertFunctionInstanceAlphaInput": {
         "description": "Delete an insert Function instance.",
         "title": "DeleteInsertFunctionInstanceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteInsertFunctionInstanceAlphaInput"
       },
       "DeleteInsertFunctionInstanceAlphaOutput": {
         "description": "Delete an insert Function instance.",
@@ -40034,7 +40177,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteInsertFunctionInstanceAlphaOutput"
       },
       "FunctionSettingV1": {
         "title": "FunctionSettingV1",
@@ -40084,7 +40228,8 @@
           "required",
           "sensitive",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "FunctionSettingV1"
       },
       "FunctionV1": {
         "description": "Represents a Function.",
@@ -40170,7 +40315,8 @@
             "type": "boolean",
             "title": "isLatestVersion"
           }
-        }
+        },
+        "x-speakeasy-entity": "FunctionV1"
       },
       "ListFunctionItemV1": {
         "description": "Represents a Function in a list.",
@@ -40222,13 +40368,15 @@
             "type": "string",
             "title": "catalogId"
           }
-        }
+        },
+        "x-speakeasy-entity": "ListFunctionItemV1"
       },
       "GetFunctionV1Input": {
         "description": "Gets a single Function.",
         "title": "GetFunctionV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetFunctionV1Input"
       },
       "GetFunctionV1Output": {
         "description": "Gets a single Function.",
@@ -40249,13 +40397,15 @@
         },
         "required": [
           "function"
-        ]
+        ],
+        "x-speakeasy-entity": "GetFunctionV1Output"
       },
       "ListFunctionsV1Input": {
         "description": "Lists all Functions in a Workspace.",
         "title": "ListFunctionsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListFunctionsV1Input"
       },
       "ListFunctionsV1Output": {
         "description": "Lists Functions in a Workspace.",
@@ -40283,7 +40433,8 @@
         "required": [
           "functions",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListFunctionsV1Output"
       },
       "CreateFunctionV1Input": {
         "description": "Creates a Function.",
@@ -40333,7 +40484,8 @@
           "code",
           "displayName",
           "resourceType"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateFunctionV1Input"
       },
       "CreateFunctionV1Output": {
         "description": "Create a Function.",
@@ -40352,13 +40504,15 @@
         },
         "required": [
           "function"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateFunctionV1Output"
       },
       "DeleteFunctionV1Input": {
         "description": "Delete a single Function.",
         "title": "DeleteFunctionV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteFunctionV1Input"
       },
       "DeleteFunctionV1Output": {
         "description": "Delete a single Function.",
@@ -40376,7 +40530,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteFunctionV1Output"
       },
       "UpdateFunctionV1Input": {
         "description": "Update a Function.",
@@ -40411,7 +40566,8 @@
             "type": "string",
             "title": "description"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateFunctionV1Input"
       },
       "UpdateFunctionV1Output": {
         "description": "Create a Function.",
@@ -40430,13 +40586,15 @@
         },
         "required": [
           "function"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateFunctionV1Output"
       },
       "CreateFunctionDeploymentV1Input": {
         "description": "Updates the deployment for a Source Function instance.",
         "title": "CreateFunctionDeploymentV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "CreateFunctionDeploymentV1Input"
       },
       "CreateFunctionDeploymentV1Output": {
         "description": "Updates the deployment for a Source Function instance.",
@@ -40463,7 +40621,8 @@
         },
         "required": [
           "functionDeployment"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateFunctionDeploymentV1Output"
       },
       "Version": {
         "description": "Represents a Function Version in a list.",
@@ -40509,7 +40668,8 @@
         "required": [
           "code",
           "id"
-        ]
+        ],
+        "x-speakeasy-entity": "Version"
       },
       "HandleWebhookInput": {
         "description": "Function webhook input.",
@@ -40542,7 +40702,8 @@
           "s",
           "t",
           "w"
-        ]
+        ],
+        "x-speakeasy-entity": "HandleWebhookInput"
       },
       "HandleWebhookOutput": {
         "description": "Function webhook output status.",
@@ -40563,7 +40724,8 @@
         "required": [
           "statusCode",
           "success"
-        ]
+        ],
+        "x-speakeasy-entity": "HandleWebhookOutput"
       },
       "ResourceV1": {
         "description": "Represents a permission's resource.",
@@ -40591,7 +40753,8 @@
         "required": [
           "id",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "ResourceV1"
       },
       "InvitePermissionV1": {
         "description": "Defines a permission to apply to the user in an invite.",
@@ -40622,7 +40785,8 @@
         },
         "required": [
           "roleId"
-        ]
+        ],
+        "x-speakeasy-entity": "InvitePermissionV1"
       },
       "InviteV1": {
         "description": "Defines an invitation to join a Workspace.",
@@ -40645,7 +40809,8 @@
         },
         "required": [
           "email"
-        ]
+        ],
+        "x-speakeasy-entity": "InviteV1"
       },
       "CreateInvitesV1Input": {
         "description": "Invites a user to a Workspace with specified permissions.",
@@ -40663,7 +40828,8 @@
         },
         "required": [
           "invites"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateInvitesV1Input"
       },
       "CreateInvitesV1Output": {
         "description": "Returns the emails of the invited users.",
@@ -40681,13 +40847,15 @@
         },
         "required": [
           "emails"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateInvitesV1Output"
       },
       "DeleteInvitesV1Input": {
         "description": "Removes pre-existing invitations to join a Workspace.",
         "title": "DeleteInvitesV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteInvitesV1Input"
       },
       "DeleteInvitesV1Output": {
         "description": "Returns the status of the removal operation.",
@@ -40705,13 +40873,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteInvitesV1Output"
       },
       "ListInvitesV1Input": {
         "description": "Retrieves a list of existing invitations to join a Workspace.",
         "title": "ListInvitesV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListInvitesV1Input"
       },
       "ListInvitesV1Output": {
         "description": "Returns the list of invites.",
@@ -40739,7 +40909,8 @@
         "required": [
           "invites",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListInvitesV1Output"
       },
       "PermissionResourceV1": {
         "description": "The most basic representation of a resource belonging to a set of permissions.",
@@ -40775,7 +40946,8 @@
         "required": [
           "id",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "PermissionResourceV1"
       },
       "PermissionV1": {
         "description": "A registered set of permissions for a subject, extending a role to a resource.",
@@ -40813,7 +40985,8 @@
           "resources",
           "roleId",
           "roleName"
-        ]
+        ],
+        "x-speakeasy-entity": "PermissionV1"
       },
       "MinimalUserGroupV1": {
         "description": "The least amount of information needed to identify a user group.",
@@ -40834,13 +41007,15 @@
         "required": [
           "id",
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "MinimalUserGroupV1"
       },
       "DeleteUsersV1Input": {
         "description": "Removes users from a Workspace.",
         "title": "DeleteUsersV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteUsersV1Input"
       },
       "DeleteUsersV1Output": {
         "description": "Returns the status of the removal operation.",
@@ -40858,7 +41033,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteUsersV1Output"
       },
       "AccessPermissionV1": {
         "description": "A permission governing access to a resource.",
@@ -40888,7 +41064,8 @@
           "resources",
           "roleId",
           "roleName"
-        ]
+        ],
+        "x-speakeasy-entity": "AccessPermissionV1"
       },
       "PermissionInputV1": {
         "description": "The input for a permission, associated with a resource and/or labels.",
@@ -40912,7 +41089,8 @@
         "required": [
           "resources",
           "roleId"
-        ]
+        ],
+        "x-speakeasy-entity": "PermissionInputV1"
       },
       "AddPermissionsToUserV1Input": {
         "description": "Adds a list of permissions to a user.",
@@ -40930,7 +41108,8 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "AddPermissionsToUserV1Input"
       },
       "AddPermissionsToUserV1Output": {
         "description": "Returns the user's permissions, including the added permissions.",
@@ -40948,7 +41127,8 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "AddPermissionsToUserV1Output"
       },
       "ReplacePermissionsForUserV1Input": {
         "description": "Updates the list of permissions for a user.",
@@ -40966,7 +41146,8 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplacePermissionsForUserV1Input"
       },
       "ReplacePermissionsForUserV1Output": {
         "description": "Returns the user's permissions, including the updated permissions.",
@@ -40984,13 +41165,15 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplacePermissionsForUserV1Output"
       },
       "ListUsersV1Input": {
         "description": "Returns a list of users with access to the Workspace.",
         "title": "ListUsersV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListUsersV1Input"
       },
       "ListUsersV1Output": {
         "description": "Returns the list of users.",
@@ -41018,13 +41201,15 @@
         "required": [
           "pagination",
           "users"
-        ]
+        ],
+        "x-speakeasy-entity": "ListUsersV1Output"
       },
       "GetUserV1Input": {
         "description": "Returns a user.",
         "title": "GetUserV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetUserV1Input"
       },
       "GetUserV1Output": {
         "description": "Returns the user.",
@@ -41043,7 +41228,8 @@
         },
         "required": [
           "user"
-        ]
+        ],
+        "x-speakeasy-entity": "GetUserV1Output"
       },
       "UserV1": {
         "description": "A user belonging to a Segment Workspace.",
@@ -41078,13 +41264,15 @@
           "email",
           "id",
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "UserV1"
       },
       "ListUserGroupsFromUserV1Input": {
         "description": "Retrieves all user groups the user belongs to.",
         "title": "ListUserGroupsFromUserV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListUserGroupsFromUserV1Input"
       },
       "ListUserGroupsFromUserV1Output": {
         "description": "Returns all user groups the user belongs to.",
@@ -41112,13 +41300,15 @@
         "required": [
           "groups",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListUserGroupsFromUserV1Output"
       },
       "ListRolesV1Input": {
         "description": "Returns a list of roles available to apply to permissions for users in the Workspace.",
         "title": "ListRolesV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListRolesV1Input"
       },
       "RoleV1": {
         "description": "Represents a role.",
@@ -41145,7 +41335,8 @@
           "description",
           "id",
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "RoleV1"
       },
       "ListRolesV1Output": {
         "description": "Returns the list of roles.",
@@ -41173,7 +41364,8 @@
         "required": [
           "pagination",
           "roles"
-        ]
+        ],
+        "x-speakeasy-entity": "ListRolesV1Output"
       },
       "MinimalUserV1": {
         "description": "A user belonging to a Segment Workspace.",
@@ -41200,7 +41392,8 @@
           "email",
           "id",
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "MinimalUserV1"
       },
       "CreateUserGroupV1Input": {
         "description": "Creates a user group, used to bundle permissions for its members, within a Workspace.",
@@ -41215,7 +41408,8 @@
         },
         "required": [
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateUserGroupV1Input"
       },
       "UserGroupV1": {
         "description": "A set of users with a set of shared permissions.",
@@ -41250,7 +41444,8 @@
           "id",
           "memberCount",
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "UserGroupV1"
       },
       "CreateUserGroupV1Output": {
         "description": "Returns the newly created user group.",
@@ -41269,7 +41464,8 @@
         },
         "required": [
           "userGroup"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateUserGroupV1Output"
       },
       "AddPermissionsToUserGroupV1Input": {
         "description": "Adds a list of permissions to a user group.",
@@ -41287,7 +41483,8 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "AddPermissionsToUserGroupV1Input"
       },
       "AddPermissionsToUserGroupV1Output": {
         "description": "Returns the group's permissions, including the added permissions.",
@@ -41305,7 +41502,8 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "AddPermissionsToUserGroupV1Output"
       },
       "AddUsersToUserGroupV1Input": {
         "description": "Adds a list of users and invites to a user group.",
@@ -41323,7 +41521,8 @@
         },
         "required": [
           "emails"
-        ]
+        ],
+        "x-speakeasy-entity": "AddUsersToUserGroupV1Input"
       },
       "AddUsersToUserGroupV1Output": {
         "description": "Returns the updated user group.",
@@ -41342,13 +41541,15 @@
         },
         "required": [
           "userGroup"
-        ]
+        ],
+        "x-speakeasy-entity": "AddUsersToUserGroupV1Output"
       },
       "DeleteUserGroupV1Input": {
         "description": "Deletes a user group with a given group id from a Workspace.",
         "title": "DeleteUserGroupV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteUserGroupV1Input"
       },
       "DeleteUserGroupV1Output": {
         "description": "Returns the status of the completed deletion operation.",
@@ -41366,13 +41567,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteUserGroupV1Output"
       },
       "GetUserGroupV1Input": {
         "description": "Looks up a user group within a Workspace.",
         "title": "GetUserGroupV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetUserGroupV1Input"
       },
       "GetUserGroupV1Output": {
         "description": "Returns a user group with the given id.",
@@ -41391,7 +41594,8 @@
         },
         "required": [
           "userGroup"
-        ]
+        ],
+        "x-speakeasy-entity": "GetUserGroupV1Output"
       },
       "UpdateUserGroupV1Input": {
         "description": "Updates a user group with a given id.",
@@ -41406,7 +41610,8 @@
         },
         "required": [
           "name"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateUserGroupV1Input"
       },
       "UpdateUserGroupV1Output": {
         "description": "Returns the updated user group.",
@@ -41425,13 +41630,15 @@
         },
         "required": [
           "userGroup"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateUserGroupV1Output"
       },
       "ListInvitesFromUserGroupV1Input": {
         "description": "Looks up the invitees to a user group within a Workspace.",
         "title": "ListInvitesFromUserGroupV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListInvitesFromUserGroupV1Input"
       },
       "ListInvitesFromUserGroupV1Output": {
         "description": "Returns the emails of invitees to a user group with the given group id.",
@@ -41459,7 +41666,8 @@
         "required": [
           "emails",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListInvitesFromUserGroupV1Output"
       },
       "ReplaceUsersInUserGroupV1Input": {
         "description": "Replace a user group's list of users and invites with a new one.",
@@ -41477,7 +41685,8 @@
         },
         "required": [
           "emails"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceUsersInUserGroupV1Input"
       },
       "ReplaceUsersInUserGroupV1Output": {
         "description": "Returns the updated user group.",
@@ -41496,13 +41705,15 @@
         },
         "required": [
           "userGroup"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceUsersInUserGroupV1Output"
       },
       "ListUserGroupsV1Input": {
         "description": "Loads all user groups for a Workspace.",
         "title": "ListUserGroupsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListUserGroupsV1Input"
       },
       "ListUserGroupsV1Output": {
         "description": "Returns a list of user groups with the given Workspace id.",
@@ -41530,13 +41741,15 @@
         "required": [
           "pagination",
           "userGroups"
-        ]
+        ],
+        "x-speakeasy-entity": "ListUserGroupsV1Output"
       },
       "RemoveUsersFromUserGroupV1Input": {
         "description": "Removes users or invites from a user group.",
         "title": "RemoveUsersFromUserGroupV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveUsersFromUserGroupV1Input"
       },
       "RemoveUsersFromUserGroupV1Output": {
         "description": "Returns the status of the removal operation.",
@@ -41554,7 +41767,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveUsersFromUserGroupV1Output"
       },
       "ReplacePermissionsForUserGroupV1Input": {
         "description": "Updates the list of permissions for a user group.",
@@ -41572,7 +41786,8 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplacePermissionsForUserGroupV1Input"
       },
       "ReplacePermissionsForUserGroupV1Output": {
         "description": "Returns the user group's permissions, including the updated permissions.",
@@ -41590,13 +41805,15 @@
         },
         "required": [
           "permissions"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplacePermissionsForUserGroupV1Output"
       },
       "ListUsersFromUserGroupV1Input": {
         "description": "Looks up the members of a user group within a Workspace.",
         "title": "ListUsersFromUserGroupV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListUsersFromUserGroupV1Input"
       },
       "ListUsersFromUserGroupV1Output": {
         "description": "Returns the members of a user group with the given group id.",
@@ -41624,7 +41841,8 @@
         "required": [
           "pagination",
           "users"
-        ]
+        ],
+        "x-speakeasy-entity": "ListUsersFromUserGroupV1Output"
       },
       "IntegrationOptionBeta": {
         "description": "Describes an Integration option field required to set up a Segment Integration such as Sources, Destinations, or\nwarehouses.",
@@ -41665,7 +41883,8 @@
           "name",
           "required",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "IntegrationOptionBeta"
       },
       "LabelAlpha": {
         "description": "A label lets Workspace owners assign permissions to users, and grant these users access to groups.\n\nA Workspace owner may use labels to grant users access to groups of resources.\n\nWhen you add a label to a Source or Personas Spaces, any users granted access to that label gain access to those\nresources.\n\nAll Workspaces include labels for Dev (development) and Prod (production) environments. On top of those, Free and\nTeam plan customers may create up to five labels.\n\nCustomers with the Enterprise pricing package may create an unlimited number of labels.",
@@ -41691,12 +41910,14 @@
         "required": [
           "key",
           "value"
-        ]
+        ],
+        "x-speakeasy-entity": "LabelAlpha"
       },
       "ListLabelsAlphaInput": {
         "description": "Retrieves all available labels for the current Workspace.",
         "title": "ListLabelsAlphaInput",
-        "type": "object"
+        "type": "object",
+        "x-speakeasy-entity": "ListLabelsAlphaInput"
       },
       "ListLabelsAlphaOutput": {
         "description": "Returns all available labels for the current Workspace.",
@@ -41714,13 +41935,15 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "ListLabelsAlphaOutput"
       },
       "DeleteLabelAlphaInput": {
         "description": "Deletes an existing label in the current Workspace.",
         "title": "DeleteLabelAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteLabelAlphaInput"
       },
       "DeleteLabelAlphaOutput": {
         "description": "Returns the status of a label deletion.",
@@ -41738,7 +41961,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteLabelAlphaOutput"
       },
       "AddLabelsToSourceAlphaInput": {
         "description": "Applies an existing label to an existing Source.",
@@ -41756,7 +41980,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "AddLabelsToSourceAlphaInput"
       },
       "AddLabelsToSourceAlphaOutput": {
         "description": "Applies an existing label to an existing Source.",
@@ -41774,7 +41999,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "AddLabelsToSourceAlphaOutput"
       },
       "ReplaceLabelsInSourceAlphaInput": {
         "description": "Replaces all labels in a Source with a list of new labels.",
@@ -41792,7 +42018,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceLabelsInSourceAlphaInput"
       },
       "ReplaceLabelsInSourceAlphaOutput": {
         "description": "Response from replacing a list of labels in a Source.",
@@ -41810,7 +42037,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceLabelsInSourceAlphaOutput"
       },
       "LabelV1": {
         "description": "A label lets Workspace owners assign permissions to users, and grant these users access to groups.\n\nA Workspace owner may use labels to grant users access to groups of resources.\n\nWhen you add a label to a Source or Personas Spaces, any users granted access to that label gain access to those\nresources.\n\nAll Workspaces include labels for Dev (development) and Prod (production) environments. On top of those, Free and\nTeam plan customers may create up to five labels.\n\nCustomers with the Enterprise pricing package may create an unlimited number of labels.",
@@ -41836,12 +42064,14 @@
         "required": [
           "key",
           "value"
-        ]
+        ],
+        "x-speakeasy-entity": "LabelV1"
       },
       "ListLabelsV1Input": {
         "description": "Retrieves all available labels for the current Workspace.",
         "title": "ListLabelsV1Input",
-        "type": "object"
+        "type": "object",
+        "x-speakeasy-entity": "ListLabelsV1Input"
       },
       "ListLabelsV1Output": {
         "description": "Returns all available labels for the current Workspace.",
@@ -41859,7 +42089,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "ListLabelsV1Output"
       },
       "CreateLabelV1Input": {
         "description": "Creates a new label in the current Workspace.",
@@ -41878,7 +42109,8 @@
         },
         "required": [
           "label"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateLabelV1Input"
       },
       "CreateLabelV1Output": {
         "description": "Result of creating a new label in the current Workspace.",
@@ -41897,13 +42129,15 @@
         },
         "required": [
           "label"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateLabelV1Output"
       },
       "DeleteLabelV1Input": {
         "description": "Deletes an existing label in the current Workspace.",
         "title": "DeleteLabelV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteLabelV1Input"
       },
       "DeleteLabelV1Output": {
         "description": "Returns the status of a label deletion.",
@@ -41921,7 +42155,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteLabelV1Output"
       },
       "AddLabelsToSourceV1Input": {
         "description": "Applies an existing label to an existing Source.",
@@ -41939,7 +42174,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "AddLabelsToSourceV1Input"
       },
       "AddLabelsToSourceV1Output": {
         "description": "Applies an existing label to an existing Source.",
@@ -41957,7 +42193,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "AddLabelsToSourceV1Output"
       },
       "ReplaceLabelsInSourceV1Input": {
         "description": "Replaces all labels in a Source with a list of new labels.",
@@ -41975,7 +42212,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceLabelsInSourceV1Input"
       },
       "ReplaceLabelsInSourceV1Output": {
         "description": "Response from replacing a list of labels in a Source.",
@@ -41993,7 +42231,8 @@
         },
         "required": [
           "labels"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceLabelsInSourceV1Output"
       },
       "LogosBeta": {
         "description": "Represents a logo.",
@@ -42020,7 +42259,8 @@
         },
         "required": [
           "default"
-        ]
+        ],
+        "x-speakeasy-entity": "LogosBeta"
       },
       "EventSourceV1": {
         "description": "Source represents a Segment Source.",
@@ -42045,7 +42285,8 @@
         },
         "required": [
           "id"
-        ]
+        ],
+        "x-speakeasy-entity": "EventSourceV1"
       },
       "SourceEventVolumeV1": {
         "description": "SourceEventVolume represents a time series of event volume for a Workspace\nbroken down by the dimensions which the customer specifies (optional\nparameters).",
@@ -42088,7 +42329,8 @@
         "required": [
           "series",
           "total"
-        ]
+        ],
+        "x-speakeasy-entity": "SourceEventVolumeV1"
       },
       "SourceEventVolumeDatapointV1": {
         "description": "SourceEventVolumeDatapoint represents an individual timestamp/event count\npair corresponding to a window of time designated by the granularity.",
@@ -42109,13 +42351,15 @@
         "required": [
           "count",
           "time"
-        ]
+        ],
+        "x-speakeasy-entity": "SourceEventVolumeDatapointV1"
       },
       "GetEventsVolumeFromWorkspaceV1Input": {
         "description": "GetEventsVolumeFromWorkspaceV1Input represents the arguments given to the API.",
         "title": "GetEventsVolumeFromWorkspaceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetEventsVolumeFromWorkspaceV1Input"
       },
       "GetEventsVolumeFromWorkspaceV1Output": {
         "description": "GetEventsVolumeFromWorkspaceV1Output represents the results given the input query.",
@@ -42158,7 +42402,8 @@
           "path",
           "query",
           "result"
-        ]
+        ],
+        "x-speakeasy-entity": "GetEventsVolumeFromWorkspaceV1Output"
       },
       "GetEventsVolumeFromWorkspaceV1Query": {
         "description": "GetEventVolumeOutputQuery represents the input query sent to output.",
@@ -42241,7 +42486,8 @@
           "granularity",
           "startTime",
           "workspaceId"
-        ]
+        ],
+        "x-speakeasy-entity": "GetEventsVolumeFromWorkspaceV1Query"
       },
       "ProfilesWarehouseAlpha": {
         "description": "Defines a Profiles data Warehouse used as a Destination for Segment data.",
@@ -42299,7 +42545,8 @@
           "settings",
           "spaceId",
           "workspaceId"
-        ]
+        ],
+        "x-speakeasy-entity": "ProfilesWarehouseAlpha"
       },
       "SpaceWarehouseSelectiveSyncItemAlpha": {
         "description": "Represents an entry in the Space Warehouse Selective Sync schema for a Warehouse and Space pair.",
@@ -42333,7 +42580,8 @@
           "enabled",
           "properties",
           "warehouseId"
-        ]
+        ],
+        "x-speakeasy-entity": "SpaceWarehouseSelectiveSyncItemAlpha"
       },
       "CreateProfilesWarehouseAlphaInput": {
         "description": "Create a new Profiles Warehouse based on a set of parameters.",
@@ -42373,7 +42621,8 @@
         "required": [
           "metadataId",
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateProfilesWarehouseAlphaInput"
       },
       "CreateProfilesWarehouseAlphaOutput": {
         "description": "Returns the newly created Warehouse.",
@@ -42392,13 +42641,15 @@
         },
         "required": [
           "profilesWarehouse"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateProfilesWarehouseAlphaOutput"
       },
       "RemoveProfilesWarehouseFromSpaceAlphaInput": {
         "description": "Deletes an existing Warehouse by id.",
         "title": "RemoveProfilesWarehouseFromSpaceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveProfilesWarehouseFromSpaceAlphaInput"
       },
       "RemoveProfilesWarehouseFromSpaceAlphaOutput": {
         "description": "Returns the status of a Warehouse deletion.",
@@ -42416,13 +42667,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveProfilesWarehouseFromSpaceAlphaOutput"
       },
       "ListProfilesWarehouseInSpaceAlphaInput": {
         "description": "Gets all Profiles Warehouse based on spaceID and pagination.",
         "title": "ListProfilesWarehouseInSpaceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListProfilesWarehouseInSpaceAlphaInput"
       },
       "ListProfilesWarehouseInSpaceAlphaOutput": {
         "description": "Returns all Profiles Warehouse based on spaceID and pagination.",
@@ -42449,7 +42702,8 @@
         },
         "required": [
           "profilesWarehouses"
-        ]
+        ],
+        "x-speakeasy-entity": "ListProfilesWarehouseInSpaceAlphaOutput"
       },
       "UpdateProfilesWarehouseForSpaceWarehouseAlphaInput": {
         "description": "Updates a Profiles Warehouse based on a set of parameters.",
@@ -42483,7 +42737,8 @@
         },
         "required": [
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateProfilesWarehouseForSpaceWarehouseAlphaInput"
       },
       "UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput": {
         "description": "Returns the updated Warehouse.",
@@ -42502,13 +42757,15 @@
         },
         "required": [
           "profilesWarehouse"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput"
       },
       "ListSelectiveSyncsFromWarehouseAndSpaceAlphaInput": {
         "description": "Get the Selective Sync configuration associated with a Space Warehouse Connection.",
         "title": "ListSelectiveSyncsFromWarehouseAndSpaceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSelectiveSyncsFromWarehouseAndSpaceAlphaInput"
       },
       "ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput": {
         "description": "Results containing the Selective Sync configuration for a Space Warehouse Connection.",
@@ -42541,7 +42798,8 @@
         "required": [
           "items",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput"
       },
       "SpaceWarehouseSchemaOverride": {
         "description": "Overrides the enabled or disabled state of the specified collection and / or properties within the schema.",
@@ -42567,7 +42825,8 @@
         "required": [
           "collection",
           "enabled"
-        ]
+        ],
+        "x-speakeasy-entity": "SpaceWarehouseSchemaOverride"
       },
       "UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput": {
         "description": "Updates the schema for a Space Warehouse connection.",
@@ -42587,7 +42846,8 @@
             "type": "boolean",
             "title": "enableEventTables"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput"
       },
       "UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput": {
         "description": "Results from a SelectiveSync patch to a Space Warehouse connection.",
@@ -42606,7 +42866,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput"
       },
       "DestinationStatusV1": {
         "description": "DestinationStatus represents status of each Destination in a stream.",
@@ -42649,7 +42910,8 @@
           "id",
           "name",
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DestinationStatusV1"
       },
       "StreamStatusV1": {
         "description": "StreamStatus represents status of each stream including all the Destinations corresponding to the stream.",
@@ -42671,7 +42933,8 @@
         "required": [
           "destinationStatus",
           "id"
-        ]
+        ],
+        "x-speakeasy-entity": "StreamStatusV1"
       },
       "RegulationListEntryV1": {
         "title": "RegulationListEntryV1",
@@ -42720,13 +42983,15 @@
           "status",
           "subjectType",
           "subjects"
-        ]
+        ],
+        "x-speakeasy-entity": "RegulationListEntryV1"
       },
       "DeleteRegulationV1Input": {
         "description": "The input to delete a regulate request.",
         "title": "DeleteRegulationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteRegulationV1Input"
       },
       "DeleteRegulationV1Output": {
         "description": "The output of the delete regulation call.",
@@ -42744,7 +43009,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteRegulationV1Output"
       },
       "CreateWorkspaceRegulationV1Input": {
         "description": "The input to create a Workspace regulation.",
@@ -42785,7 +43051,8 @@
           "regulationType",
           "subjectIds",
           "subjectType"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateWorkspaceRegulationV1Input"
       },
       "CreateWorkspaceRegulationV1Output": {
         "description": "The output of a create Workspace regulation call.",
@@ -42800,13 +43067,15 @@
         },
         "required": [
           "regulateId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateWorkspaceRegulationV1Output"
       },
       "GetRegulationV1Input": {
         "description": "The input to get a regulate request.",
         "title": "GetRegulationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetRegulationV1Input"
       },
       "GetRegulationV1Output": {
         "description": "The regulate request returned.",
@@ -42873,13 +43142,15 @@
         },
         "required": [
           "regulation"
-        ]
+        ],
+        "x-speakeasy-entity": "GetRegulationV1Output"
       },
       "ListWorkspaceRegulationsV1Input": {
         "description": "Input to list all Workspace-scoped regulations in a given Workspace.",
         "title": "ListWorkspaceRegulationsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListWorkspaceRegulationsV1Input"
       },
       "ListWorkspaceRegulationsV1Output": {
         "description": "Output of all Workspace-scoped regulations in a given Workspace.",
@@ -42907,7 +43178,8 @@
         "required": [
           "pagination",
           "regulations"
-        ]
+        ],
+        "x-speakeasy-entity": "ListWorkspaceRegulationsV1Output"
       },
       "CreateSourceRegulationV1Input": {
         "description": "The input to create a Source-scoped regulation.",
@@ -42947,7 +43219,8 @@
           "regulationType",
           "subjectIds",
           "subjectType"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateSourceRegulationV1Input"
       },
       "CreateSourceRegulationV1Output": {
         "description": "The output of a create Source regulation call.",
@@ -42962,7 +43235,8 @@
         },
         "required": [
           "regulateId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateSourceRegulationV1Output"
       },
       "CreateCloudSourceRegulationV1Input": {
         "description": "The input to create a Cloud Source-scoped regulation.",
@@ -43008,7 +43282,8 @@
           "regulationType",
           "subjectIds",
           "subjectType"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateCloudSourceRegulationV1Input"
       },
       "CreateCloudSourceRegulationV1Output": {
         "description": "The output of a create Cloud Source regulation call.",
@@ -43023,13 +43298,15 @@
         },
         "required": [
           "regulateId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateCloudSourceRegulationV1Output"
       },
       "ListRegulationsFromSourceV1Input": {
         "description": "Input to list all Source-scoped regulations.",
         "title": "ListRegulationsFromSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListRegulationsFromSourceV1Input"
       },
       "ListRegulationsFromSourceV1Output": {
         "description": "Output of all Source-scoped regulations.",
@@ -43047,13 +43324,15 @@
         },
         "required": [
           "regulations"
-        ]
+        ],
+        "x-speakeasy-entity": "ListRegulationsFromSourceV1Output"
       },
       "ListSuppressionsV1Input": {
         "description": "The input to list suppressions for the Workspace.",
         "title": "ListSuppressionsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSuppressionsV1Input"
       },
       "ListSuppressionsV1Output": {
         "description": "The output of a list suppressed call for a Workspace.",
@@ -43098,7 +43377,8 @@
         "required": [
           "pagination",
           "suppressed"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSuppressionsV1Output"
       },
       "ReverseEtlModel": {
         "description": "Defines a Reverse ETL Model.",
@@ -43165,19 +43445,22 @@
           "scheduleConfig",
           "scheduleStrategy",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "ReverseEtlModel"
       },
       "ReverseEtlModelScheduleConfig": {
         "description": "Defines a configuration object used for scheduling, which can vary depending\non the configured strategy, but must always be an object with at least 1\nlevel of keys.",
         "title": "ReverseEtlModelScheduleConfig",
         "type": "object",
-        "additionalProperties": {}
+        "additionalProperties": {},
+        "x-speakeasy-entity": "ReverseEtlModelScheduleConfig"
       },
       "ListReverseEtlModelsInput": {
         "description": "Defines the parameters needed to list Models.",
         "title": "ListReverseEtlModelsInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListReverseEtlModelsInput"
       },
       "ListReverseEtlModelsOutput": {
         "description": "Defines the result of listing Models.",
@@ -43205,7 +43488,8 @@
         "required": [
           "models",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListReverseEtlModelsOutput"
       },
       "CreateReverseEtlModelInput": {
         "description": "Defines how to create a new Model.",
@@ -43271,7 +43555,8 @@
           "scheduleConfig",
           "scheduleStrategy",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateReverseEtlModelInput"
       },
       "CreateReverseEtlModelOutput": {
         "description": "Defines the results of creating a Model.",
@@ -43290,13 +43575,15 @@
         },
         "required": [
           "reverseEtlModel"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateReverseEtlModelOutput"
       },
       "GetReverseEtlModelInput": {
         "description": "Defines the result of getting a Model.",
         "title": "GetReverseEtlModelInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetReverseEtlModelInput"
       },
       "GetReverseEtlModelOutput": {
         "description": "Defines the result of getting a Model.",
@@ -43315,7 +43602,8 @@
         },
         "required": [
           "reverseEtlModel"
-        ]
+        ],
+        "x-speakeasy-entity": "GetReverseEtlModelOutput"
       },
       "UpdateReverseEtlModelInput": {
         "description": "Defines how to update an existing Model.",
@@ -43366,7 +43654,8 @@
             "type": "string",
             "title": "queryIdentifierColumn"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateReverseEtlModelInput"
       },
       "UpdateReverseEtlModelOutput": {
         "description": "Defines the results of updating a Model.",
@@ -43385,13 +43674,15 @@
         },
         "required": [
           "reverseEtlModel"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateReverseEtlModelOutput"
       },
       "DeleteReverseEtlModelInput": {
         "description": "Defines the result of getting a Model.",
         "title": "DeleteReverseEtlModelInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteReverseEtlModelInput"
       },
       "DeleteReverseEtlModelOutput": {
         "description": "Defines the result of getting a Model.",
@@ -43409,13 +43700,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteReverseEtlModelOutput"
       },
       "GetSourcesCatalogV1Input": {
         "description": "Filter parameters used for loading the Sources public catalog.",
         "title": "GetSourcesCatalogV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetSourcesCatalogV1Input"
       },
       "GetSourcesCatalogV1Output": {
         "description": "Returns a list of all Source catalog items contained within a given page.",
@@ -43443,13 +43736,15 @@
         "required": [
           "pagination",
           "sourcesCatalog"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSourcesCatalogV1Output"
       },
       "GetSourceMetadataV1Input": {
         "description": "Requests a Source catalog item by id.",
         "title": "GetSourceMetadataV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetSourceMetadataV1Input"
       },
       "GetSourceMetadataV1Output": {
         "description": "Returns the Source catalog item looked up by id.",
@@ -43468,7 +43763,8 @@
         },
         "required": [
           "sourceMetadata"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSourceMetadataV1Output"
       },
       "SourceMetadataV1": {
         "description": "A website, server library, mobile SDK, or cloud application which can send data into Segment.",
@@ -43535,7 +43831,8 @@
           "name",
           "options",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "SourceMetadataV1"
       },
       "CommonSourceSettingsV1": {
         "title": "CommonSourceSettingsV1",
@@ -43578,7 +43875,8 @@
             "type": "string",
             "title": "forwardingBlockedEventsTo"
           }
-        }
+        },
+        "x-speakeasy-entity": "CommonSourceSettingsV1"
       },
       "TrackSourceSettingsV1": {
         "title": "TrackSourceSettingsV1",
@@ -43614,7 +43912,8 @@
             "type": "string",
             "title": "commonEventOnViolations"
           }
-        }
+        },
+        "x-speakeasy-entity": "TrackSourceSettingsV1"
       },
       "IdentifySourceSettingsV1": {
         "title": "IdentifySourceSettingsV1",
@@ -43640,7 +43939,8 @@
             "type": "string",
             "title": "commonEventOnViolations"
           }
-        }
+        },
+        "x-speakeasy-entity": "IdentifySourceSettingsV1"
       },
       "GroupSourceSettingsV1": {
         "title": "GroupSourceSettingsV1",
@@ -43666,7 +43966,8 @@
             "type": "string",
             "title": "commonEventOnViolations"
           }
-        }
+        },
+        "x-speakeasy-entity": "GroupSourceSettingsV1"
       },
       "SourceSettingsOutputV1": {
         "description": "The output of Source settings.",
@@ -43710,13 +44011,15 @@
             "type": "string",
             "title": "forwardingBlockedEventsTo"
           }
-        }
+        },
+        "x-speakeasy-entity": "SourceSettingsOutputV1"
       },
       "ListSchemaSettingsInSourceV1Input": {
         "description": "Request the settings of a Source.",
         "title": "ListSchemaSettingsInSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSchemaSettingsInSourceV1Input"
       },
       "ListSchemaSettingsInSourceV1Output": {
         "description": "Returns a list of settings for the Source.",
@@ -43741,7 +44044,8 @@
         "required": [
           "settings",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSchemaSettingsInSourceV1Output"
       },
       "UpdateSchemaSettingsInSourceV1Input": {
         "description": "Input to update a Source's settings.",
@@ -43785,7 +44089,8 @@
             "type": "string",
             "title": "forwardingBlockedEventsTo"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateSchemaSettingsInSourceV1Input"
       },
       "UpdateSchemaSettingsInSourceV1Output": {
         "description": "Output of the Source with updated settings.",
@@ -43810,7 +44115,8 @@
         "required": [
           "settings",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSchemaSettingsInSourceV1Output"
       },
       "SourceAlpha": {
         "description": "Defines a data Source for Segment data.",
@@ -43885,19 +44191,22 @@
           "slug",
           "workspaceId",
           "writeKeys"
-        ]
+        ],
+        "x-speakeasy-entity": "SourceAlpha"
       },
       "SourceSettingsAlpha": {
         "description": "A key-value object that contains instance-specific settings for a Source.\n\nThe `options` field in the Source metadata defines the schema of this object.",
         "title": "SourceSettingsAlpha",
         "type": "object",
-        "additionalProperties": {}
+        "additionalProperties": {},
+        "x-speakeasy-entity": "SourceSettingsAlpha"
       },
       "ListSourcesAlphaInput": {
         "description": "Requests a list of Sources that belong to the current Workspace.",
         "title": "ListSourcesAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSourcesAlphaInput"
       },
       "ListSourcesAlphaOutput": {
         "description": "Returns a list of Sources that belong to the current Workspace.",
@@ -43925,13 +44234,15 @@
         "required": [
           "pagination",
           "sources"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSourcesAlphaOutput"
       },
       "GetSourceAlphaInput": {
         "description": "Looks up a Source by id.",
         "title": "GetSourceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetSourceAlphaInput"
       },
       "GetSourceAlphaOutput": {
         "description": "Returns a Source.",
@@ -43950,13 +44261,15 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSourceAlphaOutput"
       },
       "ListConnectedWarehousesFromSourceAlphaInput": {
         "description": "Requests a list of Warehouses connected to a Source.",
         "title": "ListConnectedWarehousesFromSourceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListConnectedWarehousesFromSourceAlphaInput"
       },
       "ListConnectedWarehousesFromSourceAlphaOutput": {
         "description": "Returns a list of Warehouses connected to a Source.",
@@ -43984,13 +44297,15 @@
         "required": [
           "pagination",
           "warehouses"
-        ]
+        ],
+        "x-speakeasy-entity": "ListConnectedWarehousesFromSourceAlphaOutput"
       },
       "ListConnectedDestinationsFromSourceAlphaInput": {
         "description": "Requests a list of Destinations connected to a Source.",
         "title": "ListConnectedDestinationsFromSourceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListConnectedDestinationsFromSourceAlphaInput"
       },
       "ListConnectedDestinationsFromSourceAlphaOutput": {
         "description": "Returns a list of Destinations connected to a Source.",
@@ -44018,7 +44333,8 @@
         "required": [
           "destinations",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListConnectedDestinationsFromSourceAlphaOutput"
       },
       "CreateSourceAlphaInput": {
         "description": "Create a new Source based on a set of parameters.",
@@ -44059,7 +44375,8 @@
           "enabled",
           "metadataId",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateSourceAlphaInput"
       },
       "CreateSourceAlphaOutput": {
         "description": "Returns the newly Source.",
@@ -44078,13 +44395,15 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateSourceAlphaOutput"
       },
       "DeleteSourceAlphaInput": {
         "description": "Deletes an existing Source by id.",
         "title": "DeleteSourceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteSourceAlphaInput"
       },
       "DeleteSourceAlphaOutput": {
         "description": "Returns the status of a Source deletion.",
@@ -44102,7 +44421,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteSourceAlphaOutput"
       },
       "UpdateSourceAlphaInput": {
         "description": "Updates an existing Source based on a set of parameters.",
@@ -44133,7 +44453,8 @@
               }
             ]
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateSourceAlphaInput"
       },
       "UpdateSourceAlphaOutput": {
         "description": "Returns the updated Source.",
@@ -44152,7 +44473,8 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSourceAlphaOutput"
       },
       "SourceV1": {
         "description": "Defines a data Source for Segment data.",
@@ -44227,19 +44549,22 @@
           "slug",
           "workspaceId",
           "writeKeys"
-        ]
+        ],
+        "x-speakeasy-entity": "SourceV1"
       },
       "SourceSettingsV1": {
         "description": "A key-value object that contains instance-specific settings for a Source.\n\nThe `options` field in the Source metadata defines the schema of this object.",
         "title": "SourceSettingsV1",
         "type": "object",
-        "additionalProperties": {}
+        "additionalProperties": {},
+        "x-speakeasy-entity": "SourceSettingsV1"
       },
       "ListSourcesV1Input": {
         "description": "Requests a list of Sources that belong to the current Workspace.",
         "title": "ListSourcesV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSourcesV1Input"
       },
       "ListSourcesV1Output": {
         "description": "Returns a list of Sources that belong to the current Workspace.",
@@ -44267,13 +44592,15 @@
         "required": [
           "pagination",
           "sources"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSourcesV1Output"
       },
       "GetSourceV1Input": {
         "description": "Looks up a Source by id.",
         "title": "GetSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetSourceV1Input"
       },
       "GetSourceV1Output": {
         "description": "Returns a Source.",
@@ -44292,13 +44619,15 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSourceV1Output"
       },
       "ListConnectedWarehousesFromSourceV1Input": {
         "description": "Requests a list of Warehouses connected to a Source.",
         "title": "ListConnectedWarehousesFromSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListConnectedWarehousesFromSourceV1Input"
       },
       "ListConnectedWarehousesFromSourceV1Output": {
         "description": "Returns a list of Warehouses connected to a Source.",
@@ -44326,13 +44655,15 @@
         "required": [
           "pagination",
           "warehouses"
-        ]
+        ],
+        "x-speakeasy-entity": "ListConnectedWarehousesFromSourceV1Output"
       },
       "ListConnectedDestinationsFromSourceV1Input": {
         "description": "Requests a list of Destinations connected to a Source.",
         "title": "ListConnectedDestinationsFromSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListConnectedDestinationsFromSourceV1Input"
       },
       "ListConnectedDestinationsFromSourceV1Output": {
         "description": "Returns a list of Destinations connected to a Source.",
@@ -44360,7 +44691,8 @@
         "required": [
           "destinations",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListConnectedDestinationsFromSourceV1Output"
       },
       "CreateSourceV1Input": {
         "description": "Create a new Source based on a set of parameters.",
@@ -44396,7 +44728,8 @@
           "enabled",
           "metadataId",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateSourceV1Input"
       },
       "CreateSourceV1Output": {
         "description": "Returns a newly created Source.",
@@ -44415,13 +44748,15 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateSourceV1Output"
       },
       "DeleteSourceV1Input": {
         "description": "Deletes an existing Source by id.",
         "title": "DeleteSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteSourceV1Input"
       },
       "DeleteSourceV1Output": {
         "description": "Returns the status of a Source deletion.",
@@ -44439,7 +44774,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteSourceV1Output"
       },
       "UpdateSourceV1Input": {
         "description": "Updates an existing Source based on a set of parameters.",
@@ -44470,7 +44806,8 @@
               }
             ]
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateSourceV1Input"
       },
       "UpdateSourceV1Output": {
         "description": "Returns the updated Source.",
@@ -44489,13 +44826,15 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSourceV1Output"
       },
       "GetSpaceAlphaInput": {
         "description": "Input for the getSpaceById endpoint.",
         "title": "GetSpaceAlphaInput",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetSpaceAlphaInput"
       },
       "Space": {
         "title": "Space",
@@ -44518,7 +44857,8 @@
           "id",
           "name",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "Space"
       },
       "GetSpaceAlphaOutput": {
         "description": "Response for the getSpaceById endpoint.",
@@ -44539,7 +44879,8 @@
         },
         "required": [
           "space"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSpaceAlphaOutput"
       },
       "GroupSubscriptionStatus": {
         "title": "GroupSubscriptionStatus",
@@ -44564,7 +44905,8 @@
         "required": [
           "name",
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "GroupSubscriptionStatus"
       },
       "GroupSubscriptionStatusResponse": {
         "title": "GroupSubscriptionStatusResponse",
@@ -44600,7 +44942,8 @@
           "id",
           "name",
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "GroupSubscriptionStatusResponse"
       },
       "UpdateGroupSubscriptionStatusResponse": {
         "title": "UpdateGroupSubscriptionStatusResponse",
@@ -44631,7 +44974,8 @@
           "id",
           "name",
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateGroupSubscriptionStatusResponse"
       },
       "MessagesSubscriptionRequest": {
         "title": "MessagesSubscriptionRequest",
@@ -44676,7 +45020,8 @@
         "required": [
           "key",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "MessagesSubscriptionRequest"
       },
       "ReplaceMessagingSubscriptionsInSpacesAlphaInput": {
         "description": "Input for the endpoint.",
@@ -44694,7 +45039,8 @@
         },
         "required": [
           "subscriptions"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceMessagingSubscriptionsInSpacesAlphaInput"
       },
       "MessageSubscriptionResponseError": {
         "title": "MessageSubscriptionResponseError",
@@ -44714,7 +45060,8 @@
         "required": [
           "code",
           "message"
-        ]
+        ],
+        "x-speakeasy-entity": "MessageSubscriptionResponseError"
       },
       "MessageSubscriptionResponse": {
         "title": "MessageSubscriptionResponse",
@@ -44767,7 +45114,8 @@
         "required": [
           "key",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "MessageSubscriptionResponse"
       },
       "ReplaceMessagingSubscriptionsInSpacesAlphaOutput": {
         "description": "Output for the endpoint.",
@@ -44803,7 +45151,8 @@
         "required": [
           "failures",
           "successes"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceMessagingSubscriptionsInSpacesAlphaOutput"
       },
       "GetMessagingSubscriptionSuccessResponse": {
         "title": "GetMessagingSubscriptionSuccessResponse",
@@ -44853,7 +45202,8 @@
         "required": [
           "key",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "GetMessagingSubscriptionSuccessResponse"
       },
       "GetMessagingSubscriptionFailureResponse": {
         "title": "GetMessagingSubscriptionFailureResponse",
@@ -44882,7 +45232,8 @@
           "errors",
           "key",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "GetMessagingSubscriptionFailureResponse"
       },
       "BatchQueryMessagingSubscriptionsForSpaceAlphaOutput": {
         "description": "Batch get response.",
@@ -44927,7 +45278,8 @@
           "errors",
           "failures",
           "successes"
-        ]
+        ],
+        "x-speakeasy-entity": "BatchQueryMessagingSubscriptionsForSpaceAlphaOutput"
       },
       "GetSubscriptionRequest": {
         "title": "GetSubscriptionRequest",
@@ -44954,7 +45306,8 @@
         "required": [
           "key",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "GetSubscriptionRequest"
       },
       "BatchQueryMessagingSubscriptionsForSpaceAlphaInput": {
         "description": "Batch get request.",
@@ -44972,7 +45325,8 @@
         },
         "required": [
           "subscriptions"
-        ]
+        ],
+        "x-speakeasy-entity": "BatchQueryMessagingSubscriptionsForSpaceAlphaInput"
       },
       "TrackingPlanV1": {
         "description": "Represents a Tracking Plan.",
@@ -45025,7 +45379,8 @@
         "required": [
           "id",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "TrackingPlanV1"
       },
       "RuleV1": {
         "description": "Represents a rule from a Tracking Plan.",
@@ -45079,7 +45434,8 @@
           "jsonSchema",
           "type",
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "RuleV1"
       },
       "RuleInputV1": {
         "description": "Represents a rule to add to a Tracking Plan.",
@@ -45118,7 +45474,8 @@
           "jsonSchema",
           "type",
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "RuleInputV1"
       },
       "UpsertRuleV1": {
         "title": "UpsertRuleV1",
@@ -45161,7 +45518,8 @@
           "jsonSchema",
           "type",
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "UpsertRuleV1"
       },
       "RemoveRuleV1": {
         "description": "Represents the parameters needed to identify a rule on the backend-side.",
@@ -45195,19 +45553,22 @@
         "required": [
           "type",
           "version"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveRuleV1"
       },
       "ListTrackingPlansV1Input": {
         "description": "Lists the Tracking Plans associated with the current Workspace.",
         "title": "ListTrackingPlansV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListTrackingPlansV1Input"
       },
       "GetTrackingPlanV1Input": {
         "description": "Gets a single Tracking Plan.",
         "title": "GetTrackingPlanV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetTrackingPlanV1Input"
       },
       "ListTrackingPlansV1Output": {
         "description": "Lists the Tracking Plans associated with the current Workspace.",
@@ -45235,7 +45596,8 @@
         "required": [
           "pagination",
           "trackingPlans"
-        ]
+        ],
+        "x-speakeasy-entity": "ListTrackingPlansV1Output"
       },
       "GetTrackingPlanV1Output": {
         "description": "Gets a single Tracking Plan.",
@@ -45254,13 +45616,15 @@
         },
         "required": [
           "trackingPlan"
-        ]
+        ],
+        "x-speakeasy-entity": "GetTrackingPlanV1Output"
       },
       "DeleteTrackingPlanV1Input": {
         "description": "Deletes a Tracking Plan.",
         "title": "DeleteTrackingPlanV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteTrackingPlanV1Input"
       },
       "DeleteTrackingPlanV1Output": {
         "description": "Result of a DeleteTrackingPlan call.",
@@ -45278,7 +45642,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteTrackingPlanV1Output"
       },
       "CreateTrackingPlanV1Input": {
         "description": "Creates a Tracking Plan in the Workspace.",
@@ -45311,7 +45676,8 @@
         "required": [
           "name",
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateTrackingPlanV1Input"
       },
       "CreateTrackingPlanV1Output": {
         "description": "Result of a CreateTrackingPlan call.",
@@ -45330,7 +45696,8 @@
         },
         "required": [
           "trackingPlan"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateTrackingPlanV1Output"
       },
       "UpdateTrackingPlanV1Input": {
         "description": "Updates the Workspace's Tracking Plan.",
@@ -45347,7 +45714,8 @@
             "type": "string",
             "title": "description"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateTrackingPlanV1Input"
       },
       "UpdateTrackingPlanV1Output": {
         "description": "Result of an UpdateTrackingPlan call.",
@@ -45365,13 +45733,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateTrackingPlanV1Output"
       },
       "ListRulesFromTrackingPlanV1Input": {
         "description": "Lists a Tracking Plan's rules.",
         "title": "ListRulesFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListRulesFromTrackingPlanV1Input"
       },
       "ListRulesFromTrackingPlanV1Output": {
         "description": "Lists a Tracking Plan's rules.",
@@ -45399,7 +45769,8 @@
         "required": [
           "pagination",
           "rules"
-        ]
+        ],
+        "x-speakeasy-entity": "ListRulesFromTrackingPlanV1Output"
       },
       "UpdateRulesInTrackingPlanV1Input": {
         "description": "Updates Tracking Plan rules. Non-existent rules are added.",
@@ -45417,13 +45788,15 @@
         },
         "required": [
           "rules"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateRulesInTrackingPlanV1Input"
       },
       "RemoveRulesFromTrackingPlanV1Input": {
         "description": "Remove specified rules from a Tracking Plan.",
         "title": "RemoveRulesFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveRulesFromTrackingPlanV1Input"
       },
       "ReplaceRulesInTrackingPlanV1Input": {
         "description": "Replaces Tracking Plan rules.",
@@ -45441,7 +45814,8 @@
         },
         "required": [
           "rules"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceRulesInTrackingPlanV1Input"
       },
       "ReplaceRulesInTrackingPlanV1Output": {
         "description": "Replaces Tracking Plan rules.",
@@ -45459,7 +45833,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceRulesInTrackingPlanV1Output"
       },
       "RemoveRulesFromTrackingPlanV1Output": {
         "description": "Remove specified rules from a Tracking Plan.",
@@ -45477,7 +45852,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveRulesFromTrackingPlanV1Output"
       },
       "UpdateRulesInTrackingPlanV1Output": {
         "description": "Updates Tracking Plan rules. Non-existent rules are added.",
@@ -45495,13 +45871,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateRulesInTrackingPlanV1Output"
       },
       "ListSourcesFromTrackingPlanV1Input": {
         "description": "Lists all Sources associated with a Tracking Plan.",
         "title": "ListSourcesFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSourcesFromTrackingPlanV1Input"
       },
       "ListSourcesFromTrackingPlanV1Output": {
         "description": "Lists all Sources associated with a Tracking Plan.",
@@ -45529,7 +45907,8 @@
         "required": [
           "pagination",
           "sources"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSourcesFromTrackingPlanV1Output"
       },
       "AddSourceToTrackingPlanV1Input": {
         "description": "Connects a Source to a Tracking Plan.",
@@ -45544,7 +45923,8 @@
         },
         "required": [
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "AddSourceToTrackingPlanV1Input"
       },
       "AddSourceToTrackingPlanV1Output": {
         "description": "Connects a Source to a Tracking Plan.",
@@ -45562,13 +45942,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "AddSourceToTrackingPlanV1Output"
       },
       "RemoveSourceFromTrackingPlanV1Input": {
         "description": "Disconnects a Source from a Tracking Plan.",
         "title": "RemoveSourceFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveSourceFromTrackingPlanV1Input"
       },
       "RemoveSourceFromTrackingPlanV1Output": {
         "description": "Disconnects a Source from a Tracking Plan.",
@@ -45586,7 +45968,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveSourceFromTrackingPlanV1Output"
       },
       "TransformationBeta": {
         "description": "Represents a Transformation.",
@@ -45651,7 +46034,8 @@
           "if",
           "name",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "TransformationBeta"
       },
       "PropertyRenameBeta": {
         "title": "PropertyRenameBeta",
@@ -45671,7 +46055,8 @@
         "required": [
           "newName",
           "oldName"
-        ]
+        ],
+        "x-speakeasy-entity": "PropertyRenameBeta"
       },
       "PropertyValueTransformationBeta": {
         "title": "PropertyValueTransformationBeta",
@@ -45694,7 +46079,8 @@
         "required": [
           "propertyPaths",
           "propertyValue"
-        ]
+        ],
+        "x-speakeasy-entity": "PropertyValueTransformationBeta"
       },
       "GetTransformationBetaOutput": {
         "description": "The output of Transformation retrieval.",
@@ -45713,7 +46099,8 @@
         },
         "required": [
           "transformation"
-        ]
+        ],
+        "x-speakeasy-entity": "GetTransformationBetaOutput"
       },
       "GetTransformationBetaInput": {
         "description": "The input of Transformation retrieval.",
@@ -45728,7 +46115,8 @@
         },
         "required": [
           "transformationId"
-        ]
+        ],
+        "x-speakeasy-entity": "GetTransformationBetaInput"
       },
       "ListTransformationsBetaInput": {
         "description": "Lists the Transformations associated with the current Workspace.",
@@ -45747,7 +46135,8 @@
         },
         "required": [
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListTransformationsBetaInput"
       },
       "ListTransformationsBetaOutput": {
         "description": "Lists the Transformations associated with the current Workspace.",
@@ -45775,7 +46164,8 @@
         "required": [
           "pagination",
           "transformations"
-        ]
+        ],
+        "x-speakeasy-entity": "ListTransformationsBetaOutput"
       },
       "DeleteTransformationBetaInput": {
         "description": "The input of delete Transformation.",
@@ -45790,7 +46180,8 @@
         },
         "required": [
           "transformationId"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteTransformationBetaInput"
       },
       "DeleteTransformationBetaOutput": {
         "description": "The output of delete Transformation.",
@@ -45808,7 +46199,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteTransformationBetaOutput"
       },
       "UpdateTransformationBetaInput": {
         "description": "The input to update a Transformation.",
@@ -45869,7 +46261,8 @@
         },
         "required": [
           "transformationId"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateTransformationBetaInput"
       },
       "UpdateTransformationBetaOutput": {
         "description": "The output of an updated Transformation.",
@@ -45888,7 +46281,8 @@
         },
         "required": [
           "transformation"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateTransformationBetaOutput"
       },
       "CreateTransformationBetaInput": {
         "description": "The input to create a Transformation.",
@@ -45947,7 +46341,8 @@
           "if",
           "name",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateTransformationBetaInput"
       },
       "CreateTransformationBetaOutput": {
         "description": "The output of a created Transformation.",
@@ -45966,7 +46361,8 @@
         },
         "required": [
           "transformation"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateTransformationBetaOutput"
       },
       "TransformationV1": {
         "description": "Represents a Transformation.",
@@ -46039,7 +46435,8 @@
           "if",
           "name",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "TransformationV1"
       },
       "PropertyRenameV1": {
         "title": "PropertyRenameV1",
@@ -46059,7 +46456,8 @@
         "required": [
           "newName",
           "oldName"
-        ]
+        ],
+        "x-speakeasy-entity": "PropertyRenameV1"
       },
       "PropertyValueTransformationV1": {
         "title": "PropertyValueTransformationV1",
@@ -46082,7 +46480,8 @@
         "required": [
           "propertyPaths",
           "propertyValue"
-        ]
+        ],
+        "x-speakeasy-entity": "PropertyValueTransformationV1"
       },
       "FQLDefinedPropertyV1": {
         "title": "FQLDefinedPropertyV1",
@@ -46102,7 +46501,8 @@
         "required": [
           "fql",
           "propertyName"
-        ]
+        ],
+        "x-speakeasy-entity": "FQLDefinedPropertyV1"
       },
       "GetTransformationV1Output": {
         "description": "The output of Transformation retrieval.",
@@ -46121,19 +46521,22 @@
         },
         "required": [
           "transformation"
-        ]
+        ],
+        "x-speakeasy-entity": "GetTransformationV1Output"
       },
       "GetTransformationV1Input": {
         "description": "The input of Transformation retrieval.",
         "title": "GetTransformationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetTransformationV1Input"
       },
       "ListTransformationsV1Input": {
         "description": "Lists the Transformations associated with the current Workspace.",
         "title": "ListTransformationsV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListTransformationsV1Input"
       },
       "ListTransformationsV1Output": {
         "description": "Lists the Transformations associated with the current Workspace.",
@@ -46161,13 +46564,15 @@
         "required": [
           "pagination",
           "transformations"
-        ]
+        ],
+        "x-speakeasy-entity": "ListTransformationsV1Output"
       },
       "DeleteTransformationV1Input": {
         "description": "The input of delete Transformation.",
         "title": "DeleteTransformationV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteTransformationV1Input"
       },
       "DeleteTransformationV1Output": {
         "description": "The output of delete Transformation.",
@@ -46185,7 +46590,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteTransformationV1Output"
       },
       "UpdateTransformationV1Input": {
         "description": "The input to update a Transformation.",
@@ -46246,7 +46652,8 @@
             },
             "title": "fqlDefinedProperties"
           }
-        }
+        },
+        "x-speakeasy-entity": "UpdateTransformationV1Input"
       },
       "UpdateTransformationV1Output": {
         "description": "The output of an updated Transformation.",
@@ -46265,7 +46672,8 @@
         },
         "required": [
           "transformation"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateTransformationV1Output"
       },
       "CreateTransformationV1Input": {
         "description": "The input to create a Transformation.",
@@ -46332,7 +46740,8 @@
           "if",
           "name",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateTransformationV1Input"
       },
       "CreateTransformationV1Output": {
         "description": "The output of a created Transformation.",
@@ -46351,7 +46760,8 @@
         },
         "required": [
           "transformation"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateTransformationV1Output"
       },
       "MtuSnapshotV1": {
         "description": "A snapshot of MTU metrics within the given usage period.",
@@ -46402,7 +46812,8 @@
           "periodEnd",
           "periodStart",
           "timestamp"
-        ]
+        ],
+        "x-speakeasy-entity": "MtuSnapshotV1"
       },
       "UsersPerSourceSnapshotV1": {
         "description": "A snapshot of MTU metrics for a given Source within the given usage period.",
@@ -46459,7 +46870,8 @@
           "periodStart",
           "sourceId",
           "timestamp"
-        ]
+        ],
+        "x-speakeasy-entity": "UsersPerSourceSnapshotV1"
       },
       "APICallSnapshotV1": {
         "description": "A snapshot of the number of API calls for a given Workspace.",
@@ -46480,7 +46892,8 @@
         "required": [
           "apiCalls",
           "timestamp"
-        ]
+        ],
+        "x-speakeasy-entity": "APICallSnapshotV1"
       },
       "SourceAPICallSnapshotV1": {
         "description": "A snapshot of the number of API calls for a given Source in a Workspace.",
@@ -46507,13 +46920,15 @@
           "apiCalls",
           "sourceId",
           "timestamp"
-        ]
+        ],
+        "x-speakeasy-entity": "SourceAPICallSnapshotV1"
       },
       "GetDailyWorkspaceMTUUsageV1Input": {
         "description": "Input to retrieve aggregated daily Workspace MTU in a billing period.",
         "title": "GetDailyWorkspaceMTUUsageV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDailyWorkspaceMTUUsageV1Input"
       },
       "GetDailyWorkspaceMTUUsageV1Output": {
         "description": "Returns a list of daily aggregations of Workspace MTU counts.",
@@ -46541,13 +46956,15 @@
         "required": [
           "dailyWorkspaceMTUUsage",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDailyWorkspaceMTUUsageV1Output"
       },
       "GetDailyPerSourceMTUUsageV1Input": {
         "description": "Input to retrieve aggregated daily Source level MTU in a billing period.",
         "title": "GetDailyPerSourceMTUUsageV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDailyPerSourceMTUUsageV1Input"
       },
       "GetDailyPerSourceMTUUsageV1Output": {
         "description": "Returns a list of daily aggregations of Source level MTU counts.",
@@ -46575,13 +46992,15 @@
         "required": [
           "dailyPerSourceMTUUsage",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDailyPerSourceMTUUsageV1Output"
       },
       "GetDailyWorkspaceAPICallsUsageV1Input": {
         "description": "Input to retrieve aggregated daily Workspace API calls in a billing period.",
         "title": "GetDailyWorkspaceAPICallsUsageV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDailyWorkspaceAPICallsUsageV1Input"
       },
       "GetDailyWorkspaceAPICallsUsageV1Output": {
         "description": "Returns a list of daily aggregations of Workspace MTU counts.",
@@ -46609,13 +47028,15 @@
         "required": [
           "dailyWorkspaceAPICallsUsage",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDailyWorkspaceAPICallsUsageV1Output"
       },
       "GetDailyPerSourceAPICallsUsageV1Input": {
         "description": "Input to retrieve aggregated daily Source level API calls in a billing period.",
         "title": "GetDailyPerSourceAPICallsUsageV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetDailyPerSourceAPICallsUsageV1Input"
       },
       "GetDailyPerSourceAPICallsUsageV1Output": {
         "description": "Returns a list of daily aggregations of Source level API calls counts.",
@@ -46643,13 +47064,15 @@
         "required": [
           "dailyPerSourceAPICallsUsage",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "GetDailyPerSourceAPICallsUsageV1Output"
       },
       "GetWarehousesCatalogV1Input": {
         "description": "Filter parameters used for loading the Warehouses public catalog.",
         "title": "GetWarehousesCatalogV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetWarehousesCatalogV1Input"
       },
       "GetWarehousesCatalogV1Output": {
         "description": "Returns a list of all Warehouse catalog items contained within a given page.",
@@ -46677,13 +47100,15 @@
         "required": [
           "pagination",
           "warehousesCatalog"
-        ]
+        ],
+        "x-speakeasy-entity": "GetWarehousesCatalogV1Output"
       },
       "GetWarehouseMetadataV1Input": {
         "description": "Returns a Warehouse catalog item by id.",
         "title": "GetWarehouseMetadataV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetWarehouseMetadataV1Input"
       },
       "GetWarehouseMetadataV1Output": {
         "description": "Returns a Warehouse catalog item looked up by id.",
@@ -46702,7 +47127,8 @@
         },
         "required": [
           "warehouseMetadata"
-        ]
+        ],
+        "x-speakeasy-entity": "GetWarehouseMetadataV1Output"
       },
       "WarehouseMetadataV1": {
         "description": "The metadata for an instance of Segment’s data Warehouse product.",
@@ -46754,13 +47180,15 @@
           "name",
           "options",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "WarehouseMetadataV1"
       },
       "WarehouseSettingsV1": {
         "description": "A key-value object that contains instance-specific Warehouse settings.",
         "title": "WarehouseSettingsV1",
         "type": "object",
-        "additionalProperties": {}
+        "additionalProperties": {},
+        "x-speakeasy-entity": "WarehouseSettingsV1"
       },
       "WarehouseV1": {
         "description": "Defines a data Warehouse used as a Destination for Segment data.",
@@ -46807,7 +47235,8 @@
           "metadata",
           "settings",
           "workspaceId"
-        ]
+        ],
+        "x-speakeasy-entity": "WarehouseV1"
       },
       "SyncNoticeV1": {
         "description": "Represents a notice within a sync for a Source and Warehouse pair.",
@@ -46834,7 +47263,8 @@
           "createdAt",
           "level",
           "message"
-        ]
+        ],
+        "x-speakeasy-entity": "SyncNoticeV1"
       },
       "SyncV1": {
         "description": "Represents a sync between a Source and Warehouse.\n\nA sync occurs when data from a Source is loaded into a Warehouse.",
@@ -46895,7 +47325,8 @@
           "sourceId",
           "start",
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "SyncV1"
       },
       "WarehouseSyncOverrideV1": {
         "description": "Represents the override for a Source/collection/property? path to apply to a Warehouse.",
@@ -46926,7 +47357,8 @@
         "required": [
           "enabled",
           "sourceId"
-        ]
+        ],
+        "x-speakeasy-entity": "WarehouseSyncOverrideV1"
       },
       "WarehouseSelectiveSyncItemV1": {
         "description": "Represents an entry in the Warehouse Selective Sync schema for a Warehouse and Source pair.",
@@ -46960,7 +47392,8 @@
           "properties",
           "sourceId",
           "warehouseId"
-        ]
+        ],
+        "x-speakeasy-entity": "WarehouseSelectiveSyncItemV1"
       },
       "WarehouseAdvancedSyncV1": {
         "description": "Determines the time of day at which a Warehouse should sync.",
@@ -46981,7 +47414,8 @@
         "required": [
           "enabled",
           "hourOfDay"
-        ]
+        ],
+        "x-speakeasy-entity": "WarehouseAdvancedSyncV1"
       },
       "AdvancedWarehouseSyncScheduleV1Input": {
         "description": "Defines the advanced sync schedule for a Warehouse.",
@@ -47005,7 +47439,8 @@
         "required": [
           "times",
           "timezone"
-        ]
+        ],
+        "x-speakeasy-entity": "AdvancedWarehouseSyncScheduleV1Input"
       },
       "AdvancedWarehouseSyncScheduleV1Output": {
         "description": "Defines the advanced sync schedule for a Warehouse.",
@@ -47025,13 +47460,15 @@
             "type": "string",
             "title": "timezone"
           }
-        }
+        },
+        "x-speakeasy-entity": "AdvancedWarehouseSyncScheduleV1Output"
       },
       "ListWarehousesV1Input": {
         "description": "Gets a list of Warehouses belonging to a Workspace.",
         "title": "ListWarehousesV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListWarehousesV1Input"
       },
       "ListWarehousesV1Output": {
         "description": "Returns a list of Warehouses that belong to a Workspace.",
@@ -47059,13 +47496,15 @@
         "required": [
           "pagination",
           "warehouses"
-        ]
+        ],
+        "x-speakeasy-entity": "ListWarehousesV1Output"
       },
       "GetWarehouseV1Input": {
         "description": "Looks up a Warehouse by id.",
         "title": "GetWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetWarehouseV1Input"
       },
       "GetWarehouseV1Output": {
         "description": "Returns a Warehouse.",
@@ -47084,13 +47523,15 @@
         },
         "required": [
           "warehouse"
-        ]
+        ],
+        "x-speakeasy-entity": "GetWarehouseV1Output"
       },
       "ListConnectedSourcesFromWarehouseV1Input": {
         "description": "Looks up the list of Sources connected to a Warehouse.",
         "title": "ListConnectedSourcesFromWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListConnectedSourcesFromWarehouseV1Input"
       },
       "ListConnectedSourcesFromWarehouseV1Output": {
         "description": "Returns a list of Sources connected to a Warehouse.",
@@ -47118,13 +47559,15 @@
         "required": [
           "pagination",
           "sources"
-        ]
+        ],
+        "x-speakeasy-entity": "ListConnectedSourcesFromWarehouseV1Output"
       },
       "ListSyncsFromWarehouseV1Input": {
         "description": "Requests the overview of syncs for every Source connected to this Warehouse.",
         "title": "ListSyncsFromWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSyncsFromWarehouseV1Input"
       },
       "ListSyncsFromWarehouseV1Output": {
         "description": "Returns an overview page that contains the last syncs for a Warehouse.",
@@ -47152,13 +47595,15 @@
         "required": [
           "pagination",
           "reports"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSyncsFromWarehouseV1Output"
       },
       "ListSyncsFromWarehouseAndSourceV1Input": {
         "description": "Loads the most recent sync information for a Warehouse-source pair.",
         "title": "ListSyncsFromWarehouseAndSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSyncsFromWarehouseAndSourceV1Input"
       },
       "ListSyncsFromWarehouseAndSourceV1Output": {
         "description": "Returns a list that contains the most recent syncs for a Warehouse-source pair, filtered and constrained by a given\nset of pagination parameters.",
@@ -47186,13 +47631,15 @@
         "required": [
           "pagination",
           "reports"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSyncsFromWarehouseAndSourceV1Output"
       },
       "AddConnectionFromSourceToWarehouseV1Input": {
         "description": "Connects a Source to a Warehouse.\n\nPosting to this idempotent endpoint creates a connection between the Source and Warehouse, and begins syncing data\nfrom the Source's collections into the chosen Warehouse Destination.",
         "title": "AddConnectionFromSourceToWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "AddConnectionFromSourceToWarehouseV1Input"
       },
       "AddConnectionFromSourceToWarehouseV1Output": {
         "description": "Response indicating whether the connection was successful.",
@@ -47211,13 +47658,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "AddConnectionFromSourceToWarehouseV1Output"
       },
       "RemoveSourceConnectionFromWarehouseV1Input": {
         "description": "Disconnects a Source from a Warehouse.\n\nPosting to this idempotent endpoint removes a connection between the Source and Warehouse, and blocks all syncing\nfrom the Source's collections into the chosen Warehouse Destination.",
         "title": "RemoveSourceConnectionFromWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "RemoveSourceConnectionFromWarehouseV1Input"
       },
       "RemoveSourceConnectionFromWarehouseV1Output": {
         "description": "Response indicating whether the disconnection was successful.",
@@ -47235,13 +47684,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "RemoveSourceConnectionFromWarehouseV1Output"
       },
       "ListSelectiveSyncsFromWarehouseAndSourceV1Input": {
         "description": "Get the Selective Sync configuration associated with a Warehouse.",
         "title": "ListSelectiveSyncsFromWarehouseAndSourceV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "ListSelectiveSyncsFromWarehouseAndSourceV1Input"
       },
       "ListSelectiveSyncsFromWarehouseAndSourceV1Output": {
         "description": "Results containing the Selective Sync configuration for a Warehouse.",
@@ -47269,7 +47720,8 @@
         "required": [
           "items",
           "pagination"
-        ]
+        ],
+        "x-speakeasy-entity": "ListSelectiveSyncsFromWarehouseAndSourceV1Output"
       },
       "UpdateSelectiveSyncForWarehouseV1Input": {
         "description": "Updates the schema for a Warehouse/sources pair.",
@@ -47287,7 +47739,8 @@
         },
         "required": [
           "syncOverrides"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSelectiveSyncForWarehouseV1Input"
       },
       "UpdateSelectiveSyncForWarehouseV1Output": {
         "description": "Results from updating the schema for a Warehouse/source pair.",
@@ -47315,13 +47768,15 @@
         "required": [
           "status",
           "warnings"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateSelectiveSyncForWarehouseV1Output"
       },
       "GetAdvancedSyncScheduleFromWarehouseV1Input": {
         "description": "Gets the advanced sync schedule for a Warehouse.",
         "title": "GetAdvancedSyncScheduleFromWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetAdvancedSyncScheduleFromWarehouseV1Input"
       },
       "GetAdvancedSyncScheduleFromWarehouseV1Output": {
         "description": "Returns the advanced sync schedule for a Warehouse.",
@@ -47345,7 +47800,8 @@
         },
         "required": [
           "enabled"
-        ]
+        ],
+        "x-speakeasy-entity": "GetAdvancedSyncScheduleFromWarehouseV1Output"
       },
       "ReplaceAdvancedSyncScheduleForWarehouseV1Input": {
         "description": "Replaces the advanced sync schedule for a Warehouse.",
@@ -47369,7 +47825,8 @@
         },
         "required": [
           "enabled"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceAdvancedSyncScheduleForWarehouseV1Input"
       },
       "ReplaceAdvancedSyncScheduleForWarehouseV1Output": {
         "description": "Returns the advanced sync schedule for a Warehouse.",
@@ -47393,7 +47850,8 @@
         },
         "required": [
           "enabled"
-        ]
+        ],
+        "x-speakeasy-entity": "ReplaceAdvancedSyncScheduleForWarehouseV1Output"
       },
       "CreateWarehouseV1Input": {
         "description": "Create a new Warehouse based on a set of parameters.",
@@ -47428,7 +47886,8 @@
         "required": [
           "metadataId",
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateWarehouseV1Input"
       },
       "CreateWarehouseV1Output": {
         "description": "Returns the newly created Warehouse.",
@@ -47447,7 +47906,8 @@
         },
         "required": [
           "warehouse"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateWarehouseV1Output"
       },
       "UpdateWarehouseV1Input": {
         "description": "Updates an existing Warehouse based on a set of parameters.",
@@ -47477,7 +47937,8 @@
         },
         "required": [
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateWarehouseV1Input"
       },
       "UpdateWarehouseV1Output": {
         "description": "Returns the updated Warehouse.",
@@ -47496,13 +47957,15 @@
         },
         "required": [
           "warehouse"
-        ]
+        ],
+        "x-speakeasy-entity": "UpdateWarehouseV1Output"
       },
       "DeleteWarehouseV1Input": {
         "description": "Deletes an existing Warehouse by id.",
         "title": "DeleteWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "DeleteWarehouseV1Input"
       },
       "DeleteWarehouseV1Output": {
         "description": "Returns the status of a Warehouse deletion.",
@@ -47520,13 +47983,15 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "DeleteWarehouseV1Output"
       },
       "GetConnectionStateFromWarehouseV1Input": {
         "description": "Verifies the connection state of a Warehouse.\n\nUse this to check if a Warehouse is reachable, given its stored connection settings.",
         "title": "GetConnectionStateFromWarehouseV1Input",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "x-speakeasy-entity": "GetConnectionStateFromWarehouseV1Input"
       },
       "GetConnectionStateFromWarehouseV1Output": {
         "description": "Returns the status of a Warehouse connection settings after an attempt to connect to it.",
@@ -47545,7 +48010,8 @@
         },
         "required": [
           "connectionState"
-        ]
+        ],
+        "x-speakeasy-entity": "GetConnectionStateFromWarehouseV1Output"
       },
       "CreateValidationInWarehouseV1Output": {
         "description": "Returns the status of a Warehouse connection settings after an attempt to connect to it.",
@@ -47564,7 +48030,8 @@
         },
         "required": [
           "status"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateValidationInWarehouseV1Output"
       },
       "CreateValidationInWarehouseV1Input": {
         "description": "Verifies a set of Warehouse credentials by attempting to connect to it.",
@@ -47589,7 +48056,8 @@
         "required": [
           "metadataId",
           "settings"
-        ]
+        ],
+        "x-speakeasy-entity": "CreateValidationInWarehouseV1Input"
       },
       "WorkspaceV1": {
         "description": "An organized group of Sources and Destinations managed by a team.",
@@ -47616,12 +48084,14 @@
           "id",
           "name",
           "slug"
-        ]
+        ],
+        "x-speakeasy-entity": "WorkspaceV1"
       },
       "GetWorkspaceV1Input": {
         "description": "Loads the Workspace associated with the token.",
         "title": "GetWorkspaceV1Input",
-        "type": "object"
+        "type": "object",
+        "x-speakeasy-entity": "GetWorkspaceV1Input"
       },
       "GetWorkspaceV1Output": {
         "description": "Represents the output of loading the Workspace.",
@@ -47640,7 +48110,8 @@
         },
         "required": [
           "workspace"
-        ]
+        ],
+        "x-speakeasy-entity": "GetWorkspaceV1Output"
       },
       "RequestError": {
         "description": "Represents any error that could have occurred while performing a request.",
@@ -47674,7 +48145,8 @@
         },
         "required": [
           "type"
-        ]
+        ],
+        "x-speakeasy-entity": "RequestError"
       },
       "PaginationInput": {
         "description": "Pagination parameters.\n\nEvery resource that returns a list of items in its `Output` object may contain a `PaginationInput` in its `Input`\nobject. Required, though some of its fields are optional.",
@@ -47694,7 +48166,8 @@
         },
         "required": [
           "count"
-        ]
+        ],
+        "x-speakeasy-entity": "PaginationInput"
       },
       "PaginationOutput": {
         "description": "Pagination metadata for a list response.\n\nResponses return this object alongside a list of resources, which provides the necessary metadata for manipulating a\npaginated collection. In operations that return lists, it's always present, though some of its fields might not be.",
@@ -47726,7 +48199,8 @@
         },
         "required": [
           "current"
-        ]
+        ],
+        "x-speakeasy-entity": "PaginationOutput"
       },
       "RequestErrorEnvelope": {
         "title": "RequestErrorEnvelope",
@@ -47742,7 +48216,8 @@
         },
         "required": [
           "errors"
-        ]
+        ],
+        "x-speakeasy-entity": "RequestErrorEnvelope"
       }
     }
   },
