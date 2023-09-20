@@ -2531,7 +2531,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    System.out.println(\n      api.listSourcesFromTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSourcesFromTrackingPlanV1Output#read"
+        "x-speakeasy-entity-operation": "ListSourcesFromTrackingPlanV1Output#get"
       },
       "delete": {
         "summary": "Remove Source from Tracking Plan",
@@ -3100,7 +3100,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    System.out.println(api.listUsersFromUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListUsersFromUserGroupV1Output#read"
+        "x-speakeasy-entity-operation": "ListUsersFromUserGroupV1Output#get"
       }
     },
     "/spaces/{spaceId}/messaging-subscriptions/batch": {
@@ -4597,7 +4597,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationsApi api = new DestinationsApi();\n    System.out.println(api.listDestinations(PaginationInput.fromJson(\"{\\\"count\\\":1}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListDestinationsV1Output#read"
+        "x-speakeasy-entity-operation": "ListDestinationsV1Output#get"
       }
     },
     "/destinations/{destinationId}/subscriptions": {
@@ -5548,7 +5548,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationFiltersApi api = new DestinationFiltersApi();\n    System.out.println(api.listFiltersFromDestination(\"fP7qoQw2HTWt9WdMr718gn\", PaginationInput.fromJson(\"{\\\"count\\\":3}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListFiltersFromDestinationV1Output#read"
+        "x-speakeasy-entity-operation": "ListFiltersFromDestinationV1Output#get"
       }
     },
     "/functions": {
@@ -6149,7 +6149,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    FunctionsApi api = new FunctionsApi();\n    System.out.println(api.listFunctions(PaginationInput.fromJson(\"{\\\"count\\\":10}\"), \"SOURCE\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListFunctionsV1Output#read"
+        "x-speakeasy-entity-operation": "ListFunctionsV1Output#get"
       }
     },
     "/functions/{functionId}/deploy": {
@@ -7164,7 +7164,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    System.out.println(api.listInvites(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListInvitesV1Output#read"
+        "x-speakeasy-entity-operation": "ListInvitesV1Output#get"
       }
     },
     "/labels": {
@@ -7570,7 +7570,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    LabelsApi api = new LabelsApi();\n    System.out.println(api.listLabels().getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListLabelsV1Output#read"
+        "x-speakeasy-entity-operation": "ListLabelsV1Output#get"
       }
     },
     "/spaces/{spaceId}/profiles-warehouses": {
@@ -8820,7 +8820,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    System.out.println(api.listSources(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSourcesV1Output#read"
+        "x-speakeasy-entity-operation": "ListSourcesV1Output#get"
       }
     },
     "/regulations/sources/{sourceId}": {
@@ -9287,7 +9287,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    System.out.println(\n      api.listRegulationsFromSource(\"qQEHquLrjRDN9j1ByrChyn\", null, null, PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListRegulationsFromSourceV1Output#read"
+        "x-speakeasy-entity-operation": "ListRegulationsFromSourceV1Output#get"
       }
     },
     "/tracking-plans": {
@@ -9735,7 +9735,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    System.out.println(api.listTrackingPlans(\"LIVE\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListTrackingPlansV1Output#read"
+        "x-speakeasy-entity-operation": "ListTrackingPlansV1Output#get"
       }
     },
     "/transformations": {
@@ -10625,7 +10625,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TransformationsApi api = new TransformationsApi();\n    System.out.println(api.listTransformations(PaginationInput.fromJson(\"{\\\"count\\\":20}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListTransformationsV1Output#read"
+        "x-speakeasy-entity-operation": "ListTransformationsV1Output#get"
       }
     },
     "/groups": {
@@ -11062,7 +11062,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    System.out.println(api.listUserGroups(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListUserGroupsV1Output#read"
+        "x-speakeasy-entity-operation": "ListUserGroupsV1Output#get"
       }
     },
     "/warehouses/validation": {
@@ -12082,7 +12082,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    System.out.println(api.listWarehouses(PaginationInput.fromJson(\"{\\\"count\\\":3}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListWarehousesV1Output#read"
+        "x-speakeasy-entity-operation": "ListWarehousesV1Output#get"
       }
     },
     "/regulations": {
@@ -12526,7 +12526,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    System.out.println(api.listWorkspaceRegulations(null, null, PaginationInput.fromJson(\"{\\\"count\\\":5}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListWorkspaceRegulationsV1Output#read"
+        "x-speakeasy-entity-operation": "ListWorkspaceRegulationsV1Output#get"
       }
     },
     "/destinations/{destinationId}": {
@@ -14364,7 +14364,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationsApi api = new DestinationsApi();\n    System.out.println(api.getDestination(\"fP7qoQw2HTWt9WdMr718gn\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDestinationV1Output#read"
+        "x-speakeasy-entity-operation": "GetDestinationV1Output#get"
       },
       "patch": {
         "summary": "Update Destination",
@@ -16547,7 +16547,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    FunctionsApi api = new FunctionsApi();\n    System.out.println(api.getFunction(\"sfnc_wXzcDGFR3KmjLDrtSawNHf\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetFunctionV1Output#read"
+        "x-speakeasy-entity-operation": "GetFunctionV1Output#get"
       },
       "patch": {
         "summary": "Update Function",
@@ -17630,7 +17630,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    System.out.println(api.getRegulation(\"1qJkfE1tpwvQcklImGksLN629wn\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetRegulationV1Output#read"
+        "x-speakeasy-entity-operation": "GetRegulationV1Output#get"
       }
     },
     "/reverse-etl-models/{modelId}": {
@@ -18422,7 +18422,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    System.out.println(api.getSource(\"qQEHquLrjRDN9j1ByrChyn\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetSourceV1Output#read"
+        "x-speakeasy-entity-operation": "GetSourceV1Output#get"
       },
       "patch": {
         "summary": "Update Source",
@@ -19068,7 +19068,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    System.out.println(api.getTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetTrackingPlanV1Output#read"
+        "x-speakeasy-entity-operation": "GetTrackingPlanV1Output#get"
       },
       "patch": {
         "summary": "Update Tracking Plan",
@@ -19643,7 +19643,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TransformationsApi api = new TransformationsApi();\n    System.out.println(api.getTransformation(\"pHrD51Ds35Zjfka84yXQE6\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetTransformationV1Output#read"
+        "x-speakeasy-entity-operation": "GetTransformationV1Output#get"
       },
       "patch": {
         "summary": "Update Transformation",
@@ -20352,7 +20352,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    System.out.println(api.getUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetUserGroupV1Output#read"
+        "x-speakeasy-entity-operation": "GetUserGroupV1Output#get"
       },
       "patch": {
         "summary": "Update User Group",
@@ -20936,7 +20936,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    System.out.println(api.listUsers(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListUsersV1Output#read"
+        "x-speakeasy-entity-operation": "ListUsersV1Output#get"
       }
     },
     "/warehouses/{warehouseId}": {
@@ -21442,7 +21442,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    System.out.println(api.getWarehouse(\"kjU72LCJexvrqL7G4TMHHN\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetWarehouseV1Output#read"
+        "x-speakeasy-entity-operation": "GetWarehouseV1Output#get"
       },
       "patch": {
         "summary": "Update Warehouse",
@@ -22180,7 +22180,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TestingApi api = new TestingApi();\n    System.out.println(api.echo(\"Hello, World!\", null, null, null, null, null).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "EchoV1Output#read"
+        "x-speakeasy-entity-operation": "EchoV1Output#get"
       }
     },
     "/sources/{sourceId}/edge-functions/upload-url": {
@@ -22504,7 +22504,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SelectiveSyncApi api = new SelectiveSyncApi();\n    System.out.println(api.getAdvancedSyncScheduleFromWarehouse(\"kjU72LCJexvrqL7G4TMHHN\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetAdvancedSyncScheduleFromWarehouseV1Output#read"
+        "x-speakeasy-entity-operation": "GetAdvancedSyncScheduleFromWarehouseV1Output#get"
       },
       "put": {
         "summary": "Replace Advanced Sync Schedule for Warehouse",
@@ -23784,7 +23784,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    System.out.println(api.getConnectionStateFromWarehouse(\"kjU72LCJexvrqL7G4TMHHN\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetConnectionStateFromWarehouseV1Output#read"
+        "x-speakeasy-entity-operation": "GetConnectionStateFromWarehouseV1Output#get"
       }
     },
     "/usage/api-calls/sources/daily": {
@@ -24181,7 +24181,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    ApiCallsApi api = new ApiCallsApi();\n    System.out.println(api.getDailyPerSourceAPICallsUsage(\"2021-02-01\", PaginationInput.fromJson(\"{\\\"count\\\":10}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDailyPerSourceAPICallsUsageV1Output#read"
+        "x-speakeasy-entity-operation": "GetDailyPerSourceAPICallsUsageV1Output#get"
       }
     },
     "/usage/mtu/sources/daily": {
@@ -24778,7 +24778,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    MonthlyTrackedUsersApi api = new MonthlyTrackedUsersApi();\n    System.out.println(api.getDailyPerSourceMTUUsage(\"2021-02-01\", PaginationInput.fromJson(\"{\\\"count\\\":10}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDailyPerSourceMTUUsageV1Output#read"
+        "x-speakeasy-entity-operation": "GetDailyPerSourceMTUUsageV1Output#get"
       }
     },
     "/usage/api-calls/daily": {
@@ -25135,7 +25135,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    ApiCallsApi api = new ApiCallsApi();\n    System.out.println(api.getDailyWorkspaceAPICallsUsage(\"2021-02-01\", PaginationInput.fromJson(\"{\\\"count\\\":10}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDailyWorkspaceAPICallsUsageV1Output#read"
+        "x-speakeasy-entity-operation": "GetDailyWorkspaceAPICallsUsageV1Output#get"
       }
     },
     "/usage/mtu/daily": {
@@ -25692,7 +25692,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    MonthlyTrackedUsersApi api = new MonthlyTrackedUsersApi();\n    System.out.println(api.getDailyWorkspaceMTUUsage(\"2021-02-01\", PaginationInput.fromJson(\"{\\\"count\\\":10}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDailyWorkspaceMTUUsageV1Output#read"
+        "x-speakeasy-entity-operation": "GetDailyWorkspaceMTUUsageV1Output#get"
       }
     },
     "/catalog/destinations/{destinationMetadataId}": {
@@ -26354,7 +26354,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    CatalogApi api = new CatalogApi();\n    System.out.println(api.getDestinationMetadata(\"54521fd525e721e32a72ee91\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDestinationMetadataV1Output#read"
+        "x-speakeasy-entity-operation": "GetDestinationMetadataV1Output#get"
       }
     },
     "/catalog/destinations": {
@@ -27302,7 +27302,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    CatalogApi api = new CatalogApi();\n    System.out.println(api.getDestinationsCatalog(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetDestinationsCatalogV1Output#read"
+        "x-speakeasy-entity-operation": "GetDestinationsCatalogV1Output#get"
       }
     },
     "/events/volume": {
@@ -27681,7 +27681,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    EventsApi api = new EventsApi();\n    System.out.println(\n      api\n        .getEventsVolumeFromWorkspace(\n          \"DAY\",\n          \"2021-10-28T00:00:00Z\",\n          \"2021-10-29T16:40:00Z\",\n          Arrays.asList(\"eventType\"),\n          null,\n          null,\n          null,\n          null,\n          null\n        )\n        .getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetEventsVolumeFromWorkspaceV1Output#read"
+        "x-speakeasy-entity-operation": "GetEventsVolumeFromWorkspaceV1Output#get"
       }
     },
     "/destination/{destinationId}/filters/{filterId}": {
@@ -27916,7 +27916,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DestinationFiltersApi api = new DestinationFiltersApi();\n    System.out.println(api.getFilterInDestination(\"fP7qoQw2HTWt9WdMr718gn\", \"xx6AySGeFExzdv2Gw2EuhV\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetFilterInDestinationV1Output#read"
+        "x-speakeasy-entity-operation": "GetFilterInDestinationV1Output#get"
       },
       "delete": {
         "summary": "Remove Filter from Destination",
@@ -28832,7 +28832,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    CatalogApi api = new CatalogApi();\n    System.out.println(api.getSourceMetadata(\"1bow82lmk\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetSourceMetadataV1Output#read"
+        "x-speakeasy-entity-operation": "GetSourceMetadataV1Output#get"
       }
     },
     "/catalog/sources": {
@@ -29140,7 +29140,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    CatalogApi api = new CatalogApi();\n    System.out.println(api.getSourcesCatalog(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetSourcesCatalogV1Output#read"
+        "x-speakeasy-entity-operation": "GetSourcesCatalogV1Output#get"
       }
     },
     "/spaces/{spaceId}": {
@@ -29896,7 +29896,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    System.out.println(api.getUser(\"sgJDWk3K21k6LE3tLU9nRK\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetUserV1Output#read"
+        "x-speakeasy-entity-operation": "GetUserV1Output#get"
       }
     },
     "/catalog/warehouses/{warehouseMetadataId}": {
@@ -30222,7 +30222,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    CatalogApi api = new CatalogApi();\n    System.out.println(api.getWarehouseMetadata(\"55d3d3aea3c\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetWarehouseMetadataV1Output#read"
+        "x-speakeasy-entity-operation": "GetWarehouseMetadataV1Output#get"
       }
     },
     "/catalog/warehouses": {
@@ -30526,7 +30526,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    CatalogApi api = new CatalogApi();\n    System.out.println(api.getWarehousesCatalog(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetWarehousesCatalogV1Output#read"
+        "x-speakeasy-entity-operation": "GetWarehousesCatalogV1Output#get"
       }
     },
     "/": {
@@ -30688,7 +30688,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WorkspacesApi api = new WorkspacesApi();\n    System.out.println(api.getWorkspace().getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "GetWorkspaceV1Output#read"
+        "x-speakeasy-entity-operation": "GetWorkspaceV1Output#get"
       }
     },
     "/spaces/{spaceId}/audiences": {
@@ -31131,7 +31131,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    AuditTrailApi api = new AuditTrailApi();\n    System.out.println(\n      api.listAuditEvents(null, null, \"9aQ1Lj62S4bomZKLF4DPqW\", null, PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListAuditEventsV1Output#read"
+        "x-speakeasy-entity-operation": "ListAuditEventsV1Output#get"
       }
     },
     "/spaces/{spaceId}/computed-traits": {
@@ -31463,7 +31463,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    System.out.println(\n      api.listConnectedDestinationsFromSource(\"qQEHquLrjRDN9j1ByrChyn\", PaginationInput.fromJson(\"{\\\"count\\\":1}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListConnectedDestinationsFromSourceV1Output#read"
+        "x-speakeasy-entity-operation": "ListConnectedDestinationsFromSourceV1Output#get"
       }
     },
     "/warehouses/{warehouseId}/connected-sources": {
@@ -31763,7 +31763,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    WarehousesApi api = new WarehousesApi();\n    System.out.println(\n      api.listConnectedSourcesFromWarehouse(\"kjU72LCJexvrqL7G4TMHHN\", PaginationInput.fromJson(\"{\\\"count\\\":1}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListConnectedSourcesFromWarehouseV1Output#read"
+        "x-speakeasy-entity-operation": "ListConnectedSourcesFromWarehouseV1Output#get"
       }
     },
     "/sources/{sourceId}/connected-warehouses": {
@@ -32346,7 +32346,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    System.out.println(\n      api.listConnectedWarehousesFromSource(\"qQEHquLrjRDN9j1ByrChyn\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListConnectedWarehousesFromSourceV1Output#read"
+        "x-speakeasy-entity-operation": "ListConnectedWarehousesFromSourceV1Output#get"
       }
     },
     "/destinations/{destinationId}/delivery-metrics": {
@@ -33110,7 +33110,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamGroupsApi api = new IamGroupsApi();\n    System.out.println(api.listInvitesFromUserGroup(\"bBABwqbaDf2QdwTbW8bNEm\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListInvitesFromUserGroupV1Output#read"
+        "x-speakeasy-entity-operation": "ListInvitesFromUserGroupV1Output#get"
       }
     },
     "/roles": {
@@ -33330,7 +33330,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamRolesApi api = new IamRolesApi();\n    System.out.println(api.listRoles(PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListRolesV1Output#read"
+        "x-speakeasy-entity-operation": "ListRolesV1Output#get"
       }
     },
     "/tracking-plans/{trackingPlanId}/rules": {
@@ -33609,7 +33609,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    TrackingPlansApi api = new TrackingPlansApi();\n    System.out.println(\n      api.listRulesFromTrackingPlan(\"tp_sprout_rVGCC6WdrNxjCf6JpCHP\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListRulesFromTrackingPlanV1Output#read"
+        "x-speakeasy-entity-operation": "ListRulesFromTrackingPlanV1Output#get"
       },
       "delete": {
         "summary": "Remove Rules from Tracking Plan",
@@ -34441,7 +34441,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SourcesApi api = new SourcesApi();\n    System.out.println(api.listSchemaSettingsInSource(\"qQEHquLrjRDN9j1ByrChyn\").getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSchemaSettingsInSourceV1Output#read"
+        "x-speakeasy-entity-operation": "ListSchemaSettingsInSourceV1Output#get"
       },
       "patch": {
         "summary": "Update Schema Settings in Source",
@@ -35050,7 +35050,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SelectiveSyncApi api = new SelectiveSyncApi();\n    System.out.println(\n      api\n        .listSelectiveSyncsFromWarehouseAndSource(\n          \"kjU72LCJexvrqL7G4TMHHN\",\n          \"rh5BDZp6QDHvXFCkibm1pR\",\n          PaginationInput.fromJson(\"{\\\"count\\\":2}\")\n        )\n        .getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSelectiveSyncsFromWarehouseAndSourceV1Output#read"
+        "x-speakeasy-entity-operation": "ListSelectiveSyncsFromWarehouseAndSourceV1Output#get"
       }
     },
     "/spaces/{spaceId}/profiles-warehouses/{warehouseId}/selective-syncs": {
@@ -35561,7 +35561,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    DeletionAndSuppressionApi api = new DeletionAndSuppressionApi();\n    System.out.println(api.listSuppressions(PaginationInput.fromJson(\"{\\\"count\\\":5}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSuppressionsV1Output#read"
+        "x-speakeasy-entity-operation": "ListSuppressionsV1Output#get"
       }
     },
     "/warehouses/{warehouseId}/syncs": {
@@ -35748,7 +35748,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SelectiveSyncApi api = new SelectiveSyncApi();\n    System.out.println(api.listSyncsFromWarehouse(\"kjU72LCJexvrqL7G4TMHHN\", PaginationInput.fromJson(\"{\\\"count\\\":5}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSyncsFromWarehouseV1Output#read"
+        "x-speakeasy-entity-operation": "ListSyncsFromWarehouseV1Output#get"
       }
     },
     "/warehouses/{warehouseId}/connected-sources/{sourceId}/syncs": {
@@ -35946,7 +35946,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    SelectiveSyncApi api = new SelectiveSyncApi();\n    System.out.println(\n      api\n        .listSyncsFromWarehouseAndSource(\"kjU72LCJexvrqL7G4TMHHN\", \"rh5BDZp6QDHvXFCkibm1pR\", PaginationInput.fromJson(\"{\\\"count\\\":2}\"))\n        .getData()\n    );\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListSyncsFromWarehouseAndSourceV1Output#read"
+        "x-speakeasy-entity-operation": "ListSyncsFromWarehouseAndSourceV1Output#get"
       }
     },
     "/users/{userId}/groups": {
@@ -36138,7 +36138,7 @@
             "source": "import com.segment.publicapi.api.*;\nimport com.segment.publicapi.auth.*;\nimport com.segment.publicapi.models.*;\n\npublic class Main {\n\n  public static void main(String[] args) throws Exception {\n    ApiClient defaultClient = Configuration.getDefaultApiClient().setBasePath(\"https://api.segmentapis.com\");\n\n    HttpBearerAuth token = (HttpBearerAuth) defaultClient.getAuthentication(\"token\");\n    token.setBearerToken(\"/* Insert your Public API token here */\");\n\n    IamUsersApi api = new IamUsersApi();\n    System.out.println(api.listUserGroupsFromUser(\"sgJDWk3K21k6LE3tLU9nRK\", PaginationInput.fromJson(\"{\\\"count\\\":2}\")).getData());\n  }\n}\n"
           }
         ],
-        "x-speakeasy-entity-operation": "ListUserGroupsFromUserV1Output#read"
+        "x-speakeasy-entity-operation": "ListUserGroupsFromUserV1Output#get"
       }
     },
     "/destination/filters/preview": {
