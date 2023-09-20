@@ -26,6 +26,7 @@ internal/provider/type_allowed_label_beta.go
 internal/provider/type_permission_resource_v1.go
 internal/provider/type_permission_input_v1.go
 internal/provider/type_destination_filter_action_v1.go
+internal/provider/type_create_function_deployment_v1_output_function_deployment.go
 internal/provider/type_function_setting_v1.go
 internal/provider/type_resource_v1.go
 internal/provider/type_invite_permission_v1.go
@@ -651,6 +652,9 @@ internal/sdk/pkg/models/shared/workspacev1.go
 USAGE.md
 internal/provider/provider.go
 examples/provider/provider.tf
+internal/provider/addconnectionfromsourcetowarehousev1output_resource.go
+internal/provider/addconnectionfromsourcetowarehousev1output_resource_sdk.go
+examples/resources/segment_add_connection_from_source_to_warehouse_v1_output/resource.tf
 internal/provider/addlabelstosourcev1input_resource.go
 internal/provider/addlabelstosourcev1input_resource_sdk.go
 examples/resources/segment_add_labels_to_source_v1_input/resource.tf
@@ -675,6 +679,9 @@ examples/resources/segment_create_destination_v1_input/resource.tf
 internal/provider/createfilterfordestinationv1input_resource.go
 internal/provider/createfilterfordestinationv1input_resource_sdk.go
 examples/resources/segment_create_filter_for_destination_v1_input/resource.tf
+internal/provider/createfunctiondeploymentv1output_resource.go
+internal/provider/createfunctiondeploymentv1output_resource_sdk.go
+examples/resources/segment_create_function_deployment_v1_output/resource.tf
 internal/provider/createfunctionv1input_resource.go
 internal/provider/createfunctionv1input_resource_sdk.go
 examples/resources/segment_create_function_v1_input/resource.tf
