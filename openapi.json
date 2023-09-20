@@ -37536,8 +37536,7 @@
         "description": "Retrieves all Audit Trail events for the current Workspace.",
         "title": "ListAuditEventsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListAuditEventsV1Input"
+        "properties": {}
       },
       "ListAuditEventsV1Output": {
         "description": "Returns a list of Audit Trail events for the current Workspace.",
@@ -37641,15 +37640,13 @@
         "description": "Input to get an audience.",
         "title": "GetAudienceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetAudienceAlphaInput"
+        "properties": {}
       },
       "ListAudiencesAlphaInput": {
         "description": "Input to list audiences for a space id.",
         "title": "ListAudiencesAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListAudiencesAlphaInput"
+        "properties": {}
       },
       "UpdateAudienceForSpaceInput": {
         "description": "Input to update an audience.",
@@ -37671,8 +37668,7 @@
         "description": "Input to delete an audience.",
         "title": "RemoveAudienceFromSpaceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveAudienceFromSpaceAlphaInput"
+        "properties": {}
       },
       "UpdateAudienceForSpaceAlphaOutput": {
         "description": "Audience output for get.",
@@ -37836,15 +37832,13 @@
         "description": "Input to get a computed trait.",
         "title": "GetComputedTraitAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetComputedTraitAlphaInput"
+        "properties": {}
       },
       "ListComputedTraitsAlphaInput": {
         "description": "Input to list computed traits for a space id.",
         "title": "ListComputedTraitsAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListComputedTraitsAlphaInput"
+        "properties": {}
       },
       "UpdateComputedTraitForSpaceAlphaInput": {
         "description": "Input to update a computed trait.",
@@ -37866,8 +37860,7 @@
         "description": "Input to delete a computed trait.",
         "title": "RemoveComputedTraitFromSpaceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveComputedTraitFromSpaceAlphaInput"
+        "properties": {}
       },
       "GetComputedTraitAlphaOutput": {
         "description": "Computed Trait output for get and update.",
@@ -37961,22 +37954,19 @@
         "description": "Input for ListDestinationFiltersV1.",
         "title": "ListFiltersFromDestinationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListFiltersFromDestinationV1Input"
+        "properties": {}
       },
       "GetFilterInDestinationV1Input": {
         "description": "Input for GetDestinationFilterV1.",
         "title": "GetFilterInDestinationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetFilterInDestinationV1Input"
+        "properties": {}
       },
       "RemoveFilterFromDestinationV1Input": {
         "description": "Input for DeleteDestinationFilterV1.",
         "title": "RemoveFilterFromDestinationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveFilterFromDestinationV1Input"
+        "properties": {}
       },
       "DestinationFilterActionV1": {
         "description": "Represents a Destination filter action.",
@@ -38905,8 +38895,7 @@
         "description": "Contains filter parameters used for loading the Destinations public catalog.",
         "title": "GetDestinationsCatalogV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDestinationsCatalogV1Input"
+        "properties": {}
       },
       "GetDestinationsCatalogV1Output": {
         "description": "Returns a list of all Destination catalog items contained within a given page.",
@@ -38941,8 +38930,7 @@
         "description": "Loads a Destination catalog item by id.",
         "title": "GetDestinationMetadataV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDestinationMetadataV1Input"
+        "properties": {}
       },
       "GetDestinationMetadataV1Output": {
         "description": "Returns a Destination catalog item.",
@@ -39034,15 +39022,13 @@
         "description": "Represents settings used to configure an action subscription.",
         "title": "DestinationSubscriptionFields",
         "type": "object",
-        "additionalProperties": {},
-        "x-speakeasy-entity": "DestinationSubscriptionFields"
+        "additionalProperties": {}
       },
       "ListSubscriptionsFromDestinationAlphaInput": {
         "description": "Input for ListDestinationSubscriptionsAlpha.",
         "title": "ListSubscriptionsFromDestinationAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSubscriptionsFromDestinationAlphaInput"
+        "properties": {}
       },
       "ListSubscriptionsFromDestinationAlphaOutput": {
         "description": "Output for ListDestinationSubscriptionsAlpha.",
@@ -39076,8 +39062,7 @@
         "description": "Fetches a Destination subscription.",
         "title": "GetSubscriptionFromDestinationAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetSubscriptionFromDestinationAlphaInput"
+        "properties": {}
       },
       "GetSubscriptionFromDestinationAlphaOutput": {
         "description": "Returns a subscription for a given subscription id.",
@@ -39243,8 +39228,7 @@
         "description": "Deletes a Destination by id.",
         "title": "RemoveSubscriptionFromDestinationAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveSubscriptionFromDestinationAlphaInput"
+        "properties": {}
       },
       "RemoveSubscriptionFromDestinationAlphaOutput": {
         "description": "Returns a Destination deletion flag.",
@@ -39269,8 +39253,7 @@
         "description": "Input to retrieve event delivery metrics summary for a Destination.",
         "title": "ListDeliveryMetricsSummaryFromDestinationBetaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListDeliveryMetricsSummaryFromDestinationBetaInput"
+        "properties": {}
       },
       "ListDeliveryMetricsSummaryFromDestinationBetaOutput": {
         "description": "Output to retrieve event delivery metrics summary for a Destination.",
@@ -39429,8 +39412,7 @@
         "description": "Loads all Destinations connected to the current Workspace.",
         "title": "ListDestinationsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListDestinationsV1Input"
+        "properties": {}
       },
       "ListDestinationsV1Output": {
         "description": "Returns all Destinations connected to the current Workspace.",
@@ -39465,8 +39447,7 @@
         "description": "Looks up a single Destination by its id.",
         "title": "GetDestinationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDestinationV1Input"
+        "properties": {}
       },
       "GetDestinationV1Output": {
         "description": "Returns a single Destination by its id.",
@@ -39492,8 +39473,7 @@
         "description": "Deletes a single Destination by its id.",
         "title": "DeleteDestinationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteDestinationV1Input"
+        "properties": {}
       },
       "DeleteDestinationV1Output": {
         "description": "Returns the status of a Destination deletion.",
@@ -39622,8 +39602,7 @@
         "description": "EchoAlphaInput and EchoAlphaOutput are needed by unit tests in the generated Go code.\n\nIf you change these, make sure `make clients` works locally, and generates the Go client correctly.\nEcho request with options.",
         "title": "EchoAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "EchoAlphaInput"
+        "properties": {}
       },
       "EchoAlphaOutput": {
         "description": "Echo response.",
@@ -39662,8 +39641,7 @@
         "description": "Echo request with options.",
         "title": "EchoV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "EchoV1Input"
+        "properties": {}
       },
       "EchoV1Output": {
         "description": "Echo response.",
@@ -39702,8 +39680,7 @@
         "description": "Input for GenerateSignedUrl.",
         "title": "GenerateUploadURLForEdgeFunctionsAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GenerateUploadURLForEdgeFunctionsAlphaInput"
+        "properties": {}
       },
       "GenerateUploadURLForEdgeFunctionsAlphaOutput": {
         "description": "Output for GenerateSignedUrl.",
@@ -39761,8 +39738,7 @@
         "description": "Input for GetLatestFromEdgeFunctions.",
         "title": "GetLatestFromEdgeFunctionsAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetLatestFromEdgeFunctionsAlphaInput"
+        "properties": {}
       },
       "GetLatestFromEdgeFunctionsAlphaOutput": {
         "description": "Output for GetLatestFromEdgeFunctions.",
@@ -39788,8 +39764,7 @@
         "description": "Input for DisableEdgeFunctions.",
         "title": "DisableEdgeFunctionsAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DisableEdgeFunctionsAlphaInput"
+        "properties": {}
       },
       "DisableEdgeFunctionsAlphaOutput": {
         "description": "Output for DisableEdgeFunctions.",
@@ -39861,8 +39836,7 @@
         "description": "Lists all versions of a Function.",
         "title": "ListFunctionVersionsAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListFunctionVersionsAlphaInput"
+        "properties": {}
       },
       "ListFunctionVersionsAlphaOutput": {
         "description": "Lists Versions of a Function.",
@@ -39897,8 +39871,7 @@
         "description": "Gets a Function version.",
         "title": "GetFunctionVersionAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetFunctionVersionAlphaInput"
+        "properties": {}
       },
       "GetFunctionVersionAlphaOutput": {
         "description": "Get Function version output.",
@@ -40077,8 +40050,7 @@
         "description": "List all insert Function instances connected to the insert Function.",
         "title": "ListInsertFunctionInstancesAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListInsertFunctionInstancesAlphaInput"
+        "properties": {}
       },
       "ListInsertFunctionInstancesAlphaOutput": {
         "description": "Returns a list of insert Function instances connected to the insert Function.",
@@ -40160,8 +40132,7 @@
         "description": "Delete an insert Function instance.",
         "title": "DeleteInsertFunctionInstanceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteInsertFunctionInstanceAlphaInput"
+        "properties": {}
       },
       "DeleteInsertFunctionInstanceAlphaOutput": {
         "description": "Delete an insert Function instance.",
@@ -40377,8 +40348,7 @@
         "description": "Gets a single Function.",
         "title": "GetFunctionV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetFunctionV1Input"
+        "properties": {}
       },
       "GetFunctionV1Output": {
         "description": "Gets a single Function.",
@@ -40406,8 +40376,7 @@
         "description": "Lists all Functions in a Workspace.",
         "title": "ListFunctionsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListFunctionsV1Input"
+        "properties": {}
       },
       "ListFunctionsV1Output": {
         "description": "Lists Functions in a Workspace.",
@@ -40513,8 +40482,7 @@
         "description": "Delete a single Function.",
         "title": "DeleteFunctionV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteFunctionV1Input"
+        "properties": {}
       },
       "DeleteFunctionV1Output": {
         "description": "Delete a single Function.",
@@ -40595,8 +40563,7 @@
         "description": "Updates the deployment for a Source Function instance.",
         "title": "CreateFunctionDeploymentV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "CreateFunctionDeploymentV1Input"
+        "properties": {}
       },
       "CreateFunctionDeploymentV1Output": {
         "description": "Updates the deployment for a Source Function instance.",
@@ -40856,8 +40823,7 @@
         "description": "Removes pre-existing invitations to join a Workspace.",
         "title": "DeleteInvitesV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteInvitesV1Input"
+        "properties": {}
       },
       "DeleteInvitesV1Output": {
         "description": "Returns the status of the removal operation.",
@@ -40882,8 +40848,7 @@
         "description": "Retrieves a list of existing invitations to join a Workspace.",
         "title": "ListInvitesV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListInvitesV1Input"
+        "properties": {}
       },
       "ListInvitesV1Output": {
         "description": "Returns the list of invites.",
@@ -41016,8 +40981,7 @@
         "description": "Removes users from a Workspace.",
         "title": "DeleteUsersV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteUsersV1Input"
+        "properties": {}
       },
       "DeleteUsersV1Output": {
         "description": "Returns the status of the removal operation.",
@@ -41174,8 +41138,7 @@
         "description": "Returns a list of users with access to the Workspace.",
         "title": "ListUsersV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListUsersV1Input"
+        "properties": {}
       },
       "ListUsersV1Output": {
         "description": "Returns the list of users.",
@@ -41210,8 +41173,7 @@
         "description": "Returns a user.",
         "title": "GetUserV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetUserV1Input"
+        "properties": {}
       },
       "GetUserV1Output": {
         "description": "Returns the user.",
@@ -41273,8 +41235,7 @@
         "description": "Retrieves all user groups the user belongs to.",
         "title": "ListUserGroupsFromUserV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListUserGroupsFromUserV1Input"
+        "properties": {}
       },
       "ListUserGroupsFromUserV1Output": {
         "description": "Returns all user groups the user belongs to.",
@@ -41309,8 +41270,7 @@
         "description": "Returns a list of roles available to apply to permissions for users in the Workspace.",
         "title": "ListRolesV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListRolesV1Input"
+        "properties": {}
       },
       "RoleV1": {
         "description": "Represents a role.",
@@ -41550,8 +41510,7 @@
         "description": "Deletes a user group with a given group id from a Workspace.",
         "title": "DeleteUserGroupV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteUserGroupV1Input"
+        "properties": {}
       },
       "DeleteUserGroupV1Output": {
         "description": "Returns the status of the completed deletion operation.",
@@ -41576,8 +41535,7 @@
         "description": "Looks up a user group within a Workspace.",
         "title": "GetUserGroupV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetUserGroupV1Input"
+        "properties": {}
       },
       "GetUserGroupV1Output": {
         "description": "Returns a user group with the given id.",
@@ -41639,8 +41597,7 @@
         "description": "Looks up the invitees to a user group within a Workspace.",
         "title": "ListInvitesFromUserGroupV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListInvitesFromUserGroupV1Input"
+        "properties": {}
       },
       "ListInvitesFromUserGroupV1Output": {
         "description": "Returns the emails of invitees to a user group with the given group id.",
@@ -41714,8 +41671,7 @@
         "description": "Loads all user groups for a Workspace.",
         "title": "ListUserGroupsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListUserGroupsV1Input"
+        "properties": {}
       },
       "ListUserGroupsV1Output": {
         "description": "Returns a list of user groups with the given Workspace id.",
@@ -41750,8 +41706,7 @@
         "description": "Removes users or invites from a user group.",
         "title": "RemoveUsersFromUserGroupV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveUsersFromUserGroupV1Input"
+        "properties": {}
       },
       "RemoveUsersFromUserGroupV1Output": {
         "description": "Returns the status of the removal operation.",
@@ -41814,8 +41769,7 @@
         "description": "Looks up the members of a user group within a Workspace.",
         "title": "ListUsersFromUserGroupV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListUsersFromUserGroupV1Input"
+        "properties": {}
       },
       "ListUsersFromUserGroupV1Output": {
         "description": "Returns the members of a user group with the given group id.",
@@ -41918,8 +41872,7 @@
       "ListLabelsAlphaInput": {
         "description": "Retrieves all available labels for the current Workspace.",
         "title": "ListLabelsAlphaInput",
-        "type": "object",
-        "x-speakeasy-entity": "ListLabelsAlphaInput"
+        "type": "object"
       },
       "ListLabelsAlphaOutput": {
         "description": "Returns all available labels for the current Workspace.",
@@ -41944,8 +41897,7 @@
         "description": "Deletes an existing label in the current Workspace.",
         "title": "DeleteLabelAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteLabelAlphaInput"
+        "properties": {}
       },
       "DeleteLabelAlphaOutput": {
         "description": "Returns the status of a label deletion.",
@@ -42072,8 +42024,7 @@
       "ListLabelsV1Input": {
         "description": "Retrieves all available labels for the current Workspace.",
         "title": "ListLabelsV1Input",
-        "type": "object",
-        "x-speakeasy-entity": "ListLabelsV1Input"
+        "type": "object"
       },
       "ListLabelsV1Output": {
         "description": "Returns all available labels for the current Workspace.",
@@ -42138,8 +42089,7 @@
         "description": "Deletes an existing label in the current Workspace.",
         "title": "DeleteLabelV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteLabelV1Input"
+        "properties": {}
       },
       "DeleteLabelV1Output": {
         "description": "Returns the status of a label deletion.",
@@ -42360,8 +42310,7 @@
         "description": "GetEventsVolumeFromWorkspaceV1Input represents the arguments given to the API.",
         "title": "GetEventsVolumeFromWorkspaceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetEventsVolumeFromWorkspaceV1Input"
+        "properties": {}
       },
       "GetEventsVolumeFromWorkspaceV1Output": {
         "description": "GetEventsVolumeFromWorkspaceV1Output represents the results given the input query.",
@@ -42650,8 +42599,7 @@
         "description": "Deletes an existing Warehouse by id.",
         "title": "RemoveProfilesWarehouseFromSpaceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveProfilesWarehouseFromSpaceAlphaInput"
+        "properties": {}
       },
       "RemoveProfilesWarehouseFromSpaceAlphaOutput": {
         "description": "Returns the status of a Warehouse deletion.",
@@ -42676,8 +42624,7 @@
         "description": "Gets all Profiles Warehouse based on spaceID and pagination.",
         "title": "ListProfilesWarehouseInSpaceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListProfilesWarehouseInSpaceAlphaInput"
+        "properties": {}
       },
       "ListProfilesWarehouseInSpaceAlphaOutput": {
         "description": "Returns all Profiles Warehouse based on spaceID and pagination.",
@@ -42766,8 +42713,7 @@
         "description": "Get the Selective Sync configuration associated with a Space Warehouse Connection.",
         "title": "ListSelectiveSyncsFromWarehouseAndSpaceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSelectiveSyncsFromWarehouseAndSpaceAlphaInput"
+        "properties": {}
       },
       "ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput": {
         "description": "Results containing the Selective Sync configuration for a Space Warehouse Connection.",
@@ -42992,8 +42938,7 @@
         "description": "The input to delete a regulate request.",
         "title": "DeleteRegulationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteRegulationV1Input"
+        "properties": {}
       },
       "DeleteRegulationV1Output": {
         "description": "The output of the delete regulation call.",
@@ -43076,8 +43021,7 @@
         "description": "The input to get a regulate request.",
         "title": "GetRegulationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetRegulationV1Input"
+        "properties": {}
       },
       "GetRegulationV1Output": {
         "description": "The regulate request returned.",
@@ -43151,8 +43095,7 @@
         "description": "Input to list all Workspace-scoped regulations in a given Workspace.",
         "title": "ListWorkspaceRegulationsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListWorkspaceRegulationsV1Input"
+        "properties": {}
       },
       "ListWorkspaceRegulationsV1Output": {
         "description": "Output of all Workspace-scoped regulations in a given Workspace.",
@@ -43307,8 +43250,7 @@
         "description": "Input to list all Source-scoped regulations.",
         "title": "ListRegulationsFromSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListRegulationsFromSourceV1Input"
+        "properties": {}
       },
       "ListRegulationsFromSourceV1Output": {
         "description": "Output of all Source-scoped regulations.",
@@ -43333,8 +43275,7 @@
         "description": "The input to list suppressions for the Workspace.",
         "title": "ListSuppressionsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSuppressionsV1Input"
+        "properties": {}
       },
       "ListSuppressionsV1Output": {
         "description": "The output of a list suppressed call for a Workspace.",
@@ -43454,15 +43395,13 @@
         "description": "Defines a configuration object used for scheduling, which can vary depending\non the configured strategy, but must always be an object with at least 1\nlevel of keys.",
         "title": "ReverseEtlModelScheduleConfig",
         "type": "object",
-        "additionalProperties": {},
-        "x-speakeasy-entity": "ReverseEtlModelScheduleConfig"
+        "additionalProperties": {}
       },
       "ListReverseEtlModelsInput": {
         "description": "Defines the parameters needed to list Models.",
         "title": "ListReverseEtlModelsInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListReverseEtlModelsInput"
+        "properties": {}
       },
       "ListReverseEtlModelsOutput": {
         "description": "Defines the result of listing Models.",
@@ -43584,8 +43523,7 @@
         "description": "Defines the result of getting a Model.",
         "title": "GetReverseEtlModelInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetReverseEtlModelInput"
+        "properties": {}
       },
       "GetReverseEtlModelOutput": {
         "description": "Defines the result of getting a Model.",
@@ -43683,8 +43621,7 @@
         "description": "Defines the result of getting a Model.",
         "title": "DeleteReverseEtlModelInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteReverseEtlModelInput"
+        "properties": {}
       },
       "DeleteReverseEtlModelOutput": {
         "description": "Defines the result of getting a Model.",
@@ -43709,8 +43646,7 @@
         "description": "Filter parameters used for loading the Sources public catalog.",
         "title": "GetSourcesCatalogV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetSourcesCatalogV1Input"
+        "properties": {}
       },
       "GetSourcesCatalogV1Output": {
         "description": "Returns a list of all Source catalog items contained within a given page.",
@@ -43745,8 +43681,7 @@
         "description": "Requests a Source catalog item by id.",
         "title": "GetSourceMetadataV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetSourceMetadataV1Input"
+        "properties": {}
       },
       "GetSourceMetadataV1Output": {
         "description": "Returns the Source catalog item looked up by id.",
@@ -44020,8 +43955,7 @@
         "description": "Request the settings of a Source.",
         "title": "ListSchemaSettingsInSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSchemaSettingsInSourceV1Input"
+        "properties": {}
       },
       "ListSchemaSettingsInSourceV1Output": {
         "description": "Returns a list of settings for the Source.",
@@ -44200,15 +44134,13 @@
         "description": "A key-value object that contains instance-specific settings for a Source.\n\nThe `options` field in the Source metadata defines the schema of this object.",
         "title": "SourceSettingsAlpha",
         "type": "object",
-        "additionalProperties": {},
-        "x-speakeasy-entity": "SourceSettingsAlpha"
+        "additionalProperties": {}
       },
       "ListSourcesAlphaInput": {
         "description": "Requests a list of Sources that belong to the current Workspace.",
         "title": "ListSourcesAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSourcesAlphaInput"
+        "properties": {}
       },
       "ListSourcesAlphaOutput": {
         "description": "Returns a list of Sources that belong to the current Workspace.",
@@ -44243,8 +44175,7 @@
         "description": "Looks up a Source by id.",
         "title": "GetSourceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetSourceAlphaInput"
+        "properties": {}
       },
       "GetSourceAlphaOutput": {
         "description": "Returns a Source.",
@@ -44270,8 +44201,7 @@
         "description": "Requests a list of Warehouses connected to a Source.",
         "title": "ListConnectedWarehousesFromSourceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListConnectedWarehousesFromSourceAlphaInput"
+        "properties": {}
       },
       "ListConnectedWarehousesFromSourceAlphaOutput": {
         "description": "Returns a list of Warehouses connected to a Source.",
@@ -44306,8 +44236,7 @@
         "description": "Requests a list of Destinations connected to a Source.",
         "title": "ListConnectedDestinationsFromSourceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListConnectedDestinationsFromSourceAlphaInput"
+        "properties": {}
       },
       "ListConnectedDestinationsFromSourceAlphaOutput": {
         "description": "Returns a list of Destinations connected to a Source.",
@@ -44404,8 +44333,7 @@
         "description": "Deletes an existing Source by id.",
         "title": "DeleteSourceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteSourceAlphaInput"
+        "properties": {}
       },
       "DeleteSourceAlphaOutput": {
         "description": "Returns the status of a Source deletion.",
@@ -44558,15 +44486,13 @@
         "description": "A key-value object that contains instance-specific settings for a Source.\n\nThe `options` field in the Source metadata defines the schema of this object.",
         "title": "SourceSettingsV1",
         "type": "object",
-        "additionalProperties": {},
-        "x-speakeasy-entity": "SourceSettingsV1"
+        "additionalProperties": {}
       },
       "ListSourcesV1Input": {
         "description": "Requests a list of Sources that belong to the current Workspace.",
         "title": "ListSourcesV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSourcesV1Input"
+        "properties": {}
       },
       "ListSourcesV1Output": {
         "description": "Returns a list of Sources that belong to the current Workspace.",
@@ -44601,8 +44527,7 @@
         "description": "Looks up a Source by id.",
         "title": "GetSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetSourceV1Input"
+        "properties": {}
       },
       "GetSourceV1Output": {
         "description": "Returns a Source.",
@@ -44628,8 +44553,7 @@
         "description": "Requests a list of Warehouses connected to a Source.",
         "title": "ListConnectedWarehousesFromSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListConnectedWarehousesFromSourceV1Input"
+        "properties": {}
       },
       "ListConnectedWarehousesFromSourceV1Output": {
         "description": "Returns a list of Warehouses connected to a Source.",
@@ -44664,8 +44588,7 @@
         "description": "Requests a list of Destinations connected to a Source.",
         "title": "ListConnectedDestinationsFromSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListConnectedDestinationsFromSourceV1Input"
+        "properties": {}
       },
       "ListConnectedDestinationsFromSourceV1Output": {
         "description": "Returns a list of Destinations connected to a Source.",
@@ -44757,8 +44680,7 @@
         "description": "Deletes an existing Source by id.",
         "title": "DeleteSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteSourceV1Input"
+        "properties": {}
       },
       "DeleteSourceV1Output": {
         "description": "Returns the status of a Source deletion.",
@@ -44835,8 +44757,7 @@
         "description": "Input for the getSpaceById endpoint.",
         "title": "GetSpaceAlphaInput",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetSpaceAlphaInput"
+        "properties": {}
       },
       "Space": {
         "title": "Space",
@@ -45562,15 +45483,13 @@
         "description": "Lists the Tracking Plans associated with the current Workspace.",
         "title": "ListTrackingPlansV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListTrackingPlansV1Input"
+        "properties": {}
       },
       "GetTrackingPlanV1Input": {
         "description": "Gets a single Tracking Plan.",
         "title": "GetTrackingPlanV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetTrackingPlanV1Input"
+        "properties": {}
       },
       "ListTrackingPlansV1Output": {
         "description": "Lists the Tracking Plans associated with the current Workspace.",
@@ -45625,8 +45544,7 @@
         "description": "Deletes a Tracking Plan.",
         "title": "DeleteTrackingPlanV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteTrackingPlanV1Input"
+        "properties": {}
       },
       "DeleteTrackingPlanV1Output": {
         "description": "Result of a DeleteTrackingPlan call.",
@@ -45742,8 +45660,7 @@
         "description": "Lists a Tracking Plan's rules.",
         "title": "ListRulesFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListRulesFromTrackingPlanV1Input"
+        "properties": {}
       },
       "ListRulesFromTrackingPlanV1Output": {
         "description": "Lists a Tracking Plan's rules.",
@@ -45797,8 +45714,7 @@
         "description": "Remove specified rules from a Tracking Plan.",
         "title": "RemoveRulesFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveRulesFromTrackingPlanV1Input"
+        "properties": {}
       },
       "ReplaceRulesInTrackingPlanV1Input": {
         "description": "Replaces Tracking Plan rules.",
@@ -45880,8 +45796,7 @@
         "description": "Lists all Sources associated with a Tracking Plan.",
         "title": "ListSourcesFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSourcesFromTrackingPlanV1Input"
+        "properties": {}
       },
       "ListSourcesFromTrackingPlanV1Output": {
         "description": "Lists all Sources associated with a Tracking Plan.",
@@ -45951,8 +45866,7 @@
         "description": "Disconnects a Source from a Tracking Plan.",
         "title": "RemoveSourceFromTrackingPlanV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveSourceFromTrackingPlanV1Input"
+        "properties": {}
       },
       "RemoveSourceFromTrackingPlanV1Output": {
         "description": "Disconnects a Source from a Tracking Plan.",
@@ -46530,15 +46444,13 @@
         "description": "The input of Transformation retrieval.",
         "title": "GetTransformationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetTransformationV1Input"
+        "properties": {}
       },
       "ListTransformationsV1Input": {
         "description": "Lists the Transformations associated with the current Workspace.",
         "title": "ListTransformationsV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListTransformationsV1Input"
+        "properties": {}
       },
       "ListTransformationsV1Output": {
         "description": "Lists the Transformations associated with the current Workspace.",
@@ -46573,8 +46485,7 @@
         "description": "The input of delete Transformation.",
         "title": "DeleteTransformationV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteTransformationV1Input"
+        "properties": {}
       },
       "DeleteTransformationV1Output": {
         "description": "The output of delete Transformation.",
@@ -46929,8 +46840,7 @@
         "description": "Input to retrieve aggregated daily Workspace MTU in a billing period.",
         "title": "GetDailyWorkspaceMTUUsageV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDailyWorkspaceMTUUsageV1Input"
+        "properties": {}
       },
       "GetDailyWorkspaceMTUUsageV1Output": {
         "description": "Returns a list of daily aggregations of Workspace MTU counts.",
@@ -46965,8 +46875,7 @@
         "description": "Input to retrieve aggregated daily Source level MTU in a billing period.",
         "title": "GetDailyPerSourceMTUUsageV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDailyPerSourceMTUUsageV1Input"
+        "properties": {}
       },
       "GetDailyPerSourceMTUUsageV1Output": {
         "description": "Returns a list of daily aggregations of Source level MTU counts.",
@@ -47001,8 +46910,7 @@
         "description": "Input to retrieve aggregated daily Workspace API calls in a billing period.",
         "title": "GetDailyWorkspaceAPICallsUsageV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDailyWorkspaceAPICallsUsageV1Input"
+        "properties": {}
       },
       "GetDailyWorkspaceAPICallsUsageV1Output": {
         "description": "Returns a list of daily aggregations of Workspace MTU counts.",
@@ -47037,8 +46945,7 @@
         "description": "Input to retrieve aggregated daily Source level API calls in a billing period.",
         "title": "GetDailyPerSourceAPICallsUsageV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetDailyPerSourceAPICallsUsageV1Input"
+        "properties": {}
       },
       "GetDailyPerSourceAPICallsUsageV1Output": {
         "description": "Returns a list of daily aggregations of Source level API calls counts.",
@@ -47073,8 +46980,7 @@
         "description": "Filter parameters used for loading the Warehouses public catalog.",
         "title": "GetWarehousesCatalogV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetWarehousesCatalogV1Input"
+        "properties": {}
       },
       "GetWarehousesCatalogV1Output": {
         "description": "Returns a list of all Warehouse catalog items contained within a given page.",
@@ -47109,8 +47015,7 @@
         "description": "Returns a Warehouse catalog item by id.",
         "title": "GetWarehouseMetadataV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetWarehouseMetadataV1Input"
+        "properties": {}
       },
       "GetWarehouseMetadataV1Output": {
         "description": "Returns a Warehouse catalog item looked up by id.",
@@ -47189,8 +47094,7 @@
         "description": "A key-value object that contains instance-specific Warehouse settings.",
         "title": "WarehouseSettingsV1",
         "type": "object",
-        "additionalProperties": {},
-        "x-speakeasy-entity": "WarehouseSettingsV1"
+        "additionalProperties": {}
       },
       "WarehouseV1": {
         "description": "Defines a data Warehouse used as a Destination for Segment data.",
@@ -47469,8 +47373,7 @@
         "description": "Gets a list of Warehouses belonging to a Workspace.",
         "title": "ListWarehousesV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListWarehousesV1Input"
+        "properties": {}
       },
       "ListWarehousesV1Output": {
         "description": "Returns a list of Warehouses that belong to a Workspace.",
@@ -47505,8 +47408,7 @@
         "description": "Looks up a Warehouse by id.",
         "title": "GetWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetWarehouseV1Input"
+        "properties": {}
       },
       "GetWarehouseV1Output": {
         "description": "Returns a Warehouse.",
@@ -47532,8 +47434,7 @@
         "description": "Looks up the list of Sources connected to a Warehouse.",
         "title": "ListConnectedSourcesFromWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListConnectedSourcesFromWarehouseV1Input"
+        "properties": {}
       },
       "ListConnectedSourcesFromWarehouseV1Output": {
         "description": "Returns a list of Sources connected to a Warehouse.",
@@ -47568,8 +47469,7 @@
         "description": "Requests the overview of syncs for every Source connected to this Warehouse.",
         "title": "ListSyncsFromWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSyncsFromWarehouseV1Input"
+        "properties": {}
       },
       "ListSyncsFromWarehouseV1Output": {
         "description": "Returns an overview page that contains the last syncs for a Warehouse.",
@@ -47604,8 +47504,7 @@
         "description": "Loads the most recent sync information for a Warehouse-source pair.",
         "title": "ListSyncsFromWarehouseAndSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSyncsFromWarehouseAndSourceV1Input"
+        "properties": {}
       },
       "ListSyncsFromWarehouseAndSourceV1Output": {
         "description": "Returns a list that contains the most recent syncs for a Warehouse-source pair, filtered and constrained by a given\nset of pagination parameters.",
@@ -47640,8 +47539,7 @@
         "description": "Connects a Source to a Warehouse.\n\nPosting to this idempotent endpoint creates a connection between the Source and Warehouse, and begins syncing data\nfrom the Source's collections into the chosen Warehouse Destination.",
         "title": "AddConnectionFromSourceToWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "AddConnectionFromSourceToWarehouseV1Input"
+        "properties": {}
       },
       "AddConnectionFromSourceToWarehouseV1Output": {
         "description": "Response indicating whether the connection was successful.",
@@ -47667,8 +47565,7 @@
         "description": "Disconnects a Source from a Warehouse.\n\nPosting to this idempotent endpoint removes a connection between the Source and Warehouse, and blocks all syncing\nfrom the Source's collections into the chosen Warehouse Destination.",
         "title": "RemoveSourceConnectionFromWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "RemoveSourceConnectionFromWarehouseV1Input"
+        "properties": {}
       },
       "RemoveSourceConnectionFromWarehouseV1Output": {
         "description": "Response indicating whether the disconnection was successful.",
@@ -47693,8 +47590,7 @@
         "description": "Get the Selective Sync configuration associated with a Warehouse.",
         "title": "ListSelectiveSyncsFromWarehouseAndSourceV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "ListSelectiveSyncsFromWarehouseAndSourceV1Input"
+        "properties": {}
       },
       "ListSelectiveSyncsFromWarehouseAndSourceV1Output": {
         "description": "Results containing the Selective Sync configuration for a Warehouse.",
@@ -47777,8 +47673,7 @@
         "description": "Gets the advanced sync schedule for a Warehouse.",
         "title": "GetAdvancedSyncScheduleFromWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetAdvancedSyncScheduleFromWarehouseV1Input"
+        "properties": {}
       },
       "GetAdvancedSyncScheduleFromWarehouseV1Output": {
         "description": "Returns the advanced sync schedule for a Warehouse.",
@@ -47966,8 +47861,7 @@
         "description": "Deletes an existing Warehouse by id.",
         "title": "DeleteWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "DeleteWarehouseV1Input"
+        "properties": {}
       },
       "DeleteWarehouseV1Output": {
         "description": "Returns the status of a Warehouse deletion.",
@@ -47992,8 +47886,7 @@
         "description": "Verifies the connection state of a Warehouse.\n\nUse this to check if a Warehouse is reachable, given its stored connection settings.",
         "title": "GetConnectionStateFromWarehouseV1Input",
         "type": "object",
-        "properties": {},
-        "x-speakeasy-entity": "GetConnectionStateFromWarehouseV1Input"
+        "properties": {}
       },
       "GetConnectionStateFromWarehouseV1Output": {
         "description": "Returns the status of a Warehouse connection settings after an attempt to connect to it.",
@@ -48092,8 +47985,7 @@
       "GetWorkspaceV1Input": {
         "description": "Loads the Workspace associated with the token.",
         "title": "GetWorkspaceV1Input",
-        "type": "object",
-        "x-speakeasy-entity": "GetWorkspaceV1Input"
+        "type": "object"
       },
       "GetWorkspaceV1Output": {
         "description": "Represents the output of loading the Workspace.",
