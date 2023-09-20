@@ -460,6 +460,8 @@ internal/sdk/pkg/models/shared/updatewarehousev1output.go
 internal/sdk/pkg/models/shared/updatewarehousev1input.go
 internal/sdk/pkg/models/shared/getworkspacev1output.go
 internal/sdk/pkg/models/shared/security.go
+internal/sdk/pkg/models/shared/eventsourcev1.go
+internal/sdk/pkg/models/shared/logosbeta.go
 USAGE.md
 internal/provider/provider.go
 examples/provider/provider.tf

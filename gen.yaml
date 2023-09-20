@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 7095a513d8a756723c0c3336b5db2212
+  docChecksum: 57e4e2b6567d95b00a0e29fb0e64cf09
   docVersion: 36.2.0
   speakeasyVersion: 1.88.0
   generationVersion: 2.118.1
@@ -17,7 +17,8 @@ features:
     core: 2.88.2
     globalSecurity: 2.81.1
     globalServerURLs: 2.82.0
+    includes: 2.81.1
 terraform:
-  version: 0.1.0
+  version: 0.1.1
   author: scentregroup
   packageName: segment
