@@ -1,7 +1,7 @@
 resource "segment_create_invites_v1_input" "my_createinvitesv1input" {
   invites = [
     {
-      email = "Madaline21@hotmail.com"
+      email = "Florian.Hilll@yahoo.com"
       permissions = [
         {
           labels = [
@@ -13,7 +13,7 @@ resource "segment_create_invites_v1_input" "my_createinvitesv1input" {
           ]
           resources = [
             {
-              id   = "52c59559-07af-4f1a-ba2f-a9467739251a"
+              id   = "98f5b93c-18bd-4388-8e54-e4dac1a06be8"
               type = "WAREHOUSE"
             },
           ]
