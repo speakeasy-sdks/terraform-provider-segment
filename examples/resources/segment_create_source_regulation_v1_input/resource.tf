@@ -1,5 +1,5 @@
 resource "segment_create_source_regulation_v1_input" "my_createsourceregulationv1input" {
-  regulation_type = "DELETE_ONLY"
+  regulation_type = "SUPPRESS_WITH_DELETE"
   source_id       = "...my_source_id..."
   subject_ids = [
     "...",
