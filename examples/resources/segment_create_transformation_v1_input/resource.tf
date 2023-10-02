@@ -1,6 +1,6 @@
 resource "segment_create_transformation_v1_input" "my_createtransformationv1input" {
   destination_metadata_id = "...my_destination_metadata_id..."
-  enabled                 = false
+  enabled                 = true
   fql_defined_properties = [
     {
       fql           = "...my_fql..."
@@ -8,7 +8,7 @@ resource "segment_create_transformation_v1_input" "my_createtransformationv1inpu
     },
   ]
   if             = "...my_if..."
-  name           = "Ryan Witting"
+  name           = "Kelly Raynor"
   new_event_name = "...my_new_event_name..."
   property_renames = [
     {
