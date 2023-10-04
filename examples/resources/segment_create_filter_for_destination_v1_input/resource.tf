@@ -2,18 +2,18 @@ resource "segment_create_filter_for_destination_v1_input" "my_createfilterfordes
   actions = [
     {
       fields = {
-        "dolor" = "{ \"see\": \"documentation\" }"
-        "natus" = "{ \"see\": \"documentation\" }"
+        "est"  = "{ \"see\": \"documentation\" }"
+        "odit" = "{ \"see\": \"documentation\" }"
       }
       path    = "...my_path..."
-      percent = 38.65
-      type    = "SAMPLE"
+      percent = 84.91
+      type    = "DROP_PROPERTIES"
     },
   ]
   description    = "...my_description..."
   destination_id = "...my_destination_id..."
-  enabled        = false
+  enabled        = true
   if             = "...my_if..."
   source_id      = "...my_source_id..."
-  title          = "Miss"
+  title          = "Dr."
 }
