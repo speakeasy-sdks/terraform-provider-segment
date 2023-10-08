@@ -1,9 +1,9 @@
 resource "segment_create_warehouse_v1_input" "my_createwarehousev1input" {
-  enabled     = false
+  enabled     = true
   metadata_id = "...my_metadata_id..."
-  name        = "Mrs. April Wuckert"
+  name        = "Marcus Feest"
   settings = {
-    "iusto" = "{ \"see\": \"documentation\" }"
-    "dicta" = "{ \"see\": \"documentation\" }"
+    "Denar" = "{ \"see\": \"documentation\" }"
+    "City"  = "{ \"see\": \"documentation\" }"
   }
 }
