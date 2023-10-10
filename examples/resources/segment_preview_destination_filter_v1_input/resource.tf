@@ -3,18 +3,18 @@ resource "segment_preview_destination_filter_v1_input" "my_previewdestinationfil
     actions = [
       {
         fields = {
-          "accusamus" = "{ \"see\": \"documentation\" }"
-          "commodi"   = "{ \"see\": \"documentation\" }"
+          "card"  = "{ \"see\": \"documentation\" }"
+          "Haute" = "{ \"see\": \"documentation\" }"
         }
         path    = "...my_path..."
-        percent = 91.83
-        type    = "ALLOW_PROPERTIES"
+        percent = 16.33
+        type    = "DROP_PROPERTIES"
       },
     ]
     if = "...my_if..."
   }
   payload = {
-    "ipsum"  = "{ \"see\": \"documentation\" }"
-    "quidem" = "{ \"see\": \"documentation\" }"
+    "Shoes" = "{ \"see\": \"documentation\" }"
+    "Auto"  = "{ \"see\": \"documentation\" }"
   }
 }
