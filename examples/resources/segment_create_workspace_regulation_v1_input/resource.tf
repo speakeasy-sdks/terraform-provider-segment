@@ -1,5 +1,5 @@
 resource "segment_create_workspace_regulation_v1_input" "my_createworkspaceregulationv1input" {
-  regulation_type = "SUPPRESS_WITH_DELETE"
+  regulation_type = "DELETE_INTERNAL"
   subject_ids = [
     "...",
   ]
