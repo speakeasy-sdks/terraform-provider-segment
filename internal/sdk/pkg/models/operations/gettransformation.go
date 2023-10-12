@@ -36,11 +36,14 @@ type GetTransformation200ApplicationJSON struct {
 }
 
 type GetTransformationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetTransformation200ApplicationJSONObject *GetTransformation200ApplicationJSON
 	// OK
