@@ -88,6 +88,7 @@ func (p *SegmentProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 func (p *SegmentProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
+		NewAddConnectionFromSourceToWarehouseV1OutputResource,
 		NewAddLabelsToSourceV1InputResource,
 		NewAddPermissionsToUserGroupV1InputResource,
 		NewAddPermissionsToUserV1InputResource,
@@ -96,6 +97,7 @@ func (p *SegmentProvider) Resources(ctx context.Context) []func() resource.Resou
 		NewCreateCloudSourceRegulationV1InputResource,
 		NewCreateDestinationV1InputResource,
 		NewCreateFilterForDestinationV1InputResource,
+		NewCreateFunctionDeploymentV1OutputResource,
 		NewCreateFunctionV1InputResource,
 		NewCreateInvitesV1InputResource,
 		NewCreateLabelV1InputResource,
