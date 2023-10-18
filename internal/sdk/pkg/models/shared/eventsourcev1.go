@@ -11,3 +11,24 @@ type EventSourceV1 struct {
 	// The slug of the Source, if applicable.
 	Slug *string `json:"slug,omitempty"`
 }
+
+func (o *EventSourceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *EventSourceV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *EventSourceV1) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}

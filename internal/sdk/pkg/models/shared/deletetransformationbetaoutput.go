@@ -37,3 +37,10 @@ type DeleteTransformationBetaOutput struct {
 	// The operation status.
 	Status DeleteTransformationBetaOutputStatus `json:"status"`
 }
+
+func (o *DeleteTransformationBetaOutput) GetStatus() DeleteTransformationBetaOutputStatus {
+	if o == nil {
+		return DeleteTransformationBetaOutputStatus("")
+	}
+	return o.Status
+}

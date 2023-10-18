@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"segment/internal/sdk/pkg/models/operations"
+	"segment/internal/sdk/pkg/models/sdkerrors"
 	"segment/internal/sdk/pkg/models/shared"
 	"segment/internal/sdk/pkg/utils"
 	"strings"
@@ -208,14 +209,24 @@ func newDestinationFilters(sdkConfig sdkConfiguration) *destinationFilters {
 // Creates a filter in a Destination.
 //
 // • When called, this endpoint may generate the `Destination Filter Created` event in the [audit trail](/tag/Audit-Trail).
-func (s *destinationFilters) CreateFilterForDestination(ctx context.Context, request operations.CreateFilterForDestinationRequest) (*operations.CreateFilterForDestinationResponse, error) {
+func (s *destinationFilters) CreateFilterForDestination(ctx context.Context, request operations.CreateFilterForDestinationRequest, opts ...operations.Option) (*operations.CreateFilterForDestinationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/destination/{destinationId}/filters", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "CreateFilterForDestinationV1Input", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateFilterForDestinationV1Input", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -230,8 +241,13 @@ func (s *destinationFilters) CreateFilterForDestination(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -264,33 +280,35 @@ func (s *destinationFilters) CreateFilterForDestination(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateFilterForDestination200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateFilterForDestination200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateFilterForDestination200ApplicationJSONObject = out
+			res.CreateFilterForDestination200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.CreateFilterForDestination200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateFilterForDestination200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject = out
+			res.CreateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -299,12 +317,14 @@ func (s *destinationFilters) CreateFilterForDestination(ctx context.Context, req
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -313,7 +333,17 @@ func (s *destinationFilters) CreateFilterForDestination(ctx context.Context, req
 
 // GetFilterInDestination - Get Filter in Destination
 // Gets a Destination filter by id.
-func (s *destinationFilters) GetFilterInDestination(ctx context.Context, request operations.GetFilterInDestinationRequest) (*operations.GetFilterInDestinationResponse, error) {
+func (s *destinationFilters) GetFilterInDestination(ctx context.Context, request operations.GetFilterInDestinationRequest, opts ...operations.Option) (*operations.GetFilterInDestinationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/destination/{destinationId}/filters/{filterId}", request, nil)
 	if err != nil {
@@ -324,8 +354,13 @@ func (s *destinationFilters) GetFilterInDestination(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -355,33 +390,35 @@ func (s *destinationFilters) GetFilterInDestination(ctx context.Context, request
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetFilterInDestination200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetFilterInDestination200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetFilterInDestination200ApplicationJSONObject = out
+			res.GetFilterInDestination200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.GetFilterInDestination200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetFilterInDestination200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetFilterInDestination200ApplicationVndSegmentV1PlusJSONObject = out
+			res.GetFilterInDestination200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -390,12 +427,14 @@ func (s *destinationFilters) GetFilterInDestination(ctx context.Context, request
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -404,7 +443,17 @@ func (s *destinationFilters) GetFilterInDestination(ctx context.Context, request
 
 // ListFiltersFromDestination - List Filters from Destination
 // Lists filters for a Destination.
-func (s *destinationFilters) ListFiltersFromDestination(ctx context.Context, request operations.ListFiltersFromDestinationRequest) (*operations.ListFiltersFromDestinationResponse, error) {
+func (s *destinationFilters) ListFiltersFromDestination(ctx context.Context, request operations.ListFiltersFromDestinationRequest, opts ...operations.Option) (*operations.ListFiltersFromDestinationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/destination/{destinationId}/filters", request, nil)
 	if err != nil {
@@ -415,8 +464,13 @@ func (s *destinationFilters) ListFiltersFromDestination(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -450,33 +504,35 @@ func (s *destinationFilters) ListFiltersFromDestination(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFiltersFromDestination200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListFiltersFromDestination200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListFiltersFromDestination200ApplicationJSONObject = out
+			res.ListFiltersFromDestination200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.ListFiltersFromDestination200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListFiltersFromDestination200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListFiltersFromDestination200ApplicationVndSegmentV1PlusJSONObject = out
+			res.ListFiltersFromDestination200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.ListFiltersFromDestination200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListFiltersFromDestination200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListFiltersFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.ListFiltersFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.ListFiltersFromDestination200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListFiltersFromDestination200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListFiltersFromDestination200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.ListFiltersFromDestination200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -485,12 +541,14 @@ func (s *destinationFilters) ListFiltersFromDestination(ctx context.Context, req
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -499,11 +557,21 @@ func (s *destinationFilters) ListFiltersFromDestination(ctx context.Context, req
 
 // PreviewDestinationFilter - Preview Destination Filter
 // Simulates the application of a Destination filter to a provided JSON payload.
-func (s *destinationFilters) PreviewDestinationFilter(ctx context.Context, request shared.PreviewDestinationFilterV1Input) (*operations.PreviewDestinationFilterResponse, error) {
+func (s *destinationFilters) PreviewDestinationFilter(ctx context.Context, request shared.PreviewDestinationFilterV1Input, opts ...operations.Option) (*operations.PreviewDestinationFilterResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/destination/filters/preview"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -518,8 +586,13 @@ func (s *destinationFilters) PreviewDestinationFilter(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -552,33 +625,35 @@ func (s *destinationFilters) PreviewDestinationFilter(ctx context.Context, reque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PreviewDestinationFilter200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.PreviewDestinationFilter200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.PreviewDestinationFilter200ApplicationJSONObject = out
+			res.PreviewDestinationFilter200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.PreviewDestinationFilter200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.PreviewDestinationFilter200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.PreviewDestinationFilter200ApplicationVndSegmentV1PlusJSONObject = out
+			res.PreviewDestinationFilter200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.PreviewDestinationFilter200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.PreviewDestinationFilter200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.PreviewDestinationFilter200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.PreviewDestinationFilter200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.PreviewDestinationFilter200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.PreviewDestinationFilter200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.PreviewDestinationFilter200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.PreviewDestinationFilter200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -587,12 +662,14 @@ func (s *destinationFilters) PreviewDestinationFilter(ctx context.Context, reque
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -603,7 +680,17 @@ func (s *destinationFilters) PreviewDestinationFilter(ctx context.Context, reque
 // Deletes a Destination filter.
 //
 // • When called, this endpoint may generate the `Destination Filter Deleted` event in the [audit trail](/tag/Audit-Trail).
-func (s *destinationFilters) RemoveFilterFromDestination(ctx context.Context, request operations.RemoveFilterFromDestinationRequest) (*operations.RemoveFilterFromDestinationResponse, error) {
+func (s *destinationFilters) RemoveFilterFromDestination(ctx context.Context, request operations.RemoveFilterFromDestinationRequest, opts ...operations.Option) (*operations.RemoveFilterFromDestinationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/destination/{destinationId}/filters/{filterId}", request, nil)
 	if err != nil {
@@ -614,8 +701,13 @@ func (s *destinationFilters) RemoveFilterFromDestination(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -645,33 +737,35 @@ func (s *destinationFilters) RemoveFilterFromDestination(ctx context.Context, re
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.RemoveFilterFromDestination200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.RemoveFilterFromDestination200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RemoveFilterFromDestination200ApplicationJSONObject = out
+			res.RemoveFilterFromDestination200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.RemoveFilterFromDestination200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.RemoveFilterFromDestination200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RemoveFilterFromDestination200ApplicationVndSegmentV1PlusJSONObject = out
+			res.RemoveFilterFromDestination200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.RemoveFilterFromDestination200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.RemoveFilterFromDestination200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RemoveFilterFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.RemoveFilterFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.RemoveFilterFromDestination200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.RemoveFilterFromDestination200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RemoveFilterFromDestination200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.RemoveFilterFromDestination200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -680,12 +774,14 @@ func (s *destinationFilters) RemoveFilterFromDestination(ctx context.Context, re
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -697,14 +793,24 @@ func (s *destinationFilters) RemoveFilterFromDestination(ctx context.Context, re
 //
 // • When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Destination Filter Enabled
 // * Destination Filter Disabled
-func (s *destinationFilters) UpdateFilterForDestination(ctx context.Context, request operations.UpdateFilterForDestinationRequest) (*operations.UpdateFilterForDestinationResponse, error) {
+func (s *destinationFilters) UpdateFilterForDestination(ctx context.Context, request operations.UpdateFilterForDestinationRequest, opts ...operations.Option) (*operations.UpdateFilterForDestinationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/destination/{destinationId}/filters/{filterId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "UpdateFilterForDestinationV1Input", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateFilterForDestinationV1Input", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -719,8 +825,13 @@ func (s *destinationFilters) UpdateFilterForDestination(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -753,33 +864,35 @@ func (s *destinationFilters) UpdateFilterForDestination(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.UpdateFilterForDestination200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateFilterForDestination200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateFilterForDestination200ApplicationJSONObject = out
+			res.UpdateFilterForDestination200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject = out
+			res.UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -788,12 +901,14 @@ func (s *destinationFilters) UpdateFilterForDestination(ctx context.Context, req
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

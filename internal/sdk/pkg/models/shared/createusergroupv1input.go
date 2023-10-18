@@ -7,3 +7,10 @@ type CreateUserGroupV1Input struct {
 	// The name of the user group to create.
 	Name string `json:"name"`
 }
+
+func (o *CreateUserGroupV1Input) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}

@@ -29,10 +29,52 @@ type GetDailyWorkspaceMTUUsageV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetDailyWorkspaceMTUUsageV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetDailyWorkspaceMTUUsageV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetDailyWorkspaceMTUUsageV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetDailyWorkspaceMTUUsageV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetDailyWorkspaceMTUUsageV1Output - Returns a list of daily aggregations of Workspace MTU counts.
 type GetDailyWorkspaceMTUUsageV1Output struct {
 	// The list of daily Workspace MTU count aggregates.
 	DailyWorkspaceMTUUsage []MtuSnapshotV1 `json:"dailyWorkspaceMTUUsage"`
 	// Information about the pagination of this response.
 	Pagination GetDailyWorkspaceMTUUsageV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *GetDailyWorkspaceMTUUsageV1Output) GetDailyWorkspaceMTUUsage() []MtuSnapshotV1 {
+	if o == nil {
+		return []MtuSnapshotV1{}
+	}
+	return o.DailyWorkspaceMTUUsage
+}
+
+func (o *GetDailyWorkspaceMTUUsageV1Output) GetPagination() GetDailyWorkspaceMTUUsageV1OutputPaginationOutput {
+	if o == nil {
+		return GetDailyWorkspaceMTUUsageV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

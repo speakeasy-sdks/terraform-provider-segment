@@ -19,3 +19,52 @@ type AuditEventV1 struct {
 	// The type of this event.
 	Type string `json:"type"`
 }
+
+func (o *AuditEventV1) GetActor() string {
+	if o == nil {
+		return ""
+	}
+	return o.Actor
+}
+
+func (o *AuditEventV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *AuditEventV1) GetResourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ResourceID
+}
+
+func (o *AuditEventV1) GetResourceName() string {
+	if o == nil {
+		return ""
+	}
+	return o.ResourceName
+}
+
+func (o *AuditEventV1) GetResourceType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ResourceType
+}
+
+func (o *AuditEventV1) GetTimestamp() string {
+	if o == nil {
+		return ""
+	}
+	return o.Timestamp
+}
+
+func (o *AuditEventV1) GetType() string {
+	if o == nil {
+		return ""
+	}
+	return o.Type
+}

@@ -12,10 +12,31 @@ type RemoveSourceConnectionFromWarehouseRequest struct {
 	WarehouseID string `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
+func (o *RemoveSourceConnectionFromWarehouseRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *RemoveSourceConnectionFromWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
 // RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
 type RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Response indicating whether the disconnection was successful.
 	Data *shared.RemoveSourceConnectionFromWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.RemoveSourceConnectionFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON 
 	Data *shared.RemoveSourceConnectionFromWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.RemoveSourceConnectionFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1PlusJSON - OK
 type RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1PlusJSON struct {
 	// Response indicating whether the disconnection was successful.
 	Data *shared.RemoveSourceConnectionFromWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1PlusJSON) GetData() *shared.RemoveSourceConnectionFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // RemoveSourceConnectionFromWarehouse200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type RemoveSourceConnectionFromWarehouse200ApplicationJSON struct {
 	Data *shared.RemoveSourceConnectionFromWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *RemoveSourceConnectionFromWarehouse200ApplicationJSON) GetData() *shared.RemoveSourceConnectionFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type RemoveSourceConnectionFromWarehouseResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	RemoveSourceConnectionFromWarehouse200ApplicationJSONObject *RemoveSourceConnectionFromWarehouse200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type RemoveSourceConnectionFromWarehouseResponse struct {
 	RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetRemoveSourceConnectionFromWarehouse200ApplicationJSONObject() *RemoveSourceConnectionFromWarehouse200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveSourceConnectionFromWarehouse200ApplicationJSONObject
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetRemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1PlusJSONObject() *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetRemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject() *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *RemoveSourceConnectionFromWarehouseResponse) GetRemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject() *RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveSourceConnectionFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject
 }

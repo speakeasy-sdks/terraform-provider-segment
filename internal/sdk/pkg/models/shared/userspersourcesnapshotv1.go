@@ -21,3 +21,59 @@ type UsersPerSourceSnapshotV1 struct {
 	// The timestamp of this snapshot within the billing cycle, in the ISO-8601 format.
 	Timestamp string `json:"timestamp"`
 }
+
+func (o *UsersPerSourceSnapshotV1) GetAnonymous() string {
+	if o == nil {
+		return ""
+	}
+	return o.Anonymous
+}
+
+func (o *UsersPerSourceSnapshotV1) GetAnonymousIdentified() string {
+	if o == nil {
+		return ""
+	}
+	return o.AnonymousIdentified
+}
+
+func (o *UsersPerSourceSnapshotV1) GetIdentified() string {
+	if o == nil {
+		return ""
+	}
+	return o.Identified
+}
+
+func (o *UsersPerSourceSnapshotV1) GetNeverIdentified() string {
+	if o == nil {
+		return ""
+	}
+	return o.NeverIdentified
+}
+
+func (o *UsersPerSourceSnapshotV1) GetPeriodEnd() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.PeriodEnd
+}
+
+func (o *UsersPerSourceSnapshotV1) GetPeriodStart() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.PeriodStart
+}
+
+func (o *UsersPerSourceSnapshotV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *UsersPerSourceSnapshotV1) GetTimestamp() string {
+	if o == nil {
+		return ""
+	}
+	return o.Timestamp
+}

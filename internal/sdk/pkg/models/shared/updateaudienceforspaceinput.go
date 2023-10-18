@@ -7,3 +7,10 @@ type UpdateAudienceForSpaceInput struct {
 	// Enabled/disabled status for the audience.
 	Enabled bool `json:"enabled"`
 }
+
+func (o *UpdateAudienceForSpaceInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}

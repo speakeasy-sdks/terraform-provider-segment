@@ -11,3 +11,24 @@ type WorkspaceV1 struct {
 	// The URL-friendly slug.
 	Slug string `json:"slug"`
 }
+
+func (o *WorkspaceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *WorkspaceV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *WorkspaceV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}

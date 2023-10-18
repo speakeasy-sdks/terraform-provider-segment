@@ -34,6 +34,34 @@ type GetEventsVolumeFromWorkspaceV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetEventsVolumeFromWorkspaceV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1QueryGranularity - Granularity corresponds to the requested bucket granularity.
 type GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1QueryGranularity string
 
@@ -97,7 +125,77 @@ type GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query str
 	WorkspaceID string `json:"workspaceId"`
 }
 
-// GetEventsVolumeFromWorkspaceV1Output - GetEventsVolumeFromWorkspaceV1Output represents the results given the input query.
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetAppVersion() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AppVersion
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetEndTime() string {
+	if o == nil {
+		return ""
+	}
+	return o.EndTime
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetEventName() []string {
+	if o == nil {
+		return nil
+	}
+	return o.EventName
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetEventType() []string {
+	if o == nil {
+		return nil
+	}
+	return o.EventType
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetGranularity() GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1QueryGranularity {
+	if o == nil {
+		return GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1QueryGranularity("")
+	}
+	return o.Granularity
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetGroupBy() []string {
+	if o == nil {
+		return nil
+	}
+	return o.GroupBy
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetLimit() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Limit
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetSourceID() []string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceID
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetStartTime() string {
+	if o == nil {
+		return ""
+	}
+	return o.StartTime
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+// GetEventsVolumeFromWorkspaceV1Output represents the results given the input query.
 type GetEventsVolumeFromWorkspaceV1Output struct {
 	// Information about the pagination of this response.
 	Pagination *GetEventsVolumeFromWorkspaceV1OutputPaginationOutput `json:"pagination,omitempty"`
@@ -109,4 +207,32 @@ type GetEventsVolumeFromWorkspaceV1Output struct {
 	// dimensions requested over the time frame requested and ordered by the total count of events in all series.
 	// Note: The limit of entries returned is 5000.
 	Result []SourceEventVolumeV1 `json:"result"`
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetPagination() *GetEventsVolumeFromWorkspaceV1OutputPaginationOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetPath() string {
+	if o == nil {
+		return ""
+	}
+	return o.Path
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetQuery() GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query {
+	if o == nil {
+		return GetEventsVolumeFromWorkspaceV1OutputGetEventsVolumeFromWorkspaceV1Query{}
+	}
+	return o.Query
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetResult() []SourceEventVolumeV1 {
+	if o == nil {
+		return []SourceEventVolumeV1{}
+	}
+	return o.Result
 }

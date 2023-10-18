@@ -7,3 +7,10 @@ type DeleteTransformationBetaInput struct {
 	// The Transformation id.
 	TransformationID string `json:"transformationId"`
 }
+
+func (o *DeleteTransformationBetaInput) GetTransformationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TransformationID
+}

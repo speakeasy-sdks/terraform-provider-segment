@@ -12,6 +12,27 @@ type GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
 type GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1 struct {
 	// A description, in English, of this object.
@@ -26,6 +47,48 @@ type GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1 struct {
 	Options []IntegrationOptionBeta `json:"options"`
 	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1) GetLogos() GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta {
+	if o == nil {
+		return GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // GetWarehouseV1OutputWarehouseV1 - Defines a data Warehouse used as a Destination for Segment data.
@@ -44,8 +107,50 @@ type GetWarehouseV1OutputWarehouseV1 struct {
 	WorkspaceID string `json:"workspaceId"`
 }
 
+func (o *GetWarehouseV1OutputWarehouseV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1) GetMetadata() GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1 {
+	if o == nil {
+		return GetWarehouseV1OutputWarehouseV1WarehouseMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *GetWarehouseV1OutputWarehouseV1) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
 // GetWarehouseV1Output - Returns a Warehouse.
 type GetWarehouseV1Output struct {
 	// The returned Warehouse object.
 	Warehouse GetWarehouseV1OutputWarehouseV1 `json:"warehouse"`
+}
+
+func (o *GetWarehouseV1Output) GetWarehouse() GetWarehouseV1OutputWarehouseV1 {
+	if o == nil {
+		return GetWarehouseV1OutputWarehouseV1{}
+	}
+	return o.Warehouse
 }

@@ -28,3 +28,66 @@ type TransformationBeta struct {
 	// The Source associated with the Transformation.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *TransformationBeta) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *TransformationBeta) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *TransformationBeta) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *TransformationBeta) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *TransformationBeta) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *TransformationBeta) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *TransformationBeta) GetPropertyRenames() []PropertyRenameBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *TransformationBeta) GetPropertyValueTransformations() []PropertyValueTransformationBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *TransformationBeta) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

@@ -12,3 +12,17 @@ type PreviewDestinationFilterV1 struct {
 	// For guidance on using FQL, see the Segment documentation site.
 	If string `json:"if"`
 }
+
+func (o *PreviewDestinationFilterV1) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *PreviewDestinationFilterV1) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}

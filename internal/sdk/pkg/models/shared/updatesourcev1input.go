@@ -22,3 +22,31 @@ type UpdateSourceV1Input struct {
 	// Config API note: equal to `name`.
 	Slug *string `json:"slug,omitempty"`
 }
+
+func (o *UpdateSourceV1Input) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSourceV1Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *UpdateSourceV1Input) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}

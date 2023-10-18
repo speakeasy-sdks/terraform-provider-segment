@@ -17,3 +17,38 @@ type CreateSourceAlphaInput struct {
 	// The slug by which to identify the Source in the Segment app.
 	Slug string `json:"slug"`
 }
+
+func (o *CreateSourceAlphaInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateSourceAlphaInput) GetMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetadataID
+}
+
+func (o *CreateSourceAlphaInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CreateSourceAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *CreateSourceAlphaInput) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}

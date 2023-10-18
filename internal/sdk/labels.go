@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"segment/internal/sdk/pkg/models/operations"
+	"segment/internal/sdk/pkg/models/sdkerrors"
 	"segment/internal/sdk/pkg/models/shared"
 	"segment/internal/sdk/pkg/utils"
 	"strings"
@@ -33,11 +34,21 @@ func newLabels(sdkConfig sdkConfiguration) *labels {
 // • When called, this endpoint may generate the `Label Created` event in the [audit trail](/tag/Audit-Trail).
 //
 // The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
-func (s *labels) CreateLabel(ctx context.Context, request shared.CreateLabelV1Input) (*operations.CreateLabelResponse, error) {
+func (s *labels) CreateLabel(ctx context.Context, request shared.CreateLabelV1Input, opts ...operations.Option) (*operations.CreateLabelResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/labels"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -52,8 +63,13 @@ func (s *labels) CreateLabel(ctx context.Context, request shared.CreateLabelV1In
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -86,33 +102,35 @@ func (s *labels) CreateLabel(ctx context.Context, request shared.CreateLabelV1In
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateLabel200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateLabel200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateLabel200ApplicationJSONObject = out
+			res.CreateLabel200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.CreateLabel200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateLabel200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateLabel200ApplicationVndSegmentV1PlusJSONObject = out
+			res.CreateLabel200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateLabel200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateLabel200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateLabel200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.CreateLabel200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.CreateLabel200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateLabel200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateLabel200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.CreateLabel200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -121,12 +139,14 @@ func (s *labels) CreateLabel(ctx context.Context, request shared.CreateLabelV1In
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -139,7 +159,17 @@ func (s *labels) CreateLabel(ctx context.Context, request shared.CreateLabelV1In
 // • When called, this endpoint may generate the `Label Deleted` event in the [audit trail](/tag/Audit-Trail).
 //
 // The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
-func (s *labels) DeleteLabel(ctx context.Context, request operations.DeleteLabelRequest) (*operations.DeleteLabelResponse, error) {
+func (s *labels) DeleteLabel(ctx context.Context, request operations.DeleteLabelRequest, opts ...operations.Option) (*operations.DeleteLabelResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/labels/{key}/{value}", request, nil)
 	if err != nil {
@@ -150,8 +180,13 @@ func (s *labels) DeleteLabel(ctx context.Context, request operations.DeleteLabel
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -181,33 +216,35 @@ func (s *labels) DeleteLabel(ctx context.Context, request operations.DeleteLabel
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.DeleteLabel200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteLabel200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteLabel200ApplicationJSONObject = out
+			res.DeleteLabel200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.DeleteLabel200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteLabel200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteLabel200ApplicationVndSegmentV1PlusJSONObject = out
+			res.DeleteLabel200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteLabel200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.DeleteLabel200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.DeleteLabel200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteLabel200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteLabel200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.DeleteLabel200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -216,12 +253,14 @@ func (s *labels) DeleteLabel(ctx context.Context, request operations.DeleteLabel
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -230,7 +269,17 @@ func (s *labels) DeleteLabel(ctx context.Context, request operations.DeleteLabel
 
 // ListLabels - List Labels
 // Returns a list of all available labels.
-func (s *labels) ListLabels(ctx context.Context) (*operations.ListLabelsResponse, error) {
+func (s *labels) ListLabels(ctx context.Context, opts ...operations.Option) (*operations.ListLabelsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/labels"
 
@@ -238,8 +287,13 @@ func (s *labels) ListLabels(ctx context.Context) (*operations.ListLabelsResponse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -269,33 +323,35 @@ func (s *labels) ListLabels(ctx context.Context) (*operations.ListLabelsResponse
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListLabels200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListLabels200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListLabels200ApplicationJSONObject = out
+			res.ListLabels200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.ListLabels200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListLabels200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListLabels200ApplicationVndSegmentV1PlusJSONObject = out
+			res.ListLabels200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.ListLabels200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListLabels200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListLabels200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.ListLabels200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.ListLabels200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListLabels200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListLabels200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.ListLabels200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -304,12 +360,14 @@ func (s *labels) ListLabels(ctx context.Context) (*operations.ListLabelsResponse
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

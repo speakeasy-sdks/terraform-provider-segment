@@ -12,6 +12,27 @@ type GetWarehouseMetadataV1OutputWarehouseMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // GetWarehouseMetadataV1OutputWarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
 type GetWarehouseMetadataV1OutputWarehouseMetadataV1 struct {
 	// A description, in English, of this object.
@@ -28,8 +49,57 @@ type GetWarehouseMetadataV1OutputWarehouseMetadataV1 struct {
 	Slug string `json:"slug"`
 }
 
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1) GetLogos() GetWarehouseMetadataV1OutputWarehouseMetadataV1LogosBeta {
+	if o == nil {
+		return GetWarehouseMetadataV1OutputWarehouseMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *GetWarehouseMetadataV1OutputWarehouseMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
 // GetWarehouseMetadataV1Output - Returns a Warehouse catalog item looked up by id.
 type GetWarehouseMetadataV1Output struct {
 	// The Warehouse catalog item.
 	WarehouseMetadata GetWarehouseMetadataV1OutputWarehouseMetadataV1 `json:"warehouseMetadata"`
+}
+
+func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadata() GetWarehouseMetadataV1OutputWarehouseMetadataV1 {
+	if o == nil {
+		return GetWarehouseMetadataV1OutputWarehouseMetadataV1{}
+	}
+	return o.WarehouseMetadata
 }

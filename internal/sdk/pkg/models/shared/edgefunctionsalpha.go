@@ -17,3 +17,45 @@ type EdgeFunctionsAlpha struct {
 	// Revision number associated with the latest Edge Function.
 	Version float64 `json:"version"`
 }
+
+func (o *EdgeFunctionsAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *EdgeFunctionsAlpha) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *EdgeFunctionsAlpha) GetDownloadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.DownloadURL
+}
+
+func (o *EdgeFunctionsAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *EdgeFunctionsAlpha) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *EdgeFunctionsAlpha) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}

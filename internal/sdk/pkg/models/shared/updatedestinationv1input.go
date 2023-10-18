@@ -16,3 +16,24 @@ type UpdateDestinationV1Input struct {
 	// Config API note: equal to `config`.
 	Settings map[string]interface{} `json:"settings,omitempty"`
 }
+
+func (o *UpdateDestinationV1Input) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateDestinationV1Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateDestinationV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}

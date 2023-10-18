@@ -9,3 +9,17 @@ type BreakdownBeta struct {
 	// Number of occurrences of the metric.
 	Value float64 `json:"value"`
 }
+
+func (o *BreakdownBeta) GetMetricName() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetricName
+}
+
+func (o *BreakdownBeta) GetValue() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Value
+}

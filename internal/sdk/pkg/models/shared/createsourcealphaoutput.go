@@ -12,6 +12,27 @@ type CreateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // CreateSourceAlphaOutputSourceAlphaSourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
 type CreateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
 	// A list of categories this Source belongs to.
@@ -36,6 +57,62 @@ type CreateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetLogos() CreateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta {
+	if o == nil {
+		return CreateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *CreateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // CreateSourceAlphaOutputSourceAlpha - Defines a data Source for Segment data.
@@ -71,8 +148,78 @@ type CreateSourceAlphaOutputSourceAlpha struct {
 	WriteKeys []string `json:"writeKeys"`
 }
 
+func (o *CreateSourceAlphaOutputSourceAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetMetadata() CreateSourceAlphaOutputSourceAlphaSourceMetadataV1 {
+	if o == nil {
+		return CreateSourceAlphaOutputSourceAlphaSourceMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *CreateSourceAlphaOutputSourceAlpha) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
+}
+
 // CreateSourceAlphaOutput - Returns the newly Source.
 type CreateSourceAlphaOutput struct {
 	// The newly created Source.
 	Source CreateSourceAlphaOutputSourceAlpha `json:"source"`
+}
+
+func (o *CreateSourceAlphaOutput) GetSource() CreateSourceAlphaOutputSourceAlpha {
+	if o == nil {
+		return CreateSourceAlphaOutputSourceAlpha{}
+	}
+	return o.Source
 }

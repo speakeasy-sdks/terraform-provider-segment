@@ -40,3 +40,10 @@ type GetConnectionStateFromWarehouseV1Output struct {
 	// Represents the status for the current connection settings.
 	ConnectionState GetConnectionStateFromWarehouseV1OutputConnectionState `json:"connectionState"`
 }
+
+func (o *GetConnectionStateFromWarehouseV1Output) GetConnectionState() GetConnectionStateFromWarehouseV1OutputConnectionState {
+	if o == nil {
+		return GetConnectionStateFromWarehouseV1OutputConnectionState("")
+	}
+	return o.ConnectionState
+}

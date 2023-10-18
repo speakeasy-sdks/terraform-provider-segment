@@ -71,3 +71,52 @@ type TrackingPlanV1 struct {
 	// Config API note: equal to `updateTime`.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
+
+func (o *TrackingPlanV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *TrackingPlanV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *TrackingPlanV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *TrackingPlanV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *TrackingPlanV1) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}
+
+func (o *TrackingPlanV1) GetType() TrackingPlanV1Type {
+	if o == nil {
+		return TrackingPlanV1Type("")
+	}
+	return o.Type
+}
+
+func (o *TrackingPlanV1) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}

@@ -13,3 +13,31 @@ type DestinationSubscriptionUpdateInput struct {
 	// The fql statement.
 	Trigger *string `json:"trigger,omitempty"`
 }
+
+func (o *DestinationSubscriptionUpdateInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *DestinationSubscriptionUpdateInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *DestinationSubscriptionUpdateInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *DestinationSubscriptionUpdateInput) GetTrigger() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Trigger
+}

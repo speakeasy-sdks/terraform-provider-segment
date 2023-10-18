@@ -14,8 +14,36 @@ type ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBe
 	SourceID string `json:"sourceId"`
 }
 
+func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBeta) GetDestinationMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBeta) GetMetrics() []MetricBeta {
+	if o == nil {
+		return []MetricBeta{}
+	}
+	return o.Metrics
+}
+
+func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBeta) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // ListDeliveryMetricsSummaryFromDestinationBetaOutput - Output to retrieve event delivery metrics summary for a Destination.
 type ListDeliveryMetricsSummaryFromDestinationBetaOutput struct {
 	// The delivery metrics summary returned.
 	DeliveryMetricsSummary ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBeta `json:"deliveryMetricsSummary"`
+}
+
+func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetricsSummary() ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBeta {
+	if o == nil {
+		return ListDeliveryMetricsSummaryFromDestinationBetaOutputDeliveryMetricsSummaryBeta{}
+	}
+	return o.DeliveryMetricsSummary
 }

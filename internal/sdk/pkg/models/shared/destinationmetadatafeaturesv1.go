@@ -97,3 +97,38 @@ type DestinationMetadataFeaturesV1 struct {
 	// Whether this Destination supports replays.
 	Replay *bool `json:"replay,omitempty"`
 }
+
+func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundling() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.BrowserUnbundling
+}
+
+func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingPublic() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.BrowserUnbundlingPublic
+}
+
+func (o *DestinationMetadataFeaturesV1) GetCloudModeInstances() *DestinationMetadataFeaturesV1CloudModeInstances {
+	if o == nil {
+		return nil
+	}
+	return o.CloudModeInstances
+}
+
+func (o *DestinationMetadataFeaturesV1) GetDeviceModeInstances() *DestinationMetadataFeaturesV1DeviceModeInstances {
+	if o == nil {
+		return nil
+	}
+	return o.DeviceModeInstances
+}
+
+func (o *DestinationMetadataFeaturesV1) GetReplay() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Replay
+}

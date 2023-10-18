@@ -29,10 +29,52 @@ type GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetDailyWorkspaceAPICallsUsageV1Output - Returns a list of daily aggregations of Workspace MTU counts.
 type GetDailyWorkspaceAPICallsUsageV1Output struct {
 	// The list of daily Workspace API calls count aggregates.
 	DailyWorkspaceAPICallsUsage []APICallSnapshotV1 `json:"dailyWorkspaceAPICallsUsage"`
 	// Information about the pagination of this response.
 	Pagination GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetDailyWorkspaceAPICallsUsage() []APICallSnapshotV1 {
+	if o == nil {
+		return []APICallSnapshotV1{}
+	}
+	return o.DailyWorkspaceAPICallsUsage
+}
+
+func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPagination() GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput {
+	if o == nil {
+		return GetDailyWorkspaceAPICallsUsageV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

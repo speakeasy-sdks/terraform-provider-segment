@@ -11,10 +11,24 @@ type ListSchemaSettingsInSourceRequest struct {
 	SourceID string `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
+func (o *ListSchemaSettingsInSourceRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSON - OK
 type ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns a list of settings for the Source.
 	Data *shared.ListSchemaSettingsInSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListSchemaSettingsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.ListSchemaSettingsInSourceV1Output `json:"data,omitempty"`
 }
 
+func (o *ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListSchemaSettingsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListSchemaSettingsInSource200ApplicationVndSegmentV1PlusJSON - OK
 type ListSchemaSettingsInSource200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns a list of settings for the Source.
 	Data *shared.ListSchemaSettingsInSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ListSchemaSettingsInSource200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListSchemaSettingsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListSchemaSettingsInSource200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type ListSchemaSettingsInSource200ApplicationJSON struct {
 	Data *shared.ListSchemaSettingsInSourceV1Output `json:"data,omitempty"`
 }
 
+func (o *ListSchemaSettingsInSource200ApplicationJSON) GetData() *shared.ListSchemaSettingsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListSchemaSettingsInSourceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListSchemaSettingsInSource200ApplicationJSONObject *ListSchemaSettingsInSource200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type ListSchemaSettingsInSourceResponse struct {
 	ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSONObject *ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSONObject *ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetListSchemaSettingsInSource200ApplicationJSONObject() *ListSchemaSettingsInSource200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSchemaSettingsInSource200ApplicationJSONObject
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetListSchemaSettingsInSource200ApplicationVndSegmentV1PlusJSONObject() *ListSchemaSettingsInSource200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSchemaSettingsInSource200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSONObject() *ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSchemaSettingsInSource200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListSchemaSettingsInSourceResponse) GetListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSONObject() *ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSchemaSettingsInSource200ApplicationVndSegmentV1betaPlusJSONObject
 }

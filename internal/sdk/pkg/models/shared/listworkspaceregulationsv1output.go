@@ -29,10 +29,52 @@ type ListWorkspaceRegulationsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListWorkspaceRegulationsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListWorkspaceRegulationsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListWorkspaceRegulationsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListWorkspaceRegulationsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListWorkspaceRegulationsV1Output - Output of all Workspace-scoped regulations in a given Workspace.
 type ListWorkspaceRegulationsV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListWorkspaceRegulationsV1OutputPaginationOutput `json:"pagination"`
 	// List of Workspace-scoped regulations with statuses.
 	Regulations []RegulationListEntryV1 `json:"regulations"`
+}
+
+func (o *ListWorkspaceRegulationsV1Output) GetPagination() ListWorkspaceRegulationsV1OutputPaginationOutput {
+	if o == nil {
+		return ListWorkspaceRegulationsV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListWorkspaceRegulationsV1Output) GetRegulations() []RegulationListEntryV1 {
+	if o == nil {
+		return []RegulationListEntryV1{}
+	}
+	return o.Regulations
 }

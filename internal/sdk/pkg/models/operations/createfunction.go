@@ -13,10 +13,24 @@ type CreateFunction200ApplicationVndSegmentV1betaPlusJSON struct {
 	Data *shared.CreateFunctionV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateFunction200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.CreateFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateFunction200ApplicationVndSegmentV1alphaPlusJSON - OK
 type CreateFunction200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Create a Function.
 	Data *shared.CreateFunctionV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateFunction200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.CreateFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // CreateFunction200ApplicationVndSegmentV1PlusJSON - OK
@@ -25,18 +39,35 @@ type CreateFunction200ApplicationVndSegmentV1PlusJSON struct {
 	Data *shared.CreateFunctionV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateFunction200ApplicationVndSegmentV1PlusJSON) GetData() *shared.CreateFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateFunction200ApplicationJSON - OK
 type CreateFunction200ApplicationJSON struct {
 	// Create a Function.
 	Data *shared.CreateFunctionV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateFunction200ApplicationJSON) GetData() *shared.CreateFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type CreateFunctionResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	CreateFunction200ApplicationJSONObject *CreateFunction200ApplicationJSON
 	// OK
@@ -45,4 +76,60 @@ type CreateFunctionResponse struct {
 	CreateFunction200ApplicationVndSegmentV1alphaPlusJSONObject *CreateFunction200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	CreateFunction200ApplicationVndSegmentV1betaPlusJSONObject *CreateFunction200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *CreateFunctionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateFunctionResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateFunctionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateFunctionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateFunctionResponse) GetCreateFunction200ApplicationJSONObject() *CreateFunction200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFunction200ApplicationJSONObject
+}
+
+func (o *CreateFunctionResponse) GetCreateFunction200ApplicationVndSegmentV1PlusJSONObject() *CreateFunction200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFunction200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateFunctionResponse) GetCreateFunction200ApplicationVndSegmentV1alphaPlusJSONObject() *CreateFunction200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFunction200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateFunctionResponse) GetCreateFunction200ApplicationVndSegmentV1betaPlusJSONObject() *CreateFunction200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFunction200ApplicationVndSegmentV1betaPlusJSONObject
 }

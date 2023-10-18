@@ -11,3 +11,24 @@ type MetricBeta struct {
 	// Number of occurrences of the metric.
 	Total float64 `json:"total"`
 }
+
+func (o *MetricBeta) GetBreakdown() []BreakdownBeta {
+	if o == nil {
+		return nil
+	}
+	return o.Breakdown
+}
+
+func (o *MetricBeta) GetMetricName() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetricName
+}
+
+func (o *MetricBeta) GetTotal() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Total
+}

@@ -16,3 +16,17 @@ type PaginationInput struct {
 	// Consumers of the API must treat this value as opaque.
 	Cursor *string `queryParam:"name=cursor" json:"cursor,omitempty"`
 }
+
+func (o *PaginationInput) GetCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Count
+}
+
+func (o *PaginationInput) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}

@@ -13,10 +13,24 @@ type GetWorkspace200ApplicationVndSegmentV1betaPlusJSON struct {
 	Data *shared.GetWorkspaceV1Output `json:"data,omitempty"`
 }
 
+func (o *GetWorkspace200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.GetWorkspaceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON - OK
 type GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Represents the output of loading the Workspace.
 	Data *shared.GetWorkspaceV1Output `json:"data,omitempty"`
+}
+
+func (o *GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetWorkspaceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetWorkspace200ApplicationVndSegmentV1PlusJSON - OK
@@ -25,18 +39,35 @@ type GetWorkspace200ApplicationVndSegmentV1PlusJSON struct {
 	Data *shared.GetWorkspaceV1Output `json:"data,omitempty"`
 }
 
+func (o *GetWorkspace200ApplicationVndSegmentV1PlusJSON) GetData() *shared.GetWorkspaceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetWorkspace200ApplicationJSON - OK
 type GetWorkspace200ApplicationJSON struct {
 	// Represents the output of loading the Workspace.
 	Data *shared.GetWorkspaceV1Output `json:"data,omitempty"`
 }
 
+func (o *GetWorkspace200ApplicationJSON) GetData() *shared.GetWorkspaceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetWorkspaceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetWorkspace200ApplicationJSONObject *GetWorkspace200ApplicationJSON
 	// OK
@@ -45,4 +76,60 @@ type GetWorkspaceResponse struct {
 	GetWorkspace200ApplicationVndSegmentV1alphaPlusJSONObject *GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	GetWorkspace200ApplicationVndSegmentV1betaPlusJSONObject *GetWorkspace200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *GetWorkspaceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetWorkspaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetWorkspaceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetWorkspaceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetWorkspaceResponse) GetGetWorkspace200ApplicationJSONObject() *GetWorkspace200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetWorkspace200ApplicationJSONObject
+}
+
+func (o *GetWorkspaceResponse) GetGetWorkspace200ApplicationVndSegmentV1PlusJSONObject() *GetWorkspace200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetWorkspace200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetWorkspaceResponse) GetGetWorkspace200ApplicationVndSegmentV1alphaPlusJSONObject() *GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetWorkspace200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetWorkspaceResponse) GetGetWorkspace200ApplicationVndSegmentV1betaPlusJSONObject() *GetWorkspace200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetWorkspace200ApplicationVndSegmentV1betaPlusJSONObject
 }

@@ -7,3 +7,10 @@ type ListRegulationsFromSourceV1Output struct {
 	// List of Workspace-scoped regulations with statuses.
 	Regulations []RegulationListEntryV1 `json:"regulations"`
 }
+
+func (o *ListRegulationsFromSourceV1Output) GetRegulations() []RegulationListEntryV1 {
+	if o == nil {
+		return []RegulationListEntryV1{}
+	}
+	return o.Regulations
+}

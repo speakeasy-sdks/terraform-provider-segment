@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"segment/internal/sdk/pkg/models/operations"
+	"segment/internal/sdk/pkg/models/sdkerrors"
 	"segment/internal/sdk/pkg/models/shared"
 	"segment/internal/sdk/pkg/utils"
 	"strings"
@@ -44,7 +45,17 @@ func newWorkspaces(sdkConfig sdkConfiguration) *workspaces {
 
 // GetWorkspace - Get Workspace
 // Returns the Workspace associated with the token used to access this resource.
-func (s *workspaces) GetWorkspace(ctx context.Context) (*operations.GetWorkspaceResponse, error) {
+func (s *workspaces) GetWorkspace(ctx context.Context, opts ...operations.Option) (*operations.GetWorkspaceResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
@@ -52,8 +63,13 @@ func (s *workspaces) GetWorkspace(ctx context.Context) (*operations.GetWorkspace
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -83,33 +99,35 @@ func (s *workspaces) GetWorkspace(ctx context.Context) (*operations.GetWorkspace
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetWorkspace200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetWorkspace200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetWorkspace200ApplicationJSONObject = out
+			res.GetWorkspace200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.GetWorkspace200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetWorkspace200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetWorkspace200ApplicationVndSegmentV1PlusJSONObject = out
+			res.GetWorkspace200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetWorkspace200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetWorkspace200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.GetWorkspace200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.GetWorkspace200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetWorkspace200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetWorkspace200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.GetWorkspace200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -118,12 +136,14 @@ func (s *workspaces) GetWorkspace(ctx context.Context) (*operations.GetWorkspace
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

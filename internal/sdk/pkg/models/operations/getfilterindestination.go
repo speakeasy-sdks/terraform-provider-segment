@@ -12,10 +12,31 @@ type GetFilterInDestinationRequest struct {
 	FilterID      string `pathParam:"style=simple,explode=false,name=filterId"`
 }
 
+func (o *GetFilterInDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *GetFilterInDestinationRequest) GetFilterID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FilterID
+}
+
 // GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON - OK
 type GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Output for GetDestinationFiltersV1.
 	Data *shared.GetFilterInDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.GetFilterInDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.GetFilterInDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetFilterInDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetFilterInDestination200ApplicationVndSegmentV1PlusJSON - OK
 type GetFilterInDestination200ApplicationVndSegmentV1PlusJSON struct {
 	// Output for GetDestinationFiltersV1.
 	Data *shared.GetFilterInDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *GetFilterInDestination200ApplicationVndSegmentV1PlusJSON) GetData() *shared.GetFilterInDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetFilterInDestination200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type GetFilterInDestination200ApplicationJSON struct {
 	Data *shared.GetFilterInDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *GetFilterInDestination200ApplicationJSON) GetData() *shared.GetFilterInDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetFilterInDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetFilterInDestination200ApplicationJSONObject *GetFilterInDestination200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type GetFilterInDestinationResponse struct {
 	GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSONObject *GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSONObject *GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *GetFilterInDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetFilterInDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetFilterInDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetFilterInDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetFilterInDestinationResponse) GetGetFilterInDestination200ApplicationJSONObject() *GetFilterInDestination200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFilterInDestination200ApplicationJSONObject
+}
+
+func (o *GetFilterInDestinationResponse) GetGetFilterInDestination200ApplicationVndSegmentV1PlusJSONObject() *GetFilterInDestination200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFilterInDestination200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetFilterInDestinationResponse) GetGetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSONObject() *GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFilterInDestination200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetFilterInDestinationResponse) GetGetFilterInDestination200ApplicationVndSegmentV1betaPlusJSONObject() *GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFilterInDestination200ApplicationVndSegmentV1betaPlusJSONObject
 }

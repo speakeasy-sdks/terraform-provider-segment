@@ -8,3 +8,17 @@ type PropertyValueTransformationV1 struct {
 	// The new value of the property paths.
 	PropertyValue string `json:"propertyValue"`
 }
+
+func (o *PropertyValueTransformationV1) GetPropertyPaths() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.PropertyPaths
+}
+
+func (o *PropertyValueTransformationV1) GetPropertyValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.PropertyValue
+}

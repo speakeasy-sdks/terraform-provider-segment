@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"segment/internal/sdk/pkg/models/operations"
+	"segment/internal/sdk/pkg/models/sdkerrors"
 	"segment/internal/sdk/pkg/models/shared"
 	"segment/internal/sdk/pkg/utils"
 	"strings"
@@ -42,14 +43,24 @@ func newDeletionAndSuppression(sdkConfig sdkConfiguration) *deletionAndSuppressi
 //
 // - `attributes`,
 // - `userAgent`
-func (s *deletionAndSuppression) CreateCloudSourceRegulation(ctx context.Context, request operations.CreateCloudSourceRegulationRequest) (*operations.CreateCloudSourceRegulationResponse, error) {
+func (s *deletionAndSuppression) CreateCloudSourceRegulation(ctx context.Context, request operations.CreateCloudSourceRegulationRequest, opts ...operations.Option) (*operations.CreateCloudSourceRegulationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/regulations/cloudsources/{sourceId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "CreateCloudSourceRegulationV1Input", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateCloudSourceRegulationV1Input", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -64,8 +75,13 @@ func (s *deletionAndSuppression) CreateCloudSourceRegulation(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -98,33 +114,35 @@ func (s *deletionAndSuppression) CreateCloudSourceRegulation(ctx context.Context
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateCloudSourceRegulation200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateCloudSourceRegulation200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateCloudSourceRegulation200ApplicationJSONObject = out
+			res.CreateCloudSourceRegulation200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.CreateCloudSourceRegulation200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateCloudSourceRegulation200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateCloudSourceRegulation200ApplicationVndSegmentV1PlusJSONObject = out
+			res.CreateCloudSourceRegulation200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateCloudSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateCloudSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateCloudSourceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.CreateCloudSourceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.CreateCloudSourceRegulation200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateCloudSourceRegulation200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateCloudSourceRegulation200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.CreateCloudSourceRegulation200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -133,12 +151,14 @@ func (s *deletionAndSuppression) CreateCloudSourceRegulation(ctx context.Context
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -153,14 +173,24 @@ func (s *deletionAndSuppression) CreateCloudSourceRegulation(ctx context.Context
 // Config API omitted fields:
 // - `attributes`,
 // - `userAgent`
-func (s *deletionAndSuppression) CreateSourceRegulation(ctx context.Context, request operations.CreateSourceRegulationRequest) (*operations.CreateSourceRegulationResponse, error) {
+func (s *deletionAndSuppression) CreateSourceRegulation(ctx context.Context, request operations.CreateSourceRegulationRequest, opts ...operations.Option) (*operations.CreateSourceRegulationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/regulations/sources/{sourceId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "CreateSourceRegulationV1Input", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateSourceRegulationV1Input", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -175,8 +205,13 @@ func (s *deletionAndSuppression) CreateSourceRegulation(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -209,33 +244,35 @@ func (s *deletionAndSuppression) CreateSourceRegulation(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateSourceRegulation200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateSourceRegulation200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateSourceRegulation200ApplicationJSONObject = out
+			res.CreateSourceRegulation200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.CreateSourceRegulation200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateSourceRegulation200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateSourceRegulation200ApplicationVndSegmentV1PlusJSONObject = out
+			res.CreateSourceRegulation200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -244,12 +281,14 @@ func (s *deletionAndSuppression) CreateSourceRegulation(ctx context.Context, req
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -264,11 +303,21 @@ func (s *deletionAndSuppression) CreateSourceRegulation(ctx context.Context, req
 // Config API omitted fields:
 // - `attributes`,
 // - `userAgent`
-func (s *deletionAndSuppression) CreateWorkspaceRegulation(ctx context.Context, request shared.CreateWorkspaceRegulationV1Input) (*operations.CreateWorkspaceRegulationResponse, error) {
+func (s *deletionAndSuppression) CreateWorkspaceRegulation(ctx context.Context, request shared.CreateWorkspaceRegulationV1Input, opts ...operations.Option) (*operations.CreateWorkspaceRegulationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/regulations"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/vnd.segment.v1beta+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -283,8 +332,13 @@ func (s *deletionAndSuppression) CreateWorkspaceRegulation(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -317,33 +371,35 @@ func (s *deletionAndSuppression) CreateWorkspaceRegulation(ctx context.Context, 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateWorkspaceRegulation200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateWorkspaceRegulation200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateWorkspaceRegulation200ApplicationJSONObject = out
+			res.CreateWorkspaceRegulation200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSONObject = out
+			res.CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -352,12 +408,14 @@ func (s *deletionAndSuppression) CreateWorkspaceRegulation(ctx context.Context, 
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -368,7 +426,17 @@ func (s *deletionAndSuppression) CreateWorkspaceRegulation(ctx context.Context, 
 // Deletes a regulation from the Workspace. The regulation must be in the initialized state to be deleted.
 //
 // • When called, this endpoint may generate the `Regulation Deleted` event in the [audit trail](/tag/Audit-Trail).
-func (s *deletionAndSuppression) DeleteRegulation(ctx context.Context, request operations.DeleteRegulationRequest) (*operations.DeleteRegulationResponse, error) {
+func (s *deletionAndSuppression) DeleteRegulation(ctx context.Context, request operations.DeleteRegulationRequest, opts ...operations.Option) (*operations.DeleteRegulationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/regulations/{regulateId}", request, nil)
 	if err != nil {
@@ -379,8 +447,13 @@ func (s *deletionAndSuppression) DeleteRegulation(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -410,33 +483,35 @@ func (s *deletionAndSuppression) DeleteRegulation(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.DeleteRegulation200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteRegulation200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteRegulation200ApplicationJSONObject = out
+			res.DeleteRegulation200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.DeleteRegulation200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteRegulation200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteRegulation200ApplicationVndSegmentV1PlusJSONObject = out
+			res.DeleteRegulation200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteRegulation200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.DeleteRegulation200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -445,12 +520,14 @@ func (s *deletionAndSuppression) DeleteRegulation(ctx context.Context, request o
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -463,7 +540,17 @@ func (s *deletionAndSuppression) DeleteRegulation(ctx context.Context, request o
 //	Config API omitted fields:
 //
 // - `parent`
-func (s *deletionAndSuppression) GetRegulation(ctx context.Context, request operations.GetRegulationRequest) (*operations.GetRegulationResponse, error) {
+func (s *deletionAndSuppression) GetRegulation(ctx context.Context, request operations.GetRegulationRequest, opts ...operations.Option) (*operations.GetRegulationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/regulations/{regulateId}", request, nil)
 	if err != nil {
@@ -474,8 +561,13 @@ func (s *deletionAndSuppression) GetRegulation(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -505,33 +597,35 @@ func (s *deletionAndSuppression) GetRegulation(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetRegulation200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetRegulation200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetRegulation200ApplicationJSONObject = out
+			res.GetRegulation200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.GetRegulation200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetRegulation200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetRegulation200ApplicationVndSegmentV1PlusJSONObject = out
+			res.GetRegulation200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.GetRegulation200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetRegulation200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.GetRegulation200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.GetRegulation200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetRegulation200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetRegulation200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.GetRegulation200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -540,12 +634,14 @@ func (s *deletionAndSuppression) GetRegulation(ctx context.Context, request oper
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -554,7 +650,17 @@ func (s *deletionAndSuppression) GetRegulation(ctx context.Context, request oper
 
 // ListSuppressions - List Suppressions
 // Lists all suppressions in a given Workspace.
-func (s *deletionAndSuppression) ListSuppressions(ctx context.Context, request operations.ListSuppressionsRequest) (*operations.ListSuppressionsResponse, error) {
+func (s *deletionAndSuppression) ListSuppressions(ctx context.Context, request operations.ListSuppressionsRequest, opts ...operations.Option) (*operations.ListSuppressionsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/suppressions"
 
@@ -562,8 +668,13 @@ func (s *deletionAndSuppression) ListSuppressions(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -597,33 +708,35 @@ func (s *deletionAndSuppression) ListSuppressions(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSuppressions200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListSuppressions200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListSuppressions200ApplicationJSONObject = out
+			res.ListSuppressions200ApplicationJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
-			var out *operations.ListSuppressions200ApplicationVndSegmentV1PlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListSuppressions200ApplicationVndSegmentV1PlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListSuppressions200ApplicationVndSegmentV1PlusJSONObject = out
+			res.ListSuppressions200ApplicationVndSegmentV1PlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.ListSuppressions200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListSuppressions200ApplicationVndSegmentV1alphaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListSuppressions200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.ListSuppressions200ApplicationVndSegmentV1alphaPlusJSONObject = &out
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
-			var out *operations.ListSuppressions200ApplicationVndSegmentV1betaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListSuppressions200ApplicationVndSegmentV1betaPlusJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListSuppressions200ApplicationVndSegmentV1betaPlusJSONObject = out
+			res.ListSuppressions200ApplicationVndSegmentV1betaPlusJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -632,12 +745,14 @@ func (s *deletionAndSuppression) ListSuppressions(ctx context.Context, request o
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

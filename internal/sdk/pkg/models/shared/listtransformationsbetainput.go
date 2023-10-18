@@ -17,8 +17,29 @@ type ListTransformationsBetaInputPaginationInput struct {
 	Cursor *string `json:"cursor,omitempty"`
 }
 
+func (o *ListTransformationsBetaInputPaginationInput) GetCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Count
+}
+
+func (o *ListTransformationsBetaInputPaginationInput) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
 // ListTransformationsBetaInput - Lists the Transformations associated with the current Workspace.
 type ListTransformationsBetaInput struct {
 	// Pagination options.
 	Pagination ListTransformationsBetaInputPaginationInput `json:"pagination"`
+}
+
+func (o *ListTransformationsBetaInput) GetPagination() ListTransformationsBetaInputPaginationInput {
+	if o == nil {
+		return ListTransformationsBetaInputPaginationInput{}
+	}
+	return o.Pagination
 }
