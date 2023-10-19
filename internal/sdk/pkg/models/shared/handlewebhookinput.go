@@ -13,3 +13,31 @@ type HandleWebhookInput struct {
 	// The Workspace id.
 	W string `json:"w"`
 }
+
+func (o *HandleWebhookInput) GetN() string {
+	if o == nil {
+		return ""
+	}
+	return o.N
+}
+
+func (o *HandleWebhookInput) GetS() string {
+	if o == nil {
+		return ""
+	}
+	return o.S
+}
+
+func (o *HandleWebhookInput) GetT() string {
+	if o == nil {
+		return ""
+	}
+	return o.T
+}
+
+func (o *HandleWebhookInput) GetW() string {
+	if o == nil {
+		return ""
+	}
+	return o.W
+}

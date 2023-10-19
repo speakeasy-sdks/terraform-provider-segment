@@ -29,10 +29,52 @@ type GetDailyPerSourceMTUUsageV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetDailyPerSourceMTUUsageV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetDailyPerSourceMTUUsageV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetDailyPerSourceMTUUsageV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetDailyPerSourceMTUUsageV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetDailyPerSourceMTUUsageV1Output - Returns a list of daily aggregations of Source level MTU counts.
 type GetDailyPerSourceMTUUsageV1Output struct {
 	// The list of daily per Source MTU count aggregates.
 	DailyPerSourceMTUUsage []UsersPerSourceSnapshotV1 `json:"dailyPerSourceMTUUsage"`
 	// Information about the pagination of this response.
 	Pagination GetDailyPerSourceMTUUsageV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *GetDailyPerSourceMTUUsageV1Output) GetDailyPerSourceMTUUsage() []UsersPerSourceSnapshotV1 {
+	if o == nil {
+		return []UsersPerSourceSnapshotV1{}
+	}
+	return o.DailyPerSourceMTUUsage
+}
+
+func (o *GetDailyPerSourceMTUUsageV1Output) GetPagination() GetDailyPerSourceMTUUsageV1OutputPaginationOutput {
+	if o == nil {
+		return GetDailyPerSourceMTUUsageV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

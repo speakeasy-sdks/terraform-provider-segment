@@ -11,10 +11,24 @@ type DeleteDestinationRequest struct {
 	DestinationID string `pathParam:"style=simple,explode=false,name=destinationId"`
 }
 
+func (o *DeleteDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
 // DeleteDestination200ApplicationVndSegmentV1betaPlusJSON - OK
 type DeleteDestination200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the status of a Destination deletion.
 	Data *shared.DeleteDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteDestination200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.DeleteDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type DeleteDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.DeleteDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteDestination200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.DeleteDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // DeleteDestination200ApplicationVndSegmentV1PlusJSON - OK
 type DeleteDestination200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the status of a Destination deletion.
 	Data *shared.DeleteDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteDestination200ApplicationVndSegmentV1PlusJSON) GetData() *shared.DeleteDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteDestination200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type DeleteDestination200ApplicationJSON struct {
 	Data *shared.DeleteDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteDestination200ApplicationJSON) GetData() *shared.DeleteDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type DeleteDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	DeleteDestination200ApplicationJSONObject *DeleteDestination200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type DeleteDestinationResponse struct {
 	DeleteDestination200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteDestination200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	DeleteDestination200ApplicationVndSegmentV1betaPlusJSONObject *DeleteDestination200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *DeleteDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeleteDestinationResponse) GetDeleteDestination200ApplicationJSONObject() *DeleteDestination200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteDestination200ApplicationJSONObject
+}
+
+func (o *DeleteDestinationResponse) GetDeleteDestination200ApplicationVndSegmentV1PlusJSONObject() *DeleteDestination200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteDestination200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteDestinationResponse) GetDeleteDestination200ApplicationVndSegmentV1alphaPlusJSONObject() *DeleteDestination200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteDestination200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteDestinationResponse) GetDeleteDestination200ApplicationVndSegmentV1betaPlusJSONObject() *DeleteDestination200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteDestination200ApplicationVndSegmentV1betaPlusJSONObject
 }

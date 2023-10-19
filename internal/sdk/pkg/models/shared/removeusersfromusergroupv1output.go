@@ -37,3 +37,10 @@ type RemoveUsersFromUserGroupV1Output struct {
 	// The status of the user removal from user group operation.
 	Status RemoveUsersFromUserGroupV1OutputStatus `json:"status"`
 }
+
+func (o *RemoveUsersFromUserGroupV1Output) GetStatus() RemoveUsersFromUserGroupV1OutputStatus {
+	if o == nil {
+		return RemoveUsersFromUserGroupV1OutputStatus("")
+	}
+	return o.Status
+}

@@ -56,3 +56,24 @@ type RemoveRuleV1 struct {
 	// Version of this rule.
 	Version float64 `json:"version"`
 }
+
+func (o *RemoveRuleV1) GetKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Key
+}
+
+func (o *RemoveRuleV1) GetType() RemoveRuleV1Type {
+	if o == nil {
+		return RemoveRuleV1Type("")
+	}
+	return o.Type
+}
+
+func (o *RemoveRuleV1) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}

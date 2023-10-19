@@ -61,3 +61,59 @@ type ListFunctionItemV1 struct {
 	// Config API note: equal to `type`.
 	ResourceType *ListFunctionItemV1ResourceType `json:"resourceType,omitempty"`
 }
+
+func (o *ListFunctionItemV1) GetCatalogID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CatalogID
+}
+
+func (o *ListFunctionItemV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *ListFunctionItemV1) GetCreatedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedBy
+}
+
+func (o *ListFunctionItemV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *ListFunctionItemV1) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *ListFunctionItemV1) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ListFunctionItemV1) GetLogoURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LogoURL
+}
+
+func (o *ListFunctionItemV1) GetResourceType() *ListFunctionItemV1ResourceType {
+	if o == nil {
+		return nil
+	}
+	return o.ResourceType
+}

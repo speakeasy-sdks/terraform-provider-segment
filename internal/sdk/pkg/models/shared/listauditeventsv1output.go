@@ -29,10 +29,52 @@ type ListAuditEventsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListAuditEventsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListAuditEventsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListAuditEventsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListAuditEventsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListAuditEventsV1Output - Returns a list of Audit Trail events for the current Workspace.
 type ListAuditEventsV1Output struct {
 	// Audit trail events for the current Workspace.
 	Events []AuditEventV1 `json:"events"`
 	// Information about the pagination of this response.
 	Pagination *ListAuditEventsV1OutputPaginationOutput `json:"pagination,omitempty"`
+}
+
+func (o *ListAuditEventsV1Output) GetEvents() []AuditEventV1 {
+	if o == nil {
+		return []AuditEventV1{}
+	}
+	return o.Events
+}
+
+func (o *ListAuditEventsV1Output) GetPagination() *ListAuditEventsV1OutputPaginationOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
 }

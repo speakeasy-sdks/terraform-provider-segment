@@ -7,3 +7,10 @@ type AddPermissionsToUserGroupV1Output struct {
 	// The updated set of permissions assigned to the user group.
 	Permissions []AccessPermissionV1 `json:"permissions"`
 }
+
+func (o *AddPermissionsToUserGroupV1Output) GetPermissions() []AccessPermissionV1 {
+	if o == nil {
+		return []AccessPermissionV1{}
+	}
+	return o.Permissions
+}

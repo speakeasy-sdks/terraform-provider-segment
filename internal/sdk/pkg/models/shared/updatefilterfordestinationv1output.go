@@ -26,8 +26,85 @@ type UpdateFilterForDestinationV1OutputDestinationFilterV1 struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetTitle() string {
+	if o == nil {
+		return ""
+	}
+	return o.Title
+}
+
+func (o *UpdateFilterForDestinationV1OutputDestinationFilterV1) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
 // UpdateFilterForDestinationV1Output - Output for UpdateDestinationFilterV1.
 type UpdateFilterForDestinationV1Output struct {
 	// The updated Destination filter.
 	Filter UpdateFilterForDestinationV1OutputDestinationFilterV1 `json:"filter"`
+}
+
+func (o *UpdateFilterForDestinationV1Output) GetFilter() UpdateFilterForDestinationV1OutputDestinationFilterV1 {
+	if o == nil {
+		return UpdateFilterForDestinationV1OutputDestinationFilterV1{}
+	}
+	return o.Filter
 }

@@ -9,3 +9,10 @@ type AddSourceToTrackingPlanV1Input struct {
 	// Config API note: analogous to `sourceName`.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *AddSourceToTrackingPlanV1Input) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

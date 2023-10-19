@@ -11,3 +11,24 @@ type DestinationMetadataPlatformsV1 struct {
 	// Whether this Destination supports server events.
 	Server *bool `json:"server,omitempty"`
 }
+
+func (o *DestinationMetadataPlatformsV1) GetBrowser() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Browser
+}
+
+func (o *DestinationMetadataPlatformsV1) GetMobile() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Mobile
+}
+
+func (o *DestinationMetadataPlatformsV1) GetServer() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Server
+}

@@ -7,3 +7,24 @@ type Space struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 }
+
+func (o *Space) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Space) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *Space) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}

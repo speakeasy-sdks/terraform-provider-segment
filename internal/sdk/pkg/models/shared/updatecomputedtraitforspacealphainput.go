@@ -7,3 +7,10 @@ type UpdateComputedTraitForSpaceAlphaInput struct {
 	// Enabled/disabled status for the computed trait.
 	Enabled bool `json:"enabled"`
 }
+
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}

@@ -26,3 +26,59 @@ type CreateTransformationBetaInput struct {
 	// The Source to be associated with the Transformation.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *CreateTransformationBetaInput) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *CreateTransformationBetaInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateTransformationBetaInput) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *CreateTransformationBetaInput) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateTransformationBetaInput) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *CreateTransformationBetaInput) GetPropertyRenames() []PropertyRenameBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *CreateTransformationBetaInput) GetPropertyValueTransformations() []PropertyValueTransformationBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *CreateTransformationBetaInput) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

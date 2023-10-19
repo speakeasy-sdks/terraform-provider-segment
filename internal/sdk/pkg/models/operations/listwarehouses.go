@@ -14,10 +14,24 @@ type ListWarehousesRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
+func (o *ListWarehousesRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
 // ListWarehouses200ApplicationVndSegmentV1betaPlusJSON - OK
 type ListWarehouses200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns a list of Warehouses that belong to a Workspace.
 	Data *shared.ListWarehousesV1Output `json:"data,omitempty"`
+}
+
+func (o *ListWarehouses200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListWarehousesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListWarehouses200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -26,10 +40,24 @@ type ListWarehouses200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.ListWarehousesV1Output `json:"data,omitempty"`
 }
 
+func (o *ListWarehouses200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListWarehousesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListWarehouses200ApplicationVndSegmentV1PlusJSON - OK
 type ListWarehouses200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns a list of Warehouses that belong to a Workspace.
 	Data *shared.ListWarehousesV1Output `json:"data,omitempty"`
+}
+
+func (o *ListWarehouses200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListWarehousesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListWarehouses200ApplicationJSON - OK
@@ -38,12 +66,22 @@ type ListWarehouses200ApplicationJSON struct {
 	Data *shared.ListWarehousesV1Output `json:"data,omitempty"`
 }
 
+func (o *ListWarehouses200ApplicationJSON) GetData() *shared.ListWarehousesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListWarehousesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListWarehouses200ApplicationJSONObject *ListWarehouses200ApplicationJSON
 	// OK
@@ -52,4 +90,60 @@ type ListWarehousesResponse struct {
 	ListWarehouses200ApplicationVndSegmentV1alphaPlusJSONObject *ListWarehouses200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListWarehouses200ApplicationVndSegmentV1betaPlusJSONObject *ListWarehouses200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListWarehousesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListWarehousesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListWarehousesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListWarehousesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListWarehousesResponse) GetListWarehouses200ApplicationJSONObject() *ListWarehouses200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListWarehouses200ApplicationJSONObject
+}
+
+func (o *ListWarehousesResponse) GetListWarehouses200ApplicationVndSegmentV1PlusJSONObject() *ListWarehouses200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListWarehouses200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListWarehousesResponse) GetListWarehouses200ApplicationVndSegmentV1alphaPlusJSONObject() *ListWarehouses200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListWarehouses200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListWarehousesResponse) GetListWarehouses200ApplicationVndSegmentV1betaPlusJSONObject() *ListWarehouses200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListWarehouses200ApplicationVndSegmentV1betaPlusJSONObject
 }

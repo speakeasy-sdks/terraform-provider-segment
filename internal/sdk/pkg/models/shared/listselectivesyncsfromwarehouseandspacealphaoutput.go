@@ -29,6 +29,34 @@ type ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput - Results containing the Selective Sync configuration for a Space Warehouse Connection.
 type ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput struct {
 	// Optional. Represents the enabled state of all event tables.
@@ -37,4 +65,25 @@ type ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput struct {
 	Items []SpaceWarehouseSelectiveSyncItemAlpha `json:"items"`
 	// Information about the pagination of this response.
 	Pagination ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetEnableEventTables() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.EnableEventTables
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetItems() []SpaceWarehouseSelectiveSyncItemAlpha {
+	if o == nil {
+		return []SpaceWarehouseSelectiveSyncItemAlpha{}
+	}
+	return o.Items
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPagination() ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput {
+	if o == nil {
+		return ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutputPaginationOutput{}
+	}
+	return o.Pagination
 }

@@ -28,3 +28,31 @@ type PaginationOutput struct {
 	// If calculating it impacts performance, the response may omit this field.
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
+
+func (o *PaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *PaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *PaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *PaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}

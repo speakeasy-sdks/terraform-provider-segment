@@ -14,10 +14,24 @@ type ListSourcesRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
+func (o *ListSourcesRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
 // ListSources200ApplicationVndSegmentV1betaPlusJSON - OK
 type ListSources200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns a list of Sources that belong to the current Workspace.
 	Data *shared.ListSourcesV1Output `json:"data,omitempty"`
+}
+
+func (o *ListSources200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListSourcesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListSources200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -26,10 +40,24 @@ type ListSources200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.ListSourcesAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *ListSources200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListSourcesAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListSources200ApplicationVndSegmentV1PlusJSON - OK
 type ListSources200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns a list of Sources that belong to the current Workspace.
 	Data *shared.ListSourcesV1Output `json:"data,omitempty"`
+}
+
+func (o *ListSources200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListSourcesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListSources200ApplicationJSON - OK
@@ -38,12 +66,22 @@ type ListSources200ApplicationJSON struct {
 	Data *shared.ListSourcesV1Output `json:"data,omitempty"`
 }
 
+func (o *ListSources200ApplicationJSON) GetData() *shared.ListSourcesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListSourcesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListSources200ApplicationJSONObject *ListSources200ApplicationJSON
 	// OK
@@ -52,4 +90,60 @@ type ListSourcesResponse struct {
 	ListSources200ApplicationVndSegmentV1alphaPlusJSONObject *ListSources200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListSources200ApplicationVndSegmentV1betaPlusJSONObject *ListSources200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListSourcesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListSourcesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListSourcesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListSourcesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListSourcesResponse) GetListSources200ApplicationJSONObject() *ListSources200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSources200ApplicationJSONObject
+}
+
+func (o *ListSourcesResponse) GetListSources200ApplicationVndSegmentV1PlusJSONObject() *ListSources200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSources200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListSourcesResponse) GetListSources200ApplicationVndSegmentV1alphaPlusJSONObject() *ListSources200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSources200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListSourcesResponse) GetListSources200ApplicationVndSegmentV1betaPlusJSONObject() *ListSources200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListSources200ApplicationVndSegmentV1betaPlusJSONObject
 }

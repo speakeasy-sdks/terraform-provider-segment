@@ -40,3 +40,10 @@ type CreateValidationInWarehouseV1Output struct {
 	// Represents the status for the current connection settings.
 	Status CreateValidationInWarehouseV1OutputStatus `json:"status"`
 }
+
+func (o *CreateValidationInWarehouseV1Output) GetStatus() CreateValidationInWarehouseV1OutputStatus {
+	if o == nil {
+		return CreateValidationInWarehouseV1OutputStatus("")
+	}
+	return o.Status
+}

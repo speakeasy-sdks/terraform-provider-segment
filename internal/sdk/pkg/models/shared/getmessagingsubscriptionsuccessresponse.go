@@ -87,3 +87,38 @@ type GetMessagingSubscriptionSuccessResponse struct {
 	// The timestamp of this subscription status's last change.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
+
+func (o *GetMessagingSubscriptionSuccessResponse) GetGroups() []GroupSubscriptionStatusResponse {
+	if o == nil {
+		return nil
+	}
+	return o.Groups
+}
+
+func (o *GetMessagingSubscriptionSuccessResponse) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *GetMessagingSubscriptionSuccessResponse) GetStatus() *GetMessagingSubscriptionSuccessResponseStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *GetMessagingSubscriptionSuccessResponse) GetType() GetMessagingSubscriptionSuccessResponseType {
+	if o == nil {
+		return GetMessagingSubscriptionSuccessResponseType("")
+	}
+	return o.Type
+}
+
+func (o *GetMessagingSubscriptionSuccessResponse) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}

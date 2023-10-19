@@ -29,8 +29,78 @@ type UpdateTransformationBetaOutputTransformationBeta struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetPropertyRenames() []PropertyRenameBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetPropertyValueTransformations() []PropertyValueTransformationBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *UpdateTransformationBetaOutputTransformationBeta) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // UpdateTransformationBetaOutput - The output of an updated Transformation.
 type UpdateTransformationBetaOutput struct {
 	// The updated Transformation.
 	Transformation UpdateTransformationBetaOutputTransformationBeta `json:"transformation"`
+}
+
+func (o *UpdateTransformationBetaOutput) GetTransformation() UpdateTransformationBetaOutputTransformationBeta {
+	if o == nil {
+		return UpdateTransformationBetaOutputTransformationBeta{}
+	}
+	return o.Transformation
 }

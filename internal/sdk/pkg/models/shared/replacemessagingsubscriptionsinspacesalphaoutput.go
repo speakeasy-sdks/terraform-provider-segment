@@ -29,6 +29,34 @@ type ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ReplaceMessagingSubscriptionsInSpacesAlphaOutput - Output for the endpoint.
 type ReplaceMessagingSubscriptionsInSpacesAlphaOutput struct {
 	// Array of failure subscription status.
@@ -37,4 +65,25 @@ type ReplaceMessagingSubscriptionsInSpacesAlphaOutput struct {
 	Pagination *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput `json:"pagination,omitempty"`
 	// Array of successful subscription status.
 	Successes []MessageSubscriptionResponse `json:"successes"`
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetFailures() []MessageSubscriptionResponse {
+	if o == nil {
+		return []MessageSubscriptionResponse{}
+	}
+	return o.Failures
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPagination() *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetSuccesses() []MessageSubscriptionResponse {
+	if o == nil {
+		return []MessageSubscriptionResponse{}
+	}
+	return o.Successes
 }

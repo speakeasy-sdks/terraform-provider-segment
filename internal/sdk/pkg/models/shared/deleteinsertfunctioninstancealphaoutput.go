@@ -37,3 +37,10 @@ type DeleteInsertFunctionInstanceAlphaOutput struct {
 	// The status of the operation.
 	Status DeleteInsertFunctionInstanceAlphaOutputStatus `json:"status"`
 }
+
+func (o *DeleteInsertFunctionInstanceAlphaOutput) GetStatus() DeleteInsertFunctionInstanceAlphaOutputStatus {
+	if o == nil {
+		return DeleteInsertFunctionInstanceAlphaOutputStatus("")
+	}
+	return o.Status
+}

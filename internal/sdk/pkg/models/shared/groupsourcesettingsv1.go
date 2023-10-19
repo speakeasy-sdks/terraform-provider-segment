@@ -54,3 +54,24 @@ type GroupSourceSettingsV1 struct {
 	// Config API note: equal to `commonGroupEventOnViolations`.
 	CommonEventOnViolations *GroupSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
+
+func (o *GroupSourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *GroupSourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *GroupSourceSettingsV1) GetCommonEventOnViolations() *GroupSourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}

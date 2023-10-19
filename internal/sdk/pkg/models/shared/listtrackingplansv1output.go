@@ -29,10 +29,52 @@ type ListTrackingPlansV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListTrackingPlansV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListTrackingPlansV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListTrackingPlansV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListTrackingPlansV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListTrackingPlansV1Output - Lists the Tracking Plans associated with the current Workspace.
 type ListTrackingPlansV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListTrackingPlansV1OutputPaginationOutput `json:"pagination"`
 	// A paginated list of Tracking Plans.
 	TrackingPlans []TrackingPlanV1 `json:"trackingPlans"`
+}
+
+func (o *ListTrackingPlansV1Output) GetPagination() ListTrackingPlansV1OutputPaginationOutput {
+	if o == nil {
+		return ListTrackingPlansV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListTrackingPlansV1Output) GetTrackingPlans() []TrackingPlanV1 {
+	if o == nil {
+		return []TrackingPlanV1{}
+	}
+	return o.TrackingPlans
 }

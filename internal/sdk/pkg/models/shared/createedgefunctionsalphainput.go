@@ -7,3 +7,10 @@ type CreateEdgeFunctionsAlphaInput struct {
 	// The id of the Source associated with this Edge Function.
 	UploadURL string `json:"uploadURL"`
 }
+
+func (o *CreateEdgeFunctionsAlphaInput) GetUploadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.UploadURL
+}

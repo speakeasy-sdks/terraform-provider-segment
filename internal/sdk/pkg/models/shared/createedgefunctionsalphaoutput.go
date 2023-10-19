@@ -18,8 +18,57 @@ type CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha struct {
 	Version float64 `json:"version"`
 }
 
+func (o *CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetDownloadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.DownloadURL
+}
+
+func (o *CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}
+
 // CreateEdgeFunctionsAlphaOutput - Output for CreateEdgeFunctions.
 type CreateEdgeFunctionsAlphaOutput struct {
 	// The created Edge Function.
 	EdgeFunctions CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha `json:"edgeFunctions"`
+}
+
+func (o *CreateEdgeFunctionsAlphaOutput) GetEdgeFunctions() CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha {
+	if o == nil {
+		return CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha{}
+	}
+	return o.EdgeFunctions
 }

@@ -19,3 +19,31 @@ type UpdateProfilesWarehouseForSpaceWarehouseAlphaInput struct {
 	// `/catalog/warehouses` endpoint.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaInput) GetSchemaName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SchemaName
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

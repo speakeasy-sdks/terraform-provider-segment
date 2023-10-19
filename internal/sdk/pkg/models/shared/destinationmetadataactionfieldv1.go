@@ -85,3 +85,94 @@ type DestinationMetadataActionFieldV1 struct {
 	// The data type for this value.
 	Type DestinationMetadataActionFieldV1Type `json:"type"`
 }
+
+func (o *DestinationMetadataActionFieldV1) GetAllowNull() bool {
+	if o == nil {
+		return false
+	}
+	return o.AllowNull
+}
+
+func (o *DestinationMetadataActionFieldV1) GetChoices() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Choices
+}
+
+func (o *DestinationMetadataActionFieldV1) GetDefaultValue() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultValue
+}
+
+func (o *DestinationMetadataActionFieldV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *DestinationMetadataActionFieldV1) GetDynamic() bool {
+	if o == nil {
+		return false
+	}
+	return o.Dynamic
+}
+
+func (o *DestinationMetadataActionFieldV1) GetFieldKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.FieldKey
+}
+
+func (o *DestinationMetadataActionFieldV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationMetadataActionFieldV1) GetLabel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Label
+}
+
+func (o *DestinationMetadataActionFieldV1) GetMultiple() bool {
+	if o == nil {
+		return false
+	}
+	return o.Multiple
+}
+
+func (o *DestinationMetadataActionFieldV1) GetPlaceholder() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Placeholder
+}
+
+func (o *DestinationMetadataActionFieldV1) GetRequired() bool {
+	if o == nil {
+		return false
+	}
+	return o.Required
+}
+
+func (o *DestinationMetadataActionFieldV1) GetSortOrder() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SortOrder
+}
+
+func (o *DestinationMetadataActionFieldV1) GetType() DestinationMetadataActionFieldV1Type {
+	if o == nil {
+		return DestinationMetadataActionFieldV1Type("")
+	}
+	return o.Type
+}

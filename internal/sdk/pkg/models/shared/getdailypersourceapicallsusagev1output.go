@@ -29,10 +29,52 @@ type GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetDailyPerSourceAPICallsUsageV1Output - Returns a list of daily aggregations of Source level API calls counts.
 type GetDailyPerSourceAPICallsUsageV1Output struct {
 	// The list of daily per Source API calls count aggregates.
 	DailyPerSourceAPICallsUsage []SourceAPICallSnapshotV1 `json:"dailyPerSourceAPICallsUsage"`
 	// Information about the pagination of this response.
 	Pagination GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *GetDailyPerSourceAPICallsUsageV1Output) GetDailyPerSourceAPICallsUsage() []SourceAPICallSnapshotV1 {
+	if o == nil {
+		return []SourceAPICallSnapshotV1{}
+	}
+	return o.DailyPerSourceAPICallsUsage
+}
+
+func (o *GetDailyPerSourceAPICallsUsageV1Output) GetPagination() GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput {
+	if o == nil {
+		return GetDailyPerSourceAPICallsUsageV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

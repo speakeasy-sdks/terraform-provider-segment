@@ -29,10 +29,52 @@ type ListFunctionsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListFunctionsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListFunctionsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListFunctionsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListFunctionsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListFunctionsV1Output - Lists Functions in a Workspace.
 type ListFunctionsV1Output struct {
 	// An array of Functions.
 	Functions []ListFunctionItemV1 `json:"functions"`
 	// Information about the pagination of this response.
 	Pagination ListFunctionsV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListFunctionsV1Output) GetFunctions() []ListFunctionItemV1 {
+	if o == nil {
+		return []ListFunctionItemV1{}
+	}
+	return o.Functions
+}
+
+func (o *ListFunctionsV1Output) GetPagination() ListFunctionsV1OutputPaginationOutput {
+	if o == nil {
+		return ListFunctionsV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

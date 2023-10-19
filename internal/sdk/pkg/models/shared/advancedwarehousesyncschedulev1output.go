@@ -9,3 +9,17 @@ type AdvancedWarehouseSyncScheduleV1Output struct {
 	// A TZ-database timezone for this sync schedule.
 	Timezone *string `json:"timezone,omitempty"`
 }
+
+func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimes() []WarehouseAdvancedSyncV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Times
+}
+
+func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
+}

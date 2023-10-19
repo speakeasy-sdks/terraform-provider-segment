@@ -13,10 +13,24 @@ type ListLabels200ApplicationVndSegmentV1betaPlusJSON struct {
 	Data *shared.ListLabelsV1Output `json:"data,omitempty"`
 }
 
+func (o *ListLabels200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListLabelsV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListLabels200ApplicationVndSegmentV1alphaPlusJSON - OK
 type ListLabels200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Returns all available labels for the current Workspace.
 	Data *shared.ListLabelsAlphaOutput `json:"data,omitempty"`
+}
+
+func (o *ListLabels200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListLabelsAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListLabels200ApplicationVndSegmentV1PlusJSON - OK
@@ -25,18 +39,35 @@ type ListLabels200ApplicationVndSegmentV1PlusJSON struct {
 	Data *shared.ListLabelsV1Output `json:"data,omitempty"`
 }
 
+func (o *ListLabels200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListLabelsV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListLabels200ApplicationJSON - OK
 type ListLabels200ApplicationJSON struct {
 	// Returns all available labels for the current Workspace.
 	Data *shared.ListLabelsV1Output `json:"data,omitempty"`
 }
 
+func (o *ListLabels200ApplicationJSON) GetData() *shared.ListLabelsV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListLabelsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListLabels200ApplicationJSONObject *ListLabels200ApplicationJSON
 	// OK
@@ -45,4 +76,60 @@ type ListLabelsResponse struct {
 	ListLabels200ApplicationVndSegmentV1alphaPlusJSONObject *ListLabels200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListLabels200ApplicationVndSegmentV1betaPlusJSONObject *ListLabels200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListLabelsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListLabelsResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListLabelsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListLabelsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListLabelsResponse) GetListLabels200ApplicationJSONObject() *ListLabels200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListLabels200ApplicationJSONObject
+}
+
+func (o *ListLabelsResponse) GetListLabels200ApplicationVndSegmentV1PlusJSONObject() *ListLabels200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListLabels200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListLabelsResponse) GetListLabels200ApplicationVndSegmentV1alphaPlusJSONObject() *ListLabels200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListLabels200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListLabelsResponse) GetListLabels200ApplicationVndSegmentV1betaPlusJSONObject() *ListLabels200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListLabels200ApplicationVndSegmentV1betaPlusJSONObject
 }

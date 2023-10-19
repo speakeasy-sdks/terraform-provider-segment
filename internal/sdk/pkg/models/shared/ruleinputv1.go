@@ -58,3 +58,31 @@ type RuleInputV1 struct {
 	// Version of this rule.
 	Version float64 `json:"version"`
 }
+
+func (o *RuleInputV1) GetJSONSchema() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.JSONSchema
+}
+
+func (o *RuleInputV1) GetKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Key
+}
+
+func (o *RuleInputV1) GetType() RuleInputV1Type {
+	if o == nil {
+		return RuleInputV1Type("")
+	}
+	return o.Type
+}
+
+func (o *RuleInputV1) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}

@@ -9,3 +9,17 @@ type HandleWebhookOutput struct {
 	// The status of the operation.
 	Success bool `json:"success"`
 }
+
+func (o *HandleWebhookOutput) GetStatusCode() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.StatusCode
+}
+
+func (o *HandleWebhookOutput) GetSuccess() bool {
+	if o == nil {
+		return false
+	}
+	return o.Success
+}

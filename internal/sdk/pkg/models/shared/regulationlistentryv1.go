@@ -57,3 +57,45 @@ type RegulationListEntryV1 struct {
 	SubjectType string                      `json:"subjectType"`
 	Subjects    []string                    `json:"subjects"`
 }
+
+func (o *RegulationListEntryV1) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *RegulationListEntryV1) GetFinishedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FinishedAt
+}
+
+func (o *RegulationListEntryV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *RegulationListEntryV1) GetStatus() RegulationListEntryV1Status {
+	if o == nil {
+		return RegulationListEntryV1Status("")
+	}
+	return o.Status
+}
+
+func (o *RegulationListEntryV1) GetSubjectType() string {
+	if o == nil {
+		return ""
+	}
+	return o.SubjectType
+}
+
+func (o *RegulationListEntryV1) GetSubjects() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Subjects
+}

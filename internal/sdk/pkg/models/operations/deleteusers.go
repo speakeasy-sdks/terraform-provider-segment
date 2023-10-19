@@ -14,10 +14,24 @@ type DeleteUsersRequest struct {
 	UserIds []string `queryParam:"style=deepObject,explode=true,name=userIds"`
 }
 
+func (o *DeleteUsersRequest) GetUserIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.UserIds
+}
+
 // DeleteUsers200ApplicationVndSegmentV1betaPlusJSON - OK
 type DeleteUsers200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the status of the removal operation.
 	Data *shared.DeleteUsersV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteUsers200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.DeleteUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteUsers200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -26,10 +40,24 @@ type DeleteUsers200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.DeleteUsersV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteUsers200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.DeleteUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // DeleteUsers200ApplicationVndSegmentV1PlusJSON - OK
 type DeleteUsers200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the status of the removal operation.
 	Data *shared.DeleteUsersV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteUsers200ApplicationVndSegmentV1PlusJSON) GetData() *shared.DeleteUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteUsers200ApplicationJSON - OK
@@ -38,12 +66,22 @@ type DeleteUsers200ApplicationJSON struct {
 	Data *shared.DeleteUsersV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteUsers200ApplicationJSON) GetData() *shared.DeleteUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type DeleteUsersResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	DeleteUsers200ApplicationJSONObject *DeleteUsers200ApplicationJSON
 	// OK
@@ -52,4 +90,60 @@ type DeleteUsersResponse struct {
 	DeleteUsers200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteUsers200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	DeleteUsers200ApplicationVndSegmentV1betaPlusJSONObject *DeleteUsers200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *DeleteUsersResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteUsersResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteUsersResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteUsersResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeleteUsersResponse) GetDeleteUsers200ApplicationJSONObject() *DeleteUsers200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUsers200ApplicationJSONObject
+}
+
+func (o *DeleteUsersResponse) GetDeleteUsers200ApplicationVndSegmentV1PlusJSONObject() *DeleteUsers200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUsers200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteUsersResponse) GetDeleteUsers200ApplicationVndSegmentV1alphaPlusJSONObject() *DeleteUsers200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUsers200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteUsersResponse) GetDeleteUsers200ApplicationVndSegmentV1betaPlusJSONObject() *DeleteUsers200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUsers200ApplicationVndSegmentV1betaPlusJSONObject
 }

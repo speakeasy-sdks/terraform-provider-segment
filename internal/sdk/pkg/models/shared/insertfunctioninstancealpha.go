@@ -13,3 +13,66 @@ type InsertFunctionInstanceAlpha struct {
 	Settings          map[string]interface{} `json:"settings"`
 	UpdatedAt         string                 `json:"updatedAt"`
 }
+
+func (o *InsertFunctionInstanceAlpha) GetClassID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ClassID
+}
+
+func (o *InsertFunctionInstanceAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *InsertFunctionInstanceAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *InsertFunctionInstanceAlpha) GetEncryptedSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.EncryptedSettings
+}
+
+func (o *InsertFunctionInstanceAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *InsertFunctionInstanceAlpha) GetIntegrationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.IntegrationID
+}
+
+func (o *InsertFunctionInstanceAlpha) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *InsertFunctionInstanceAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *InsertFunctionInstanceAlpha) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}

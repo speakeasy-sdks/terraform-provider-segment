@@ -7,3 +7,10 @@ type GetTransformationBetaInput struct {
 	// The Transformation id.
 	TransformationID string `json:"transformationId"`
 }
+
+func (o *GetTransformationBetaInput) GetTransformationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TransformationID
+}
