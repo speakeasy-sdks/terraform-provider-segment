@@ -73,3 +73,101 @@ type FunctionV1 struct {
 	// The list of settings for this Function.
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
 }
+
+func (o *FunctionV1) GetBatchMaxCount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchMaxCount
+}
+
+func (o *FunctionV1) GetCatalogID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CatalogID
+}
+
+func (o *FunctionV1) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *FunctionV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *FunctionV1) GetCreatedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedBy
+}
+
+func (o *FunctionV1) GetDeployedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DeployedAt
+}
+
+func (o *FunctionV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *FunctionV1) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *FunctionV1) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *FunctionV1) GetIsLatestVersion() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsLatestVersion
+}
+
+func (o *FunctionV1) GetLogoURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LogoURL
+}
+
+func (o *FunctionV1) GetPreviewWebhookURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PreviewWebhookURL
+}
+
+func (o *FunctionV1) GetResourceType() *FunctionV1ResourceType {
+	if o == nil {
+		return nil
+	}
+	return o.ResourceType
+}
+
+func (o *FunctionV1) GetSettings() []FunctionSettingV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}

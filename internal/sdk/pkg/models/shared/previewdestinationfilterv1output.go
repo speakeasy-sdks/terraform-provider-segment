@@ -14,3 +14,17 @@ type PreviewDestinationFilterV1Output struct {
 	// The filtered JSON output.
 	Result *PreviewDestinationFilterV1OutputResult `json:"result"`
 }
+
+func (o *PreviewDestinationFilterV1Output) GetInputPayload() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.InputPayload
+}
+
+func (o *PreviewDestinationFilterV1Output) GetResult() *PreviewDestinationFilterV1OutputResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}

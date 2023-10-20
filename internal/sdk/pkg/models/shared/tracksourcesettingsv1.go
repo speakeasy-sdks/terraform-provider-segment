@@ -62,3 +62,38 @@ type TrackSourceSettingsV1 struct {
 	// Config API note: equal to `commonTrackEventOnViolations`.
 	CommonEventOnViolations *TrackSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
+
+func (o *TrackSourceSettingsV1) GetAllowEventOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowEventOnViolations
+}
+
+func (o *TrackSourceSettingsV1) GetAllowPropertiesOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowPropertiesOnViolations
+}
+
+func (o *TrackSourceSettingsV1) GetAllowUnplannedEventProperties() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEventProperties
+}
+
+func (o *TrackSourceSettingsV1) GetAllowUnplannedEvents() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEvents
+}
+
+func (o *TrackSourceSettingsV1) GetCommonEventOnViolations() *TrackSourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}

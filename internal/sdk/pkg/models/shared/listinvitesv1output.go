@@ -29,10 +29,52 @@ type ListInvitesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListInvitesV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListInvitesV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListInvitesV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListInvitesV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListInvitesV1Output - Returns the list of invites.
 type ListInvitesV1Output struct {
 	// The list of invites.
 	Invites []string `json:"invites"`
 	// Information about the pagination of this response.
 	Pagination ListInvitesV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListInvitesV1Output) GetInvites() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Invites
+}
+
+func (o *ListInvitesV1Output) GetPagination() ListInvitesV1OutputPaginationOutput {
+	if o == nil {
+		return ListInvitesV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

@@ -12,18 +12,77 @@ type GetComputedTraitRequest struct {
 	SpaceID string `pathParam:"style=simple,explode=false,name=spaceId"`
 }
 
+func (o *GetComputedTraitRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetComputedTraitRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
 // GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSON - OK
 type GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Computed Trait output for get and update.
 	Data *shared.GetComputedTraitAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetComputedTraitAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetComputedTraitResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSONObject *GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *GetComputedTraitResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetComputedTraitResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetComputedTraitResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetComputedTraitResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetComputedTraitResponse) GetGetComputedTrait200ApplicationVndSegmentV1alphaPlusJSONObject() *GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetComputedTrait200ApplicationVndSegmentV1alphaPlusJSONObject
 }

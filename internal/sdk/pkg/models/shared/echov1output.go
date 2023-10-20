@@ -48,3 +48,24 @@ type EchoV1Output struct {
 	// Currently, this endpoint supports only `get` and `post` methods.
 	Method EchoV1OutputMethod `json:"method"`
 }
+
+func (o *EchoV1Output) GetHeaders() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Headers
+}
+
+func (o *EchoV1Output) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
+}
+
+func (o *EchoV1Output) GetMethod() EchoV1OutputMethod {
+	if o == nil {
+		return EchoV1OutputMethod("")
+	}
+	return o.Method
+}

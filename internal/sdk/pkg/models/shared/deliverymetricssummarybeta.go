@@ -13,3 +13,24 @@ type DeliveryMetricsSummaryBeta struct {
 	// Config API note: analogous to `parent`.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *DeliveryMetricsSummaryBeta) GetDestinationMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *DeliveryMetricsSummaryBeta) GetMetrics() []MetricBeta {
+	if o == nil {
+		return []MetricBeta{}
+	}
+	return o.Metrics
+}
+
+func (o *DeliveryMetricsSummaryBeta) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

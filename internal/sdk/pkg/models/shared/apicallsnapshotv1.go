@@ -9,3 +9,17 @@ type APICallSnapshotV1 struct {
 	// Timestamp of this snapshot within the billing cycle in the ISO-8601 format.
 	Timestamp string `json:"timestamp"`
 }
+
+func (o *APICallSnapshotV1) GetAPICalls() string {
+	if o == nil {
+		return ""
+	}
+	return o.APICalls
+}
+
+func (o *APICallSnapshotV1) GetTimestamp() string {
+	if o == nil {
+		return ""
+	}
+	return o.Timestamp
+}

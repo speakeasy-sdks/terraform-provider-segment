@@ -54,3 +54,24 @@ type IdentifySourceSettingsV1 struct {
 	// Config API note: equal to `commonIdentifyEventOnViolations`.
 	CommonEventOnViolations *IdentifySourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
+
+func (o *IdentifySourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *IdentifySourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *IdentifySourceSettingsV1) GetCommonEventOnViolations() *IdentifySourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}

@@ -15,3 +15,38 @@ type DestinationMetadataMethodsV1 struct {
 	// Identifies if the Destination supports the `track` method.
 	Track *bool `json:"track,omitempty"`
 }
+
+func (o *DestinationMetadataMethodsV1) GetAlias() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Alias
+}
+
+func (o *DestinationMetadataMethodsV1) GetGroup() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Group
+}
+
+func (o *DestinationMetadataMethodsV1) GetIdentify() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Identify
+}
+
+func (o *DestinationMetadataMethodsV1) GetPageview() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Pageview
+}
+
+func (o *DestinationMetadataMethodsV1) GetTrack() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Track
+}

@@ -29,10 +29,52 @@ type ListInvitesFromUserGroupV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListInvitesFromUserGroupV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListInvitesFromUserGroupV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListInvitesFromUserGroupV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListInvitesFromUserGroupV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListInvitesFromUserGroupV1Output - Returns the emails of invitees to a user group with the given group id.
 type ListInvitesFromUserGroupV1Output struct {
 	// The emails of the invitees to the user group.
 	Emails []string `json:"emails"`
 	// Information about the pagination of this response.
 	Pagination ListInvitesFromUserGroupV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListInvitesFromUserGroupV1Output) GetEmails() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Emails
+}
+
+func (o *ListInvitesFromUserGroupV1Output) GetPagination() ListInvitesFromUserGroupV1OutputPaginationOutput {
+	if o == nil {
+		return ListInvitesFromUserGroupV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

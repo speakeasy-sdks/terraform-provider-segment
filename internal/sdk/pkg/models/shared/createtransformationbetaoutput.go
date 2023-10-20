@@ -29,8 +29,78 @@ type CreateTransformationBetaOutputTransformationBeta struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *CreateTransformationBetaOutputTransformationBeta) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetPropertyRenames() []PropertyRenameBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetPropertyValueTransformations() []PropertyValueTransformationBeta {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *CreateTransformationBetaOutputTransformationBeta) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // CreateTransformationBetaOutput - The output of a created Transformation.
 type CreateTransformationBetaOutput struct {
 	// The created Transformation.
 	Transformation CreateTransformationBetaOutputTransformationBeta `json:"transformation"`
+}
+
+func (o *CreateTransformationBetaOutput) GetTransformation() CreateTransformationBetaOutputTransformationBeta {
+	if o == nil {
+		return CreateTransformationBetaOutputTransformationBeta{}
+	}
+	return o.Transformation
 }

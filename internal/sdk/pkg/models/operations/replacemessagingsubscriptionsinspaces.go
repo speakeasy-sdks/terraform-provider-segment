@@ -12,18 +12,77 @@ type ReplaceMessagingSubscriptionsInSpacesRequest struct {
 	SpaceID                                         string                                                 `pathParam:"style=simple,explode=false,name=spaceId"`
 }
 
+func (o *ReplaceMessagingSubscriptionsInSpacesRequest) GetReplaceMessagingSubscriptionsInSpacesAlphaInput() shared.ReplaceMessagingSubscriptionsInSpacesAlphaInput {
+	if o == nil {
+		return shared.ReplaceMessagingSubscriptionsInSpacesAlphaInput{}
+	}
+	return o.ReplaceMessagingSubscriptionsInSpacesAlphaInput
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
 // ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSON - OK
 type ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Output for the endpoint.
 	Data *shared.ReplaceMessagingSubscriptionsInSpacesAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ReplaceMessagingSubscriptionsInSpacesAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ReplaceMessagingSubscriptionsInSpacesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSONObject *ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesResponse) GetReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSONObject() *ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ReplaceMessagingSubscriptionsInSpaces200ApplicationVndSegmentV1alphaPlusJSONObject
 }

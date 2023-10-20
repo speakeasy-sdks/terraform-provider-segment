@@ -12,10 +12,31 @@ type UpdateTransformationRequest struct {
 	TransformationID            string                             `pathParam:"style=simple,explode=false,name=transformationId"`
 }
 
+func (o *UpdateTransformationRequest) GetUpdateTransformationV1Input() shared.UpdateTransformationV1Input {
+	if o == nil {
+		return shared.UpdateTransformationV1Input{}
+	}
+	return o.UpdateTransformationV1Input
+}
+
+func (o *UpdateTransformationRequest) GetTransformationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TransformationID
+}
+
 // UpdateTransformation200ApplicationVndSegmentV1betaPlusJSON - OK
 type UpdateTransformation200ApplicationVndSegmentV1betaPlusJSON struct {
 	// The output of an updated Transformation.
 	Data *shared.UpdateTransformationV1Output `json:"data,omitempty"`
+}
+
+func (o *UpdateTransformation200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.UpdateTransformationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.UpdateTransformationV1Output `json:"data,omitempty"`
 }
 
+func (o *UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.UpdateTransformationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // UpdateTransformation200ApplicationVndSegmentV1PlusJSON - OK
 type UpdateTransformation200ApplicationVndSegmentV1PlusJSON struct {
 	// The output of an updated Transformation.
 	Data *shared.UpdateTransformationV1Output `json:"data,omitempty"`
+}
+
+func (o *UpdateTransformation200ApplicationVndSegmentV1PlusJSON) GetData() *shared.UpdateTransformationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // UpdateTransformation200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type UpdateTransformation200ApplicationJSON struct {
 	Data *shared.UpdateTransformationV1Output `json:"data,omitempty"`
 }
 
+func (o *UpdateTransformation200ApplicationJSON) GetData() *shared.UpdateTransformationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type UpdateTransformationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	UpdateTransformation200ApplicationJSONObject *UpdateTransformation200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type UpdateTransformationResponse struct {
 	UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	UpdateTransformation200ApplicationVndSegmentV1betaPlusJSONObject *UpdateTransformation200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *UpdateTransformationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateTransformationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateTransformationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateTransformationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateTransformationResponse) GetUpdateTransformation200ApplicationJSONObject() *UpdateTransformation200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateTransformation200ApplicationJSONObject
+}
+
+func (o *UpdateTransformationResponse) GetUpdateTransformation200ApplicationVndSegmentV1PlusJSONObject() *UpdateTransformation200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateTransformation200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *UpdateTransformationResponse) GetUpdateTransformation200ApplicationVndSegmentV1alphaPlusJSONObject() *UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateTransformation200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *UpdateTransformationResponse) GetUpdateTransformation200ApplicationVndSegmentV1betaPlusJSONObject() *UpdateTransformation200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateTransformation200ApplicationVndSegmentV1betaPlusJSONObject
 }

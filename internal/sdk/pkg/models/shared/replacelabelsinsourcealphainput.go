@@ -7,3 +7,10 @@ type ReplaceLabelsInSourceAlphaInput struct {
 	// The list of labels to replace in the Source.
 	Labels []LabelAlpha `json:"labels"`
 }
+
+func (o *ReplaceLabelsInSourceAlphaInput) GetLabels() []LabelAlpha {
+	if o == nil {
+		return []LabelAlpha{}
+	}
+	return o.Labels
+}

@@ -55,3 +55,24 @@ type CreateTrackingPlanV1Input struct {
 	// The Tracking Plan's type.
 	Type CreateTrackingPlanV1InputType `json:"type"`
 }
+
+func (o *CreateTrackingPlanV1Input) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CreateTrackingPlanV1Input) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateTrackingPlanV1Input) GetType() CreateTrackingPlanV1InputType {
+	if o == nil {
+		return CreateTrackingPlanV1InputType("")
+	}
+	return o.Type
+}

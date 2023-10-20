@@ -12,6 +12,27 @@ type SourceEventVolumeV1EventSourceV1 struct {
 	Slug *string `json:"slug,omitempty"`
 }
 
+func (o *SourceEventVolumeV1EventSourceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceEventVolumeV1EventSourceV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *SourceEventVolumeV1EventSourceV1) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}
+
 // SourceEventVolumeV1 - SourceEventVolume represents a time series of event volume for a Workspace
 // broken down by the dimensions which the customer specifies (optional
 // parameters).
@@ -27,4 +48,39 @@ type SourceEventVolumeV1 struct {
 	Source *SourceEventVolumeV1EventSourceV1 `json:"source,omitempty"`
 	// The total count for all events in the requested time frame.
 	Total float64 `json:"total"`
+}
+
+func (o *SourceEventVolumeV1) GetEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EventName
+}
+
+func (o *SourceEventVolumeV1) GetEventType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EventType
+}
+
+func (o *SourceEventVolumeV1) GetSeries() []SourceEventVolumeDatapointV1 {
+	if o == nil {
+		return []SourceEventVolumeDatapointV1{}
+	}
+	return o.Series
+}
+
+func (o *SourceEventVolumeV1) GetSource() *SourceEventVolumeV1EventSourceV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Source
+}
+
+func (o *SourceEventVolumeV1) GetTotal() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Total
 }

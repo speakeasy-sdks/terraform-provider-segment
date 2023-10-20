@@ -29,10 +29,52 @@ type ListSubscriptionsFromDestinationAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSubscriptionsFromDestinationAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSubscriptionsFromDestinationAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSubscriptionsFromDestinationAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSubscriptionsFromDestinationAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSubscriptionsFromDestinationAlphaOutput - Output for ListDestinationSubscriptionsAlpha.
 type ListSubscriptionsFromDestinationAlphaOutput struct {
 	// Information about the pagination of this response.
 	Pagination *ListSubscriptionsFromDestinationAlphaOutputPaginationOutput `json:"pagination,omitempty"`
 	// A list of Destination subscriptions.
 	Subscriptions []DestinationSubscription `json:"subscriptions"`
+}
+
+func (o *ListSubscriptionsFromDestinationAlphaOutput) GetPagination() *ListSubscriptionsFromDestinationAlphaOutputPaginationOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
+}
+
+func (o *ListSubscriptionsFromDestinationAlphaOutput) GetSubscriptions() []DestinationSubscription {
+	if o == nil {
+		return []DestinationSubscription{}
+	}
+	return o.Subscriptions
 }

@@ -69,3 +69,73 @@ type GetEventsVolumeFromWorkspaceV1Query struct {
 	// Workspace being requested.
 	WorkspaceID string `json:"workspaceId"`
 }
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetAppVersion() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AppVersion
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetEndTime() string {
+	if o == nil {
+		return ""
+	}
+	return o.EndTime
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventName() []string {
+	if o == nil {
+		return nil
+	}
+	return o.EventName
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventType() []string {
+	if o == nil {
+		return nil
+	}
+	return o.EventType
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetGranularity() GetEventsVolumeFromWorkspaceV1QueryGranularity {
+	if o == nil {
+		return GetEventsVolumeFromWorkspaceV1QueryGranularity("")
+	}
+	return o.Granularity
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetGroupBy() []string {
+	if o == nil {
+		return nil
+	}
+	return o.GroupBy
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetLimit() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Limit
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetSourceID() []string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceID
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetStartTime() string {
+	if o == nil {
+		return ""
+	}
+	return o.StartTime
+}
+
+func (o *GetEventsVolumeFromWorkspaceV1Query) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}

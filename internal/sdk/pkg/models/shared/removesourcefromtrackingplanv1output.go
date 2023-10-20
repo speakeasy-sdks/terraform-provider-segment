@@ -37,3 +37,10 @@ type RemoveSourceFromTrackingPlanV1Output struct {
 	// The operation status.
 	Status RemoveSourceFromTrackingPlanV1OutputStatus `json:"status"`
 }
+
+func (o *RemoveSourceFromTrackingPlanV1Output) GetStatus() RemoveSourceFromTrackingPlanV1OutputStatus {
+	if o == nil {
+		return RemoveSourceFromTrackingPlanV1OutputStatus("")
+	}
+	return o.Status
+}

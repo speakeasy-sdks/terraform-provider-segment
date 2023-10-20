@@ -28,3 +28,66 @@ type UpdateTransformationV1Input struct {
 	// The optional Source to be associated with the Transformation.
 	SourceID *string `json:"sourceId,omitempty"`
 }
+
+func (o *UpdateTransformationV1Input) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *UpdateTransformationV1Input) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateTransformationV1Input) GetFqlDefinedProperties() []FQLDefinedPropertyV1 {
+	if o == nil {
+		return nil
+	}
+	return o.FqlDefinedProperties
+}
+
+func (o *UpdateTransformationV1Input) GetIf() *string {
+	if o == nil {
+		return nil
+	}
+	return o.If
+}
+
+func (o *UpdateTransformationV1Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateTransformationV1Input) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *UpdateTransformationV1Input) GetPropertyRenames() []PropertyRenameV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *UpdateTransformationV1Input) GetPropertyValueTransformations() []PropertyValueTransformationV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *UpdateTransformationV1Input) GetSourceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceID
+}

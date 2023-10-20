@@ -29,10 +29,52 @@ type ListInsertFunctionInstancesAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListInsertFunctionInstancesAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListInsertFunctionInstancesAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListInsertFunctionInstancesAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListInsertFunctionInstancesAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListInsertFunctionInstancesAlphaOutput - Returns a list of insert Function instances connected to the insert Function.
 type ListInsertFunctionInstancesAlphaOutput struct {
 	// All insert Function instances found.
 	Instances []InsertFunctionInstanceAlpha `json:"instances"`
 	// Information about the pagination of this response.
 	Pagination ListInsertFunctionInstancesAlphaOutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListInsertFunctionInstancesAlphaOutput) GetInstances() []InsertFunctionInstanceAlpha {
+	if o == nil {
+		return []InsertFunctionInstanceAlpha{}
+	}
+	return o.Instances
+}
+
+func (o *ListInsertFunctionInstancesAlphaOutput) GetPagination() ListInsertFunctionInstancesAlphaOutputPaginationOutput {
+	if o == nil {
+		return ListInsertFunctionInstancesAlphaOutputPaginationOutput{}
+	}
+	return o.Pagination
 }

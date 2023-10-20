@@ -12,3 +12,17 @@ type SourceEventVolumeDatapointV1 struct {
 	// by the requested granularity.
 	Time string `json:"time"`
 }
+
+func (o *SourceEventVolumeDatapointV1) GetCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Count
+}
+
+func (o *SourceEventVolumeDatapointV1) GetTime() string {
+	if o == nil {
+		return ""
+	}
+	return o.Time
+}

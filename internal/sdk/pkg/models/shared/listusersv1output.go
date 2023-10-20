@@ -29,10 +29,52 @@ type ListUsersV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListUsersV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListUsersV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListUsersV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListUsersV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListUsersV1Output - Returns the list of users.
 type ListUsersV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListUsersV1OutputPaginationOutput `json:"pagination"`
 	// The list of users.
 	Users []UserV1 `json:"users"`
+}
+
+func (o *ListUsersV1Output) GetPagination() ListUsersV1OutputPaginationOutput {
+	if o == nil {
+		return ListUsersV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListUsersV1Output) GetUsers() []UserV1 {
+	if o == nil {
+		return []UserV1{}
+	}
+	return o.Users
 }

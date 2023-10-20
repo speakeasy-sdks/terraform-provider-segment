@@ -56,6 +56,27 @@ type CommonSourceSettingsV1GroupSourceSettingsV1 struct {
 	CommonEventOnViolations *CommonSourceSettingsV1GroupSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
 
+func (o *CommonSourceSettingsV1GroupSourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *CommonSourceSettingsV1GroupSourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *CommonSourceSettingsV1GroupSourceSettingsV1) GetCommonEventOnViolations() *CommonSourceSettingsV1GroupSourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}
+
 // CommonSourceSettingsV1IdentifySourceSettingsV1CommonEventOnViolations - The common identify event on violations.
 //
 // Config API note: equal to `commonIdentifyEventOnViolations`.
@@ -103,6 +124,27 @@ type CommonSourceSettingsV1IdentifySourceSettingsV1 struct {
 	//
 	// Config API note: equal to `commonIdentifyEventOnViolations`.
 	CommonEventOnViolations *CommonSourceSettingsV1IdentifySourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
+}
+
+func (o *CommonSourceSettingsV1IdentifySourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *CommonSourceSettingsV1IdentifySourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *CommonSourceSettingsV1IdentifySourceSettingsV1) GetCommonEventOnViolations() *CommonSourceSettingsV1IdentifySourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
 }
 
 // CommonSourceSettingsV1TrackSourceSettingsV1CommonEventOnViolations - The common track event on violations.
@@ -162,6 +204,41 @@ type CommonSourceSettingsV1TrackSourceSettingsV1 struct {
 	CommonEventOnViolations *CommonSourceSettingsV1TrackSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
 
+func (o *CommonSourceSettingsV1TrackSourceSettingsV1) GetAllowEventOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowEventOnViolations
+}
+
+func (o *CommonSourceSettingsV1TrackSourceSettingsV1) GetAllowPropertiesOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowPropertiesOnViolations
+}
+
+func (o *CommonSourceSettingsV1TrackSourceSettingsV1) GetAllowUnplannedEventProperties() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEventProperties
+}
+
+func (o *CommonSourceSettingsV1TrackSourceSettingsV1) GetAllowUnplannedEvents() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEvents
+}
+
+func (o *CommonSourceSettingsV1TrackSourceSettingsV1) GetCommonEventOnViolations() *CommonSourceSettingsV1TrackSourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}
+
 type CommonSourceSettingsV1 struct {
 	// SourceId to forward blocked events to.
 	ForwardingBlockedEventsTo *string `json:"forwardingBlockedEventsTo,omitempty"`
@@ -173,4 +250,39 @@ type CommonSourceSettingsV1 struct {
 	Identify *CommonSourceSettingsV1IdentifySourceSettingsV1 `json:"identify,omitempty"`
 	// Track settings.
 	Track *CommonSourceSettingsV1TrackSourceSettingsV1 `json:"track,omitempty"`
+}
+
+func (o *CommonSourceSettingsV1) GetForwardingBlockedEventsTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ForwardingBlockedEventsTo
+}
+
+func (o *CommonSourceSettingsV1) GetForwardingViolationsTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ForwardingViolationsTo
+}
+
+func (o *CommonSourceSettingsV1) GetGroup() *CommonSourceSettingsV1GroupSourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Group
+}
+
+func (o *CommonSourceSettingsV1) GetIdentify() *CommonSourceSettingsV1IdentifySourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Identify
+}
+
+func (o *CommonSourceSettingsV1) GetTrack() *CommonSourceSettingsV1TrackSourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Track
 }

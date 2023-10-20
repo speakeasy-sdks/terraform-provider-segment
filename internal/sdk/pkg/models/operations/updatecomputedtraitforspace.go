@@ -13,18 +13,84 @@ type UpdateComputedTraitForSpaceRequest struct {
 	SpaceID                               string                                       `pathParam:"style=simple,explode=false,name=spaceId"`
 }
 
+func (o *UpdateComputedTraitForSpaceRequest) GetUpdateComputedTraitForSpaceAlphaInput() shared.UpdateComputedTraitForSpaceAlphaInput {
+	if o == nil {
+		return shared.UpdateComputedTraitForSpaceAlphaInput{}
+	}
+	return o.UpdateComputedTraitForSpaceAlphaInput
+}
+
+func (o *UpdateComputedTraitForSpaceRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateComputedTraitForSpaceRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
 // UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSON - OK
 type UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Computed Trait output for get and update.
 	Data *shared.UpdateComputedTraitForSpaceAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.UpdateComputedTraitForSpaceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type UpdateComputedTraitForSpaceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *UpdateComputedTraitForSpaceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateComputedTraitForSpaceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateComputedTraitForSpaceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateComputedTraitForSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateComputedTraitForSpaceResponse) GetUpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSONObject() *UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateComputedTraitForSpace200ApplicationVndSegmentV1alphaPlusJSONObject
 }

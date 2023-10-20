@@ -11,3 +11,24 @@ type LogosBeta struct {
 	// The logo mark.
 	Mark *string `json:"mark,omitempty"`
 }
+
+func (o *LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}

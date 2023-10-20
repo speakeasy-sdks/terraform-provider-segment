@@ -22,3 +22,31 @@ type UpdateSourceAlphaInput struct {
 	// Config API note: equal to `name`.
 	Slug *string `json:"slug,omitempty"`
 }
+
+func (o *UpdateSourceAlphaInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSourceAlphaInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *UpdateSourceAlphaInput) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}

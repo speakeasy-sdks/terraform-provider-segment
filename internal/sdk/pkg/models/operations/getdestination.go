@@ -11,10 +11,24 @@ type GetDestinationRequest struct {
 	DestinationID string `pathParam:"style=simple,explode=false,name=destinationId"`
 }
 
+func (o *GetDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
 // GetDestination200ApplicationVndSegmentV1betaPlusJSON - OK
 type GetDestination200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns a single Destination by its id.
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *GetDestination200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type GetDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *GetDestination200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetDestination200ApplicationVndSegmentV1PlusJSON - OK
 type GetDestination200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns a single Destination by its id.
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *GetDestination200ApplicationVndSegmentV1PlusJSON) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetDestination200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type GetDestination200ApplicationJSON struct {
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *GetDestination200ApplicationJSON) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetDestination200ApplicationJSONObject *GetDestination200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type GetDestinationResponse struct {
 	GetDestination200ApplicationVndSegmentV1alphaPlusJSONObject *GetDestination200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	GetDestination200ApplicationVndSegmentV1betaPlusJSONObject *GetDestination200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *GetDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetDestinationResponse) GetGetDestination200ApplicationJSONObject() *GetDestination200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetDestination200ApplicationJSONObject
+}
+
+func (o *GetDestinationResponse) GetGetDestination200ApplicationVndSegmentV1PlusJSONObject() *GetDestination200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetDestination200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetDestinationResponse) GetGetDestination200ApplicationVndSegmentV1alphaPlusJSONObject() *GetDestination200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetDestination200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetDestinationResponse) GetGetDestination200ApplicationVndSegmentV1betaPlusJSONObject() *GetDestination200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetDestination200ApplicationVndSegmentV1betaPlusJSONObject
 }

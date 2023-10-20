@@ -48,3 +48,24 @@ type EchoAlphaOutput struct {
 	// Currently, this endpoint supports only `get` and `post` methods.
 	Method EchoAlphaOutputMethod `json:"method"`
 }
+
+func (o *EchoAlphaOutput) GetHeaders() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Headers
+}
+
+func (o *EchoAlphaOutput) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
+}
+
+func (o *EchoAlphaOutput) GetMethod() EchoAlphaOutputMethod {
+	if o == nil {
+		return EchoAlphaOutputMethod("")
+	}
+	return o.Method
+}

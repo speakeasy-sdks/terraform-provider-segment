@@ -29,10 +29,52 @@ type ListAudiencesAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListAudiencesAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListAudiencesAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListAudiencesAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListAudiencesAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListAudiencesAlphaOutput - List audiences endpoint output.
 type ListAudiencesAlphaOutput struct {
 	// A list of audience summary results.
 	Audiences []AudienceSummary `json:"audiences"`
 	// Information about the pagination of this response.
 	Pagination ListAudiencesAlphaOutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListAudiencesAlphaOutput) GetAudiences() []AudienceSummary {
+	if o == nil {
+		return []AudienceSummary{}
+	}
+	return o.Audiences
+}
+
+func (o *ListAudiencesAlphaOutput) GetPagination() ListAudiencesAlphaOutputPaginationOutput {
+	if o == nil {
+		return ListAudiencesAlphaOutputPaginationOutput{}
+	}
+	return o.Pagination
 }
