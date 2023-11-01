@@ -33,8 +33,8 @@ type CreateLabelV1InputResource struct {
 
 // CreateLabelV1InputResourceModel describes the resource data model.
 type CreateLabelV1InputResourceModel struct {
-	Errors []RequestError            `tfsdk:"errors"`
-	Label  CreateLabelV1InputLabelV1 `tfsdk:"label"`
+	Errors []RequestError `tfsdk:"errors"`
+	Label  LabelV1        `tfsdk:"label"`
 }
 
 func (r *CreateLabelV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

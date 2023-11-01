@@ -12,3 +12,24 @@ type UpdateInsertFunctionInstanceAlphaInput struct {
 	// insert Function class.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *UpdateInsertFunctionInstanceAlphaInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateInsertFunctionInstanceAlphaInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateInsertFunctionInstanceAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

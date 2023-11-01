@@ -74,8 +74,113 @@ type GetFunctionV1OutputFunctionV1 struct {
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
 }
 
+func (o *GetFunctionV1OutputFunctionV1) GetBatchMaxCount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchMaxCount
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetCatalogID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CatalogID
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetCreatedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedBy
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetDeployedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DeployedAt
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetIsLatestVersion() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsLatestVersion
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetLogoURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LogoURL
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetPreviewWebhookURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PreviewWebhookURL
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetResourceType() *GetFunctionV1OutputFunctionV1ResourceType {
+	if o == nil {
+		return nil
+	}
+	return o.ResourceType
+}
+
+func (o *GetFunctionV1OutputFunctionV1) GetSettings() []FunctionSettingV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
 // GetFunctionV1Output - Gets a single Function.
 type GetFunctionV1Output struct {
 	// A Function object.
 	Function *GetFunctionV1OutputFunctionV1 `json:"function"`
+}
+
+func (o *GetFunctionV1Output) GetFunction() *GetFunctionV1OutputFunctionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Function
 }

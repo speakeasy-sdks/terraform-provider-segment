@@ -29,9 +29,51 @@ type ListSuppressionsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSuppressionsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSuppressionsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSuppressionsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSuppressionsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 type ListSuppressionsV1OutputSuppressed struct {
 	SubjectIds  []string `json:"subjectIds"`
 	SubjectType string   `json:"subjectType"`
+}
+
+func (o *ListSuppressionsV1OutputSuppressed) GetSubjectIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.SubjectIds
+}
+
+func (o *ListSuppressionsV1OutputSuppressed) GetSubjectType() string {
+	if o == nil {
+		return ""
+	}
+	return o.SubjectType
 }
 
 // ListSuppressionsV1Output - The output of a list suppressed call for a Workspace.
@@ -42,4 +84,18 @@ type ListSuppressionsV1Output struct {
 	//
 	// Config API note: equal to `attributes`.
 	Suppressed []ListSuppressionsV1OutputSuppressed `json:"suppressed"`
+}
+
+func (o *ListSuppressionsV1Output) GetPagination() ListSuppressionsV1OutputPaginationOutput {
+	if o == nil {
+		return ListSuppressionsV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSuppressionsV1Output) GetSuppressed() []ListSuppressionsV1OutputSuppressed {
+	if o == nil {
+		return []ListSuppressionsV1OutputSuppressed{}
+	}
+	return o.Suppressed
 }

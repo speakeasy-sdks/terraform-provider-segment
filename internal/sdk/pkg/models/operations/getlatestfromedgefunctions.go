@@ -11,18 +11,70 @@ type GetLatestFromEdgeFunctionsRequest struct {
 	SourceID string `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
+func (o *GetLatestFromEdgeFunctionsRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSON - OK
 type GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Output for GetLatestFromEdgeFunctions.
 	Data *shared.GetLatestFromEdgeFunctionsAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetLatestFromEdgeFunctionsAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetLatestFromEdgeFunctionsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSONObject *GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *GetLatestFromEdgeFunctionsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetLatestFromEdgeFunctionsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetLatestFromEdgeFunctionsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetLatestFromEdgeFunctionsResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetLatestFromEdgeFunctionsResponse) GetGetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSONObject() *GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetLatestFromEdgeFunctions200ApplicationVndSegmentV1alphaPlusJSONObject
 }

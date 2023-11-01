@@ -11,3 +11,24 @@ type AllowedLabelBeta struct {
 	// The value of this label.
 	Value string `json:"value"`
 }
+
+func (o *AllowedLabelBeta) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *AllowedLabelBeta) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *AllowedLabelBeta) GetValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.Value
+}

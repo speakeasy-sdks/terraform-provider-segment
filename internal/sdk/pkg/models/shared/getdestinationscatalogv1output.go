@@ -29,10 +29,52 @@ type GetDestinationsCatalogV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetDestinationsCatalogV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetDestinationsCatalogV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetDestinationsCatalogV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetDestinationsCatalogV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetDestinationsCatalogV1Output - Returns a list of all Destination catalog items contained within a given page.
 type GetDestinationsCatalogV1Output struct {
 	// All Destination catalog items contained within the requested page.
 	DestinationsCatalog []DestinationMetadataV1 `json:"destinationsCatalog"`
 	// Information about the pagination of this response.
 	Pagination GetDestinationsCatalogV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *GetDestinationsCatalogV1Output) GetDestinationsCatalog() []DestinationMetadataV1 {
+	if o == nil {
+		return []DestinationMetadataV1{}
+	}
+	return o.DestinationsCatalog
+}
+
+func (o *GetDestinationsCatalogV1Output) GetPagination() GetDestinationsCatalogV1OutputPaginationOutput {
+	if o == nil {
+		return GetDestinationsCatalogV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

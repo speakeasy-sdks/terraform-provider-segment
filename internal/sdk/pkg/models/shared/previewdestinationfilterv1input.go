@@ -13,6 +13,20 @@ type PreviewDestinationFilterV1InputPreviewDestinationFilterV1 struct {
 	If string `json:"if"`
 }
 
+func (o *PreviewDestinationFilterV1InputPreviewDestinationFilterV1) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *PreviewDestinationFilterV1InputPreviewDestinationFilterV1) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
 // PreviewDestinationFilterV1Input - Input of the Destination filter to preview.
 // For guidance on using FQL, see the Segment documentation site.
 type PreviewDestinationFilterV1Input struct {
@@ -20,4 +34,18 @@ type PreviewDestinationFilterV1Input struct {
 	Filter PreviewDestinationFilterV1InputPreviewDestinationFilterV1 `json:"filter"`
 	// The JSON payload to apply the filter to.
 	Payload map[string]interface{} `json:"payload"`
+}
+
+func (o *PreviewDestinationFilterV1Input) GetFilter() PreviewDestinationFilterV1InputPreviewDestinationFilterV1 {
+	if o == nil {
+		return PreviewDestinationFilterV1InputPreviewDestinationFilterV1{}
+	}
+	return o.Filter
+}
+
+func (o *PreviewDestinationFilterV1Input) GetPayload() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Payload
 }

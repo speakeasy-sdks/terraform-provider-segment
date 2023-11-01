@@ -12,8 +12,36 @@ type GetWorkspaceV1OutputWorkspaceV1 struct {
 	Slug string `json:"slug"`
 }
 
+func (o *GetWorkspaceV1OutputWorkspaceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetWorkspaceV1OutputWorkspaceV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetWorkspaceV1OutputWorkspaceV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
 // GetWorkspaceV1Output - Represents the output of loading the Workspace.
 type GetWorkspaceV1Output struct {
 	// The Workspace.
 	Workspace GetWorkspaceV1OutputWorkspaceV1 `json:"workspace"`
+}
+
+func (o *GetWorkspaceV1Output) GetWorkspace() GetWorkspaceV1OutputWorkspaceV1 {
+	if o == nil {
+		return GetWorkspaceV1OutputWorkspaceV1{}
+	}
+	return o.Workspace
 }

@@ -37,3 +37,10 @@ type RemoveAudienceFromSpaceAlphaOutput struct {
 	// The status of the operation.
 	Status RemoveAudienceFromSpaceAlphaOutputStatus `json:"status"`
 }
+
+func (o *RemoveAudienceFromSpaceAlphaOutput) GetStatus() RemoveAudienceFromSpaceAlphaOutputStatus {
+	if o == nil {
+		return RemoveAudienceFromSpaceAlphaOutputStatus("")
+	}
+	return o.Status
+}

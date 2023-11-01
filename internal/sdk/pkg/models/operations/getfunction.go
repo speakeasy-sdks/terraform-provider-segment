@@ -11,10 +11,24 @@ type GetFunctionRequest struct {
 	FunctionID string `pathParam:"style=simple,explode=false,name=functionId"`
 }
 
+func (o *GetFunctionRequest) GetFunctionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FunctionID
+}
+
 // GetFunction200ApplicationVndSegmentV1betaPlusJSON - OK
 type GetFunction200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Gets a single Function.
 	Data *shared.GetFunctionV1Output `json:"data,omitempty"`
+}
+
+func (o *GetFunction200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.GetFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetFunction200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type GetFunction200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.GetFunctionV1Output `json:"data,omitempty"`
 }
 
+func (o *GetFunction200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetFunction200ApplicationVndSegmentV1PlusJSON - OK
 type GetFunction200ApplicationVndSegmentV1PlusJSON struct {
 	// Gets a single Function.
 	Data *shared.GetFunctionV1Output `json:"data,omitempty"`
+}
+
+func (o *GetFunction200ApplicationVndSegmentV1PlusJSON) GetData() *shared.GetFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetFunction200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type GetFunction200ApplicationJSON struct {
 	Data *shared.GetFunctionV1Output `json:"data,omitempty"`
 }
 
+func (o *GetFunction200ApplicationJSON) GetData() *shared.GetFunctionV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetFunctionResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetFunction200ApplicationJSONObject *GetFunction200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type GetFunctionResponse struct {
 	GetFunction200ApplicationVndSegmentV1alphaPlusJSONObject *GetFunction200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	GetFunction200ApplicationVndSegmentV1betaPlusJSONObject *GetFunction200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *GetFunctionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetFunctionResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetFunctionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetFunctionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetFunctionResponse) GetGetFunction200ApplicationJSONObject() *GetFunction200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFunction200ApplicationJSONObject
+}
+
+func (o *GetFunctionResponse) GetGetFunction200ApplicationVndSegmentV1PlusJSONObject() *GetFunction200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFunction200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetFunctionResponse) GetGetFunction200ApplicationVndSegmentV1alphaPlusJSONObject() *GetFunction200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFunction200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetFunctionResponse) GetGetFunction200ApplicationVndSegmentV1betaPlusJSONObject() *GetFunction200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetFunction200ApplicationVndSegmentV1betaPlusJSONObject
 }

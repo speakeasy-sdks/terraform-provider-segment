@@ -13,3 +13,31 @@ type DestinationMetadataSubscriptionPresetV1 struct {
 	// FQL string that describes what events should trigger an action. See https://segment.com/docs/config-api/fql/ for more information regarding Segment's Filter Query Language (FQL).
 	Trigger string `json:"trigger"`
 }
+
+func (o *DestinationMetadataSubscriptionPresetV1) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *DestinationMetadataSubscriptionPresetV1) GetFields() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Fields
+}
+
+func (o *DestinationMetadataSubscriptionPresetV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *DestinationMetadataSubscriptionPresetV1) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}

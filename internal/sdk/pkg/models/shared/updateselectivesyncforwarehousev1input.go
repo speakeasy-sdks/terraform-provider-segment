@@ -7,3 +7,10 @@ type UpdateSelectiveSyncForWarehouseV1Input struct {
 	// A list of sync schema overrides to apply to this Warehouse.
 	SyncOverrides []WarehouseSyncOverrideV1 `json:"syncOverrides"`
 }
+
+func (o *UpdateSelectiveSyncForWarehouseV1Input) GetSyncOverrides() []WarehouseSyncOverrideV1 {
+	if o == nil {
+		return []WarehouseSyncOverrideV1{}
+	}
+	return o.SyncOverrides
+}

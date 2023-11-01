@@ -12,10 +12,31 @@ type DeleteLabelRequest struct {
 	Value string `pathParam:"style=simple,explode=false,name=value"`
 }
 
+func (o *DeleteLabelRequest) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *DeleteLabelRequest) GetValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.Value
+}
+
 // DeleteLabel200ApplicationVndSegmentV1betaPlusJSON - OK
 type DeleteLabel200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the status of a label deletion.
 	Data *shared.DeleteLabelV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteLabel200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.DeleteLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.DeleteLabelAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.DeleteLabelAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // DeleteLabel200ApplicationVndSegmentV1PlusJSON - OK
 type DeleteLabel200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the status of a label deletion.
 	Data *shared.DeleteLabelV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteLabel200ApplicationVndSegmentV1PlusJSON) GetData() *shared.DeleteLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteLabel200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type DeleteLabel200ApplicationJSON struct {
 	Data *shared.DeleteLabelV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteLabel200ApplicationJSON) GetData() *shared.DeleteLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type DeleteLabelResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	DeleteLabel200ApplicationJSONObject *DeleteLabel200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type DeleteLabelResponse struct {
 	DeleteLabel200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	DeleteLabel200ApplicationVndSegmentV1betaPlusJSONObject *DeleteLabel200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *DeleteLabelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteLabelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteLabelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteLabelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeleteLabelResponse) GetDeleteLabel200ApplicationJSONObject() *DeleteLabel200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteLabel200ApplicationJSONObject
+}
+
+func (o *DeleteLabelResponse) GetDeleteLabel200ApplicationVndSegmentV1PlusJSONObject() *DeleteLabel200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteLabel200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteLabelResponse) GetDeleteLabel200ApplicationVndSegmentV1alphaPlusJSONObject() *DeleteLabel200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteLabel200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteLabelResponse) GetDeleteLabel200ApplicationVndSegmentV1betaPlusJSONObject() *DeleteLabel200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteLabel200ApplicationVndSegmentV1betaPlusJSONObject
 }
