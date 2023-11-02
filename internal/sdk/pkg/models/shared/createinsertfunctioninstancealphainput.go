@@ -16,3 +16,38 @@ type CreateInsertFunctionInstanceAlphaInput struct {
 	// insert Function class.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *CreateInsertFunctionInstanceAlphaInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *CreateInsertFunctionInstanceAlphaInput) GetFunctionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FunctionID
+}
+
+func (o *CreateInsertFunctionInstanceAlphaInput) GetIntegrationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.IntegrationID
+}
+
+func (o *CreateInsertFunctionInstanceAlphaInput) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateInsertFunctionInstanceAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

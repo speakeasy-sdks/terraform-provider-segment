@@ -78,3 +78,24 @@ type DestinationMetadataComponentV1 struct {
 	// The component type.
 	Type DestinationMetadataComponentV1Type `json:"type"`
 }
+
+func (o *DestinationMetadataComponentV1) GetCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.Code
+}
+
+func (o *DestinationMetadataComponentV1) GetOwner() *DestinationMetadataComponentV1Owner {
+	if o == nil {
+		return nil
+	}
+	return o.Owner
+}
+
+func (o *DestinationMetadataComponentV1) GetType() DestinationMetadataComponentV1Type {
+	if o == nil {
+		return DestinationMetadataComponentV1Type("")
+	}
+	return o.Type
+}

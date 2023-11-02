@@ -37,3 +37,10 @@ type RemoveComputedTraitFromSpaceAlphaOutput struct {
 	// The status of the operation.
 	Status RemoveComputedTraitFromSpaceAlphaOutputStatus `json:"status"`
 }
+
+func (o *RemoveComputedTraitFromSpaceAlphaOutput) GetStatus() RemoveComputedTraitFromSpaceAlphaOutputStatus {
+	if o == nil {
+		return RemoveComputedTraitFromSpaceAlphaOutputStatus("")
+	}
+	return o.Status
+}

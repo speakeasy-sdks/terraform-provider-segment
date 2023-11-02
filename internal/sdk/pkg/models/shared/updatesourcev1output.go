@@ -12,6 +12,27 @@ type UpdateSourceV1OutputSourceV1SourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // UpdateSourceV1OutputSourceV1SourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
 type UpdateSourceV1OutputSourceV1SourceMetadataV1 struct {
 	// A list of categories this Source belongs to.
@@ -36,6 +57,62 @@ type UpdateSourceV1OutputSourceV1SourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetLogos() UpdateSourceV1OutputSourceV1SourceMetadataV1LogosBeta {
+	if o == nil {
+		return UpdateSourceV1OutputSourceV1SourceMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *UpdateSourceV1OutputSourceV1SourceMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // UpdateSourceV1OutputSourceV1 - Defines a data Source for Segment data.
@@ -71,8 +148,78 @@ type UpdateSourceV1OutputSourceV1 struct {
 	WriteKeys []string `json:"writeKeys"`
 }
 
+func (o *UpdateSourceV1OutputSourceV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetMetadata() UpdateSourceV1OutputSourceV1SourceMetadataV1 {
+	if o == nil {
+		return UpdateSourceV1OutputSourceV1SourceMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *UpdateSourceV1OutputSourceV1) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
+}
+
 // UpdateSourceV1Output - Returns the updated Source.
 type UpdateSourceV1Output struct {
 	// The updated Source.
 	Source UpdateSourceV1OutputSourceV1 `json:"source"`
+}
+
+func (o *UpdateSourceV1Output) GetSource() UpdateSourceV1OutputSourceV1 {
+	if o == nil {
+		return UpdateSourceV1OutputSourceV1{}
+	}
+	return o.Source
 }

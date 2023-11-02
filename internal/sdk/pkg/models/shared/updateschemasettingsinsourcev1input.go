@@ -56,6 +56,27 @@ type UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1 struct {
 	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
 
+func (o *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1) GetCommonEventOnViolations() *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}
+
 // UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations - The common identify event on violations.
 //
 // Config API note: equal to `commonIdentifyEventOnViolations`.
@@ -103,6 +124,27 @@ type UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 struct {
 	//
 	// Config API note: equal to `commonIdentifyEventOnViolations`.
 	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1) GetCommonEventOnViolations() *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
 }
 
 // UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations - The common track event on violations.
@@ -162,6 +204,41 @@ type UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 struct {
 	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
 
+func (o *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1) GetAllowEventOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowEventOnViolations
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1) GetAllowPropertiesOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowPropertiesOnViolations
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1) GetAllowUnplannedEventProperties() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEventProperties
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1) GetAllowUnplannedEvents() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEvents
+}
+
+func (o *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1) GetCommonEventOnViolations() *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}
+
 // UpdateSchemaSettingsInSourceV1Input - Input to update a Source's settings.
 type UpdateSchemaSettingsInSourceV1Input struct {
 	// Source id to forward blocked events to.
@@ -174,4 +251,39 @@ type UpdateSchemaSettingsInSourceV1Input struct {
 	Identify *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 `json:"identify,omitempty"`
 	// Track settings.
 	Track *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 `json:"track,omitempty"`
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetForwardingBlockedEventsTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ForwardingBlockedEventsTo
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetForwardingViolationsTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ForwardingViolationsTo
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetGroup() *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Group
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetIdentify() *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Identify
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetTrack() *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Track
 }

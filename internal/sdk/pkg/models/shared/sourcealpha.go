@@ -12,6 +12,27 @@ type SourceAlphaSourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *SourceAlphaSourceMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *SourceAlphaSourceMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *SourceAlphaSourceMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // SourceAlphaSourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
 type SourceAlphaSourceMetadataV1 struct {
 	// A list of categories this Source belongs to.
@@ -36,6 +57,62 @@ type SourceAlphaSourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetLogos() SourceAlphaSourceMetadataV1LogosBeta {
+	if o == nil {
+		return SourceAlphaSourceMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *SourceAlphaSourceMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // SourceAlpha - Defines a data Source for Segment data.
@@ -69,4 +146,67 @@ type SourceAlpha struct {
 	// The write keys used to send data from the Source. This field is left empty when the current token does not have the
 	// 'source admin' permission.
 	WriteKeys []string `json:"writeKeys"`
+}
+
+func (o *SourceAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *SourceAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceAlpha) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *SourceAlpha) GetMetadata() SourceAlphaSourceMetadataV1 {
+	if o == nil {
+		return SourceAlphaSourceMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *SourceAlpha) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *SourceAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *SourceAlpha) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *SourceAlpha) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *SourceAlpha) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
 }

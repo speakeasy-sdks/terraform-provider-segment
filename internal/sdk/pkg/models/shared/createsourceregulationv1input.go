@@ -80,3 +80,24 @@ type CreateSourceRegulationV1Input struct {
 	// The subject type.
 	SubjectType CreateSourceRegulationV1InputSubjectType `json:"subjectType"`
 }
+
+func (o *CreateSourceRegulationV1Input) GetRegulationType() CreateSourceRegulationV1InputRegulationType {
+	if o == nil {
+		return CreateSourceRegulationV1InputRegulationType("")
+	}
+	return o.RegulationType
+}
+
+func (o *CreateSourceRegulationV1Input) GetSubjectIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.SubjectIds
+}
+
+func (o *CreateSourceRegulationV1Input) GetSubjectType() CreateSourceRegulationV1InputSubjectType {
+	if o == nil {
+		return CreateSourceRegulationV1InputSubjectType("")
+	}
+	return o.SubjectType
+}

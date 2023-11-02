@@ -82,3 +82,31 @@ type CreateCloudSourceRegulationV1Input struct {
 	// The subject type. Must be `objectId` for Cloud Sources.
 	SubjectType CreateCloudSourceRegulationV1InputSubjectType `json:"subjectType"`
 }
+
+func (o *CreateCloudSourceRegulationV1Input) GetCollection() string {
+	if o == nil {
+		return ""
+	}
+	return o.Collection
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetRegulationType() CreateCloudSourceRegulationV1InputRegulationType {
+	if o == nil {
+		return CreateCloudSourceRegulationV1InputRegulationType("")
+	}
+	return o.RegulationType
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetSubjectIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.SubjectIds
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetSubjectType() CreateCloudSourceRegulationV1InputSubjectType {
+	if o == nil {
+		return CreateCloudSourceRegulationV1InputSubjectType("")
+	}
+	return o.SubjectType
+}

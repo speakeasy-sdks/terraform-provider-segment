@@ -12,6 +12,27 @@ type GetSourceMetadataV1OutputSourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *GetSourceMetadataV1OutputSourceMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // GetSourceMetadataV1OutputSourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
 type GetSourceMetadataV1OutputSourceMetadataV1 struct {
 	// A list of categories this Source belongs to.
@@ -38,8 +59,71 @@ type GetSourceMetadataV1OutputSourceMetadataV1 struct {
 	Slug string `json:"slug"`
 }
 
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetLogos() GetSourceMetadataV1OutputSourceMetadataV1LogosBeta {
+	if o == nil {
+		return GetSourceMetadataV1OutputSourceMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *GetSourceMetadataV1OutputSourceMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
 // GetSourceMetadataV1Output - Returns the Source catalog item looked up by id.
 type GetSourceMetadataV1Output struct {
 	// The catalog item matched by id.
 	SourceMetadata GetSourceMetadataV1OutputSourceMetadataV1 `json:"sourceMetadata"`
+}
+
+func (o *GetSourceMetadataV1Output) GetSourceMetadata() GetSourceMetadataV1OutputSourceMetadataV1 {
+	if o == nil {
+		return GetSourceMetadataV1OutputSourceMetadataV1{}
+	}
+	return o.SourceMetadata
 }

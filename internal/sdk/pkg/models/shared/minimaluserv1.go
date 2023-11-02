@@ -13,3 +13,24 @@ type MinimalUserV1 struct {
 	// The human-readable name of this user.
 	Name string `json:"name"`
 }
+
+func (o *MinimalUserV1) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *MinimalUserV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *MinimalUserV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
