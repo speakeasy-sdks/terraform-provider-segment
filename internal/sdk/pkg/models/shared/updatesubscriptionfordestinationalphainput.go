@@ -14,8 +14,43 @@ type UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInpu
 	Trigger *string `json:"trigger,omitempty"`
 }
 
+func (o *UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput) GetTrigger() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Trigger
+}
+
 // UpdateSubscriptionForDestinationAlphaInput - The basic input parameters for updating a Destination subscription.
 type UpdateSubscriptionForDestinationAlphaInput struct {
 	// A set of valid Destination input params required for updating.
 	Input UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput `json:"input"`
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaInput) GetInput() UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput {
+	if o == nil {
+		return UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput{}
+	}
+	return o.Input
 }

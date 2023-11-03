@@ -7,3 +7,10 @@ type AddPermissionsToUserV1Output struct {
 	// The new permissions.
 	Permissions []AccessPermissionV1 `json:"permissions"`
 }
+
+func (o *AddPermissionsToUserV1Output) GetPermissions() []AccessPermissionV1 {
+	if o == nil {
+		return []AccessPermissionV1{}
+	}
+	return o.Permissions
+}

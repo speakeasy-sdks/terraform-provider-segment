@@ -5,3 +5,10 @@ package shared
 type Security struct {
 	Token string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
 }
+
+func (o *Security) GetToken() string {
+	if o == nil {
+		return ""
+	}
+	return o.Token
+}

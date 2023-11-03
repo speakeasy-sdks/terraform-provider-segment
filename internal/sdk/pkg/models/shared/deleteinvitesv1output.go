@@ -37,3 +37,10 @@ type DeleteInvitesV1Output struct {
 	// The status of the invite deletion operation.
 	Status DeleteInvitesV1OutputStatus `json:"status"`
 }
+
+func (o *DeleteInvitesV1Output) GetStatus() DeleteInvitesV1OutputStatus {
+	if o == nil {
+		return DeleteInvitesV1OutputStatus("")
+	}
+	return o.Status
+}

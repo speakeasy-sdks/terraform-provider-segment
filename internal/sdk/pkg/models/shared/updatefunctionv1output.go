@@ -74,8 +74,113 @@ type UpdateFunctionV1OutputFunctionV1 struct {
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
 }
 
+func (o *UpdateFunctionV1OutputFunctionV1) GetBatchMaxCount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchMaxCount
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetCatalogID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CatalogID
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetCreatedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedBy
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetDeployedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DeployedAt
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetIsLatestVersion() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsLatestVersion
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetLogoURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LogoURL
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetPreviewWebhookURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PreviewWebhookURL
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetResourceType() *UpdateFunctionV1OutputFunctionV1ResourceType {
+	if o == nil {
+		return nil
+	}
+	return o.ResourceType
+}
+
+func (o *UpdateFunctionV1OutputFunctionV1) GetSettings() []FunctionSettingV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
 // UpdateFunctionV1Output - Create a Function.
 type UpdateFunctionV1Output struct {
 	// The updated Function object.
 	Function UpdateFunctionV1OutputFunctionV1 `json:"function"`
+}
+
+func (o *UpdateFunctionV1Output) GetFunction() UpdateFunctionV1OutputFunctionV1 {
+	if o == nil {
+		return UpdateFunctionV1OutputFunctionV1{}
+	}
+	return o.Function
 }

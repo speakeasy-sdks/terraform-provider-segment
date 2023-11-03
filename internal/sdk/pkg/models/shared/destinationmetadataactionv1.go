@@ -57,3 +57,59 @@ type DestinationMetadataActionV1 struct {
 	// A machine-readable key unique to the action definition.
 	Slug string `json:"slug"`
 }
+
+func (o *DestinationMetadataActionV1) GetDefaultTrigger() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultTrigger
+}
+
+func (o *DestinationMetadataActionV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *DestinationMetadataActionV1) GetFields() []DestinationMetadataActionFieldV1 {
+	if o == nil {
+		return []DestinationMetadataActionFieldV1{}
+	}
+	return o.Fields
+}
+
+func (o *DestinationMetadataActionV1) GetHidden() bool {
+	if o == nil {
+		return false
+	}
+	return o.Hidden
+}
+
+func (o *DestinationMetadataActionV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationMetadataActionV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *DestinationMetadataActionV1) GetPlatform() DestinationMetadataActionV1Platform {
+	if o == nil {
+		return DestinationMetadataActionV1Platform("")
+	}
+	return o.Platform
+}
+
+func (o *DestinationMetadataActionV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}

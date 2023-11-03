@@ -87,3 +87,38 @@ type MessageSubscriptionResponse struct {
 	// Type is communication medium used. Either SMS, EMAIL or WHATSAPP.
 	Type MessageSubscriptionResponseType `json:"type"`
 }
+
+func (o *MessageSubscriptionResponse) GetErrors() []MessageSubscriptionResponseError {
+	if o == nil {
+		return nil
+	}
+	return o.Errors
+}
+
+func (o *MessageSubscriptionResponse) GetGroups() []UpdateGroupSubscriptionStatusResponse {
+	if o == nil {
+		return nil
+	}
+	return o.Groups
+}
+
+func (o *MessageSubscriptionResponse) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *MessageSubscriptionResponse) GetStatus() *MessageSubscriptionResponseStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *MessageSubscriptionResponse) GetType() MessageSubscriptionResponseType {
+	if o == nil {
+		return MessageSubscriptionResponseType("")
+	}
+	return o.Type
+}

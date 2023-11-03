@@ -16,8 +16,43 @@ type GetUserV1OutputUserV1 struct {
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
 
+func (o *GetUserV1OutputUserV1) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *GetUserV1OutputUserV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetUserV1OutputUserV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetUserV1OutputUserV1) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}
+
 // GetUserV1Output - Returns the user.
 type GetUserV1Output struct {
 	// The user object.
 	User GetUserV1OutputUserV1 `json:"user"`
+}
+
+func (o *GetUserV1Output) GetUser() GetUserV1OutputUserV1 {
+	if o == nil {
+		return GetUserV1OutputUserV1{}
+	}
+	return o.User
 }

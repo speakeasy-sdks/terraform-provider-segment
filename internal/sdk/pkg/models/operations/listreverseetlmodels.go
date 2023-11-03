@@ -14,18 +14,70 @@ type ListReverseEtlModelsRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
+func (o *ListReverseEtlModelsRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
 // ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSON - OK
 type ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Defines the result of listing Models.
 	Data *shared.ListReverseEtlModelsOutput `json:"data,omitempty"`
 }
 
+func (o *ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListReverseEtlModelsOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListReverseEtlModelsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSONObject *ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *ListReverseEtlModelsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListReverseEtlModelsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListReverseEtlModelsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListReverseEtlModelsResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListReverseEtlModelsResponse) GetListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSONObject() *ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSONObject
 }

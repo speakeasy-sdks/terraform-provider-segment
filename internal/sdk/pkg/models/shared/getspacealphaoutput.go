@@ -9,8 +9,36 @@ type GetSpaceAlphaOutputSpace struct {
 	Slug string `json:"slug"`
 }
 
+func (o *GetSpaceAlphaOutputSpace) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetSpaceAlphaOutputSpace) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetSpaceAlphaOutputSpace) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
 // GetSpaceAlphaOutput - Response for the getSpaceById endpoint.
 type GetSpaceAlphaOutput struct {
 	// Space matching the given id.
 	Space *GetSpaceAlphaOutputSpace `json:"space"`
+}
+
+func (o *GetSpaceAlphaOutput) GetSpace() *GetSpaceAlphaOutputSpace {
+	if o == nil {
+		return nil
+	}
+	return o.Space
 }

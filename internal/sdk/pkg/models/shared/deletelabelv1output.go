@@ -37,3 +37,10 @@ type DeleteLabelV1Output struct {
 	// The status of the label deletion operation.
 	Status DeleteLabelV1OutputStatus `json:"status"`
 }
+
+func (o *DeleteLabelV1Output) GetStatus() DeleteLabelV1OutputStatus {
+	if o == nil {
+		return DeleteLabelV1OutputStatus("")
+	}
+	return o.Status
+}

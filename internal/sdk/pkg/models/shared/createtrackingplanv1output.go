@@ -72,8 +72,64 @@ type CreateTrackingPlanV1OutputTrackingPlanV1 struct {
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}
+
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetType() CreateTrackingPlanV1OutputTrackingPlanV1Type {
+	if o == nil {
+		return CreateTrackingPlanV1OutputTrackingPlanV1Type("")
+	}
+	return o.Type
+}
+
+func (o *CreateTrackingPlanV1OutputTrackingPlanV1) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}
+
 // CreateTrackingPlanV1Output - Result of a CreateTrackingPlan call.
 type CreateTrackingPlanV1Output struct {
 	// The created Tracking Plan.
 	TrackingPlan CreateTrackingPlanV1OutputTrackingPlanV1 `json:"trackingPlan"`
+}
+
+func (o *CreateTrackingPlanV1Output) GetTrackingPlan() CreateTrackingPlanV1OutputTrackingPlanV1 {
+	if o == nil {
+		return CreateTrackingPlanV1OutputTrackingPlanV1{}
+	}
+	return o.TrackingPlan
 }

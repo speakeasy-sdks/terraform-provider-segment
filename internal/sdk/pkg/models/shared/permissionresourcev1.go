@@ -53,3 +53,24 @@ type PermissionResourceV1 struct {
 	// The type for this resource.
 	Type PermissionResourceV1Type `json:"type"`
 }
+
+func (o *PermissionResourceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *PermissionResourceV1) GetLabels() []AllowedLabelBeta {
+	if o == nil {
+		return nil
+	}
+	return o.Labels
+}
+
+func (o *PermissionResourceV1) GetType() PermissionResourceV1Type {
+	if o == nil {
+		return PermissionResourceV1Type("")
+	}
+	return o.Type
+}

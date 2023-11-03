@@ -37,3 +37,10 @@ type RemoveFilterFromDestinationV1Output struct {
 	// The status of delete operation.
 	Status RemoveFilterFromDestinationV1OutputStatus `json:"status"`
 }
+
+func (o *RemoveFilterFromDestinationV1Output) GetStatus() RemoveFilterFromDestinationV1OutputStatus {
+	if o == nil {
+		return RemoveFilterFromDestinationV1OutputStatus("")
+	}
+	return o.Status
+}

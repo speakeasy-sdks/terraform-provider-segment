@@ -22,8 +22,36 @@ type CreateLabelV1InputLabelV1 struct {
 	Value string `json:"value"`
 }
 
+func (o *CreateLabelV1InputLabelV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CreateLabelV1InputLabelV1) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *CreateLabelV1InputLabelV1) GetValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.Value
+}
+
 // CreateLabelV1Input - Creates a new label in the current Workspace.
 type CreateLabelV1Input struct {
 	// The new label to create in the Workspace.
 	Label CreateLabelV1InputLabelV1 `json:"label"`
+}
+
+func (o *CreateLabelV1Input) GetLabel() CreateLabelV1InputLabelV1 {
+	if o == nil {
+		return CreateLabelV1InputLabelV1{}
+	}
+	return o.Label
 }

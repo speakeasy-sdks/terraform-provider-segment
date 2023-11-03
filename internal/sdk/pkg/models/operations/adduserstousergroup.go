@@ -12,10 +12,31 @@ type AddUsersToUserGroupRequest struct {
 	UserGroupID                string                            `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
+func (o *AddUsersToUserGroupRequest) GetAddUsersToUserGroupV1Input() shared.AddUsersToUserGroupV1Input {
+	if o == nil {
+		return shared.AddUsersToUserGroupV1Input{}
+	}
+	return o.AddUsersToUserGroupV1Input
+}
+
+func (o *AddUsersToUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
 // AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
 type AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the updated user group.
 	Data *shared.AddUsersToUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.AddUsersToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.AddUsersToUserGroupV1Output `json:"data,omitempty"`
 }
 
+func (o *AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.AddUsersToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // AddUsersToUserGroup200ApplicationVndSegmentV1PlusJSON - OK
 type AddUsersToUserGroup200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the updated user group.
 	Data *shared.AddUsersToUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *AddUsersToUserGroup200ApplicationVndSegmentV1PlusJSON) GetData() *shared.AddUsersToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // AddUsersToUserGroup200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type AddUsersToUserGroup200ApplicationJSON struct {
 	Data *shared.AddUsersToUserGroupV1Output `json:"data,omitempty"`
 }
 
+func (o *AddUsersToUserGroup200ApplicationJSON) GetData() *shared.AddUsersToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type AddUsersToUserGroupResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	AddUsersToUserGroup200ApplicationJSONObject *AddUsersToUserGroup200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type AddUsersToUserGroupResponse struct {
 	AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *AddUsersToUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AddUsersToUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *AddUsersToUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AddUsersToUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *AddUsersToUserGroupResponse) GetAddUsersToUserGroup200ApplicationJSONObject() *AddUsersToUserGroup200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddUsersToUserGroup200ApplicationJSONObject
+}
+
+func (o *AddUsersToUserGroupResponse) GetAddUsersToUserGroup200ApplicationVndSegmentV1PlusJSONObject() *AddUsersToUserGroup200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddUsersToUserGroup200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *AddUsersToUserGroupResponse) GetAddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject() *AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddUsersToUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *AddUsersToUserGroupResponse) GetAddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSONObject() *AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddUsersToUserGroup200ApplicationVndSegmentV1betaPlusJSONObject
 }

@@ -15,3 +15,31 @@ type UserV1 struct {
 	// The permissions associated with this user.
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
+
+func (o *UserV1) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *UserV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UserV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UserV1) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}

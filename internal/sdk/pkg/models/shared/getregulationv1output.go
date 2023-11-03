@@ -66,8 +66,57 @@ type GetRegulationV1OutputRegulation struct {
 	WorkspaceID string `json:"workspaceId"`
 }
 
+func (o *GetRegulationV1OutputRegulation) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *GetRegulationV1OutputRegulation) GetFinishedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.FinishedAt
+}
+
+func (o *GetRegulationV1OutputRegulation) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetRegulationV1OutputRegulation) GetOverallStatus() GetRegulationV1OutputRegulationOverallStatus {
+	if o == nil {
+		return GetRegulationV1OutputRegulationOverallStatus("")
+	}
+	return o.OverallStatus
+}
+
+func (o *GetRegulationV1OutputRegulation) GetStreamStatus() []StreamStatusV1 {
+	if o == nil {
+		return []StreamStatusV1{}
+	}
+	return o.StreamStatus
+}
+
+func (o *GetRegulationV1OutputRegulation) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
 // GetRegulationV1Output - The regulate request returned.
 type GetRegulationV1Output struct {
 	// The regulate request.
 	Regulation GetRegulationV1OutputRegulation `json:"regulation"`
+}
+
+func (o *GetRegulationV1Output) GetRegulation() GetRegulationV1OutputRegulation {
+	if o == nil {
+		return GetRegulationV1OutputRegulation{}
+	}
+	return o.Regulation
 }

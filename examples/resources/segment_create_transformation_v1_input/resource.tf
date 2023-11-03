@@ -8,7 +8,7 @@ resource "segment_create_transformation_v1_input" "my_createtransformationv1inpu
     },
   ]
   if             = "...my_if..."
-  name           = "Ryan Witting"
+  name           = "Jesse Fay"
   new_event_name = "...my_new_event_name..."
   property_renames = [
     {
