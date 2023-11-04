@@ -7,3 +7,10 @@ type AddUsersToUserGroupV1Input struct {
 	// The email addresses of the users and invites to add.
 	Emails []string `json:"emails"`
 }
+
+func (o *AddUsersToUserGroupV1Input) GetEmails() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Emails
+}

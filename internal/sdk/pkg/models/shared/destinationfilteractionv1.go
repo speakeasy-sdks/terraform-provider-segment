@@ -55,3 +55,31 @@ type DestinationFilterActionV1 struct {
 	// The kind of Transformation to apply to any matched properties.
 	Type DestinationFilterActionV1Type `json:"type"`
 }
+
+func (o *DestinationFilterActionV1) GetFields() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Fields
+}
+
+func (o *DestinationFilterActionV1) GetPath() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Path
+}
+
+func (o *DestinationFilterActionV1) GetPercent() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Percent
+}
+
+func (o *DestinationFilterActionV1) GetType() DestinationFilterActionV1Type {
+	if o == nil {
+		return DestinationFilterActionV1Type("")
+	}
+	return o.Type
+}

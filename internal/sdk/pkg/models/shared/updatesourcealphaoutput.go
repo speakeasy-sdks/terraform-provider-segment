@@ -12,6 +12,27 @@ type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
 type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
 	// A list of categories this Source belongs to.
@@ -36,6 +57,62 @@ type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetLogos() UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta {
+	if o == nil {
+		return UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // UpdateSourceAlphaOutputSourceAlpha - Defines a data Source for Segment data.
@@ -71,8 +148,78 @@ type UpdateSourceAlphaOutputSourceAlpha struct {
 	WriteKeys []string `json:"writeKeys"`
 }
 
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetMetadata() UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 {
+	if o == nil {
+		return UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *UpdateSourceAlphaOutputSourceAlpha) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
+}
+
 // UpdateSourceAlphaOutput - Returns the updated Source.
 type UpdateSourceAlphaOutput struct {
 	// The updated Source.
 	Source UpdateSourceAlphaOutputSourceAlpha `json:"source"`
+}
+
+func (o *UpdateSourceAlphaOutput) GetSource() UpdateSourceAlphaOutputSourceAlpha {
+	if o == nil {
+		return UpdateSourceAlphaOutputSourceAlpha{}
+	}
+	return o.Source
 }

@@ -29,6 +29,34 @@ type BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput struct 
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // BatchQueryMessagingSubscriptionsForSpaceAlphaOutput - Batch get response.
 type BatchQueryMessagingSubscriptionsForSpaceAlphaOutput struct {
 	// General errors when making the request such as invalid payload or wrong http method errors.
@@ -39,4 +67,32 @@ type BatchQueryMessagingSubscriptionsForSpaceAlphaOutput struct {
 	Pagination *BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput `json:"pagination,omitempty"`
 	// Array of successful subscription status.
 	Successes []GetMessagingSubscriptionSuccessResponse `json:"successes"`
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetErrors() []MessageSubscriptionResponseError {
+	if o == nil {
+		return []MessageSubscriptionResponseError{}
+	}
+	return o.Errors
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetFailures() []GetMessagingSubscriptionFailureResponse {
+	if o == nil {
+		return []GetMessagingSubscriptionFailureResponse{}
+	}
+	return o.Failures
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetPagination() *BatchQueryMessagingSubscriptionsForSpaceAlphaOutputPaginationOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetSuccesses() []GetMessagingSubscriptionSuccessResponse {
+	if o == nil {
+		return []GetMessagingSubscriptionSuccessResponse{}
+	}
+	return o.Successes
 }

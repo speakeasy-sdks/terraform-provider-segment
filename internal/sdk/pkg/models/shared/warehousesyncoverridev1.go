@@ -13,3 +13,31 @@ type WarehouseSyncOverrideV1 struct {
 	// The id of the Source this schema item applies to.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *WarehouseSyncOverrideV1) GetCollection() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Collection
+}
+
+func (o *WarehouseSyncOverrideV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *WarehouseSyncOverrideV1) GetProperty() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Property
+}
+
+func (o *WarehouseSyncOverrideV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

@@ -14,8 +14,43 @@ type UpdateUserGroupV1OutputUserGroupV1 struct {
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
 
+func (o *UpdateUserGroupV1OutputUserGroupV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateUserGroupV1OutputUserGroupV1) GetMemberCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.MemberCount
+}
+
+func (o *UpdateUserGroupV1OutputUserGroupV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateUserGroupV1OutputUserGroupV1) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}
+
 // UpdateUserGroupV1Output - Returns the updated user group.
 type UpdateUserGroupV1Output struct {
 	// The updated user group.
 	UserGroup UpdateUserGroupV1OutputUserGroupV1 `json:"userGroup"`
+}
+
+func (o *UpdateUserGroupV1Output) GetUserGroup() UpdateUserGroupV1OutputUserGroupV1 {
+	if o == nil {
+		return UpdateUserGroupV1OutputUserGroupV1{}
+	}
+	return o.UserGroup
 }

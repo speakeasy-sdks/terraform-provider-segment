@@ -8,3 +8,17 @@ type PropertyRenameV1 struct {
 	// The old name of the property.
 	OldName string `json:"oldName"`
 }
+
+func (o *PropertyRenameV1) GetNewName() string {
+	if o == nil {
+		return ""
+	}
+	return o.NewName
+}
+
+func (o *PropertyRenameV1) GetOldName() string {
+	if o == nil {
+		return ""
+	}
+	return o.OldName
+}

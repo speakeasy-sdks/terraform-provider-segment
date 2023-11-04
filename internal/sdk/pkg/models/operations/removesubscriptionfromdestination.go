@@ -12,18 +12,77 @@ type RemoveSubscriptionFromDestinationRequest struct {
 	ID            string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *RemoveSubscriptionFromDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *RemoveSubscriptionFromDestinationRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 // RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
 type RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Returns a Destination deletion flag.
 	Data *shared.RemoveSubscriptionFromDestinationAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.RemoveSubscriptionFromDestinationAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type RemoveSubscriptionFromDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject *RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetRemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject() *RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject
 }

@@ -59,3 +59,45 @@ type CreateFunctionV1Input struct {
 	// The list of settings for this Function.
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
 }
+
+func (o *CreateFunctionV1Input) GetCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.Code
+}
+
+func (o *CreateFunctionV1Input) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CreateFunctionV1Input) GetDisplayName() string {
+	if o == nil {
+		return ""
+	}
+	return o.DisplayName
+}
+
+func (o *CreateFunctionV1Input) GetLogoURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LogoURL
+}
+
+func (o *CreateFunctionV1Input) GetResourceType() CreateFunctionV1InputResourceType {
+	if o == nil {
+		return CreateFunctionV1InputResourceType("")
+	}
+	return o.ResourceType
+}
+
+func (o *CreateFunctionV1Input) GetSettings() []FunctionSettingV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}

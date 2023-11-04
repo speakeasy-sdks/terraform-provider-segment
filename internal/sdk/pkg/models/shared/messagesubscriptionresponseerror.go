@@ -8,3 +8,17 @@ type MessageSubscriptionResponseError struct {
 	// Error message.
 	Message string `json:"message"`
 }
+
+func (o *MessageSubscriptionResponseError) GetCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.Code
+}
+
+func (o *MessageSubscriptionResponseError) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
+}

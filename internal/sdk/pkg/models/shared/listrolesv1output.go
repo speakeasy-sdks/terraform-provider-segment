@@ -29,10 +29,52 @@ type ListRolesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListRolesV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListRolesV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListRolesV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListRolesV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListRolesV1Output - Returns the list of roles.
 type ListRolesV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListRolesV1OutputPaginationOutput `json:"pagination"`
 	// The list of roles.
 	Roles []RoleV1 `json:"roles"`
+}
+
+func (o *ListRolesV1Output) GetPagination() ListRolesV1OutputPaginationOutput {
+	if o == nil {
+		return ListRolesV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListRolesV1Output) GetRoles() []RoleV1 {
+	if o == nil {
+		return []RoleV1{}
+	}
+	return o.Roles
 }

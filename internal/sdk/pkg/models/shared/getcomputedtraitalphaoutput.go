@@ -26,8 +26,85 @@ type GetComputedTraitAlphaOutputComputedTraitSummary struct {
 	UpdatedBy string `json:"updatedBy"`
 }
 
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
+func (o *GetComputedTraitAlphaOutputComputedTraitSummary) GetUpdatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedBy
+}
+
 // GetComputedTraitAlphaOutput - Computed Trait output for get and update.
 type GetComputedTraitAlphaOutput struct {
 	// The computed trait summary output.
 	ComputedTrait GetComputedTraitAlphaOutputComputedTraitSummary `json:"computedTrait"`
+}
+
+func (o *GetComputedTraitAlphaOutput) GetComputedTrait() GetComputedTraitAlphaOutputComputedTraitSummary {
+	if o == nil {
+		return GetComputedTraitAlphaOutputComputedTraitSummary{}
+	}
+	return o.ComputedTrait
 }
