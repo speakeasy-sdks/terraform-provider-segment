@@ -12,10 +12,31 @@ type AddPermissionsToUserRequest struct {
 	UserID                      string                             `pathParam:"style=simple,explode=false,name=userId"`
 }
 
+func (o *AddPermissionsToUserRequest) GetAddPermissionsToUserV1Input() shared.AddPermissionsToUserV1Input {
+	if o == nil {
+		return shared.AddPermissionsToUserV1Input{}
+	}
+	return o.AddPermissionsToUserV1Input
+}
+
+func (o *AddPermissionsToUserRequest) GetUserID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserID
+}
+
 // AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSON - OK
 type AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the user's permissions, including the added permissions.
 	Data *shared.AddPermissionsToUserV1Output `json:"data,omitempty"`
+}
+
+func (o *AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.AddPermissionsToUserV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.AddPermissionsToUserV1Output `json:"data,omitempty"`
 }
 
+func (o *AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.AddPermissionsToUserV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // AddPermissionsToUser200ApplicationVndSegmentV1PlusJSON - OK
 type AddPermissionsToUser200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the user's permissions, including the added permissions.
 	Data *shared.AddPermissionsToUserV1Output `json:"data,omitempty"`
+}
+
+func (o *AddPermissionsToUser200ApplicationVndSegmentV1PlusJSON) GetData() *shared.AddPermissionsToUserV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // AddPermissionsToUser200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type AddPermissionsToUser200ApplicationJSON struct {
 	Data *shared.AddPermissionsToUserV1Output `json:"data,omitempty"`
 }
 
+func (o *AddPermissionsToUser200ApplicationJSON) GetData() *shared.AddPermissionsToUserV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type AddPermissionsToUserResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	AddPermissionsToUser200ApplicationJSONObject *AddPermissionsToUser200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type AddPermissionsToUserResponse struct {
 	AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSONObject *AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSONObject *AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *AddPermissionsToUserResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AddPermissionsToUserResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *AddPermissionsToUserResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AddPermissionsToUserResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *AddPermissionsToUserResponse) GetAddPermissionsToUser200ApplicationJSONObject() *AddPermissionsToUser200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddPermissionsToUser200ApplicationJSONObject
+}
+
+func (o *AddPermissionsToUserResponse) GetAddPermissionsToUser200ApplicationVndSegmentV1PlusJSONObject() *AddPermissionsToUser200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddPermissionsToUser200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *AddPermissionsToUserResponse) GetAddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSONObject() *AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddPermissionsToUser200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *AddPermissionsToUserResponse) GetAddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSONObject() *AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddPermissionsToUser200ApplicationVndSegmentV1betaPlusJSONObject
 }

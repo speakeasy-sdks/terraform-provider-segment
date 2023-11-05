@@ -21,3 +21,38 @@ type CreateProfilesWarehouseAlphaInput struct {
 	// `/catalog/warehouses` endpoint.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *CreateProfilesWarehouseAlphaInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *CreateProfilesWarehouseAlphaInput) GetMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetadataID
+}
+
+func (o *CreateProfilesWarehouseAlphaInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CreateProfilesWarehouseAlphaInput) GetSchemaName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SchemaName
+}
+
+func (o *CreateProfilesWarehouseAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

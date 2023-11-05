@@ -15,8 +15,78 @@ type CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha struct {
 	UpdatedAt         string                 `json:"updatedAt"`
 }
 
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetClassID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ClassID
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetEncryptedSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.EncryptedSettings
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetIntegrationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.IntegrationID
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
 // CreateInsertFunctionInstanceAlphaOutput - Creates an insert Function instance.
 type CreateInsertFunctionInstanceAlphaOutput struct {
 	// The created instance.
 	InsertFunctionInstance CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha `json:"insertFunctionInstance"`
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstance() CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha {
+	if o == nil {
+		return CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha{}
+	}
+	return o.InsertFunctionInstance
 }

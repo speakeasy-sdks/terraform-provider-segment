@@ -7,3 +7,10 @@ type UpdateRulesInTrackingPlanV1Input struct {
 	// Rules to update or insert.
 	Rules []UpsertRuleV1 `json:"rules"`
 }
+
+func (o *UpdateRulesInTrackingPlanV1Input) GetRules() []UpsertRuleV1 {
+	if o == nil {
+		return []UpsertRuleV1{}
+	}
+	return o.Rules
+}

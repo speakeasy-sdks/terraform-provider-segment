@@ -9,3 +9,17 @@ type CreateValidationInWarehouseV1Input struct {
 	// The settings to check.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *CreateValidationInWarehouseV1Input) GetMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetadataID
+}
+
+func (o *CreateValidationInWarehouseV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

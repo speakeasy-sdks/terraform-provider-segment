@@ -85,3 +85,31 @@ type MessagesSubscriptionRequest struct {
 	// Type is communication medium used.
 	Type MessagesSubscriptionRequestType `json:"type"`
 }
+
+func (o *MessagesSubscriptionRequest) GetGroups() []GroupSubscriptionStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Groups
+}
+
+func (o *MessagesSubscriptionRequest) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *MessagesSubscriptionRequest) GetStatus() *MessagesSubscriptionRequestStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *MessagesSubscriptionRequest) GetType() MessagesSubscriptionRequestType {
+	if o == nil {
+		return MessagesSubscriptionRequestType("")
+	}
+	return o.Type
+}

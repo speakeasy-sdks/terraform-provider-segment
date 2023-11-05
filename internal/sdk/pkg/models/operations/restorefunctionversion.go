@@ -12,18 +12,77 @@ type RestoreFunctionVersionRequest struct {
 	FunctionID                       string                                  `pathParam:"style=simple,explode=false,name=functionId"`
 }
 
+func (o *RestoreFunctionVersionRequest) GetRestoreFunctionVersionAlphaInput() shared.RestoreFunctionVersionAlphaInput {
+	if o == nil {
+		return shared.RestoreFunctionVersionAlphaInput{}
+	}
+	return o.RestoreFunctionVersionAlphaInput
+}
+
+func (o *RestoreFunctionVersionRequest) GetFunctionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FunctionID
+}
+
 // RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSON - OK
 type RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Restore version output.
 	Data *shared.RestoreFunctionVersionAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.RestoreFunctionVersionAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type RestoreFunctionVersionResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSONObject *RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSON
+}
+
+func (o *RestoreFunctionVersionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RestoreFunctionVersionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RestoreFunctionVersionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *RestoreFunctionVersionResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *RestoreFunctionVersionResponse) GetRestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSONObject() *RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RestoreFunctionVersion200ApplicationVndSegmentV1alphaPlusJSONObject
 }

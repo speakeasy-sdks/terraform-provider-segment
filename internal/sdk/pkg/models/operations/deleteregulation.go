@@ -11,10 +11,24 @@ type DeleteRegulationRequest struct {
 	RegulateID string `pathParam:"style=simple,explode=false,name=regulateId"`
 }
 
+func (o *DeleteRegulationRequest) GetRegulateID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RegulateID
+}
+
 // DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON - OK
 type DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON struct {
 	// The output of the delete regulation call.
 	Data *shared.DeleteRegulationV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.DeleteRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.DeleteRegulationV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.DeleteRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // DeleteRegulation200ApplicationVndSegmentV1PlusJSON - OK
 type DeleteRegulation200ApplicationVndSegmentV1PlusJSON struct {
 	// The output of the delete regulation call.
 	Data *shared.DeleteRegulationV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteRegulation200ApplicationVndSegmentV1PlusJSON) GetData() *shared.DeleteRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteRegulation200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type DeleteRegulation200ApplicationJSON struct {
 	Data *shared.DeleteRegulationV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteRegulation200ApplicationJSON) GetData() *shared.DeleteRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type DeleteRegulationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	DeleteRegulation200ApplicationJSONObject *DeleteRegulation200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type DeleteRegulationResponse struct {
 	DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	DeleteRegulation200ApplicationVndSegmentV1betaPlusJSONObject *DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *DeleteRegulationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteRegulationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteRegulationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteRegulationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeleteRegulationResponse) GetDeleteRegulation200ApplicationJSONObject() *DeleteRegulation200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteRegulation200ApplicationJSONObject
+}
+
+func (o *DeleteRegulationResponse) GetDeleteRegulation200ApplicationVndSegmentV1PlusJSONObject() *DeleteRegulation200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteRegulation200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteRegulationResponse) GetDeleteRegulation200ApplicationVndSegmentV1alphaPlusJSONObject() *DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteRegulation200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteRegulationResponse) GetDeleteRegulation200ApplicationVndSegmentV1betaPlusJSONObject() *DeleteRegulation200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteRegulation200ApplicationVndSegmentV1betaPlusJSONObject
 }

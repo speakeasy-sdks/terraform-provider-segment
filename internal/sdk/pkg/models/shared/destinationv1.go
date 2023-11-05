@@ -17,6 +17,27 @@ type DestinationV1DestinationMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
+func (o *DestinationV1DestinationMetadataV1LogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *DestinationV1DestinationMetadataV1LogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *DestinationV1DestinationMetadataV1LogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
 // DestinationV1DestinationMetadataV1Status - Support status of the Destination.
 type DestinationV1DestinationMetadataV1Status string
 
@@ -151,6 +172,41 @@ type DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1 struct {
 	Replay *bool `json:"replay,omitempty"`
 }
 
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1) GetBrowserUnbundling() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.BrowserUnbundling
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1) GetBrowserUnbundlingPublic() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.BrowserUnbundlingPublic
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1) GetCloudModeInstances() *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances {
+	if o == nil {
+		return nil
+	}
+	return o.CloudModeInstances
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1) GetDeviceModeInstances() *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances {
+	if o == nil {
+		return nil
+	}
+	return o.DeviceModeInstances
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1) GetReplay() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Replay
+}
+
 // DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 - Represents methods that a given Destination supports.
 type DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 struct {
 	// Identifies if the Destination supports the `alias` method.
@@ -165,6 +221,41 @@ type DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 struct {
 	Track *bool `json:"track,omitempty"`
 }
 
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1) GetAlias() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Alias
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1) GetGroup() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Group
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1) GetIdentify() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Identify
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1) GetPageview() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Pageview
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1) GetTrack() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Track
+}
+
 // DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 - Represents platforms that a given Destination supports.
 type DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 struct {
 	// Whether this Destination supports browser events.
@@ -173,6 +264,27 @@ type DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 struct {
 	Mobile *bool `json:"mobile,omitempty"`
 	// Whether this Destination supports server events.
 	Server *bool `json:"server,omitempty"`
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1) GetBrowser() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Browser
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1) GetMobile() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Mobile
+}
+
+func (o *DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1) GetServer() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Server
 }
 
 // DestinationV1DestinationMetadataV1 - Represents a Destination within Segment.
@@ -231,6 +343,146 @@ type DestinationV1DestinationMetadataV1 struct {
 	Website string `json:"website"`
 }
 
+func (o *DestinationV1DestinationMetadataV1) GetActions() []DestinationMetadataActionV1 {
+	if o == nil {
+		return []DestinationMetadataActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetComponents() []DestinationMetadataComponentV1 {
+	if o == nil {
+		return []DestinationMetadataComponentV1{}
+	}
+	return o.Components
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetContacts() []Contact {
+	if o == nil {
+		return nil
+	}
+	return o.Contacts
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetLogos() DestinationV1DestinationMetadataV1LogosBeta {
+	if o == nil {
+		return DestinationV1DestinationMetadataV1LogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetPartnerOwned() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.PartnerOwned
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetPresets() []DestinationMetadataSubscriptionPresetV1 {
+	if o == nil {
+		return []DestinationMetadataSubscriptionPresetV1{}
+	}
+	return o.Presets
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetPreviousNames() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.PreviousNames
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetRegionEndpoints() []string {
+	if o == nil {
+		return nil
+	}
+	return o.RegionEndpoints
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetStatus() DestinationV1DestinationMetadataV1Status {
+	if o == nil {
+		return DestinationV1DestinationMetadataV1Status("")
+	}
+	return o.Status
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetSupportedFeatures() DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1 {
+	if o == nil {
+		return DestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1{}
+	}
+	return o.SupportedFeatures
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetSupportedMethods() DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 {
+	if o == nil {
+		return DestinationV1DestinationMetadataV1DestinationMetadataMethodsV1{}
+	}
+	return o.SupportedMethods
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetSupportedPlatforms() DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 {
+	if o == nil {
+		return DestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1{}
+	}
+	return o.SupportedPlatforms
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetSupportedRegions() []string {
+	if o == nil {
+		return nil
+	}
+	return o.SupportedRegions
+}
+
+func (o *DestinationV1DestinationMetadataV1) GetWebsite() string {
+	if o == nil {
+		return ""
+	}
+	return o.Website
+}
+
 // DestinationV1 - Business tools or apps that you can connect to the data flowing through Segment.
 //
 // This is equal to the Destination object in Config API, with the following fields omitted:
@@ -259,4 +511,46 @@ type DestinationV1 struct {
 	//
 	// Config API note: analogous to `parent`.
 	SourceID string `json:"sourceId"`
+}
+
+func (o *DestinationV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *DestinationV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationV1) GetMetadata() DestinationV1DestinationMetadataV1 {
+	if o == nil {
+		return DestinationV1DestinationMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *DestinationV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *DestinationV1) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *DestinationV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
 }

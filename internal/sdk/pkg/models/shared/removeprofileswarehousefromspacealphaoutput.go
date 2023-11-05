@@ -37,3 +37,10 @@ type RemoveProfilesWarehouseFromSpaceAlphaOutput struct {
 	// The status of the Warehouse deletion operation.
 	Status RemoveProfilesWarehouseFromSpaceAlphaOutputStatus `json:"status"`
 }
+
+func (o *RemoveProfilesWarehouseFromSpaceAlphaOutput) GetStatus() RemoveProfilesWarehouseFromSpaceAlphaOutputStatus {
+	if o == nil {
+		return RemoveProfilesWarehouseFromSpaceAlphaOutputStatus("")
+	}
+	return o.Status
+}

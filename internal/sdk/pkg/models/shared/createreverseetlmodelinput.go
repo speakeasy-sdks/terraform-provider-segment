@@ -63,3 +63,59 @@ type CreateReverseEtlModelInput struct {
 	// Indicates which Source to attach this model to.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *CreateReverseEtlModelInput) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *CreateReverseEtlModelInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateReverseEtlModelInput) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateReverseEtlModelInput) GetQuery() string {
+	if o == nil {
+		return ""
+	}
+	return o.Query
+}
+
+func (o *CreateReverseEtlModelInput) GetQueryIdentifierColumn() string {
+	if o == nil {
+		return ""
+	}
+	return o.QueryIdentifierColumn
+}
+
+func (o *CreateReverseEtlModelInput) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.ScheduleConfig
+}
+
+func (o *CreateReverseEtlModelInput) GetScheduleStrategy() CreateReverseEtlModelInputScheduleStrategy {
+	if o == nil {
+		return CreateReverseEtlModelInputScheduleStrategy("")
+	}
+	return o.ScheduleStrategy
+}
+
+func (o *CreateReverseEtlModelInput) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

@@ -15,3 +15,31 @@ type CreateSourceV1Input struct {
 	// The slug by which to identify the Source in the Segment app.
 	Slug string `json:"slug"`
 }
+
+func (o *CreateSourceV1Input) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateSourceV1Input) GetMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetadataID
+}
+
+func (o *CreateSourceV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *CreateSourceV1Input) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}

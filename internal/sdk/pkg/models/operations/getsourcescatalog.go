@@ -14,10 +14,24 @@ type GetSourcesCatalogRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
+func (o *GetSourcesCatalogRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
 // GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSON - OK
 type GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns a list of all Source catalog items contained within a given page.
 	Data *shared.GetSourcesCatalogV1Output `json:"data,omitempty"`
+}
+
+func (o *GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.GetSourcesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -26,10 +40,24 @@ type GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.GetSourcesCatalogV1Output `json:"data,omitempty"`
 }
 
+func (o *GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetSourcesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetSourcesCatalog200ApplicationVndSegmentV1PlusJSON - OK
 type GetSourcesCatalog200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns a list of all Source catalog items contained within a given page.
 	Data *shared.GetSourcesCatalogV1Output `json:"data,omitempty"`
+}
+
+func (o *GetSourcesCatalog200ApplicationVndSegmentV1PlusJSON) GetData() *shared.GetSourcesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetSourcesCatalog200ApplicationJSON - OK
@@ -38,12 +66,22 @@ type GetSourcesCatalog200ApplicationJSON struct {
 	Data *shared.GetSourcesCatalogV1Output `json:"data,omitempty"`
 }
 
+func (o *GetSourcesCatalog200ApplicationJSON) GetData() *shared.GetSourcesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetSourcesCatalogResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetSourcesCatalog200ApplicationJSONObject *GetSourcesCatalog200ApplicationJSON
 	// OK
@@ -52,4 +90,60 @@ type GetSourcesCatalogResponse struct {
 	GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSONObject *GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSONObject *GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *GetSourcesCatalogResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetSourcesCatalogResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetSourcesCatalogResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetSourcesCatalogResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetSourcesCatalogResponse) GetGetSourcesCatalog200ApplicationJSONObject() *GetSourcesCatalog200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetSourcesCatalog200ApplicationJSONObject
+}
+
+func (o *GetSourcesCatalogResponse) GetGetSourcesCatalog200ApplicationVndSegmentV1PlusJSONObject() *GetSourcesCatalog200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetSourcesCatalog200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetSourcesCatalogResponse) GetGetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSONObject() *GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetSourcesCatalog200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetSourcesCatalogResponse) GetGetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSONObject() *GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetSourcesCatalog200ApplicationVndSegmentV1betaPlusJSONObject
 }

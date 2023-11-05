@@ -13,3 +13,31 @@ type UserGroupV1 struct {
 	// The permissions associated with the user group.
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
+
+func (o *UserGroupV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UserGroupV1) GetMemberCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.MemberCount
+}
+
+func (o *UserGroupV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UserGroupV1) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}

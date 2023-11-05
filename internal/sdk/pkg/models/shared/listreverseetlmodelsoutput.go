@@ -29,10 +29,52 @@ type ListReverseEtlModelsOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListReverseEtlModelsOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListReverseEtlModelsOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListReverseEtlModelsOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListReverseEtlModelsOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListReverseEtlModelsOutput - Defines the result of listing Models.
 type ListReverseEtlModelsOutput struct {
 	// A list of Models that belong to the Workspace.
 	Models []ReverseEtlModel `json:"models"`
 	// Information about the pagination of this response.
 	Pagination ListReverseEtlModelsOutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListReverseEtlModelsOutput) GetModels() []ReverseEtlModel {
+	if o == nil {
+		return []ReverseEtlModel{}
+	}
+	return o.Models
+}
+
+func (o *ListReverseEtlModelsOutput) GetPagination() ListReverseEtlModelsOutputPaginationOutput {
+	if o == nil {
+		return ListReverseEtlModelsOutputPaginationOutput{}
+	}
+	return o.Pagination
 }

@@ -11,10 +11,24 @@ type GetConnectionStateFromWarehouseRequest struct {
 	WarehouseID string `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
+func (o *GetConnectionStateFromWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
 // GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
 type GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.GetConnectionStateFromWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.GetConnectionStateFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON stru
 	Data *shared.GetConnectionStateFromWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.GetConnectionStateFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // GetConnectionStateFromWarehouse200ApplicationVndSegmentV1PlusJSON - OK
 type GetConnectionStateFromWarehouse200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.GetConnectionStateFromWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1PlusJSON) GetData() *shared.GetConnectionStateFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // GetConnectionStateFromWarehouse200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type GetConnectionStateFromWarehouse200ApplicationJSON struct {
 	Data *shared.GetConnectionStateFromWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *GetConnectionStateFromWarehouse200ApplicationJSON) GetData() *shared.GetConnectionStateFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetConnectionStateFromWarehouseResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	GetConnectionStateFromWarehouse200ApplicationJSONObject *GetConnectionStateFromWarehouse200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type GetConnectionStateFromWarehouseResponse struct {
 	GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetGetConnectionStateFromWarehouse200ApplicationJSONObject() *GetConnectionStateFromWarehouse200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetConnectionStateFromWarehouse200ApplicationJSONObject
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetGetConnectionStateFromWarehouse200ApplicationVndSegmentV1PlusJSONObject() *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetConnectionStateFromWarehouse200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetGetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject() *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetConnectionStateFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetConnectionStateFromWarehouseResponse) GetGetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject() *GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetConnectionStateFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject
 }

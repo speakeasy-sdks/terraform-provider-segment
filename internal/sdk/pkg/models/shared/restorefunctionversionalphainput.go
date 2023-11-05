@@ -7,3 +7,10 @@ type RestoreFunctionVersionAlphaInput struct {
 	// An identifier for this version.
 	VersionID string `json:"versionId"`
 }
+
+func (o *RestoreFunctionVersionAlphaInput) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}

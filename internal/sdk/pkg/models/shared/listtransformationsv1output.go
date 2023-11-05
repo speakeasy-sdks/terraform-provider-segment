@@ -29,10 +29,52 @@ type ListTransformationsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListTransformationsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListTransformationsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListTransformationsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListTransformationsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListTransformationsV1Output - Lists the Transformations associated with the current Workspace.
 type ListTransformationsV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListTransformationsV1OutputPaginationOutput `json:"pagination"`
 	// A paginated list of Transformations.
 	Transformations []TransformationV1 `json:"transformations"`
+}
+
+func (o *ListTransformationsV1Output) GetPagination() ListTransformationsV1OutputPaginationOutput {
+	if o == nil {
+		return ListTransformationsV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListTransformationsV1Output) GetTransformations() []TransformationV1 {
+	if o == nil {
+		return []TransformationV1{}
+	}
+	return o.Transformations
 }
