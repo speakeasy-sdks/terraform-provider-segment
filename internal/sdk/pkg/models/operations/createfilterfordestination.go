@@ -12,10 +12,31 @@ type CreateFilterForDestinationRequest struct {
 	DestinationID                     string                                   `pathParam:"style=simple,explode=false,name=destinationId"`
 }
 
+func (o *CreateFilterForDestinationRequest) GetCreateFilterForDestinationV1Input() shared.CreateFilterForDestinationV1Input {
+	if o == nil {
+		return shared.CreateFilterForDestinationV1Input{}
+	}
+	return o.CreateFilterForDestinationV1Input
+}
+
+func (o *CreateFilterForDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
 // CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON - OK
 type CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Output for CreateDestinationFiltersV1.
 	Data *shared.CreateFilterForDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.CreateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -24,10 +45,24 @@ type CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.CreateFilterForDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.CreateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateFilterForDestination200ApplicationVndSegmentV1PlusJSON - OK
 type CreateFilterForDestination200ApplicationVndSegmentV1PlusJSON struct {
 	// Output for CreateDestinationFiltersV1.
 	Data *shared.CreateFilterForDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateFilterForDestination200ApplicationVndSegmentV1PlusJSON) GetData() *shared.CreateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // CreateFilterForDestination200ApplicationJSON - OK
@@ -36,12 +71,22 @@ type CreateFilterForDestination200ApplicationJSON struct {
 	Data *shared.CreateFilterForDestinationV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateFilterForDestination200ApplicationJSON) GetData() *shared.CreateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type CreateFilterForDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	CreateFilterForDestination200ApplicationJSONObject *CreateFilterForDestination200ApplicationJSON
 	// OK
@@ -50,4 +95,60 @@ type CreateFilterForDestinationResponse struct {
 	CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject *CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject *CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *CreateFilterForDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateFilterForDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateFilterForDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateFilterForDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateFilterForDestinationResponse) GetCreateFilterForDestination200ApplicationJSONObject() *CreateFilterForDestination200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFilterForDestination200ApplicationJSONObject
+}
+
+func (o *CreateFilterForDestinationResponse) GetCreateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject() *CreateFilterForDestination200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateFilterForDestinationResponse) GetCreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject() *CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateFilterForDestinationResponse) GetCreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject() *CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject
 }

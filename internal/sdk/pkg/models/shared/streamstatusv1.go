@@ -7,3 +7,17 @@ type StreamStatusV1 struct {
 	DestinationStatus []DestinationStatusV1 `json:"destinationStatus"`
 	ID                string                `json:"id"`
 }
+
+func (o *StreamStatusV1) GetDestinationStatus() []DestinationStatusV1 {
+	if o == nil {
+		return []DestinationStatusV1{}
+	}
+	return o.DestinationStatus
+}
+
+func (o *StreamStatusV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}

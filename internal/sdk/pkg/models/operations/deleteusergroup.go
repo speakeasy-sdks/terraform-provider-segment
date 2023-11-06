@@ -11,10 +11,24 @@ type DeleteUserGroupRequest struct {
 	UserGroupID string `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
+func (o *DeleteUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
 // DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
 type DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the status of the completed deletion operation.
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -23,10 +37,24 @@ type DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // DeleteUserGroup200ApplicationVndSegmentV1PlusJSON - OK
 type DeleteUserGroup200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the status of the completed deletion operation.
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteUserGroup200ApplicationVndSegmentV1PlusJSON) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // DeleteUserGroup200ApplicationJSON - OK
@@ -35,12 +63,22 @@ type DeleteUserGroup200ApplicationJSON struct {
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
 }
 
+func (o *DeleteUserGroup200ApplicationJSON) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type DeleteUserGroupResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	DeleteUserGroup200ApplicationJSONObject *DeleteUserGroup200ApplicationJSON
 	// OK
@@ -49,4 +87,60 @@ type DeleteUserGroupResponse struct {
 	DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *DeleteUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeleteUserGroupResponse) GetDeleteUserGroup200ApplicationJSONObject() *DeleteUserGroup200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUserGroup200ApplicationJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetDeleteUserGroup200ApplicationVndSegmentV1PlusJSONObject() *DeleteUserGroup200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUserGroup200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetDeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject() *DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetDeleteUserGroup200ApplicationVndSegmentV1betaPlusJSONObject() *DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSONObject
 }

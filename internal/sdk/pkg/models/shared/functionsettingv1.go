@@ -55,3 +55,45 @@ type FunctionSettingV1 struct {
 	// The type of this Function Setting.
 	Type FunctionSettingV1Type `json:"type"`
 }
+
+func (o *FunctionSettingV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *FunctionSettingV1) GetLabel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Label
+}
+
+func (o *FunctionSettingV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *FunctionSettingV1) GetRequired() bool {
+	if o == nil {
+		return false
+	}
+	return o.Required
+}
+
+func (o *FunctionSettingV1) GetSensitive() bool {
+	if o == nil {
+		return false
+	}
+	return o.Sensitive
+}
+
+func (o *FunctionSettingV1) GetType() FunctionSettingV1Type {
+	if o == nil {
+		return FunctionSettingV1Type("")
+	}
+	return o.Type
+}

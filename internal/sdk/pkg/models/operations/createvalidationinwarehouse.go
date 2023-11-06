@@ -13,10 +13,24 @@ type CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
 type CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON - OK
@@ -25,18 +39,35 @@ type CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON struct {
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateValidationInWarehouse200ApplicationJSON - OK
 type CreateValidationInWarehouse200ApplicationJSON struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateValidationInWarehouse200ApplicationJSON) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type CreateValidationInWarehouseResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	CreateValidationInWarehouse200ApplicationJSONObject *CreateValidationInWarehouse200ApplicationJSON
 	// OK
@@ -45,4 +76,60 @@ type CreateValidationInWarehouseResponse struct {
 	CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *CreateValidationInWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateValidationInWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateValidationInWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateValidationInWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateValidationInWarehouseResponse) GetCreateValidationInWarehouse200ApplicationJSONObject() *CreateValidationInWarehouse200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateValidationInWarehouse200ApplicationJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetCreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSONObject() *CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetCreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject() *CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetCreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSONObject() *CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSONObject
 }

@@ -15,10 +15,31 @@ type ListConnectedDestinationsFromSourceRequest struct {
 	SourceID   string                 `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
+func (o *ListConnectedDestinationsFromSourceRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListConnectedDestinationsFromSourceRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON - OK
 type ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns a list of Destinations connected to a Source.
 	Data *shared.ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListConnectedDestinationsFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -27,10 +48,24 @@ type ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON 
 	Data *shared.ListConnectedDestinationsFromSourceAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListConnectedDestinationsFromSourceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON - OK
 type ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns a list of Destinations connected to a Source.
 	Data *shared.ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListConnectedDestinationsFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListConnectedDestinationsFromSource200ApplicationJSON - OK
@@ -39,12 +74,22 @@ type ListConnectedDestinationsFromSource200ApplicationJSON struct {
 	Data *shared.ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
 }
 
+func (o *ListConnectedDestinationsFromSource200ApplicationJSON) GetData() *shared.ListConnectedDestinationsFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListConnectedDestinationsFromSourceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListConnectedDestinationsFromSource200ApplicationJSONObject *ListConnectedDestinationsFromSource200ApplicationJSON
 	// OK
@@ -53,4 +98,60 @@ type ListConnectedDestinationsFromSourceResponse struct {
 	ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSONObject *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetListConnectedDestinationsFromSource200ApplicationJSONObject() *ListConnectedDestinationsFromSource200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListConnectedDestinationsFromSource200ApplicationJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSONObject() *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSONObject() *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSONObject() *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSONObject
 }

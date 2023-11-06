@@ -40,3 +40,10 @@ type AddConnectionFromSourceToWarehouseV1Output struct {
 	// The status of the connection between the Source and Warehouse.
 	Status AddConnectionFromSourceToWarehouseV1OutputStatus `json:"status"`
 }
+
+func (o *AddConnectionFromSourceToWarehouseV1Output) GetStatus() AddConnectionFromSourceToWarehouseV1OutputStatus {
+	if o == nil {
+		return AddConnectionFromSourceToWarehouseV1OutputStatus("")
+	}
+	return o.Status
+}

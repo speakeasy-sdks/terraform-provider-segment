@@ -8,3 +8,17 @@ type FQLDefinedPropertyV1 struct {
 	// The new property name.
 	PropertyName string `json:"propertyName"`
 }
+
+func (o *FQLDefinedPropertyV1) GetFql() string {
+	if o == nil {
+		return ""
+	}
+	return o.Fql
+}
+
+func (o *FQLDefinedPropertyV1) GetPropertyName() string {
+	if o == nil {
+		return ""
+	}
+	return o.PropertyName
+}

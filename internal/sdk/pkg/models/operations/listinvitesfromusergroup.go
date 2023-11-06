@@ -15,10 +15,31 @@ type ListInvitesFromUserGroupRequest struct {
 	UserGroupID string                 `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
+func (o *ListInvitesFromUserGroupRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListInvitesFromUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
 // ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
 type ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the emails of invitees to a user group with the given group id.
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -27,10 +48,24 @@ type ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
 }
 
+func (o *ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON - OK
 type ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the emails of invitees to a user group with the given group id.
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListInvitesFromUserGroup200ApplicationJSON - OK
@@ -39,12 +74,22 @@ type ListInvitesFromUserGroup200ApplicationJSON struct {
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
 }
 
+func (o *ListInvitesFromUserGroup200ApplicationJSON) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListInvitesFromUserGroupResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListInvitesFromUserGroup200ApplicationJSONObject *ListInvitesFromUserGroup200ApplicationJSON
 	// OK
@@ -53,4 +98,60 @@ type ListInvitesFromUserGroupResponse struct {
 	ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetListInvitesFromUserGroup200ApplicationJSONObject() *ListInvitesFromUserGroup200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListInvitesFromUserGroup200ApplicationJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSONObject() *ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject() *ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSONObject() *ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSONObject
 }

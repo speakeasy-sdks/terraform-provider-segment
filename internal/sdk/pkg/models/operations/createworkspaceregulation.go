@@ -13,10 +13,24 @@ type CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSON struct {
 	Data *shared.CreateWorkspaceRegulationV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.CreateWorkspaceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON - OK
 type CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON struct {
 	// The output of a create Workspace regulation call.
 	Data *shared.CreateWorkspaceRegulationV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.CreateWorkspaceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSON - OK
@@ -25,18 +39,35 @@ type CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSON struct {
 	Data *shared.CreateWorkspaceRegulationV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSON) GetData() *shared.CreateWorkspaceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // CreateWorkspaceRegulation200ApplicationJSON - OK
 type CreateWorkspaceRegulation200ApplicationJSON struct {
 	// The output of a create Workspace regulation call.
 	Data *shared.CreateWorkspaceRegulationV1Output `json:"data,omitempty"`
 }
 
+func (o *CreateWorkspaceRegulation200ApplicationJSON) GetData() *shared.CreateWorkspaceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type CreateWorkspaceRegulationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	CreateWorkspaceRegulation200ApplicationJSONObject *CreateWorkspaceRegulation200ApplicationJSON
 	// OK
@@ -45,4 +76,60 @@ type CreateWorkspaceRegulationResponse struct {
 	CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject *CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSONObject *CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetCreateWorkspaceRegulation200ApplicationJSONObject() *CreateWorkspaceRegulation200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateWorkspaceRegulation200ApplicationJSONObject
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetCreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSONObject() *CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateWorkspaceRegulation200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetCreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject() *CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateWorkspaceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateWorkspaceRegulationResponse) GetCreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSONObject() *CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.CreateWorkspaceRegulation200ApplicationVndSegmentV1betaPlusJSONObject
 }

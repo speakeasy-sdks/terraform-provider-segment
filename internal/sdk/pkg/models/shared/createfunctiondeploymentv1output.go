@@ -36,8 +36,22 @@ type CreateFunctionDeploymentV1OutputFunctionDeployment struct {
 	Status CreateFunctionDeploymentV1OutputFunctionDeploymentStatus `json:"status"`
 }
 
+func (o *CreateFunctionDeploymentV1OutputFunctionDeployment) GetStatus() CreateFunctionDeploymentV1OutputFunctionDeploymentStatus {
+	if o == nil {
+		return CreateFunctionDeploymentV1OutputFunctionDeploymentStatus("")
+	}
+	return o.Status
+}
+
 // CreateFunctionDeploymentV1Output - Updates the deployment for a Source Function instance.
 type CreateFunctionDeploymentV1Output struct {
 	// The status of the operation.
 	FunctionDeployment CreateFunctionDeploymentV1OutputFunctionDeployment `json:"functionDeployment"`
+}
+
+func (o *CreateFunctionDeploymentV1Output) GetFunctionDeployment() CreateFunctionDeploymentV1OutputFunctionDeployment {
+	if o == nil {
+		return CreateFunctionDeploymentV1OutputFunctionDeployment{}
+	}
+	return o.FunctionDeployment
 }

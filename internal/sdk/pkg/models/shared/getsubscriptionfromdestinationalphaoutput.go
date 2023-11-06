@@ -25,8 +25,78 @@ type GetSubscriptionFromDestinationAlphaOutputDestinationSubscription struct {
 	Trigger string `json:"trigger"`
 }
 
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetActionSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionSlug
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetModelID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModelID
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutputDestinationSubscription) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}
+
 // GetSubscriptionFromDestinationAlphaOutput - Returns a subscription for a given subscription id.
 type GetSubscriptionFromDestinationAlphaOutput struct {
 	// The Destination subscription.
 	Subscription GetSubscriptionFromDestinationAlphaOutputDestinationSubscription `json:"subscription"`
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutput) GetSubscription() GetSubscriptionFromDestinationAlphaOutputDestinationSubscription {
+	if o == nil {
+		return GetSubscriptionFromDestinationAlphaOutputDestinationSubscription{}
+	}
+	return o.Subscription
 }

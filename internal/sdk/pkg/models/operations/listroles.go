@@ -14,10 +14,24 @@ type ListRolesRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
+func (o *ListRolesRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
 // ListRoles200ApplicationVndSegmentV1betaPlusJSON - OK
 type ListRoles200ApplicationVndSegmentV1betaPlusJSON struct {
 	// Returns the list of roles.
 	Data *shared.ListRolesV1Output `json:"data,omitempty"`
+}
+
+func (o *ListRoles200ApplicationVndSegmentV1betaPlusJSON) GetData() *shared.ListRolesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListRoles200ApplicationVndSegmentV1alphaPlusJSON - OK
@@ -26,10 +40,24 @@ type ListRoles200ApplicationVndSegmentV1alphaPlusJSON struct {
 	Data *shared.ListRolesV1Output `json:"data,omitempty"`
 }
 
+func (o *ListRoles200ApplicationVndSegmentV1alphaPlusJSON) GetData() *shared.ListRolesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 // ListRoles200ApplicationVndSegmentV1PlusJSON - OK
 type ListRoles200ApplicationVndSegmentV1PlusJSON struct {
 	// Returns the list of roles.
 	Data *shared.ListRolesV1Output `json:"data,omitempty"`
+}
+
+func (o *ListRoles200ApplicationVndSegmentV1PlusJSON) GetData() *shared.ListRolesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 // ListRoles200ApplicationJSON - OK
@@ -38,12 +66,22 @@ type ListRoles200ApplicationJSON struct {
 	Data *shared.ListRolesV1Output `json:"data,omitempty"`
 }
 
+func (o *ListRoles200ApplicationJSON) GetData() *shared.ListRolesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListRolesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	ListRoles200ApplicationJSONObject *ListRoles200ApplicationJSON
 	// OK
@@ -52,4 +90,60 @@ type ListRolesResponse struct {
 	ListRoles200ApplicationVndSegmentV1alphaPlusJSONObject *ListRoles200ApplicationVndSegmentV1alphaPlusJSON
 	// OK
 	ListRoles200ApplicationVndSegmentV1betaPlusJSONObject *ListRoles200ApplicationVndSegmentV1betaPlusJSON
+}
+
+func (o *ListRolesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListRolesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListRolesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListRolesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListRolesResponse) GetListRoles200ApplicationJSONObject() *ListRoles200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListRoles200ApplicationJSONObject
+}
+
+func (o *ListRolesResponse) GetListRoles200ApplicationVndSegmentV1PlusJSONObject() *ListRoles200ApplicationVndSegmentV1PlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListRoles200ApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListRolesResponse) GetListRoles200ApplicationVndSegmentV1alphaPlusJSONObject() *ListRoles200ApplicationVndSegmentV1alphaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListRoles200ApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListRolesResponse) GetListRoles200ApplicationVndSegmentV1betaPlusJSONObject() *ListRoles200ApplicationVndSegmentV1betaPlusJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListRoles200ApplicationVndSegmentV1betaPlusJSONObject
 }

@@ -29,10 +29,52 @@ type ListSourcesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSourcesV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSourcesV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSourcesV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSourcesV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSourcesV1Output - Returns a list of Sources that belong to the current Workspace.
 type ListSourcesV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListSourcesV1OutputPaginationOutput `json:"pagination"`
 	// A list of Sources that belong to the Workspace.
 	Sources []SourceV1 `json:"sources"`
+}
+
+func (o *ListSourcesV1Output) GetPagination() ListSourcesV1OutputPaginationOutput {
+	if o == nil {
+		return ListSourcesV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSourcesV1Output) GetSources() []SourceV1 {
+	if o == nil {
+		return []SourceV1{}
+	}
+	return o.Sources
 }
