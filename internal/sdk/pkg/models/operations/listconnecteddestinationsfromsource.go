@@ -15,42 +15,143 @@ type ListConnectedDestinationsFromSourceRequest struct {
 	SourceID   string                 `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
-// ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON - OK
-type ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ListConnectedDestinationsFromSourceRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListConnectedDestinationsFromSourceRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+// ListConnectedDestinationsFromSourceSourcesResponse200ResponseBody - OK
+type ListConnectedDestinationsFromSourceSourcesResponse200ResponseBody struct {
 	// Returns a list of Destinations connected to a Source.
 	Data *shared.ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListConnectedDestinationsFromSourceSourcesResponse200ResponseBody) GetData() *shared.ListConnectedDestinationsFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedDestinationsFromSourceSourcesResponseResponseBody - OK
+type ListConnectedDestinationsFromSourceSourcesResponseResponseBody struct {
 	// Returns a list of Destinations connected to a Source.
 	Data *shared.ListConnectedDestinationsFromSourceAlphaOutput `json:"data,omitempty"`
 }
 
-// ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON - OK
-type ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ListConnectedDestinationsFromSourceSourcesResponseResponseBody) GetData() *shared.ListConnectedDestinationsFromSourceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedDestinationsFromSourceSourcesResponseBody - OK
+type ListConnectedDestinationsFromSourceSourcesResponseBody struct {
 	// Returns a list of Destinations connected to a Source.
 	Data *shared.ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedDestinationsFromSource200ApplicationJSON - OK
-type ListConnectedDestinationsFromSource200ApplicationJSON struct {
+func (o *ListConnectedDestinationsFromSourceSourcesResponseBody) GetData() *shared.ListConnectedDestinationsFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedDestinationsFromSourceResponseBody - OK
+type ListConnectedDestinationsFromSourceResponseBody struct {
 	// Returns a list of Destinations connected to a Source.
 	Data *shared.ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ListConnectedDestinationsFromSourceResponseBody) GetData() *shared.ListConnectedDestinationsFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ListConnectedDestinationsFromSourceResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ListConnectedDestinationsFromSourceResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ListConnectedDestinationsFromSourceSourcesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedDestinationsFromSourceSourcesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ListConnectedDestinationsFromSourceSourcesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ListConnectedDestinationsFromSource200ApplicationJSONObject *ListConnectedDestinationsFromSource200ApplicationJSON
-	// OK
-	ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSONObject *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSONObject *ListConnectedDestinationsFromSource200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetTwoHundredApplicationJSONObject() *ListConnectedDestinationsFromSourceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ListConnectedDestinationsFromSourceSourcesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ListConnectedDestinationsFromSourceSourcesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ListConnectedDestinationsFromSourceSourcesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListConnectedDestinationsFromSourceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

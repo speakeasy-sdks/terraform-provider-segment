@@ -61,3 +61,52 @@ type UpdateReverseEtlModelInput struct {
 	// conjunction with scheduleConfig.
 	ScheduleStrategy *UpdateReverseEtlModelInputScheduleStrategy `json:"scheduleStrategy,omitempty"`
 }
+
+func (o *UpdateReverseEtlModelInput) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UpdateReverseEtlModelInput) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateReverseEtlModelInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateReverseEtlModelInput) GetQuery() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Query
+}
+
+func (o *UpdateReverseEtlModelInput) GetQueryIdentifierColumn() *string {
+	if o == nil {
+		return nil
+	}
+	return o.QueryIdentifierColumn
+}
+
+func (o *UpdateReverseEtlModelInput) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.ScheduleConfig
+}
+
+func (o *UpdateReverseEtlModelInput) GetScheduleStrategy() *UpdateReverseEtlModelInputScheduleStrategy {
+	if o == nil {
+		return nil
+	}
+	return o.ScheduleStrategy
+}

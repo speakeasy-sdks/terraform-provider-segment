@@ -12,18 +12,77 @@ type UpdateReverseEtlModelRequest struct {
 	ModelID                    string                            `pathParam:"style=simple,explode=false,name=modelId"`
 }
 
-// UpdateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON - OK
-type UpdateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *UpdateReverseEtlModelRequest) GetUpdateReverseEtlModelInput() shared.UpdateReverseEtlModelInput {
+	if o == nil {
+		return shared.UpdateReverseEtlModelInput{}
+	}
+	return o.UpdateReverseEtlModelInput
+}
+
+func (o *UpdateReverseEtlModelRequest) GetModelID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ModelID
+}
+
+// UpdateReverseEtlModelResponseBody - OK
+type UpdateReverseEtlModelResponseBody struct {
 	// Defines the results of updating a Model.
 	Data *shared.UpdateReverseEtlModelOutput `json:"data,omitempty"`
 }
 
+func (o *UpdateReverseEtlModelResponseBody) GetData() *shared.UpdateReverseEtlModelOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type UpdateReverseEtlModelResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	UpdateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
+	Object *UpdateReverseEtlModelResponseBody
+}
+
+func (o *UpdateReverseEtlModelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateReverseEtlModelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateReverseEtlModelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateReverseEtlModelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateReverseEtlModelResponse) GetObject() *UpdateReverseEtlModelResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

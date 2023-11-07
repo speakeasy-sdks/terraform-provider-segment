@@ -7,18 +7,63 @@ import (
 	"segment/internal/sdk/pkg/models/shared"
 )
 
-// CreateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON - OK
-type CreateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON struct {
+// CreateReverseEtlModelResponseBody - OK
+type CreateReverseEtlModelResponseBody struct {
 	// Defines the results of creating a Model.
 	Data *shared.CreateReverseEtlModelOutput `json:"data,omitempty"`
 }
 
+func (o *CreateReverseEtlModelResponseBody) GetData() *shared.CreateReverseEtlModelOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type CreateReverseEtlModelResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	CreateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject *CreateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
+	Object *CreateReverseEtlModelResponseBody
+}
+
+func (o *CreateReverseEtlModelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateReverseEtlModelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateReverseEtlModelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateReverseEtlModelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateReverseEtlModelResponse) GetObject() *CreateReverseEtlModelResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

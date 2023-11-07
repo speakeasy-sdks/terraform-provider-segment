@@ -14,42 +14,136 @@ type ListUsersRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
-// ListUsers200ApplicationVndSegmentV1betaPlusJSON - OK
-type ListUsers200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ListUsersRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+// ListUsersIAMUsersResponse200ResponseBody - OK
+type ListUsersIAMUsersResponse200ResponseBody struct {
 	// Returns the list of users.
 	Data *shared.ListUsersV1Output `json:"data,omitempty"`
 }
 
-// ListUsers200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListUsers200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListUsersIAMUsersResponse200ResponseBody) GetData() *shared.ListUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListUsersIAMUsersResponseResponseBody - OK
+type ListUsersIAMUsersResponseResponseBody struct {
 	// Returns the list of users.
 	Data *shared.ListUsersV1Output `json:"data,omitempty"`
 }
 
-// ListUsers200ApplicationVndSegmentV1PlusJSON - OK
-type ListUsers200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ListUsersIAMUsersResponseResponseBody) GetData() *shared.ListUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListUsersIAMUsersResponseBody - OK
+type ListUsersIAMUsersResponseBody struct {
 	// Returns the list of users.
 	Data *shared.ListUsersV1Output `json:"data,omitempty"`
 }
 
-// ListUsers200ApplicationJSON - OK
-type ListUsers200ApplicationJSON struct {
+func (o *ListUsersIAMUsersResponseBody) GetData() *shared.ListUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListUsersResponseBody - OK
+type ListUsersResponseBody struct {
 	// Returns the list of users.
 	Data *shared.ListUsersV1Output `json:"data,omitempty"`
+}
+
+func (o *ListUsersResponseBody) GetData() *shared.ListUsersV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ListUsersResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ListUsersResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ListUsersIAMUsersResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ListUsersIAMUsersResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ListUsersIAMUsersResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ListUsers200ApplicationJSONObject *ListUsers200ApplicationJSON
-	// OK
-	ListUsers200ApplicationVndSegmentV1PlusJSONObject *ListUsers200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ListUsers200ApplicationVndSegmentV1alphaPlusJSONObject *ListUsers200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ListUsers200ApplicationVndSegmentV1betaPlusJSONObject *ListUsers200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListUsersResponse) GetTwoHundredApplicationJSONObject() *ListUsersResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ListUsersResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ListUsersIAMUsersResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListUsersResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ListUsersIAMUsersResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListUsersResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ListUsersIAMUsersResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ListUsersResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListUsersResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListUsersResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListUsersResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

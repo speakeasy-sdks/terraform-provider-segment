@@ -3,9 +3,9 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"math/big"
+	"segment/internal/sdk/pkg/models/operations"
 	"segment/internal/sdk/pkg/models/shared"
 )
 
@@ -17,32 +17,51 @@ func (r *CreateUserGroupV1InputResourceModel) ToCreateSDKType() *shared.CreateUs
 	return &out
 }
 
-func (r *CreateUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+func (r *CreateUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateUserGroupResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &AddUsersToUserGroupV1Output{}
+		r.Data.UserGroup.ID = types.StringValue(resp.Data.UserGroup.ID)
+		r.Data.UserGroup.MemberCount = types.NumberValue(big.NewFloat(float64(resp.Data.UserGroup.MemberCount)))
+		r.Data.UserGroup.Name = types.StringValue(resp.Data.UserGroup.Name)
+		r.Data.UserGroup.Permissions = nil
+		for _, permissionsItem := range resp.Data.UserGroup.Permissions {
+			var permissions1 PermissionV1
+			permissions1.Labels = nil
+			for _, labelsItem := range permissionsItem.Labels {
+				var labels1 LabelV1
+				if labelsItem.Description != nil {
+					labels1.Description = types.StringValue(*labelsItem.Description)
+				} else {
+					labels1.Description = types.StringNull()
+				}
+				labels1.Key = types.StringValue(labelsItem.Key)
+				labels1.Value = types.StringValue(labelsItem.Value)
+				permissions1.Labels = append(permissions1.Labels, labels1)
+			}
+			permissions1.Resources = nil
+			for _, resourcesItem := range permissionsItem.Resources {
+				var resources1 PermissionResourceV1
+				resources1.ID = types.StringValue(resourcesItem.ID)
+				resources1.Labels = nil
+				for _, labelsItem1 := range resourcesItem.Labels {
+					var labels3 LabelV1
+					if labelsItem1.Description != nil {
+						labels3.Description = types.StringValue(*labelsItem1.Description)
+					} else {
+						labels3.Description = types.StringNull()
+					}
+					labels3.Key = types.StringValue(labelsItem1.Key)
+					labels3.Value = types.StringValue(labelsItem1.Value)
+					resources1.Labels = append(resources1.Labels, labels3)
+				}
+				resources1.Type = types.StringValue(string(resourcesItem.Type))
+				permissions1.Resources = append(permissions1.Resources, resources1)
+			}
+			permissions1.RoleID = types.StringValue(permissionsItem.RoleID)
+			permissions1.RoleName = types.StringValue(permissionsItem.RoleName)
+			r.Data.UserGroup.Permissions = append(r.Data.UserGroup.Permissions, permissions1)
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
-		} else {
-			errors1.Field = types.StringNull()
-		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
 	}
 }

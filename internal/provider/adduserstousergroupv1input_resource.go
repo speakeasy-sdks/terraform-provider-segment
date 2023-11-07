@@ -8,6 +8,7 @@ import (
 	"segment/internal/sdk"
 	"segment/internal/sdk/pkg/models/operations"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -16,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -34,9 +34,9 @@ type AddUsersToUserGroupV1InputResource struct {
 
 // AddUsersToUserGroupV1InputResourceModel describes the resource data model.
 type AddUsersToUserGroupV1InputResourceModel struct {
-	Emails      []types.String `tfsdk:"emails"`
-	Errors      []RequestError `tfsdk:"errors"`
-	UserGroupID types.String   `tfsdk:"user_group_id"`
+	Data        *AddUsersToUserGroupV1Output `tfsdk:"data"`
+	Emails      []types.String               `tfsdk:"emails"`
+	UserGroupID types.String                 `tfsdk:"user_group_id"`
 }
 
 func (r *AddUsersToUserGroupV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -48,6 +48,112 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 		MarkdownDescription: "AddUsersToUserGroupV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"user_group": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The id of the user group.`,
+							},
+							"member_count": schema.NumberAttribute{
+								Computed:    true,
+								Description: `The number of members in the user group.`,
+							},
+							"name": schema.StringAttribute{
+								Computed:    true,
+								Description: `The name of the user group.`,
+							},
+							"permissions": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"labels": schema.ListNestedAttribute{
+											Computed: true,
+											NestedObject: schema.NestedAttributeObject{
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														Computed:    true,
+														Description: `A description of what this label represents.`,
+													},
+													"key": schema.StringAttribute{
+														Computed:    true,
+														Description: `The key identifier for this label.`,
+													},
+													"value": schema.StringAttribute{
+														Computed:    true,
+														Description: `The value of this label.`,
+													},
+												},
+											},
+											Description: `The labels to attach to this permission.`,
+										},
+										"resources": schema.ListNestedAttribute{
+											Computed: true,
+											NestedObject: schema.NestedAttributeObject{
+												Attributes: map[string]schema.Attribute{
+													"id": schema.StringAttribute{
+														Computed:    true,
+														Description: `The id of this resource.`,
+													},
+													"labels": schema.ListNestedAttribute{
+														Computed: true,
+														NestedObject: schema.NestedAttributeObject{
+															Attributes: map[string]schema.Attribute{
+																"description": schema.StringAttribute{
+																	Computed:    true,
+																	Description: `A description of what this label represents.`,
+																},
+																"key": schema.StringAttribute{
+																	Computed:    true,
+																	Description: `The key identifier for this label.`,
+																},
+																"value": schema.StringAttribute{
+																	Computed:    true,
+																	Description: `The value of this label.`,
+																},
+															},
+														},
+														Description: `The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions.`,
+													},
+													"type": schema.StringAttribute{
+														Computed: true,
+														Validators: []validator.String{
+															stringvalidator.OneOf(
+																"FUNCTION",
+																"SOURCE",
+																"SPACE",
+																"WAREHOUSE",
+																"WORKSPACE",
+															),
+														},
+														MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
+															`The type for this resource.`,
+													},
+												},
+											},
+											Description: `The resources associated with this permission.`,
+										},
+										"role_id": schema.StringAttribute{
+											Computed:    true,
+											Description: `The id of the role associated with this permission.`,
+										},
+										"role_name": schema.StringAttribute{
+											Computed:    true,
+											Description: `The name of the role associated with this permission.`,
+										},
+									},
+								},
+								Description: `The permissions associated with the user group.`,
+							},
+						},
+						Description: `A set of users with a set of shared permissions.`,
+					},
+				},
+				Description: `Returns the updated user group.`,
+			},
 			"emails": schema.ListAttribute{
 				PlanModifiers: []planmodifier.List{
 					listplanmodifier.RequiresReplace(),
@@ -55,37 +161,6 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 				Required:    true,
 				ElementType: types.StringType,
 				Description: `The email addresses of the users and invites to add.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"user_group_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -157,11 +232,11 @@ func (r *AddUsersToUserGroupV1InputResource) Create(ctx context.Context, req res
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

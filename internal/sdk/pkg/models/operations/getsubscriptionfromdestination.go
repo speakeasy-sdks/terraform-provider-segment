@@ -12,18 +12,77 @@ type GetSubscriptionFromDestinationRequest struct {
 	ID            string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-// GetSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetSubscriptionFromDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *GetSubscriptionFromDestinationRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+// GetSubscriptionFromDestinationResponseBody - OK
+type GetSubscriptionFromDestinationResponseBody struct {
 	// Returns a subscription for a given subscription id.
 	Data *shared.GetSubscriptionFromDestinationAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *GetSubscriptionFromDestinationResponseBody) GetData() *shared.GetSubscriptionFromDestinationAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetSubscriptionFromDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	GetSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject *GetSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON
+	Object *GetSubscriptionFromDestinationResponseBody
+}
+
+func (o *GetSubscriptionFromDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetSubscriptionFromDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetSubscriptionFromDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetSubscriptionFromDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetSubscriptionFromDestinationResponse) GetObject() *GetSubscriptionFromDestinationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

@@ -15,42 +15,143 @@ type ListConnectedSourcesFromWarehouseRequest struct {
 	WarehouseID string                 `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
-// ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
-type ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ListConnectedSourcesFromWarehouseRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListConnectedSourcesFromWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
+// ListConnectedSourcesFromWarehouseWarehousesResponse200ResponseBody - OK
+type ListConnectedSourcesFromWarehouseWarehousesResponse200ResponseBody struct {
 	// Returns a list of Sources connected to a Warehouse.
 	Data *shared.ListConnectedSourcesFromWarehouseV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListConnectedSourcesFromWarehouseWarehousesResponse200ResponseBody) GetData() *shared.ListConnectedSourcesFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedSourcesFromWarehouseWarehousesResponseResponseBody - OK
+type ListConnectedSourcesFromWarehouseWarehousesResponseResponseBody struct {
 	// Returns a list of Sources connected to a Warehouse.
 	Data *shared.ListConnectedSourcesFromWarehouseV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1PlusJSON - OK
-type ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ListConnectedSourcesFromWarehouseWarehousesResponseResponseBody) GetData() *shared.ListConnectedSourcesFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedSourcesFromWarehouseWarehousesResponseBody - OK
+type ListConnectedSourcesFromWarehouseWarehousesResponseBody struct {
 	// Returns a list of Sources connected to a Warehouse.
 	Data *shared.ListConnectedSourcesFromWarehouseV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedSourcesFromWarehouse200ApplicationJSON - OK
-type ListConnectedSourcesFromWarehouse200ApplicationJSON struct {
+func (o *ListConnectedSourcesFromWarehouseWarehousesResponseBody) GetData() *shared.ListConnectedSourcesFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedSourcesFromWarehouseResponseBody - OK
+type ListConnectedSourcesFromWarehouseResponseBody struct {
 	// Returns a list of Sources connected to a Warehouse.
 	Data *shared.ListConnectedSourcesFromWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponseBody) GetData() *shared.ListConnectedSourcesFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ListConnectedSourcesFromWarehouseResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ListConnectedSourcesFromWarehouseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ListConnectedSourcesFromWarehouseWarehousesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedSourcesFromWarehouseWarehousesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ListConnectedSourcesFromWarehouseWarehousesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ListConnectedSourcesFromWarehouse200ApplicationJSONObject *ListConnectedSourcesFromWarehouse200ApplicationJSON
-	// OK
-	ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1PlusJSONObject *ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *ListConnectedSourcesFromWarehouse200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetTwoHundredApplicationJSONObject() *ListConnectedSourcesFromWarehouseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ListConnectedSourcesFromWarehouseWarehousesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ListConnectedSourcesFromWarehouseWarehousesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ListConnectedSourcesFromWarehouseWarehousesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListConnectedSourcesFromWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

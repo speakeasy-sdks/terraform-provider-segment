@@ -13,18 +13,84 @@ type UpdateSubscriptionForDestinationRequest struct {
 	ID                                         string                                            `pathParam:"style=simple,explode=false,name=id"`
 }
 
-// UpdateSubscriptionForDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
-type UpdateSubscriptionForDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *UpdateSubscriptionForDestinationRequest) GetUpdateSubscriptionForDestinationAlphaInput() shared.UpdateSubscriptionForDestinationAlphaInput {
+	if o == nil {
+		return shared.UpdateSubscriptionForDestinationAlphaInput{}
+	}
+	return o.UpdateSubscriptionForDestinationAlphaInput
+}
+
+func (o *UpdateSubscriptionForDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *UpdateSubscriptionForDestinationRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+// UpdateSubscriptionForDestinationResponseBody - OK
+type UpdateSubscriptionForDestinationResponseBody struct {
 	// Returns the updated Destination subscription.
 	Data *shared.UpdateSubscriptionForDestinationAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *UpdateSubscriptionForDestinationResponseBody) GetData() *shared.UpdateSubscriptionForDestinationAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type UpdateSubscriptionForDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	UpdateSubscriptionForDestination200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateSubscriptionForDestination200ApplicationVndSegmentV1alphaPlusJSON
+	Object *UpdateSubscriptionForDestinationResponseBody
+}
+
+func (o *UpdateSubscriptionForDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateSubscriptionForDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateSubscriptionForDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateSubscriptionForDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateSubscriptionForDestinationResponse) GetObject() *UpdateSubscriptionForDestinationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

@@ -7,3 +7,10 @@ type ReplacePermissionsForUserGroupV1Output struct {
 	// The updated permissions.
 	Permissions []AccessPermissionV1 `json:"permissions"`
 }
+
+func (o *ReplacePermissionsForUserGroupV1Output) GetPermissions() []AccessPermissionV1 {
+	if o == nil {
+		return []AccessPermissionV1{}
+	}
+	return o.Permissions
+}

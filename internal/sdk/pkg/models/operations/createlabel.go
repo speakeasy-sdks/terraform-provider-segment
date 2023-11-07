@@ -7,42 +7,129 @@ import (
 	"segment/internal/sdk/pkg/models/shared"
 )
 
-// CreateLabel200ApplicationVndSegmentV1betaPlusJSON - OK
-type CreateLabel200ApplicationVndSegmentV1betaPlusJSON struct {
+// CreateLabelLabelsResponse200ResponseBody - OK
+type CreateLabelLabelsResponse200ResponseBody struct {
 	// Result of creating a new label in the current Workspace.
 	Data *shared.CreateLabelV1Output `json:"data,omitempty"`
 }
 
-// CreateLabel200ApplicationVndSegmentV1alphaPlusJSON - OK
-type CreateLabel200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *CreateLabelLabelsResponse200ResponseBody) GetData() *shared.CreateLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateLabelLabelsResponseResponseBody - OK
+type CreateLabelLabelsResponseResponseBody struct {
 	// Result of creating a new label in the current Workspace.
 	Data *shared.CreateLabelV1Output `json:"data,omitempty"`
 }
 
-// CreateLabel200ApplicationVndSegmentV1PlusJSON - OK
-type CreateLabel200ApplicationVndSegmentV1PlusJSON struct {
+func (o *CreateLabelLabelsResponseResponseBody) GetData() *shared.CreateLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateLabelLabelsResponseBody - OK
+type CreateLabelLabelsResponseBody struct {
 	// Result of creating a new label in the current Workspace.
 	Data *shared.CreateLabelV1Output `json:"data,omitempty"`
 }
 
-// CreateLabel200ApplicationJSON - OK
-type CreateLabel200ApplicationJSON struct {
+func (o *CreateLabelLabelsResponseBody) GetData() *shared.CreateLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateLabelResponseBody - OK
+type CreateLabelResponseBody struct {
 	// Result of creating a new label in the current Workspace.
 	Data *shared.CreateLabelV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateLabelResponseBody) GetData() *shared.CreateLabelV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type CreateLabelResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *CreateLabelResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *CreateLabelLabelsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *CreateLabelLabelsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *CreateLabelLabelsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	CreateLabel200ApplicationJSONObject *CreateLabel200ApplicationJSON
-	// OK
-	CreateLabel200ApplicationVndSegmentV1PlusJSONObject *CreateLabel200ApplicationVndSegmentV1PlusJSON
-	// OK
-	CreateLabel200ApplicationVndSegmentV1alphaPlusJSONObject *CreateLabel200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	CreateLabel200ApplicationVndSegmentV1betaPlusJSONObject *CreateLabel200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *CreateLabelResponse) GetTwoHundredApplicationJSONObject() *CreateLabelResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *CreateLabelResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *CreateLabelLabelsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateLabelResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *CreateLabelLabelsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateLabelResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *CreateLabelLabelsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *CreateLabelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateLabelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateLabelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateLabelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

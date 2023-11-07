@@ -7,3 +7,10 @@ type GenerateUploadURLForEdgeFunctionsAlphaOutput struct {
 	// A temporary URL that can be used to upload your Edge Functions bundle. Expires in 15 minutes.
 	UploadURL string `json:"uploadURL"`
 }
+
+func (o *GenerateUploadURLForEdgeFunctionsAlphaOutput) GetUploadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.UploadURL
+}

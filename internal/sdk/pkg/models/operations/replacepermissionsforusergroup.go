@@ -12,42 +12,143 @@ type ReplacePermissionsForUserGroupRequest struct {
 	UserGroupID                           string                                       `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
-// ReplacePermissionsForUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
-type ReplacePermissionsForUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ReplacePermissionsForUserGroupRequest) GetReplacePermissionsForUserGroupV1Input() shared.ReplacePermissionsForUserGroupV1Input {
+	if o == nil {
+		return shared.ReplacePermissionsForUserGroupV1Input{}
+	}
+	return o.ReplacePermissionsForUserGroupV1Input
+}
+
+func (o *ReplacePermissionsForUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
+// ReplacePermissionsForUserGroupIAMGroupsResponse200ResponseBody - OK
+type ReplacePermissionsForUserGroupIAMGroupsResponse200ResponseBody struct {
 	// Returns the user group's permissions, including the updated permissions.
 	Data *shared.ReplacePermissionsForUserGroupV1Output `json:"data,omitempty"`
 }
 
-// ReplacePermissionsForUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ReplacePermissionsForUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ReplacePermissionsForUserGroupIAMGroupsResponse200ResponseBody) GetData() *shared.ReplacePermissionsForUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ReplacePermissionsForUserGroupIAMGroupsResponseResponseBody - OK
+type ReplacePermissionsForUserGroupIAMGroupsResponseResponseBody struct {
 	// Returns the user group's permissions, including the updated permissions.
 	Data *shared.ReplacePermissionsForUserGroupV1Output `json:"data,omitempty"`
 }
 
-// ReplacePermissionsForUserGroup200ApplicationVndSegmentV1PlusJSON - OK
-type ReplacePermissionsForUserGroup200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ReplacePermissionsForUserGroupIAMGroupsResponseResponseBody) GetData() *shared.ReplacePermissionsForUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ReplacePermissionsForUserGroupIAMGroupsResponseBody - OK
+type ReplacePermissionsForUserGroupIAMGroupsResponseBody struct {
 	// Returns the user group's permissions, including the updated permissions.
 	Data *shared.ReplacePermissionsForUserGroupV1Output `json:"data,omitempty"`
 }
 
-// ReplacePermissionsForUserGroup200ApplicationJSON - OK
-type ReplacePermissionsForUserGroup200ApplicationJSON struct {
+func (o *ReplacePermissionsForUserGroupIAMGroupsResponseBody) GetData() *shared.ReplacePermissionsForUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ReplacePermissionsForUserGroupResponseBody - OK
+type ReplacePermissionsForUserGroupResponseBody struct {
 	// Returns the user group's permissions, including the updated permissions.
 	Data *shared.ReplacePermissionsForUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *ReplacePermissionsForUserGroupResponseBody) GetData() *shared.ReplacePermissionsForUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ReplacePermissionsForUserGroupResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ReplacePermissionsForUserGroupResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ReplacePermissionsForUserGroupIAMGroupsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ReplacePermissionsForUserGroupIAMGroupsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ReplacePermissionsForUserGroupIAMGroupsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ReplacePermissionsForUserGroup200ApplicationJSONObject *ReplacePermissionsForUserGroup200ApplicationJSON
-	// OK
-	ReplacePermissionsForUserGroup200ApplicationVndSegmentV1PlusJSONObject *ReplacePermissionsForUserGroup200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ReplacePermissionsForUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *ReplacePermissionsForUserGroup200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ReplacePermissionsForUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *ReplacePermissionsForUserGroup200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetTwoHundredApplicationJSONObject() *ReplacePermissionsForUserGroupResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ReplacePermissionsForUserGroupIAMGroupsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ReplacePermissionsForUserGroupIAMGroupsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ReplacePermissionsForUserGroupIAMGroupsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ReplacePermissionsForUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

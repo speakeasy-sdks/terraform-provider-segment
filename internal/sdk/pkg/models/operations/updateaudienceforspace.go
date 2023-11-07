@@ -13,18 +13,84 @@ type UpdateAudienceForSpaceRequest struct {
 	SpaceID                     string                             `pathParam:"style=simple,explode=false,name=spaceId"`
 }
 
-// UpdateAudienceForSpace200ApplicationVndSegmentV1alphaPlusJSON - OK
-type UpdateAudienceForSpace200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *UpdateAudienceForSpaceRequest) GetUpdateAudienceForSpaceInput() shared.UpdateAudienceForSpaceInput {
+	if o == nil {
+		return shared.UpdateAudienceForSpaceInput{}
+	}
+	return o.UpdateAudienceForSpaceInput
+}
+
+func (o *UpdateAudienceForSpaceRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateAudienceForSpaceRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+// UpdateAudienceForSpaceResponseBody - OK
+type UpdateAudienceForSpaceResponseBody struct {
 	// Audience output for get.
 	Data *shared.UpdateAudienceForSpaceAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *UpdateAudienceForSpaceResponseBody) GetData() *shared.UpdateAudienceForSpaceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type UpdateAudienceForSpaceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	UpdateAudienceForSpace200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateAudienceForSpace200ApplicationVndSegmentV1alphaPlusJSON
+	Object *UpdateAudienceForSpaceResponseBody
+}
+
+func (o *UpdateAudienceForSpaceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateAudienceForSpaceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateAudienceForSpaceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateAudienceForSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateAudienceForSpaceResponse) GetObject() *UpdateAudienceForSpaceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

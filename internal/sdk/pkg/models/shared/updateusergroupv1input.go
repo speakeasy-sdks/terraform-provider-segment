@@ -7,3 +7,10 @@ type UpdateUserGroupV1Input struct {
 	// The intended value to rename the user group to.
 	Name string `json:"name"`
 }
+
+func (o *UpdateUserGroupV1Input) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}

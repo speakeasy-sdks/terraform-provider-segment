@@ -3,9 +3,8 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
+	"segment/internal/sdk/pkg/models/operations"
 	"segment/internal/sdk/pkg/models/shared"
 )
 
@@ -70,32 +69,49 @@ func (r *CreateTransformationV1InputResourceModel) ToCreateSDKType() *shared.Cre
 	return &out
 }
 
-func (r *CreateTransformationV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
+func (r *CreateTransformationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateTransformationResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateTransformationV1Output{}
+		if resp.Data.Transformation.DestinationMetadataID != nil {
+			r.Data.Transformation.DestinationMetadataID = types.StringValue(*resp.Data.Transformation.DestinationMetadataID)
 		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+			r.Data.Transformation.DestinationMetadataID = types.StringNull()
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
+		r.Data.Transformation.Enabled = types.BoolValue(resp.Data.Transformation.Enabled)
+		r.Data.Transformation.FqlDefinedProperties = nil
+		for _, fqlDefinedPropertiesItem := range resp.Data.Transformation.FqlDefinedProperties {
+			var fqlDefinedProperties1 FQLDefinedPropertyV1
+			fqlDefinedProperties1.Fql = types.StringValue(fqlDefinedPropertiesItem.Fql)
+			fqlDefinedProperties1.PropertyName = types.StringValue(fqlDefinedPropertiesItem.PropertyName)
+			r.Data.Transformation.FqlDefinedProperties = append(r.Data.Transformation.FqlDefinedProperties, fqlDefinedProperties1)
+		}
+		r.Data.Transformation.ID = types.StringValue(resp.Data.Transformation.ID)
+		r.Data.Transformation.If = types.StringValue(resp.Data.Transformation.If)
+		r.Data.Transformation.Name = types.StringValue(resp.Data.Transformation.Name)
+		if resp.Data.Transformation.NewEventName != nil {
+			r.Data.Transformation.NewEventName = types.StringValue(*resp.Data.Transformation.NewEventName)
 		} else {
-			errors1.Field = types.StringNull()
+			r.Data.Transformation.NewEventName = types.StringNull()
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
+		r.Data.Transformation.PropertyRenames = nil
+		for _, propertyRenamesItem := range resp.Data.Transformation.PropertyRenames {
+			var propertyRenames1 PropertyRenameV1
+			propertyRenames1.NewName = types.StringValue(propertyRenamesItem.NewName)
+			propertyRenames1.OldName = types.StringValue(propertyRenamesItem.OldName)
+			r.Data.Transformation.PropertyRenames = append(r.Data.Transformation.PropertyRenames, propertyRenames1)
 		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
+		r.Data.Transformation.PropertyValueTransformations = nil
+		for _, propertyValueTransformationsItem := range resp.Data.Transformation.PropertyValueTransformations {
+			var propertyValueTransformations1 PropertyValueTransformationV1
+			propertyValueTransformations1.PropertyPaths = nil
+			for _, v := range propertyValueTransformationsItem.PropertyPaths {
+				propertyValueTransformations1.PropertyPaths = append(propertyValueTransformations1.PropertyPaths, types.StringValue(v))
+			}
+			propertyValueTransformations1.PropertyValue = types.StringValue(propertyValueTransformationsItem.PropertyValue)
+			r.Data.Transformation.PropertyValueTransformations = append(r.Data.Transformation.PropertyValueTransformations, propertyValueTransformations1)
 		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+		r.Data.Transformation.SourceID = types.StringValue(resp.Data.Transformation.SourceID)
 	}
 }

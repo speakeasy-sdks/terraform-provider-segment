@@ -5,7 +5,7 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
+	"segment/internal/sdk/pkg/models/operations"
 	"segment/internal/sdk/pkg/models/shared"
 )
 
@@ -39,7 +39,7 @@ func (r *PreviewDestinationFilterV1InputResourceModel) ToCreateSDKType() *shared
 		})
 	}
 	ifVar := r.Filter.If.ValueString()
-	filter := shared.PreviewDestinationFilterV1InputPreviewDestinationFilterV1{
+	filter := shared.PreviewDestinationFilterV1{
 		Actions: actions,
 		If:      ifVar,
 	}
@@ -56,32 +56,22 @@ func (r *PreviewDestinationFilterV1InputResourceModel) ToCreateSDKType() *shared
 	return &out
 }
 
-func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromCreateResponse(resp *operations.PreviewDestinationFilterResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &PreviewDestinationFilterV1Output{}
+		if r.Data.InputPayload == nil && len(resp.Data.InputPayload) > 0 {
+			r.Data.InputPayload = make(map[string]types.String)
+			for key, value := range resp.Data.InputPayload {
+				result, _ := json.Marshal(value)
+				r.Data.InputPayload[key] = types.StringValue(string(result))
+			}
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
+		if resp.Data.Result == nil {
+			r.Data.Result = nil
 		} else {
-			errors1.Field = types.StringNull()
+			r.Data.Result = &Result{}
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
 	}
 }

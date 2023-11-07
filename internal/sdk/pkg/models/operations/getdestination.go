@@ -11,42 +11,136 @@ type GetDestinationRequest struct {
 	DestinationID string `pathParam:"style=simple,explode=false,name=destinationId"`
 }
 
-// GetDestination200ApplicationVndSegmentV1betaPlusJSON - OK
-type GetDestination200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *GetDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+// GetDestinationDestinationsResponse200ResponseBody - OK
+type GetDestinationDestinationsResponse200ResponseBody struct {
 	// Returns a single Destination by its id.
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
 }
 
-// GetDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetDestinationDestinationsResponse200ResponseBody) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetDestinationDestinationsResponseResponseBody - OK
+type GetDestinationDestinationsResponseResponseBody struct {
 	// Returns a single Destination by its id.
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
 }
 
-// GetDestination200ApplicationVndSegmentV1PlusJSON - OK
-type GetDestination200ApplicationVndSegmentV1PlusJSON struct {
+func (o *GetDestinationDestinationsResponseResponseBody) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetDestinationDestinationsResponseBody - OK
+type GetDestinationDestinationsResponseBody struct {
 	// Returns a single Destination by its id.
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
 }
 
-// GetDestination200ApplicationJSON - OK
-type GetDestination200ApplicationJSON struct {
+func (o *GetDestinationDestinationsResponseBody) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetDestinationResponseBody - OK
+type GetDestinationResponseBody struct {
 	// Returns a single Destination by its id.
 	Data *shared.GetDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *GetDestinationResponseBody) GetData() *shared.GetDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type GetDestinationResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *GetDestinationResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *GetDestinationDestinationsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *GetDestinationDestinationsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *GetDestinationDestinationsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	GetDestination200ApplicationJSONObject *GetDestination200ApplicationJSON
-	// OK
-	GetDestination200ApplicationVndSegmentV1PlusJSONObject *GetDestination200ApplicationVndSegmentV1PlusJSON
-	// OK
-	GetDestination200ApplicationVndSegmentV1alphaPlusJSONObject *GetDestination200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	GetDestination200ApplicationVndSegmentV1betaPlusJSONObject *GetDestination200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *GetDestinationResponse) GetTwoHundredApplicationJSONObject() *GetDestinationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *GetDestinationResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *GetDestinationDestinationsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetDestinationResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *GetDestinationDestinationsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetDestinationResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *GetDestinationDestinationsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *GetDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

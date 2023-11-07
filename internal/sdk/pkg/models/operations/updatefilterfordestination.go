@@ -13,42 +13,150 @@ type UpdateFilterForDestinationRequest struct {
 	FilterID                          string                                   `pathParam:"style=simple,explode=false,name=filterId"`
 }
 
-// UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON - OK
-type UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *UpdateFilterForDestinationRequest) GetUpdateFilterForDestinationV1Input() shared.UpdateFilterForDestinationV1Input {
+	if o == nil {
+		return shared.UpdateFilterForDestinationV1Input{}
+	}
+	return o.UpdateFilterForDestinationV1Input
+}
+
+func (o *UpdateFilterForDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *UpdateFilterForDestinationRequest) GetFilterID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FilterID
+}
+
+// UpdateFilterForDestinationDestinationFiltersResponse200ResponseBody - OK
+type UpdateFilterForDestinationDestinationFiltersResponse200ResponseBody struct {
 	// Output for UpdateDestinationFilterV1.
 	Data *shared.UpdateFilterForDestinationV1Output `json:"data,omitempty"`
 }
 
-// UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
-type UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *UpdateFilterForDestinationDestinationFiltersResponse200ResponseBody) GetData() *shared.UpdateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// UpdateFilterForDestinationDestinationFiltersResponseResponseBody - OK
+type UpdateFilterForDestinationDestinationFiltersResponseResponseBody struct {
 	// Output for UpdateDestinationFilterV1.
 	Data *shared.UpdateFilterForDestinationV1Output `json:"data,omitempty"`
 }
 
-// UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSON - OK
-type UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSON struct {
+func (o *UpdateFilterForDestinationDestinationFiltersResponseResponseBody) GetData() *shared.UpdateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// UpdateFilterForDestinationDestinationFiltersResponseBody - OK
+type UpdateFilterForDestinationDestinationFiltersResponseBody struct {
 	// Output for UpdateDestinationFilterV1.
 	Data *shared.UpdateFilterForDestinationV1Output `json:"data,omitempty"`
 }
 
-// UpdateFilterForDestination200ApplicationJSON - OK
-type UpdateFilterForDestination200ApplicationJSON struct {
+func (o *UpdateFilterForDestinationDestinationFiltersResponseBody) GetData() *shared.UpdateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// UpdateFilterForDestinationResponseBody - OK
+type UpdateFilterForDestinationResponseBody struct {
 	// Output for UpdateDestinationFilterV1.
 	Data *shared.UpdateFilterForDestinationV1Output `json:"data,omitempty"`
+}
+
+func (o *UpdateFilterForDestinationResponseBody) GetData() *shared.UpdateFilterForDestinationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type UpdateFilterForDestinationResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *UpdateFilterForDestinationResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *UpdateFilterForDestinationDestinationFiltersResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *UpdateFilterForDestinationDestinationFiltersResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *UpdateFilterForDestinationDestinationFiltersResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	UpdateFilterForDestination200ApplicationJSONObject *UpdateFilterForDestination200ApplicationJSON
-	// OK
-	UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSONObject *UpdateFilterForDestination200ApplicationVndSegmentV1PlusJSON
-	// OK
-	UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateFilterForDestination200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSONObject *UpdateFilterForDestination200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *UpdateFilterForDestinationResponse) GetTwoHundredApplicationJSONObject() *UpdateFilterForDestinationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *UpdateFilterForDestinationResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *UpdateFilterForDestinationDestinationFiltersResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *UpdateFilterForDestinationResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *UpdateFilterForDestinationDestinationFiltersResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *UpdateFilterForDestinationResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *UpdateFilterForDestinationDestinationFiltersResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *UpdateFilterForDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateFilterForDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateFilterForDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateFilterForDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

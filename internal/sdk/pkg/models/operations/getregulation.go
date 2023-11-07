@@ -11,42 +11,136 @@ type GetRegulationRequest struct {
 	RegulateID string `pathParam:"style=simple,explode=false,name=regulateId"`
 }
 
-// GetRegulation200ApplicationVndSegmentV1betaPlusJSON - OK
-type GetRegulation200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *GetRegulationRequest) GetRegulateID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RegulateID
+}
+
+// GetRegulationDeletionAndSuppressionResponse200ResponseBody - OK
+type GetRegulationDeletionAndSuppressionResponse200ResponseBody struct {
 	// The regulate request returned.
 	Data *shared.GetRegulationV1Output `json:"data,omitempty"`
 }
 
-// GetRegulation200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetRegulation200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetRegulationDeletionAndSuppressionResponse200ResponseBody) GetData() *shared.GetRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetRegulationDeletionAndSuppressionResponseResponseBody - OK
+type GetRegulationDeletionAndSuppressionResponseResponseBody struct {
 	// The regulate request returned.
 	Data *shared.GetRegulationV1Output `json:"data,omitempty"`
 }
 
-// GetRegulation200ApplicationVndSegmentV1PlusJSON - OK
-type GetRegulation200ApplicationVndSegmentV1PlusJSON struct {
+func (o *GetRegulationDeletionAndSuppressionResponseResponseBody) GetData() *shared.GetRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetRegulationDeletionAndSuppressionResponseBody - OK
+type GetRegulationDeletionAndSuppressionResponseBody struct {
 	// The regulate request returned.
 	Data *shared.GetRegulationV1Output `json:"data,omitempty"`
 }
 
-// GetRegulation200ApplicationJSON - OK
-type GetRegulation200ApplicationJSON struct {
+func (o *GetRegulationDeletionAndSuppressionResponseBody) GetData() *shared.GetRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetRegulationResponseBody - OK
+type GetRegulationResponseBody struct {
 	// The regulate request returned.
 	Data *shared.GetRegulationV1Output `json:"data,omitempty"`
+}
+
+func (o *GetRegulationResponseBody) GetData() *shared.GetRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type GetRegulationResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *GetRegulationResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *GetRegulationDeletionAndSuppressionResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *GetRegulationDeletionAndSuppressionResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *GetRegulationDeletionAndSuppressionResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	GetRegulation200ApplicationJSONObject *GetRegulation200ApplicationJSON
-	// OK
-	GetRegulation200ApplicationVndSegmentV1PlusJSONObject *GetRegulation200ApplicationVndSegmentV1PlusJSON
-	// OK
-	GetRegulation200ApplicationVndSegmentV1alphaPlusJSONObject *GetRegulation200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	GetRegulation200ApplicationVndSegmentV1betaPlusJSONObject *GetRegulation200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *GetRegulationResponse) GetTwoHundredApplicationJSONObject() *GetRegulationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *GetRegulationResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *GetRegulationDeletionAndSuppressionResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetRegulationResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *GetRegulationDeletionAndSuppressionResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetRegulationResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *GetRegulationDeletionAndSuppressionResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *GetRegulationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetRegulationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetRegulationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetRegulationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

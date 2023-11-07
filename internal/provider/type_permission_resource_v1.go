@@ -5,7 +5,7 @@ package provider
 import "github.com/hashicorp/terraform-plugin-framework/types"
 
 type PermissionResourceV1 struct {
-	ID     types.String       `tfsdk:"id"`
-	Labels []AllowedLabelBeta `tfsdk:"labels"`
-	Type   types.String       `tfsdk:"type"`
+	ID     types.String `tfsdk:"id"`
+	Labels []LabelV1    `tfsdk:"labels"`
+	Type   types.String `tfsdk:"type"`
 }

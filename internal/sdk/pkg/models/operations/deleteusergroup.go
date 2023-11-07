@@ -11,42 +11,136 @@ type DeleteUserGroupRequest struct {
 	UserGroupID string `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
-// DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
-type DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *DeleteUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
+// DeleteUserGroupIAMGroupsResponse200ResponseBody - OK
+type DeleteUserGroupIAMGroupsResponse200ResponseBody struct {
 	// Returns the status of the completed deletion operation.
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
 }
 
-// DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
-type DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *DeleteUserGroupIAMGroupsResponse200ResponseBody) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteUserGroupIAMGroupsResponseResponseBody - OK
+type DeleteUserGroupIAMGroupsResponseResponseBody struct {
 	// Returns the status of the completed deletion operation.
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
 }
 
-// DeleteUserGroup200ApplicationVndSegmentV1PlusJSON - OK
-type DeleteUserGroup200ApplicationVndSegmentV1PlusJSON struct {
+func (o *DeleteUserGroupIAMGroupsResponseResponseBody) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteUserGroupIAMGroupsResponseBody - OK
+type DeleteUserGroupIAMGroupsResponseBody struct {
 	// Returns the status of the completed deletion operation.
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
 }
 
-// DeleteUserGroup200ApplicationJSON - OK
-type DeleteUserGroup200ApplicationJSON struct {
+func (o *DeleteUserGroupIAMGroupsResponseBody) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteUserGroupResponseBody - OK
+type DeleteUserGroupResponseBody struct {
 	// Returns the status of the completed deletion operation.
 	Data *shared.DeleteUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteUserGroupResponseBody) GetData() *shared.DeleteUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type DeleteUserGroupResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *DeleteUserGroupResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *DeleteUserGroupIAMGroupsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *DeleteUserGroupIAMGroupsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *DeleteUserGroupIAMGroupsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	DeleteUserGroup200ApplicationJSONObject *DeleteUserGroup200ApplicationJSON
-	// OK
-	DeleteUserGroup200ApplicationVndSegmentV1PlusJSONObject *DeleteUserGroup200ApplicationVndSegmentV1PlusJSON
-	// OK
-	DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteUserGroup200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *DeleteUserGroup200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *DeleteUserGroupResponse) GetTwoHundredApplicationJSONObject() *DeleteUserGroupResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *DeleteUserGroupIAMGroupsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *DeleteUserGroupIAMGroupsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *DeleteUserGroupIAMGroupsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *DeleteUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

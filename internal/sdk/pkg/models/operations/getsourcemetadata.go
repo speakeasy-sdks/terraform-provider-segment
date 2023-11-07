@@ -11,42 +11,136 @@ type GetSourceMetadataRequest struct {
 	SourceMetadataID string `pathParam:"style=simple,explode=false,name=sourceMetadataId"`
 }
 
-// GetSourceMetadata200ApplicationVndSegmentV1betaPlusJSON - OK
-type GetSourceMetadata200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *GetSourceMetadataRequest) GetSourceMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceMetadataID
+}
+
+// GetSourceMetadataCatalogResponse200ResponseBody - OK
+type GetSourceMetadataCatalogResponse200ResponseBody struct {
 	// Returns the Source catalog item looked up by id.
 	Data *shared.GetSourceMetadataV1Output `json:"data,omitempty"`
 }
 
-// GetSourceMetadata200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetSourceMetadata200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetSourceMetadataCatalogResponse200ResponseBody) GetData() *shared.GetSourceMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetSourceMetadataCatalogResponseResponseBody - OK
+type GetSourceMetadataCatalogResponseResponseBody struct {
 	// Returns the Source catalog item looked up by id.
 	Data *shared.GetSourceMetadataV1Output `json:"data,omitempty"`
 }
 
-// GetSourceMetadata200ApplicationVndSegmentV1PlusJSON - OK
-type GetSourceMetadata200ApplicationVndSegmentV1PlusJSON struct {
+func (o *GetSourceMetadataCatalogResponseResponseBody) GetData() *shared.GetSourceMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetSourceMetadataCatalogResponseBody - OK
+type GetSourceMetadataCatalogResponseBody struct {
 	// Returns the Source catalog item looked up by id.
 	Data *shared.GetSourceMetadataV1Output `json:"data,omitempty"`
 }
 
-// GetSourceMetadata200ApplicationJSON - OK
-type GetSourceMetadata200ApplicationJSON struct {
+func (o *GetSourceMetadataCatalogResponseBody) GetData() *shared.GetSourceMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetSourceMetadataResponseBody - OK
+type GetSourceMetadataResponseBody struct {
 	// Returns the Source catalog item looked up by id.
 	Data *shared.GetSourceMetadataV1Output `json:"data,omitempty"`
+}
+
+func (o *GetSourceMetadataResponseBody) GetData() *shared.GetSourceMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type GetSourceMetadataResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *GetSourceMetadataResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *GetSourceMetadataCatalogResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *GetSourceMetadataCatalogResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *GetSourceMetadataCatalogResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	GetSourceMetadata200ApplicationJSONObject *GetSourceMetadata200ApplicationJSON
-	// OK
-	GetSourceMetadata200ApplicationVndSegmentV1PlusJSONObject *GetSourceMetadata200ApplicationVndSegmentV1PlusJSON
-	// OK
-	GetSourceMetadata200ApplicationVndSegmentV1alphaPlusJSONObject *GetSourceMetadata200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	GetSourceMetadata200ApplicationVndSegmentV1betaPlusJSONObject *GetSourceMetadata200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *GetSourceMetadataResponse) GetTwoHundredApplicationJSONObject() *GetSourceMetadataResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *GetSourceMetadataResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *GetSourceMetadataCatalogResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetSourceMetadataResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *GetSourceMetadataCatalogResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetSourceMetadataResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *GetSourceMetadataCatalogResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *GetSourceMetadataResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetSourceMetadataResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetSourceMetadataResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetSourceMetadataResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

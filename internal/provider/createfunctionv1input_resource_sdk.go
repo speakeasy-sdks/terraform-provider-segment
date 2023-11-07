@@ -3,9 +3,9 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"math/big"
+	"segment/internal/sdk/pkg/models/operations"
 	"segment/internal/sdk/pkg/models/shared"
 )
 
@@ -24,7 +24,7 @@ func (r *CreateFunctionV1InputResourceModel) ToCreateSDKType() *shared.CreateFun
 	} else {
 		logoURL = nil
 	}
-	resourceType := shared.CreateFunctionV1InputResourceType(r.ResourceType.ValueString())
+	resourceType := shared.ResourceType(r.ResourceType.ValueString())
 	var settings []shared.FunctionSettingV1 = nil
 	for _, settingsItem := range r.Settings {
 		description1 := settingsItem.Description.ValueString()
@@ -53,32 +53,86 @@ func (r *CreateFunctionV1InputResourceModel) ToCreateSDKType() *shared.CreateFun
 	return &out
 }
 
-func (r *CreateFunctionV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
+func (r *CreateFunctionV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateFunctionResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateFunctionV1Output{}
+		if resp.Data.Function.BatchMaxCount != nil {
+			r.Data.Function.BatchMaxCount = types.NumberValue(big.NewFloat(float64(*resp.Data.Function.BatchMaxCount)))
 		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+			r.Data.Function.BatchMaxCount = types.NumberNull()
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
+		if resp.Data.Function.CatalogID != nil {
+			r.Data.Function.CatalogID = types.StringValue(*resp.Data.Function.CatalogID)
 		} else {
-			errors1.Field = types.StringNull()
+			r.Data.Function.CatalogID = types.StringNull()
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
+		if resp.Data.Function.Code != nil {
+			r.Data.Function.Code = types.StringValue(*resp.Data.Function.Code)
 		} else {
-			errors1.Message = types.StringNull()
+			r.Data.Function.Code = types.StringNull()
 		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
+		if resp.Data.Function.CreatedAt != nil {
+			r.Data.Function.CreatedAt = types.StringValue(*resp.Data.Function.CreatedAt)
 		} else {
-			errors1.Status = types.NumberNull()
+			r.Data.Function.CreatedAt = types.StringNull()
 		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+		if resp.Data.Function.CreatedBy != nil {
+			r.Data.Function.CreatedBy = types.StringValue(*resp.Data.Function.CreatedBy)
+		} else {
+			r.Data.Function.CreatedBy = types.StringNull()
+		}
+		if resp.Data.Function.DeployedAt != nil {
+			r.Data.Function.DeployedAt = types.StringValue(*resp.Data.Function.DeployedAt)
+		} else {
+			r.Data.Function.DeployedAt = types.StringNull()
+		}
+		if resp.Data.Function.Description != nil {
+			r.Data.Function.Description = types.StringValue(*resp.Data.Function.Description)
+		} else {
+			r.Data.Function.Description = types.StringNull()
+		}
+		if resp.Data.Function.DisplayName != nil {
+			r.Data.Function.DisplayName = types.StringValue(*resp.Data.Function.DisplayName)
+		} else {
+			r.Data.Function.DisplayName = types.StringNull()
+		}
+		if resp.Data.Function.ID != nil {
+			r.Data.Function.ID = types.StringValue(*resp.Data.Function.ID)
+		} else {
+			r.Data.Function.ID = types.StringNull()
+		}
+		if resp.Data.Function.IsLatestVersion != nil {
+			r.Data.Function.IsLatestVersion = types.BoolValue(*resp.Data.Function.IsLatestVersion)
+		} else {
+			r.Data.Function.IsLatestVersion = types.BoolNull()
+		}
+		if resp.Data.Function.LogoURL != nil {
+			r.Data.Function.LogoURL = types.StringValue(*resp.Data.Function.LogoURL)
+		} else {
+			r.Data.Function.LogoURL = types.StringNull()
+		}
+		if resp.Data.Function.PreviewWebhookURL != nil {
+			r.Data.Function.PreviewWebhookURL = types.StringValue(*resp.Data.Function.PreviewWebhookURL)
+		} else {
+			r.Data.Function.PreviewWebhookURL = types.StringNull()
+		}
+		if resp.Data.Function.ResourceType != nil {
+			r.Data.Function.ResourceType = types.StringValue(string(*resp.Data.Function.ResourceType))
+		} else {
+			r.Data.Function.ResourceType = types.StringNull()
+		}
+		r.Data.Function.Settings = nil
+		for _, settingsItem := range resp.Data.Function.Settings {
+			var settings1 FunctionSettingV1
+			settings1.Description = types.StringValue(settingsItem.Description)
+			settings1.Label = types.StringValue(settingsItem.Label)
+			settings1.Name = types.StringValue(settingsItem.Name)
+			settings1.Required = types.BoolValue(settingsItem.Required)
+			settings1.Sensitive = types.BoolValue(settingsItem.Sensitive)
+			settings1.Type = types.StringValue(string(settingsItem.Type))
+			r.Data.Function.Settings = append(r.Data.Function.Settings, settings1)
+		}
 	}
 }

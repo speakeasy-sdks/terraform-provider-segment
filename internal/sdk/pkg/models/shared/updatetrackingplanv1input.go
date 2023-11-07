@@ -11,3 +11,17 @@ type UpdateTrackingPlanV1Input struct {
 	// Config API note: equal to `displayName`.
 	Name *string `json:"name,omitempty"`
 }
+
+func (o *UpdateTrackingPlanV1Input) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UpdateTrackingPlanV1Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}

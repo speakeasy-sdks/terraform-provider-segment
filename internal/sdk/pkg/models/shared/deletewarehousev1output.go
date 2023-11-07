@@ -37,3 +37,10 @@ type DeleteWarehouseV1Output struct {
 	// The status of the Warehouse deletion operation.
 	Status DeleteWarehouseV1OutputStatus `json:"status"`
 }
+
+func (o *DeleteWarehouseV1Output) GetStatus() DeleteWarehouseV1OutputStatus {
+	if o == nil {
+		return DeleteWarehouseV1OutputStatus("")
+	}
+	return o.Status
+}

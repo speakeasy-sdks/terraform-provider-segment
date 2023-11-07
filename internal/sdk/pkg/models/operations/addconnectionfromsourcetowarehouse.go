@@ -12,42 +12,143 @@ type AddConnectionFromSourceToWarehouseRequest struct {
 	WarehouseID string `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
-// AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
-type AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *AddConnectionFromSourceToWarehouseRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *AddConnectionFromSourceToWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
+// AddConnectionFromSourceToWarehouseWarehousesResponse200ResponseBody - OK
+type AddConnectionFromSourceToWarehouseWarehousesResponse200ResponseBody struct {
 	// Response indicating whether the connection was successful.
 	Data *shared.AddConnectionFromSourceToWarehouseV1Output `json:"data,omitempty"`
 }
 
-// AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
-type AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *AddConnectionFromSourceToWarehouseWarehousesResponse200ResponseBody) GetData() *shared.AddConnectionFromSourceToWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddConnectionFromSourceToWarehouseWarehousesResponseResponseBody - OK
+type AddConnectionFromSourceToWarehouseWarehousesResponseResponseBody struct {
 	// Response indicating whether the connection was successful.
 	Data *shared.AddConnectionFromSourceToWarehouseV1Output `json:"data,omitempty"`
 }
 
-// AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1PlusJSON - OK
-type AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1PlusJSON struct {
+func (o *AddConnectionFromSourceToWarehouseWarehousesResponseResponseBody) GetData() *shared.AddConnectionFromSourceToWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddConnectionFromSourceToWarehouseWarehousesResponseBody - OK
+type AddConnectionFromSourceToWarehouseWarehousesResponseBody struct {
 	// Response indicating whether the connection was successful.
 	Data *shared.AddConnectionFromSourceToWarehouseV1Output `json:"data,omitempty"`
 }
 
-// AddConnectionFromSourceToWarehouse200ApplicationJSON - OK
-type AddConnectionFromSourceToWarehouse200ApplicationJSON struct {
+func (o *AddConnectionFromSourceToWarehouseWarehousesResponseBody) GetData() *shared.AddConnectionFromSourceToWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddConnectionFromSourceToWarehouseResponseBody - OK
+type AddConnectionFromSourceToWarehouseResponseBody struct {
 	// Response indicating whether the connection was successful.
 	Data *shared.AddConnectionFromSourceToWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponseBody) GetData() *shared.AddConnectionFromSourceToWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type AddConnectionFromSourceToWarehouseResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *AddConnectionFromSourceToWarehouseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *AddConnectionFromSourceToWarehouseWarehousesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *AddConnectionFromSourceToWarehouseWarehousesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *AddConnectionFromSourceToWarehouseWarehousesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	AddConnectionFromSourceToWarehouse200ApplicationJSONObject *AddConnectionFromSourceToWarehouse200ApplicationJSON
-	// OK
-	AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1PlusJSONObject *AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1PlusJSON
-	// OK
-	AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *AddConnectionFromSourceToWarehouse200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetTwoHundredApplicationJSONObject() *AddConnectionFromSourceToWarehouseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *AddConnectionFromSourceToWarehouseWarehousesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *AddConnectionFromSourceToWarehouseWarehousesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *AddConnectionFromSourceToWarehouseWarehousesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AddConnectionFromSourceToWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

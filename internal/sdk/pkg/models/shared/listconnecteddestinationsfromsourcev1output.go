@@ -29,10 +29,52 @@ type ListConnectedDestinationsFromSourceV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListConnectedDestinationsFromSourceV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListConnectedDestinationsFromSourceV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListConnectedDestinationsFromSourceV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListConnectedDestinationsFromSourceV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListConnectedDestinationsFromSourceV1Output - Returns a list of Destinations connected to a Source.
 type ListConnectedDestinationsFromSourceV1Output struct {
 	// A list that contains the Destinations connected to the Source.
 	Destinations []DestinationV1 `json:"destinations"`
 	// Information about the pagination of this response.
 	Pagination ListConnectedDestinationsFromSourceV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListConnectedDestinationsFromSourceV1Output) GetDestinations() []DestinationV1 {
+	if o == nil {
+		return []DestinationV1{}
+	}
+	return o.Destinations
+}
+
+func (o *ListConnectedDestinationsFromSourceV1Output) GetPagination() ListConnectedDestinationsFromSourceV1OutputPaginationOutput {
+	if o == nil {
+		return ListConnectedDestinationsFromSourceV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

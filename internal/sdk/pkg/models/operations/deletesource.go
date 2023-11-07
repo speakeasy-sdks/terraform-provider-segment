@@ -11,42 +11,136 @@ type DeleteSourceRequest struct {
 	SourceID string `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
-// DeleteSource200ApplicationVndSegmentV1betaPlusJSON - OK
-type DeleteSource200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *DeleteSourceRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+// DeleteSourceSourcesResponse200ResponseBody - OK
+type DeleteSourceSourcesResponse200ResponseBody struct {
 	// Returns the status of a Source deletion.
 	Data *shared.DeleteSourceV1Output `json:"data,omitempty"`
 }
 
-// DeleteSource200ApplicationVndSegmentV1alphaPlusJSON - OK
-type DeleteSource200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *DeleteSourceSourcesResponse200ResponseBody) GetData() *shared.DeleteSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteSourceSourcesResponseResponseBody - OK
+type DeleteSourceSourcesResponseResponseBody struct {
 	// Returns the status of a Source deletion.
 	Data *shared.DeleteSourceAlphaOutput `json:"data,omitempty"`
 }
 
-// DeleteSource200ApplicationVndSegmentV1PlusJSON - OK
-type DeleteSource200ApplicationVndSegmentV1PlusJSON struct {
+func (o *DeleteSourceSourcesResponseResponseBody) GetData() *shared.DeleteSourceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteSourceSourcesResponseBody - OK
+type DeleteSourceSourcesResponseBody struct {
 	// Returns the status of a Source deletion.
 	Data *shared.DeleteSourceV1Output `json:"data,omitempty"`
 }
 
-// DeleteSource200ApplicationJSON - OK
-type DeleteSource200ApplicationJSON struct {
+func (o *DeleteSourceSourcesResponseBody) GetData() *shared.DeleteSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteSourceResponseBody - OK
+type DeleteSourceResponseBody struct {
 	// Returns the status of a Source deletion.
 	Data *shared.DeleteSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteSourceResponseBody) GetData() *shared.DeleteSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type DeleteSourceResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *DeleteSourceResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *DeleteSourceSourcesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *DeleteSourceSourcesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *DeleteSourceSourcesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	DeleteSource200ApplicationJSONObject *DeleteSource200ApplicationJSON
-	// OK
-	DeleteSource200ApplicationVndSegmentV1PlusJSONObject *DeleteSource200ApplicationVndSegmentV1PlusJSON
-	// OK
-	DeleteSource200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteSource200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	DeleteSource200ApplicationVndSegmentV1betaPlusJSONObject *DeleteSource200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *DeleteSourceResponse) GetTwoHundredApplicationJSONObject() *DeleteSourceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *DeleteSourceResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *DeleteSourceSourcesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteSourceResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *DeleteSourceSourcesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteSourceResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *DeleteSourceSourcesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *DeleteSourceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteSourceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteSourceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteSourceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

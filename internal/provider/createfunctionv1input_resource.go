@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -35,13 +34,13 @@ type CreateFunctionV1InputResource struct {
 
 // CreateFunctionV1InputResourceModel describes the resource data model.
 type CreateFunctionV1InputResourceModel struct {
-	Code         types.String        `tfsdk:"code"`
-	Description  types.String        `tfsdk:"description"`
-	DisplayName  types.String        `tfsdk:"display_name"`
-	Errors       []RequestError      `tfsdk:"errors"`
-	LogoURL      types.String        `tfsdk:"logo_url"`
-	ResourceType types.String        `tfsdk:"resource_type"`
-	Settings     []FunctionSettingV1 `tfsdk:"settings"`
+	Code         types.String            `tfsdk:"code"`
+	Data         *CreateFunctionV1Output `tfsdk:"data"`
+	Description  types.String            `tfsdk:"description"`
+	DisplayName  types.String            `tfsdk:"display_name"`
+	LogoURL      types.String            `tfsdk:"logo_url"`
+	ResourceType types.String            `tfsdk:"resource_type"`
+	Settings     []FunctionSettingV1     `tfsdk:"settings"`
 }
 
 func (r *CreateFunctionV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -60,6 +59,121 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 				Required:    true,
 				Description: `The Function code.`,
 			},
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"function": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"batch_max_count": schema.NumberAttribute{
+								Computed:    true,
+								Description: `The max count of the batch for this Function.`,
+							},
+							"catalog_id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The catalog id of this Function.`,
+							},
+							"code": schema.StringAttribute{
+								Computed:    true,
+								Description: `The Function code.`,
+							},
+							"created_at": schema.StringAttribute{
+								Computed:    true,
+								Description: `The time this Function was created.`,
+							},
+							"created_by": schema.StringAttribute{
+								Computed:    true,
+								Description: `The id of the user who created this Function.`,
+							},
+							"deployed_at": schema.StringAttribute{
+								Computed:    true,
+								Description: `The time of this Function's last deployment.`,
+							},
+							"description": schema.StringAttribute{
+								Computed:    true,
+								Description: `A description for this Function.`,
+							},
+							"display_name": schema.StringAttribute{
+								Computed:    true,
+								Description: `A display name for this Function.`,
+							},
+							"id": schema.StringAttribute{
+								Computed:    true,
+								Description: `An identifier for this Function.`,
+							},
+							"is_latest_version": schema.BoolAttribute{
+								Computed:    true,
+								Description: `Whether the deployment of this Function is the latest version.`,
+							},
+							"logo_url": schema.StringAttribute{
+								Computed:    true,
+								Description: `The URL of the logo for this Function.`,
+							},
+							"preview_webhook_url": schema.StringAttribute{
+								Computed:    true,
+								Description: `The preview webhook URL for this Function.`,
+							},
+							"resource_type": schema.StringAttribute{
+								Computed: true,
+								Validators: []validator.String{
+									stringvalidator.OneOf(
+										"DESTINATION",
+										"INSERT_DESTINATION",
+										"SOURCE",
+									),
+								},
+								MarkdownDescription: `must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]` + "\n" +
+									`The Function type.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `type` + "`" + `.`,
+							},
+							"settings": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"description": schema.StringAttribute{
+											Computed:    true,
+											Description: `A description of this Function Setting.`,
+										},
+										"label": schema.StringAttribute{
+											Computed:    true,
+											Description: `The label for this Function Setting.`,
+										},
+										"name": schema.StringAttribute{
+											Computed:    true,
+											Description: `The name of this Function Setting.`,
+										},
+										"required": schema.BoolAttribute{
+											Computed:    true,
+											Description: `Whether this Function Setting is required.`,
+										},
+										"sensitive": schema.BoolAttribute{
+											Computed:    true,
+											Description: `Whether this Function Setting contains sensitive information.`,
+										},
+										"type": schema.StringAttribute{
+											Computed: true,
+											Validators: []validator.String{
+												stringvalidator.OneOf(
+													"ARRAY",
+													"BOOLEAN",
+													"STRING",
+													"TEXT_MAP",
+												),
+											},
+											MarkdownDescription: `must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]` + "\n" +
+												`The type of this Function Setting.`,
+										},
+									},
+								},
+								Description: `The list of settings for this Function.`,
+							},
+						},
+						Description: `Represents a Function.`,
+					},
+				},
+				Description: `Create a Function.`,
+			},
 			"description": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -75,37 +189,6 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 				MarkdownDescription: `A display name for this Function.` + "\n" +
 					`` + "\n" +
 					`Note that Destination Functions append the Workspace to the display name.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"logo_url": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -252,11 +335,11 @@ func (r *CreateFunctionV1InputResource) Create(ctx context.Context, req resource
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

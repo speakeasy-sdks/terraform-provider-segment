@@ -12,42 +12,143 @@ type ReplaceLabelsInSourceRequest struct {
 	SourceID                     string                              `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
-// ReplaceLabelsInSource200ApplicationVndSegmentV1betaPlusJSON - OK
-type ReplaceLabelsInSource200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ReplaceLabelsInSourceRequest) GetReplaceLabelsInSourceV1Input() shared.ReplaceLabelsInSourceV1Input {
+	if o == nil {
+		return shared.ReplaceLabelsInSourceV1Input{}
+	}
+	return o.ReplaceLabelsInSourceV1Input
+}
+
+func (o *ReplaceLabelsInSourceRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+// ReplaceLabelsInSourceSourcesResponse200ResponseBody - OK
+type ReplaceLabelsInSourceSourcesResponse200ResponseBody struct {
 	// Response from replacing a list of labels in a Source.
 	Data *shared.ReplaceLabelsInSourceV1Output `json:"data,omitempty"`
 }
 
-// ReplaceLabelsInSource200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ReplaceLabelsInSource200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ReplaceLabelsInSourceSourcesResponse200ResponseBody) GetData() *shared.ReplaceLabelsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ReplaceLabelsInSourceSourcesResponseResponseBody - OK
+type ReplaceLabelsInSourceSourcesResponseResponseBody struct {
 	// Response from replacing a list of labels in a Source.
 	Data *shared.ReplaceLabelsInSourceAlphaOutput `json:"data,omitempty"`
 }
 
-// ReplaceLabelsInSource200ApplicationVndSegmentV1PlusJSON - OK
-type ReplaceLabelsInSource200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ReplaceLabelsInSourceSourcesResponseResponseBody) GetData() *shared.ReplaceLabelsInSourceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ReplaceLabelsInSourceSourcesResponseBody - OK
+type ReplaceLabelsInSourceSourcesResponseBody struct {
 	// Response from replacing a list of labels in a Source.
 	Data *shared.ReplaceLabelsInSourceV1Output `json:"data,omitempty"`
 }
 
-// ReplaceLabelsInSource200ApplicationJSON - OK
-type ReplaceLabelsInSource200ApplicationJSON struct {
+func (o *ReplaceLabelsInSourceSourcesResponseBody) GetData() *shared.ReplaceLabelsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ReplaceLabelsInSourceResponseBody - OK
+type ReplaceLabelsInSourceResponseBody struct {
 	// Response from replacing a list of labels in a Source.
 	Data *shared.ReplaceLabelsInSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ReplaceLabelsInSourceResponseBody) GetData() *shared.ReplaceLabelsInSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ReplaceLabelsInSourceResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ReplaceLabelsInSourceResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ReplaceLabelsInSourceSourcesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ReplaceLabelsInSourceSourcesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ReplaceLabelsInSourceSourcesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ReplaceLabelsInSource200ApplicationJSONObject *ReplaceLabelsInSource200ApplicationJSON
-	// OK
-	ReplaceLabelsInSource200ApplicationVndSegmentV1PlusJSONObject *ReplaceLabelsInSource200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ReplaceLabelsInSource200ApplicationVndSegmentV1alphaPlusJSONObject *ReplaceLabelsInSource200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ReplaceLabelsInSource200ApplicationVndSegmentV1betaPlusJSONObject *ReplaceLabelsInSource200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetTwoHundredApplicationJSONObject() *ReplaceLabelsInSourceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ReplaceLabelsInSourceSourcesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ReplaceLabelsInSourceSourcesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ReplaceLabelsInSourceSourcesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ReplaceLabelsInSourceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

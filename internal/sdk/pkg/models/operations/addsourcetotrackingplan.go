@@ -12,42 +12,143 @@ type AddSourceToTrackingPlanRequest struct {
 	TrackingPlanID                 string                                `pathParam:"style=simple,explode=false,name=trackingPlanId"`
 }
 
-// AddSourceToTrackingPlan200ApplicationVndSegmentV1betaPlusJSON - OK
-type AddSourceToTrackingPlan200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *AddSourceToTrackingPlanRequest) GetAddSourceToTrackingPlanV1Input() shared.AddSourceToTrackingPlanV1Input {
+	if o == nil {
+		return shared.AddSourceToTrackingPlanV1Input{}
+	}
+	return o.AddSourceToTrackingPlanV1Input
+}
+
+func (o *AddSourceToTrackingPlanRequest) GetTrackingPlanID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TrackingPlanID
+}
+
+// AddSourceToTrackingPlanTrackingPlansResponse200ResponseBody - OK
+type AddSourceToTrackingPlanTrackingPlansResponse200ResponseBody struct {
 	// Connects a Source to a Tracking Plan.
 	Data *shared.AddSourceToTrackingPlanV1Output `json:"data,omitempty"`
 }
 
-// AddSourceToTrackingPlan200ApplicationVndSegmentV1alphaPlusJSON - OK
-type AddSourceToTrackingPlan200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *AddSourceToTrackingPlanTrackingPlansResponse200ResponseBody) GetData() *shared.AddSourceToTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddSourceToTrackingPlanTrackingPlansResponseResponseBody - OK
+type AddSourceToTrackingPlanTrackingPlansResponseResponseBody struct {
 	// Connects a Source to a Tracking Plan.
 	Data *shared.AddSourceToTrackingPlanV1Output `json:"data,omitempty"`
 }
 
-// AddSourceToTrackingPlan200ApplicationVndSegmentV1PlusJSON - OK
-type AddSourceToTrackingPlan200ApplicationVndSegmentV1PlusJSON struct {
+func (o *AddSourceToTrackingPlanTrackingPlansResponseResponseBody) GetData() *shared.AddSourceToTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddSourceToTrackingPlanTrackingPlansResponseBody - OK
+type AddSourceToTrackingPlanTrackingPlansResponseBody struct {
 	// Connects a Source to a Tracking Plan.
 	Data *shared.AddSourceToTrackingPlanV1Output `json:"data,omitempty"`
 }
 
-// AddSourceToTrackingPlan200ApplicationJSON - OK
-type AddSourceToTrackingPlan200ApplicationJSON struct {
+func (o *AddSourceToTrackingPlanTrackingPlansResponseBody) GetData() *shared.AddSourceToTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddSourceToTrackingPlanResponseBody - OK
+type AddSourceToTrackingPlanResponseBody struct {
 	// Connects a Source to a Tracking Plan.
 	Data *shared.AddSourceToTrackingPlanV1Output `json:"data,omitempty"`
+}
+
+func (o *AddSourceToTrackingPlanResponseBody) GetData() *shared.AddSourceToTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type AddSourceToTrackingPlanResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *AddSourceToTrackingPlanResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *AddSourceToTrackingPlanTrackingPlansResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *AddSourceToTrackingPlanTrackingPlansResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *AddSourceToTrackingPlanTrackingPlansResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	AddSourceToTrackingPlan200ApplicationJSONObject *AddSourceToTrackingPlan200ApplicationJSON
-	// OK
-	AddSourceToTrackingPlan200ApplicationVndSegmentV1PlusJSONObject *AddSourceToTrackingPlan200ApplicationVndSegmentV1PlusJSON
-	// OK
-	AddSourceToTrackingPlan200ApplicationVndSegmentV1alphaPlusJSONObject *AddSourceToTrackingPlan200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	AddSourceToTrackingPlan200ApplicationVndSegmentV1betaPlusJSONObject *AddSourceToTrackingPlan200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetTwoHundredApplicationJSONObject() *AddSourceToTrackingPlanResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *AddSourceToTrackingPlanTrackingPlansResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *AddSourceToTrackingPlanTrackingPlansResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *AddSourceToTrackingPlanTrackingPlansResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AddSourceToTrackingPlanResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

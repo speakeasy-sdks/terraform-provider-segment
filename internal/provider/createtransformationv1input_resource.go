@@ -13,10 +13,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -34,9 +32,9 @@ type CreateTransformationV1InputResource struct {
 
 // CreateTransformationV1InputResourceModel describes the resource data model.
 type CreateTransformationV1InputResourceModel struct {
+	Data                         *CreateTransformationV1Output   `tfsdk:"data"`
 	DestinationMetadataID        types.String                    `tfsdk:"destination_metadata_id"`
 	Enabled                      types.Bool                      `tfsdk:"enabled"`
-	Errors                       []RequestError                  `tfsdk:"errors"`
 	FqlDefinedProperties         []FQLDefinedPropertyV1          `tfsdk:"fql_defined_properties"`
 	If                           types.String                    `tfsdk:"if"`
 	Name                         types.String                    `tfsdk:"name"`
@@ -55,6 +53,100 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 		MarkdownDescription: "CreateTransformationV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"transformation": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"destination_metadata_id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The optional Destination metadata associated with the Transformation.`,
+							},
+							"enabled": schema.BoolAttribute{
+								Computed:    true,
+								Description: `If the Transformation is enabled.`,
+							},
+							"fql_defined_properties": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"fql": schema.StringAttribute{
+											Computed:    true,
+											Description: `The FQL expression used to compute the property.`,
+										},
+										"property_name": schema.StringAttribute{
+											Computed:    true,
+											Description: `The new property name.`,
+										},
+									},
+								},
+								Description: `Optional array for defining new properties in FQL. Limited to 1 property right now.`,
+							},
+							"id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The id of the Transformation.`,
+							},
+							"if": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `If statement ([FQL](https://segment.com/docs/config-api/fql/)) to match events.` + "\n" +
+									`` + "\n" +
+									`For standard event matchers, use the following:` + "\n" +
+									`  Track -\> "event='\<eventName\>'"` + "\n" +
+									`  Identify -\> "type='identify'"` + "\n" +
+									`  Group -\> "type='group'"`,
+							},
+							"name": schema.StringAttribute{
+								Computed:    true,
+								Description: `The name of the Transformation.`,
+							},
+							"new_event_name": schema.StringAttribute{
+								Computed:    true,
+								Description: `Optional new event name for renaming events. Works only for 'track' event type.`,
+							},
+							"property_renames": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"new_name": schema.StringAttribute{
+											Computed:    true,
+											Description: `The new name to rename the property.`,
+										},
+										"old_name": schema.StringAttribute{
+											Computed:    true,
+											Description: `The old name of the property.`,
+										},
+									},
+								},
+								Description: `Optional array for renaming properties collected by your events.`,
+							},
+							"property_value_transformations": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"property_paths": schema.ListAttribute{
+											Computed:    true,
+											ElementType: types.StringType,
+											Description: `The property paths. The maximum number of paths is 10.`,
+										},
+										"property_value": schema.StringAttribute{
+											Computed:    true,
+											Description: `The new value of the property paths.`,
+										},
+									},
+								},
+								Description: `Optional array for transforming properties and values collected by your events. Limited to 10 properties.`,
+							},
+							"source_id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The Source associated with the Transformation.`,
+							},
+						},
+						Description: `Represents a Transformation.`,
+					},
+				},
+				Description: `The output of a created Transformation.`,
+			},
 			"destination_metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -68,37 +160,6 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 				},
 				Required:    true,
 				Description: `If the Transformation should be enabled.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"fql_defined_properties": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -268,11 +329,11 @@ func (r *CreateTransformationV1InputResource) Create(ctx context.Context, req re
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

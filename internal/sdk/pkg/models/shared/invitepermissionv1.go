@@ -11,3 +11,24 @@ type InvitePermissionV1 struct {
 	// The id of the role.
 	RoleID string `json:"roleId"`
 }
+
+func (o *InvitePermissionV1) GetLabels() []AllowedLabelBeta {
+	if o == nil {
+		return nil
+	}
+	return o.Labels
+}
+
+func (o *InvitePermissionV1) GetResources() []ResourceV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Resources
+}
+
+func (o *InvitePermissionV1) GetRoleID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RoleID
+}

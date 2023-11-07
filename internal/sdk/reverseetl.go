@@ -9,12 +9,13 @@ import (
 	"io"
 	"net/http"
 	"segment/internal/sdk/pkg/models/operations"
+	"segment/internal/sdk/pkg/models/sdkerrors"
 	"segment/internal/sdk/pkg/models/shared"
 	"segment/internal/sdk/pkg/utils"
 	"strings"
 )
 
-// reverseETL - Reverse ETL allows the use of a database (aka: Segment Warehouse) as a source of
+// ReverseETL - Reverse ETL allows the use of a database (aka: Segment Warehouse) as a source of
 // data to be connected and sent to supported Segment Destinations. Previously, it
 // was only possible to use a Segment Warehouse as a destination.
 //
@@ -91,12 +92,12 @@ import (
 //
 // [go-time-parse-duration]: https://pkg.go.dev/time#ParseDuration
 // [iana-timezones]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-type reverseETL struct {
+type ReverseETL struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newReverseETL(sdkConfig sdkConfiguration) *reverseETL {
-	return &reverseETL{
+func newReverseETL(sdkConfig sdkConfiguration) *ReverseETL {
+	return &ReverseETL{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -105,11 +106,21 @@ func newReverseETL(sdkConfig sdkConfiguration) *reverseETL {
 // Creates a new Reverse ETL Model.
 //
 // • When called, this endpoint may generate the `Model Created` event in the [audit trail](/tag/Audit-Trail).
-func (s *reverseETL) CreateReverseEtlModel(ctx context.Context, request shared.CreateReverseEtlModelInput) (*operations.CreateReverseEtlModelResponse, error) {
+func (s *ReverseETL) CreateReverseEtlModel(ctx context.Context, request shared.CreateReverseEtlModelInput, opts ...operations.Option) (*operations.CreateReverseEtlModelResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/reverse-etl-models"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/vnd.segment.v1alpha+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -124,8 +135,13 @@ func (s *reverseETL) CreateReverseEtlModel(ctx context.Context, request shared.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -158,12 +174,14 @@ func (s *reverseETL) CreateReverseEtlModel(ctx context.Context, request shared.C
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateReverseEtlModelResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -172,12 +190,14 @@ func (s *reverseETL) CreateReverseEtlModel(ctx context.Context, request shared.C
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -188,7 +208,17 @@ func (s *reverseETL) CreateReverseEtlModel(ctx context.Context, request shared.C
 // Deletes an existing Model.
 //
 // • When called, this endpoint may generate the `Model Deleted` event in the [audit trail](/tag/Audit-Trail).
-func (s *reverseETL) DeleteReverseEtlModel(ctx context.Context, request operations.DeleteReverseEtlModelRequest) (*operations.DeleteReverseEtlModelResponse, error) {
+func (s *ReverseETL) DeleteReverseEtlModel(ctx context.Context, request operations.DeleteReverseEtlModelRequest, opts ...operations.Option) (*operations.DeleteReverseEtlModelResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/reverse-etl-models/{modelId}", request, nil)
 	if err != nil {
@@ -199,8 +229,13 @@ func (s *reverseETL) DeleteReverseEtlModel(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -230,12 +265,14 @@ func (s *reverseETL) DeleteReverseEtlModel(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.DeleteReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.DeleteReverseEtlModelResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DeleteReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -244,12 +281,14 @@ func (s *reverseETL) DeleteReverseEtlModel(ctx context.Context, request operatio
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -258,7 +297,17 @@ func (s *reverseETL) DeleteReverseEtlModel(ctx context.Context, request operatio
 
 // GetReverseEtlModel - Get Reverse Etl Model
 // Returns a Reverse ETL Model by its id.
-func (s *reverseETL) GetReverseEtlModel(ctx context.Context, request operations.GetReverseEtlModelRequest) (*operations.GetReverseEtlModelResponse, error) {
+func (s *ReverseETL) GetReverseEtlModel(ctx context.Context, request operations.GetReverseEtlModelRequest, opts ...operations.Option) (*operations.GetReverseEtlModelResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/reverse-etl-models/{modelId}", request, nil)
 	if err != nil {
@@ -269,8 +318,13 @@ func (s *reverseETL) GetReverseEtlModel(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -300,12 +354,14 @@ func (s *reverseETL) GetReverseEtlModel(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.GetReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.GetReverseEtlModelResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.GetReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -314,12 +370,14 @@ func (s *reverseETL) GetReverseEtlModel(ctx context.Context, request operations.
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -328,7 +386,17 @@ func (s *reverseETL) GetReverseEtlModel(ctx context.Context, request operations.
 
 // ListReverseEtlModels - List Reverse Etl Models
 // Returns a list of Reverse ETL Models.
-func (s *reverseETL) ListReverseEtlModels(ctx context.Context, request operations.ListReverseEtlModelsRequest) (*operations.ListReverseEtlModelsResponse, error) {
+func (s *ReverseETL) ListReverseEtlModels(ctx context.Context, request operations.ListReverseEtlModelsRequest, opts ...operations.Option) (*operations.ListReverseEtlModelsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/reverse-etl-models"
 
@@ -336,8 +404,13 @@ func (s *reverseETL) ListReverseEtlModels(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -371,12 +444,14 @@ func (s *reverseETL) ListReverseEtlModels(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListReverseEtlModelsResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListReverseEtlModels200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -385,12 +460,14 @@ func (s *reverseETL) ListReverseEtlModels(ctx context.Context, request operation
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -402,14 +479,24 @@ func (s *reverseETL) ListReverseEtlModels(ctx context.Context, request operation
 //
 // • When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Model Settings Saved
 // * Model State Change Toggled
-func (s *reverseETL) UpdateReverseEtlModel(ctx context.Context, request operations.UpdateReverseEtlModelRequest) (*operations.UpdateReverseEtlModelResponse, error) {
+func (s *ReverseETL) UpdateReverseEtlModel(ctx context.Context, request operations.UpdateReverseEtlModelRequest, opts ...operations.Option) (*operations.UpdateReverseEtlModelResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/reverse-etl-models/{modelId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "UpdateReverseEtlModelInput", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateReverseEtlModelInput", "json", `request:"mediaType=application/vnd.segment.v1alpha+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -424,8 +511,13 @@ func (s *reverseETL) UpdateReverseEtlModel(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -458,12 +550,14 @@ func (s *reverseETL) UpdateReverseEtlModel(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.UpdateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateReverseEtlModelResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -472,12 +566,14 @@ func (s *reverseETL) UpdateReverseEtlModel(ctx context.Context, request operatio
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

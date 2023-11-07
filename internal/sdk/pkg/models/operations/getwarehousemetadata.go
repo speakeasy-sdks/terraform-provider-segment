@@ -11,42 +11,136 @@ type GetWarehouseMetadataRequest struct {
 	WarehouseMetadataID string `pathParam:"style=simple,explode=false,name=warehouseMetadataId"`
 }
 
-// GetWarehouseMetadata200ApplicationVndSegmentV1betaPlusJSON - OK
-type GetWarehouseMetadata200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *GetWarehouseMetadataRequest) GetWarehouseMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseMetadataID
+}
+
+// GetWarehouseMetadataCatalogResponse200ResponseBody - OK
+type GetWarehouseMetadataCatalogResponse200ResponseBody struct {
 	// Returns a Warehouse catalog item looked up by id.
 	Data *shared.GetWarehouseMetadataV1Output `json:"data,omitempty"`
 }
 
-// GetWarehouseMetadata200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetWarehouseMetadata200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetWarehouseMetadataCatalogResponse200ResponseBody) GetData() *shared.GetWarehouseMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetWarehouseMetadataCatalogResponseResponseBody - OK
+type GetWarehouseMetadataCatalogResponseResponseBody struct {
 	// Returns a Warehouse catalog item looked up by id.
 	Data *shared.GetWarehouseMetadataV1Output `json:"data,omitempty"`
 }
 
-// GetWarehouseMetadata200ApplicationVndSegmentV1PlusJSON - OK
-type GetWarehouseMetadata200ApplicationVndSegmentV1PlusJSON struct {
+func (o *GetWarehouseMetadataCatalogResponseResponseBody) GetData() *shared.GetWarehouseMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetWarehouseMetadataCatalogResponseBody - OK
+type GetWarehouseMetadataCatalogResponseBody struct {
 	// Returns a Warehouse catalog item looked up by id.
 	Data *shared.GetWarehouseMetadataV1Output `json:"data,omitempty"`
 }
 
-// GetWarehouseMetadata200ApplicationJSON - OK
-type GetWarehouseMetadata200ApplicationJSON struct {
+func (o *GetWarehouseMetadataCatalogResponseBody) GetData() *shared.GetWarehouseMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetWarehouseMetadataResponseBody - OK
+type GetWarehouseMetadataResponseBody struct {
 	// Returns a Warehouse catalog item looked up by id.
 	Data *shared.GetWarehouseMetadataV1Output `json:"data,omitempty"`
+}
+
+func (o *GetWarehouseMetadataResponseBody) GetData() *shared.GetWarehouseMetadataV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type GetWarehouseMetadataResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *GetWarehouseMetadataResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *GetWarehouseMetadataCatalogResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *GetWarehouseMetadataCatalogResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *GetWarehouseMetadataCatalogResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	GetWarehouseMetadata200ApplicationJSONObject *GetWarehouseMetadata200ApplicationJSON
-	// OK
-	GetWarehouseMetadata200ApplicationVndSegmentV1PlusJSONObject *GetWarehouseMetadata200ApplicationVndSegmentV1PlusJSON
-	// OK
-	GetWarehouseMetadata200ApplicationVndSegmentV1alphaPlusJSONObject *GetWarehouseMetadata200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	GetWarehouseMetadata200ApplicationVndSegmentV1betaPlusJSONObject *GetWarehouseMetadata200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *GetWarehouseMetadataResponse) GetTwoHundredApplicationJSONObject() *GetWarehouseMetadataResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *GetWarehouseMetadataResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *GetWarehouseMetadataCatalogResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetWarehouseMetadataResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *GetWarehouseMetadataCatalogResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetWarehouseMetadataResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *GetWarehouseMetadataCatalogResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *GetWarehouseMetadataResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetWarehouseMetadataResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetWarehouseMetadataResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetWarehouseMetadataResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

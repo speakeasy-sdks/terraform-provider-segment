@@ -39,14 +39,14 @@ type CreateFilterForDestinationV1InputResource struct {
 
 // CreateFilterForDestinationV1InputResourceModel describes the resource data model.
 type CreateFilterForDestinationV1InputResourceModel struct {
-	Actions       []DestinationFilterActionV1 `tfsdk:"actions"`
-	Description   types.String                `tfsdk:"description"`
-	DestinationID types.String                `tfsdk:"destination_id"`
-	Enabled       types.Bool                  `tfsdk:"enabled"`
-	Errors        []RequestError              `tfsdk:"errors"`
-	If            types.String                `tfsdk:"if"`
-	SourceID      types.String                `tfsdk:"source_id"`
-	Title         types.String                `tfsdk:"title"`
+	Actions       []DestinationFilterActionV1         `tfsdk:"actions"`
+	Data          *CreateFilterForDestinationV1Output `tfsdk:"data"`
+	Description   types.String                        `tfsdk:"description"`
+	DestinationID types.String                        `tfsdk:"destination_id"`
+	Enabled       types.Bool                          `tfsdk:"enabled"`
+	If            types.String                        `tfsdk:"if"`
+	SourceID      types.String                        `tfsdk:"source_id"`
+	Title         types.String                        `tfsdk:"title"`
 }
 
 func (r *CreateFilterForDestinationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -113,6 +113,94 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 				},
 				Description: `Actions for the Destination filter.`,
 			},
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"filter": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"actions": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"fields": schema.MapAttribute{
+											Computed:    true,
+											ElementType: types.StringType,
+											Validators: []validator.Map{
+												mapvalidator.ValueStringsAre(validators.IsValidJSON()),
+											},
+											MarkdownDescription: `A dictionary of paths to object keys that this filter applies to.` + "\n" +
+												`  The literal string '' represents the top level of the object.`,
+										},
+										"path": schema.StringAttribute{
+											Computed: true,
+											MarkdownDescription: `The JSON path to a property within a payload object from which Segment generates a deterministic` + "\n" +
+												`sampling rate.`,
+										},
+										"percent": schema.NumberAttribute{
+											Computed: true,
+											MarkdownDescription: `A decimal between 0 and 1 used for 'sample' type events and` + "\n" +
+												`influences the likelihood of sampling to occur.`,
+										},
+										"type": schema.StringAttribute{
+											Computed: true,
+											Validators: []validator.String{
+												stringvalidator.OneOf(
+													"ALLOW_PROPERTIES",
+													"DROP",
+													"DROP_PROPERTIES",
+													"SAMPLE",
+												),
+											},
+											MarkdownDescription: `must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]` + "\n" +
+												`The kind of Transformation to apply to any matched properties.`,
+										},
+									},
+								},
+								Description: `A list of actions this filter performs.`,
+							},
+							"created_at": schema.StringAttribute{
+								Computed:    true,
+								Description: `The timestamp of this filter's creation.`,
+							},
+							"description": schema.StringAttribute{
+								Computed:    true,
+								Description: `A description for this filter.`,
+							},
+							"destination_id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The id of the Destination associated with this filter.`,
+							},
+							"enabled": schema.BoolAttribute{
+								Computed:    true,
+								Description: `When set to true, this filter is active.`,
+							},
+							"id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The unique id of this filter.`,
+							},
+							"if": schema.StringAttribute{
+								Computed:    true,
+								Description: `A condition that defines whether to apply this filter to a payload.`,
+							},
+							"source_id": schema.StringAttribute{
+								Computed:    true,
+								Description: `The id of the Source associated with this filter.`,
+							},
+							"title": schema.StringAttribute{
+								Computed:    true,
+								Description: `A title for this filter.`,
+							},
+							"updated_at": schema.StringAttribute{
+								Computed:    true,
+								Description: `The timestamp of this filter's last change.`,
+							},
+						},
+						Description: `Represents a Destination filter.`,
+					},
+				},
+				Description: `Output for CreateDestinationFiltersV1.`,
+			},
 			"description": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -132,37 +220,6 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 				},
 				Required:    true,
 				Description: `When set to true, the Destination filter is active.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"if": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -249,11 +306,11 @@ func (r *CreateFilterForDestinationV1InputResource) Create(ctx context.Context, 
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

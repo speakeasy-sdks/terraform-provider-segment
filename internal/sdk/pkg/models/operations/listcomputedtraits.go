@@ -15,18 +15,77 @@ type ListComputedTraitsRequest struct {
 	SpaceID    string                 `pathParam:"style=simple,explode=false,name=spaceId"`
 }
 
-// ListComputedTraits200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListComputedTraits200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListComputedTraitsRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListComputedTraitsRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+// ListComputedTraitsResponseBody - OK
+type ListComputedTraitsResponseBody struct {
 	// List computed traits endpoint output.
 	Data *shared.ListComputedTraitsAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *ListComputedTraitsResponseBody) GetData() *shared.ListComputedTraitsAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListComputedTraitsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	ListComputedTraits200ApplicationVndSegmentV1alphaPlusJSONObject *ListComputedTraits200ApplicationVndSegmentV1alphaPlusJSON
+	Object *ListComputedTraitsResponseBody
+}
+
+func (o *ListComputedTraitsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListComputedTraitsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListComputedTraitsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListComputedTraitsResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListComputedTraitsResponse) GetObject() *ListComputedTraitsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

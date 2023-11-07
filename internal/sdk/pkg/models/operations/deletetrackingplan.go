@@ -11,42 +11,136 @@ type DeleteTrackingPlanRequest struct {
 	TrackingPlanID string `pathParam:"style=simple,explode=false,name=trackingPlanId"`
 }
 
-// DeleteTrackingPlan200ApplicationVndSegmentV1betaPlusJSON - OK
-type DeleteTrackingPlan200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *DeleteTrackingPlanRequest) GetTrackingPlanID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TrackingPlanID
+}
+
+// DeleteTrackingPlanTrackingPlansResponse200ResponseBody - OK
+type DeleteTrackingPlanTrackingPlansResponse200ResponseBody struct {
 	// Result of a DeleteTrackingPlan call.
 	Data *shared.DeleteTrackingPlanV1Output `json:"data,omitempty"`
 }
 
-// DeleteTrackingPlan200ApplicationVndSegmentV1alphaPlusJSON - OK
-type DeleteTrackingPlan200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *DeleteTrackingPlanTrackingPlansResponse200ResponseBody) GetData() *shared.DeleteTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteTrackingPlanTrackingPlansResponseResponseBody - OK
+type DeleteTrackingPlanTrackingPlansResponseResponseBody struct {
 	// Result of a DeleteTrackingPlan call.
 	Data *shared.DeleteTrackingPlanV1Output `json:"data,omitempty"`
 }
 
-// DeleteTrackingPlan200ApplicationVndSegmentV1PlusJSON - OK
-type DeleteTrackingPlan200ApplicationVndSegmentV1PlusJSON struct {
+func (o *DeleteTrackingPlanTrackingPlansResponseResponseBody) GetData() *shared.DeleteTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteTrackingPlanTrackingPlansResponseBody - OK
+type DeleteTrackingPlanTrackingPlansResponseBody struct {
 	// Result of a DeleteTrackingPlan call.
 	Data *shared.DeleteTrackingPlanV1Output `json:"data,omitempty"`
 }
 
-// DeleteTrackingPlan200ApplicationJSON - OK
-type DeleteTrackingPlan200ApplicationJSON struct {
+func (o *DeleteTrackingPlanTrackingPlansResponseBody) GetData() *shared.DeleteTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteTrackingPlanResponseBody - OK
+type DeleteTrackingPlanResponseBody struct {
 	// Result of a DeleteTrackingPlan call.
 	Data *shared.DeleteTrackingPlanV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteTrackingPlanResponseBody) GetData() *shared.DeleteTrackingPlanV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type DeleteTrackingPlanResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *DeleteTrackingPlanResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *DeleteTrackingPlanTrackingPlansResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *DeleteTrackingPlanTrackingPlansResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *DeleteTrackingPlanTrackingPlansResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	DeleteTrackingPlan200ApplicationJSONObject *DeleteTrackingPlan200ApplicationJSON
-	// OK
-	DeleteTrackingPlan200ApplicationVndSegmentV1PlusJSONObject *DeleteTrackingPlan200ApplicationVndSegmentV1PlusJSON
-	// OK
-	DeleteTrackingPlan200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteTrackingPlan200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	DeleteTrackingPlan200ApplicationVndSegmentV1betaPlusJSONObject *DeleteTrackingPlan200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *DeleteTrackingPlanResponse) GetTwoHundredApplicationJSONObject() *DeleteTrackingPlanResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *DeleteTrackingPlanResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *DeleteTrackingPlanTrackingPlansResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteTrackingPlanResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *DeleteTrackingPlanTrackingPlansResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteTrackingPlanResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *DeleteTrackingPlanTrackingPlansResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *DeleteTrackingPlanResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteTrackingPlanResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteTrackingPlanResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteTrackingPlanResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

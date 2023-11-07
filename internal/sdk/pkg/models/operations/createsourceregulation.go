@@ -12,42 +12,143 @@ type CreateSourceRegulationRequest struct {
 	SourceID                      string                               `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
-// CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSON - OK
-type CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *CreateSourceRegulationRequest) GetCreateSourceRegulationV1Input() shared.CreateSourceRegulationV1Input {
+	if o == nil {
+		return shared.CreateSourceRegulationV1Input{}
+	}
+	return o.CreateSourceRegulationV1Input
+}
+
+func (o *CreateSourceRegulationRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+// CreateSourceRegulationDeletionAndSuppressionResponse200ResponseBody - OK
+type CreateSourceRegulationDeletionAndSuppressionResponse200ResponseBody struct {
 	// The output of a create Source regulation call.
 	Data *shared.CreateSourceRegulationV1Output `json:"data,omitempty"`
 }
 
-// CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON - OK
-type CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *CreateSourceRegulationDeletionAndSuppressionResponse200ResponseBody) GetData() *shared.CreateSourceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateSourceRegulationDeletionAndSuppressionResponseResponseBody - OK
+type CreateSourceRegulationDeletionAndSuppressionResponseResponseBody struct {
 	// The output of a create Source regulation call.
 	Data *shared.CreateSourceRegulationV1Output `json:"data,omitempty"`
 }
 
-// CreateSourceRegulation200ApplicationVndSegmentV1PlusJSON - OK
-type CreateSourceRegulation200ApplicationVndSegmentV1PlusJSON struct {
+func (o *CreateSourceRegulationDeletionAndSuppressionResponseResponseBody) GetData() *shared.CreateSourceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateSourceRegulationDeletionAndSuppressionResponseBody - OK
+type CreateSourceRegulationDeletionAndSuppressionResponseBody struct {
 	// The output of a create Source regulation call.
 	Data *shared.CreateSourceRegulationV1Output `json:"data,omitempty"`
 }
 
-// CreateSourceRegulation200ApplicationJSON - OK
-type CreateSourceRegulation200ApplicationJSON struct {
+func (o *CreateSourceRegulationDeletionAndSuppressionResponseBody) GetData() *shared.CreateSourceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateSourceRegulationResponseBody - OK
+type CreateSourceRegulationResponseBody struct {
 	// The output of a create Source regulation call.
 	Data *shared.CreateSourceRegulationV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateSourceRegulationResponseBody) GetData() *shared.CreateSourceRegulationV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type CreateSourceRegulationResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *CreateSourceRegulationResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *CreateSourceRegulationDeletionAndSuppressionResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *CreateSourceRegulationDeletionAndSuppressionResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *CreateSourceRegulationDeletionAndSuppressionResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	CreateSourceRegulation200ApplicationJSONObject *CreateSourceRegulation200ApplicationJSON
-	// OK
-	CreateSourceRegulation200ApplicationVndSegmentV1PlusJSONObject *CreateSourceRegulation200ApplicationVndSegmentV1PlusJSON
-	// OK
-	CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSONObject *CreateSourceRegulation200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSONObject *CreateSourceRegulation200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *CreateSourceRegulationResponse) GetTwoHundredApplicationJSONObject() *CreateSourceRegulationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *CreateSourceRegulationResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *CreateSourceRegulationDeletionAndSuppressionResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateSourceRegulationResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *CreateSourceRegulationDeletionAndSuppressionResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateSourceRegulationResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *CreateSourceRegulationDeletionAndSuppressionResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *CreateSourceRegulationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateSourceRegulationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateSourceRegulationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateSourceRegulationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

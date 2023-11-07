@@ -12,10 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -33,8 +31,8 @@ type CreateLabelV1InputResource struct {
 
 // CreateLabelV1InputResourceModel describes the resource data model.
 type CreateLabelV1InputResourceModel struct {
-	Errors []RequestError            `tfsdk:"errors"`
-	Label  CreateLabelV1InputLabelV1 `tfsdk:"label"`
+	Data  *CreateLabelV1Output `tfsdk:"data"`
+	Label LabelV1              `tfsdk:"label"`
 }
 
 func (r *CreateLabelV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -46,36 +44,39 @@ func (r *CreateLabelV1InputResource) Schema(ctx context.Context, req resource.Sc
 		MarkdownDescription: "CreateLabelV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
+				Attributes: map[string]schema.Attribute{
+					"label": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"description": schema.StringAttribute{
+								Computed:    true,
+								Description: `An optional description of the purpose of this label.`,
 							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
+							"key": schema.StringAttribute{
+								Computed:    true,
+								Description: `The key that represents the name of this label.`,
+							},
+							"value": schema.StringAttribute{
+								Computed:    true,
+								Description: `The value associated with the key of this label.`,
+							},
 						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+						MarkdownDescription: `A label lets Workspace owners assign permissions to users, and grant these users access to groups.` + "\n" +
+							`` + "\n" +
+							`A Workspace owner may use labels to grant users access to groups of resources.` + "\n" +
+							`` + "\n" +
+							`When you add a label to a Source or Personas Spaces, any users granted access to that label gain access to those` + "\n" +
+							`resources.` + "\n" +
+							`` + "\n" +
+							`All Workspaces include labels for Dev (development) and Prod (production) environments. On top of those, Free and` + "\n" +
+							`Team plan customers may create up to five labels.` + "\n" +
+							`` + "\n" +
+							`Customers with the Enterprise pricing package may create an unlimited number of labels.`,
 					},
 				},
+				Description: `Result of creating a new label in the current Workspace.`,
 			},
 			"label": schema.SingleNestedAttribute{
 				PlanModifiers: []planmodifier.Object{
@@ -176,11 +177,11 @@ func (r *CreateLabelV1InputResource) Create(ctx context.Context, req resource.Cr
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

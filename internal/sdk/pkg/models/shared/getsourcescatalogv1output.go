@@ -29,10 +29,52 @@ type GetSourcesCatalogV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetSourcesCatalogV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetSourcesCatalogV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetSourcesCatalogV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetSourcesCatalogV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetSourcesCatalogV1Output - Returns a list of all Source catalog items contained within a given page.
 type GetSourcesCatalogV1Output struct {
 	// Information about the pagination of this response.
 	Pagination GetSourcesCatalogV1OutputPaginationOutput `json:"pagination"`
 	// All Source catalog items contained within the requested page.
 	SourcesCatalog []SourceMetadataV1 `json:"sourcesCatalog"`
+}
+
+func (o *GetSourcesCatalogV1Output) GetPagination() GetSourcesCatalogV1OutputPaginationOutput {
+	if o == nil {
+		return GetSourcesCatalogV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *GetSourcesCatalogV1Output) GetSourcesCatalog() []SourceMetadataV1 {
+	if o == nil {
+		return []SourceMetadataV1{}
+	}
+	return o.SourcesCatalog
 }

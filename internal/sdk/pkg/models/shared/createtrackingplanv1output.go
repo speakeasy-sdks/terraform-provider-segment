@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// CreateTrackingPlanV1OutputTrackingPlanV1Type - The Tracking Plan's type.
-type CreateTrackingPlanV1OutputTrackingPlanV1Type string
+// CreateTrackingPlanV1OutputType - The Tracking Plan's type.
+type CreateTrackingPlanV1OutputType string
 
 const (
-	CreateTrackingPlanV1OutputTrackingPlanV1TypeEngage          CreateTrackingPlanV1OutputTrackingPlanV1Type = "ENGAGE"
-	CreateTrackingPlanV1OutputTrackingPlanV1TypeLive            CreateTrackingPlanV1OutputTrackingPlanV1Type = "LIVE"
-	CreateTrackingPlanV1OutputTrackingPlanV1TypePropertyLibrary CreateTrackingPlanV1OutputTrackingPlanV1Type = "PROPERTY_LIBRARY"
-	CreateTrackingPlanV1OutputTrackingPlanV1TypeRuleLibrary     CreateTrackingPlanV1OutputTrackingPlanV1Type = "RULE_LIBRARY"
-	CreateTrackingPlanV1OutputTrackingPlanV1TypeTemplate        CreateTrackingPlanV1OutputTrackingPlanV1Type = "TEMPLATE"
+	CreateTrackingPlanV1OutputTypeEngage          CreateTrackingPlanV1OutputType = "ENGAGE"
+	CreateTrackingPlanV1OutputTypeLive            CreateTrackingPlanV1OutputType = "LIVE"
+	CreateTrackingPlanV1OutputTypePropertyLibrary CreateTrackingPlanV1OutputType = "PROPERTY_LIBRARY"
+	CreateTrackingPlanV1OutputTypeRuleLibrary     CreateTrackingPlanV1OutputType = "RULE_LIBRARY"
+	CreateTrackingPlanV1OutputTypeTemplate        CreateTrackingPlanV1OutputType = "TEMPLATE"
 )
 
-func (e CreateTrackingPlanV1OutputTrackingPlanV1Type) ToPointer() *CreateTrackingPlanV1OutputTrackingPlanV1Type {
+func (e CreateTrackingPlanV1OutputType) ToPointer() *CreateTrackingPlanV1OutputType {
 	return &e
 }
 
-func (e *CreateTrackingPlanV1OutputTrackingPlanV1Type) UnmarshalJSON(data []byte) error {
+func (e *CreateTrackingPlanV1OutputType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,15 +37,15 @@ func (e *CreateTrackingPlanV1OutputTrackingPlanV1Type) UnmarshalJSON(data []byte
 	case "RULE_LIBRARY":
 		fallthrough
 	case "TEMPLATE":
-		*e = CreateTrackingPlanV1OutputTrackingPlanV1Type(v)
+		*e = CreateTrackingPlanV1OutputType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateTrackingPlanV1OutputTrackingPlanV1Type: %v", v)
+		return fmt.Errorf("invalid value for CreateTrackingPlanV1OutputType: %v", v)
 	}
 }
 
-// CreateTrackingPlanV1OutputTrackingPlanV1 - Represents a Tracking Plan.
-type CreateTrackingPlanV1OutputTrackingPlanV1 struct {
+// TrackingPlanV1 - Represents a Tracking Plan.
+type TrackingPlanV1 struct {
 	// The timestamp of this Tracking Plan's creation.
 	//
 	// Config API note: equal to `createTime`.
@@ -65,15 +65,71 @@ type CreateTrackingPlanV1OutputTrackingPlanV1 struct {
 	// Config API note: equal to `name`.
 	Slug *string `json:"slug,omitempty"`
 	// The Tracking Plan's type.
-	Type CreateTrackingPlanV1OutputTrackingPlanV1Type `json:"type"`
+	Type CreateTrackingPlanV1OutputType `json:"type"`
 	// The timestamp of the last change to the Tracking Plan.
 	//
 	// Config API note: equal to `updateTime`.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
+func (o *TrackingPlanV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *TrackingPlanV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *TrackingPlanV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *TrackingPlanV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *TrackingPlanV1) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}
+
+func (o *TrackingPlanV1) GetType() CreateTrackingPlanV1OutputType {
+	if o == nil {
+		return CreateTrackingPlanV1OutputType("")
+	}
+	return o.Type
+}
+
+func (o *TrackingPlanV1) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}
+
 // CreateTrackingPlanV1Output - Result of a CreateTrackingPlan call.
 type CreateTrackingPlanV1Output struct {
 	// The created Tracking Plan.
-	TrackingPlan CreateTrackingPlanV1OutputTrackingPlanV1 `json:"trackingPlan"`
+	TrackingPlan TrackingPlanV1 `json:"trackingPlan"`
+}
+
+func (o *CreateTrackingPlanV1Output) GetTrackingPlan() TrackingPlanV1 {
+	if o == nil {
+		return TrackingPlanV1{}
+	}
+	return o.TrackingPlan
 }

@@ -37,3 +37,10 @@ type RemoveSubscriptionFromDestinationAlphaOutput struct {
 	// The status of the operation.
 	Status RemoveSubscriptionFromDestinationAlphaOutputStatus `json:"status"`
 }
+
+func (o *RemoveSubscriptionFromDestinationAlphaOutput) GetStatus() RemoveSubscriptionFromDestinationAlphaOutputStatus {
+	if o == nil {
+		return RemoveSubscriptionFromDestinationAlphaOutputStatus("")
+	}
+	return o.Status
+}
