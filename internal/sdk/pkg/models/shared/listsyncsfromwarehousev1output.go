@@ -29,10 +29,52 @@ type ListSyncsFromWarehouseV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSyncsFromWarehouseV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSyncsFromWarehouseV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSyncsFromWarehouseV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSyncsFromWarehouseV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSyncsFromWarehouseV1Output - Returns an overview page that contains the last syncs for a Warehouse.
 type ListSyncsFromWarehouseV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListSyncsFromWarehouseV1OutputPaginationOutput `json:"pagination"`
 	// A list that contains the latest syncs for the specified Warehouse.
 	Reports []SyncV1 `json:"reports"`
+}
+
+func (o *ListSyncsFromWarehouseV1Output) GetPagination() ListSyncsFromWarehouseV1OutputPaginationOutput {
+	if o == nil {
+		return ListSyncsFromWarehouseV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSyncsFromWarehouseV1Output) GetReports() []SyncV1 {
+	if o == nil {
+		return []SyncV1{}
+	}
+	return o.Reports
 }

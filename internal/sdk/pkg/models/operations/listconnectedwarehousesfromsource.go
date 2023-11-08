@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type ListConnectedWarehousesFromSourceRequest struct {
@@ -15,42 +15,143 @@ type ListConnectedWarehousesFromSourceRequest struct {
 	SourceID   string                 `pathParam:"style=simple,explode=false,name=sourceId"`
 }
 
-// ListConnectedWarehousesFromSource200ApplicationVndSegmentV1betaPlusJSON - OK
-type ListConnectedWarehousesFromSource200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ListConnectedWarehousesFromSourceRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListConnectedWarehousesFromSourceRequest) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+// ListConnectedWarehousesFromSourceSourcesResponse200ResponseBody - OK
+type ListConnectedWarehousesFromSourceSourcesResponse200ResponseBody struct {
 	// Returns a list of Warehouses connected to a Source.
 	Data *shared.ListConnectedWarehousesFromSourceV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedWarehousesFromSource200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListConnectedWarehousesFromSource200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListConnectedWarehousesFromSourceSourcesResponse200ResponseBody) GetData() *shared.ListConnectedWarehousesFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedWarehousesFromSourceSourcesResponseResponseBody - OK
+type ListConnectedWarehousesFromSourceSourcesResponseResponseBody struct {
 	// Returns a list of Warehouses connected to a Source.
 	Data *shared.ListConnectedWarehousesFromSourceAlphaOutput `json:"data,omitempty"`
 }
 
-// ListConnectedWarehousesFromSource200ApplicationVndSegmentV1PlusJSON - OK
-type ListConnectedWarehousesFromSource200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ListConnectedWarehousesFromSourceSourcesResponseResponseBody) GetData() *shared.ListConnectedWarehousesFromSourceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedWarehousesFromSourceSourcesResponseBody - OK
+type ListConnectedWarehousesFromSourceSourcesResponseBody struct {
 	// Returns a list of Warehouses connected to a Source.
 	Data *shared.ListConnectedWarehousesFromSourceV1Output `json:"data,omitempty"`
 }
 
-// ListConnectedWarehousesFromSource200ApplicationJSON - OK
-type ListConnectedWarehousesFromSource200ApplicationJSON struct {
+func (o *ListConnectedWarehousesFromSourceSourcesResponseBody) GetData() *shared.ListConnectedWarehousesFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListConnectedWarehousesFromSourceResponseBody - OK
+type ListConnectedWarehousesFromSourceResponseBody struct {
 	// Returns a list of Warehouses connected to a Source.
 	Data *shared.ListConnectedWarehousesFromSourceV1Output `json:"data,omitempty"`
+}
+
+func (o *ListConnectedWarehousesFromSourceResponseBody) GetData() *shared.ListConnectedWarehousesFromSourceV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ListConnectedWarehousesFromSourceResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ListConnectedWarehousesFromSourceResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ListConnectedWarehousesFromSourceSourcesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedWarehousesFromSourceSourcesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ListConnectedWarehousesFromSourceSourcesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ListConnectedWarehousesFromSource200ApplicationJSONObject *ListConnectedWarehousesFromSource200ApplicationJSON
-	// OK
-	ListConnectedWarehousesFromSource200ApplicationVndSegmentV1PlusJSONObject *ListConnectedWarehousesFromSource200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ListConnectedWarehousesFromSource200ApplicationVndSegmentV1alphaPlusJSONObject *ListConnectedWarehousesFromSource200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ListConnectedWarehousesFromSource200ApplicationVndSegmentV1betaPlusJSONObject *ListConnectedWarehousesFromSource200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetTwoHundredApplicationJSONObject() *ListConnectedWarehousesFromSourceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ListConnectedWarehousesFromSourceSourcesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ListConnectedWarehousesFromSourceSourcesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ListConnectedWarehousesFromSourceSourcesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListConnectedWarehousesFromSourceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

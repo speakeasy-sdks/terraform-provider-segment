@@ -31,8 +31,85 @@ type GetTransformationV1OutputTransformationV1 struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *GetTransformationV1OutputTransformationV1) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetFqlDefinedProperties() []FQLDefinedPropertyV1 {
+	if o == nil {
+		return nil
+	}
+	return o.FqlDefinedProperties
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetPropertyRenames() []PropertyRenameV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetPropertyValueTransformations() []PropertyValueTransformationV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *GetTransformationV1OutputTransformationV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // GetTransformationV1Output - The output of Transformation retrieval.
 type GetTransformationV1Output struct {
 	// The retrieved Transformation.
 	Transformation GetTransformationV1OutputTransformationV1 `json:"transformation"`
+}
+
+func (o *GetTransformationV1Output) GetTransformation() GetTransformationV1OutputTransformationV1 {
+	if o == nil {
+		return GetTransformationV1OutputTransformationV1{}
+	}
+	return o.Transformation
 }

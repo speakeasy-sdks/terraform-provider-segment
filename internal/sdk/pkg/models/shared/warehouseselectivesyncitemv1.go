@@ -13,3 +13,31 @@ type WarehouseSelectiveSyncItemV1 struct {
 	// The id of the Warehouse this sync belongs to.
 	WarehouseID string `json:"warehouseId"`
 }
+
+func (o *WarehouseSelectiveSyncItemV1) GetCollection() string {
+	if o == nil {
+		return ""
+	}
+	return o.Collection
+}
+
+func (o *WarehouseSelectiveSyncItemV1) GetProperties() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Properties
+}
+
+func (o *WarehouseSelectiveSyncItemV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *WarehouseSelectiveSyncItemV1) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}

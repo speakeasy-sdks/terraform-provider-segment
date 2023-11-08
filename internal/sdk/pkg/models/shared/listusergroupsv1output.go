@@ -29,10 +29,52 @@ type ListUserGroupsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListUserGroupsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListUserGroupsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListUserGroupsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListUserGroupsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListUserGroupsV1Output - Returns a list of user groups with the given Workspace id.
 type ListUserGroupsV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListUserGroupsV1OutputPaginationOutput `json:"pagination"`
 	// The user group returned from the query.
 	UserGroups []UserGroupV1 `json:"userGroups"`
+}
+
+func (o *ListUserGroupsV1Output) GetPagination() ListUserGroupsV1OutputPaginationOutput {
+	if o == nil {
+		return ListUserGroupsV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListUserGroupsV1Output) GetUserGroups() []UserGroupV1 {
+	if o == nil {
+		return []UserGroupV1{}
+	}
+	return o.UserGroups
 }

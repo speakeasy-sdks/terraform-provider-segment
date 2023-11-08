@@ -29,10 +29,52 @@ type ListWarehousesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListWarehousesV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListWarehousesV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListWarehousesV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListWarehousesV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListWarehousesV1Output - Returns a list of Warehouses that belong to a Workspace.
 type ListWarehousesV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListWarehousesV1OutputPaginationOutput `json:"pagination"`
 	// A list of Warehouses that belong to the Workspace.
 	Warehouses []WarehouseV1 `json:"warehouses"`
+}
+
+func (o *ListWarehousesV1Output) GetPagination() ListWarehousesV1OutputPaginationOutput {
+	if o == nil {
+		return ListWarehousesV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListWarehousesV1Output) GetWarehouses() []WarehouseV1 {
+	if o == nil {
+		return []WarehouseV1{}
+	}
+	return o.Warehouses
 }

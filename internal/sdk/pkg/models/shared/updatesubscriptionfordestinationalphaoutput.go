@@ -25,8 +25,78 @@ type UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription struct {
 	Trigger string `json:"trigger"`
 }
 
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetActionSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionSlug
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetModelID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModelID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}
+
 // UpdateSubscriptionForDestinationAlphaOutput - Returns the updated Destination subscription.
 type UpdateSubscriptionForDestinationAlphaOutput struct {
 	// The Destination subscription.
 	Subscription UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription `json:"subscription"`
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscription() UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription {
+	if o == nil {
+		return UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription{}
+	}
+	return o.Subscription
 }

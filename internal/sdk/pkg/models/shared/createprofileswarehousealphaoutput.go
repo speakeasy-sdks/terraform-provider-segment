@@ -2,8 +2,8 @@
 
 package shared
 
-// CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta - Represents a logo.
-type CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta struct {
+// CreateProfilesWarehouseAlphaOutputLogosBeta - Represents a logo.
+type CreateProfilesWarehouseAlphaOutputLogosBeta struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,20 +12,83 @@ type CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1
 	Mark *string `json:"mark,omitempty"`
 }
 
-// CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
-type CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1 struct {
+func (o *CreateProfilesWarehouseAlphaOutputLogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputLogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputLogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
+type CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1 struct {
 	// A description, in English, of this object.
 	Description string `json:"description"`
 	// The id of this object.
 	ID string `json:"id"`
 	// Logo information for this object.
-	Logos CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta `json:"logos"`
+	Logos CreateProfilesWarehouseAlphaOutputLogosBeta `json:"logos"`
 	// The name of this object.
 	Name string `json:"name"`
 	// The Integration options for this object.
 	Options []IntegrationOptionBeta `json:"options"`
 	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1) GetLogos() CreateProfilesWarehouseAlphaOutputLogosBeta {
+	if o == nil {
+		return CreateProfilesWarehouseAlphaOutputLogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha - Defines a Profiles data Warehouse used as a Destination for Segment data.
@@ -35,7 +98,7 @@ type CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha struct {
 	// The id of the Warehouse.
 	ID string `json:"id"`
 	// The metadata for the Warehouse.
-	Metadata CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1 `json:"metadata"`
+	Metadata CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1 `json:"metadata"`
 	// The custom schema name that Segment uses on the Warehouse side.
 	SchemaName *string `json:"schemaName,omitempty"`
 	// The settings associated with this Warehouse.
@@ -48,8 +111,64 @@ type CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha struct {
 	WorkspaceID string `json:"workspaceId"`
 }
 
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetMetadata() CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1 {
+	if o == nil {
+		return CreateProfilesWarehouseAlphaOutputWarehouseMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetSchemaName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SchemaName
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
 // CreateProfilesWarehouseAlphaOutput - Returns the newly created Warehouse.
 type CreateProfilesWarehouseAlphaOutput struct {
 	// The newly created Warehouse.
 	ProfilesWarehouse CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha `json:"profilesWarehouse"`
+}
+
+func (o *CreateProfilesWarehouseAlphaOutput) GetProfilesWarehouse() CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha {
+	if o == nil {
+		return CreateProfilesWarehouseAlphaOutputProfilesWarehouseAlpha{}
+	}
+	return o.ProfilesWarehouse
 }

@@ -3,26 +3,78 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type GetSpaceRequest struct {
 	SpaceID string `pathParam:"style=simple,explode=false,name=spaceId"`
 }
 
-// GetSpace200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetSpace200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetSpaceRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+// GetSpaceResponseBody - OK
+type GetSpaceResponseBody struct {
 	// Response for the getSpaceById endpoint.
 	Data *shared.GetSpaceAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *GetSpaceResponseBody) GetData() *shared.GetSpaceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type GetSpaceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	GetSpace200ApplicationVndSegmentV1alphaPlusJSONObject *GetSpace200ApplicationVndSegmentV1alphaPlusJSON
+	Object *GetSpaceResponseBody
+}
+
+func (o *GetSpaceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetSpaceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetSpaceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetSpaceResponse) GetObject() *GetSpaceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

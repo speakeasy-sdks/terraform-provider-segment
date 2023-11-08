@@ -29,10 +29,52 @@ type ListDestinationsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListDestinationsV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListDestinationsV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListDestinationsV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListDestinationsV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListDestinationsV1Output - Returns all Destinations connected to the current Workspace.
 type ListDestinationsV1Output struct {
 	// The list that contains the Destinations connected to the Workspace.
 	Destinations []DestinationV1 `json:"destinations"`
 	// Information about the pagination of this response.
 	Pagination ListDestinationsV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListDestinationsV1Output) GetDestinations() []DestinationV1 {
+	if o == nil {
+		return []DestinationV1{}
+	}
+	return o.Destinations
+}
+
+func (o *ListDestinationsV1Output) GetPagination() ListDestinationsV1OutputPaginationOutput {
+	if o == nil {
+		return ListDestinationsV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

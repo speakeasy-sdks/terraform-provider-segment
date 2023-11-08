@@ -7,3 +7,10 @@ type AddLabelsToSourceV1Output struct {
 	// All labels applied to the Source.
 	Labels []LabelV1 `json:"labels"`
 }
+
+func (o *AddLabelsToSourceV1Output) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}

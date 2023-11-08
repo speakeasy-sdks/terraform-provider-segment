@@ -37,3 +37,10 @@ type ReplaceRulesInTrackingPlanV1Output struct {
 	// The operation status.
 	Status ReplaceRulesInTrackingPlanV1OutputStatus `json:"status"`
 }
+
+func (o *ReplaceRulesInTrackingPlanV1Output) GetStatus() ReplaceRulesInTrackingPlanV1OutputStatus {
+	if o == nil {
+		return ReplaceRulesInTrackingPlanV1OutputStatus("")
+	}
+	return o.Status
+}

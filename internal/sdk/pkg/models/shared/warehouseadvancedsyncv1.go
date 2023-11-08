@@ -9,3 +9,17 @@ type WarehouseAdvancedSyncV1 struct {
 	// The hour of day for which to enable/disable a sync, between 0 and 23.
 	HourOfDay float64 `json:"hourOfDay"`
 }
+
+func (o *WarehouseAdvancedSyncV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *WarehouseAdvancedSyncV1) GetHourOfDay() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.HourOfDay
+}

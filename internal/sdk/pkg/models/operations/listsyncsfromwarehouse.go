@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type ListSyncsFromWarehouseRequest struct {
@@ -15,42 +15,143 @@ type ListSyncsFromWarehouseRequest struct {
 	WarehouseID string                 `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
-// ListSyncsFromWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
-type ListSyncsFromWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ListSyncsFromWarehouseRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSyncsFromWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
+// ListSyncsFromWarehouseSelectiveSyncResponse200ResponseBody - OK
+type ListSyncsFromWarehouseSelectiveSyncResponse200ResponseBody struct {
 	// Returns an overview page that contains the last syncs for a Warehouse.
 	Data *shared.ListSyncsFromWarehouseV1Output `json:"data,omitempty"`
 }
 
-// ListSyncsFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListSyncsFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListSyncsFromWarehouseSelectiveSyncResponse200ResponseBody) GetData() *shared.ListSyncsFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListSyncsFromWarehouseSelectiveSyncResponseResponseBody - OK
+type ListSyncsFromWarehouseSelectiveSyncResponseResponseBody struct {
 	// Returns an overview page that contains the last syncs for a Warehouse.
 	Data *shared.ListSyncsFromWarehouseV1Output `json:"data,omitempty"`
 }
 
-// ListSyncsFromWarehouse200ApplicationVndSegmentV1PlusJSON - OK
-type ListSyncsFromWarehouse200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ListSyncsFromWarehouseSelectiveSyncResponseResponseBody) GetData() *shared.ListSyncsFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListSyncsFromWarehouseSelectiveSyncResponseBody - OK
+type ListSyncsFromWarehouseSelectiveSyncResponseBody struct {
 	// Returns an overview page that contains the last syncs for a Warehouse.
 	Data *shared.ListSyncsFromWarehouseV1Output `json:"data,omitempty"`
 }
 
-// ListSyncsFromWarehouse200ApplicationJSON - OK
-type ListSyncsFromWarehouse200ApplicationJSON struct {
+func (o *ListSyncsFromWarehouseSelectiveSyncResponseBody) GetData() *shared.ListSyncsFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListSyncsFromWarehouseResponseBody - OK
+type ListSyncsFromWarehouseResponseBody struct {
 	// Returns an overview page that contains the last syncs for a Warehouse.
 	Data *shared.ListSyncsFromWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *ListSyncsFromWarehouseResponseBody) GetData() *shared.ListSyncsFromWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ListSyncsFromWarehouseResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ListSyncsFromWarehouseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ListSyncsFromWarehouseSelectiveSyncResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ListSyncsFromWarehouseSelectiveSyncResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ListSyncsFromWarehouseSelectiveSyncResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ListSyncsFromWarehouse200ApplicationJSONObject *ListSyncsFromWarehouse200ApplicationJSON
-	// OK
-	ListSyncsFromWarehouse200ApplicationVndSegmentV1PlusJSONObject *ListSyncsFromWarehouse200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ListSyncsFromWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *ListSyncsFromWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ListSyncsFromWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *ListSyncsFromWarehouse200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetTwoHundredApplicationJSONObject() *ListSyncsFromWarehouseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ListSyncsFromWarehouseSelectiveSyncResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ListSyncsFromWarehouseSelectiveSyncResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ListSyncsFromWarehouseSelectiveSyncResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListSyncsFromWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

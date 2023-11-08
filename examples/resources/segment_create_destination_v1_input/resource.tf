@@ -1,10 +1,10 @@
 resource "segment_create_destination_v1_input" "my_createdestinationv1input" {
   enabled     = true
   metadata_id = "...my_metadata_id..."
-  name        = "Brandon Auer"
+  name        = "Dr. Luther Russel"
   settings = {
-    "sed"  = "{ \"see\": \"documentation\" }"
-    "iste" = "{ \"see\": \"documentation\" }"
+    "SUV"        = "{ \"see\": \"documentation\" }"
+    "synthesize" = "{ \"see\": \"documentation\" }"
   }
   source_id = "...my_source_id..."
 }

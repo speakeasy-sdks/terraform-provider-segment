@@ -3,22 +3,67 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
-// CreateInsertFunctionInstance200ApplicationVndSegmentV1alphaPlusJSON - OK
-type CreateInsertFunctionInstance200ApplicationVndSegmentV1alphaPlusJSON struct {
+// CreateInsertFunctionInstanceResponseBody - OK
+type CreateInsertFunctionInstanceResponseBody struct {
 	// Creates an insert Function instance.
 	Data *shared.CreateInsertFunctionInstanceAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *CreateInsertFunctionInstanceResponseBody) GetData() *shared.CreateInsertFunctionInstanceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type CreateInsertFunctionInstanceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	CreateInsertFunctionInstance200ApplicationVndSegmentV1alphaPlusJSONObject *CreateInsertFunctionInstance200ApplicationVndSegmentV1alphaPlusJSON
+	Object *CreateInsertFunctionInstanceResponseBody
+}
+
+func (o *CreateInsertFunctionInstanceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateInsertFunctionInstanceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateInsertFunctionInstanceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateInsertFunctionInstanceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateInsertFunctionInstanceResponse) GetObject() *CreateInsertFunctionInstanceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

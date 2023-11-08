@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -20,7 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
+	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -38,9 +38,9 @@ type PreviewDestinationFilterV1InputResource struct {
 
 // PreviewDestinationFilterV1InputResourceModel describes the resource data model.
 type PreviewDestinationFilterV1InputResourceModel struct {
-	Errors  []RequestError                                            `tfsdk:"errors"`
-	Filter  PreviewDestinationFilterV1InputPreviewDestinationFilterV1 `tfsdk:"filter"`
-	Payload map[string]types.String                                   `tfsdk:"payload"`
+	Data    *PreviewDestinationFilterV1Output `tfsdk:"data"`
+	Filter  PreviewDestinationFilterV1        `tfsdk:"filter"`
+	Payload map[string]types.String           `tfsdk:"payload"`
 }
 
 func (r *PreviewDestinationFilterV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -52,36 +52,25 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 		MarkdownDescription: "PreviewDestinationFilterV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
+				Attributes: map[string]schema.Attribute{
+					"input_payload": schema.MapAttribute{
+						Computed:    true,
+						ElementType: types.StringType,
+						Validators: []validator.Map{
+							mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+						Description: `The pre-filter JSON input.`,
+					},
+					"result": schema.SingleNestedAttribute{
+						Computed:    true,
+						Attributes:  map[string]schema.Attribute{},
+						Description: `The filtered JSON output.`,
 					},
 				},
+				MarkdownDescription: `Preview output from applying the Destination filter.` + "\n" +
+					`Segment modifies or nullifies payloads depending on the provided filter actions.`,
 			},
 			"filter": schema.SingleNestedAttribute{
 				PlanModifiers: []planmodifier.Object{
@@ -227,11 +216,11 @@ func (r *PreviewDestinationFilterV1InputResource) Create(ctx context.Context, re
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
