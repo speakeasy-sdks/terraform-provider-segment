@@ -37,3 +37,10 @@ type AddSourceToTrackingPlanV1Output struct {
 	// The operation status.
 	Status AddSourceToTrackingPlanV1OutputStatus `json:"status"`
 }
+
+func (o *AddSourceToTrackingPlanV1Output) GetStatus() AddSourceToTrackingPlanV1OutputStatus {
+	if o == nil {
+		return AddSourceToTrackingPlanV1OutputStatus("")
+	}
+	return o.Status
+}

@@ -6,22 +6,23 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/sdkerrors"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/utils"
 	"io"
 	"net/http"
-	"segment/internal/sdk/pkg/models/operations"
-	"segment/internal/sdk/pkg/models/shared"
-	"segment/internal/sdk/pkg/utils"
 )
 
-// profilesSync - A Profiles Sync Warehouse is a central repository of data collected from your workspace. It is what commonly comes to mind when you think about a relational database: structured data that fits into rows and columns.
+// ProfilesSync - A Profiles Sync Warehouse is a central repository of data collected from your workspace. It is what commonly comes to mind when you think about a relational database: structured data that fits into rows and columns.
 //
 // Using Segment’s Public API, you can create, delete, update, and list Spaces Warehouses connections.
-type profilesSync struct {
+type ProfilesSync struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newProfilesSync(sdkConfig sdkConfiguration) *profilesSync {
-	return &profilesSync{
+func newProfilesSync(sdkConfig sdkConfiguration) *ProfilesSync {
+	return &ProfilesSync{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,14 +31,24 @@ func newProfilesSync(sdkConfig sdkConfiguration) *profilesSync {
 // Creates a new Profiles Warehouse.
 //
 // • When called, this endpoint may generate the `Profiles Sync Warehouse Created` event in the [audit trail](/tag/Audit-Trail).
-func (s *profilesSync) CreateProfilesWarehouse(ctx context.Context, request operations.CreateProfilesWarehouseRequest) (*operations.CreateProfilesWarehouseResponse, error) {
+func (s *ProfilesSync) CreateProfilesWarehouse(ctx context.Context, request operations.CreateProfilesWarehouseRequest, opts ...operations.Option) (*operations.CreateProfilesWarehouseResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/spaces/{spaceId}/profiles-warehouses", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "CreateProfilesWarehouseAlphaInput", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateProfilesWarehouseAlphaInput", "json", `request:"mediaType=application/vnd.segment.v1alpha+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -52,8 +63,13 @@ func (s *profilesSync) CreateProfilesWarehouse(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -86,12 +102,14 @@ func (s *profilesSync) CreateProfilesWarehouse(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.CreateProfilesWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.CreateProfilesWarehouseResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.CreateProfilesWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -100,12 +118,14 @@ func (s *profilesSync) CreateProfilesWarehouse(ctx context.Context, request oper
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -116,7 +136,17 @@ func (s *profilesSync) CreateProfilesWarehouse(ctx context.Context, request oper
 // Lists all Profile Warehouses for a given space id.
 //
 // • When called, this endpoint may generate the `Profiles Sync Warehouse Retrieved` event in the [audit trail](/tag/Audit-Trail).
-func (s *profilesSync) ListProfilesWarehouseInSpace(ctx context.Context, request operations.ListProfilesWarehouseInSpaceRequest) (*operations.ListProfilesWarehouseInSpaceResponse, error) {
+func (s *ProfilesSync) ListProfilesWarehouseInSpace(ctx context.Context, request operations.ListProfilesWarehouseInSpaceRequest, opts ...operations.Option) (*operations.ListProfilesWarehouseInSpaceResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/spaces/{spaceId}/profiles-warehouses", request, nil)
 	if err != nil {
@@ -127,8 +157,13 @@ func (s *profilesSync) ListProfilesWarehouseInSpace(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -162,12 +197,14 @@ func (s *profilesSync) ListProfilesWarehouseInSpace(ctx context.Context, request
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.ListProfilesWarehouseInSpace200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListProfilesWarehouseInSpaceResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListProfilesWarehouseInSpace200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -176,12 +213,14 @@ func (s *profilesSync) ListProfilesWarehouseInSpace(ctx context.Context, request
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -190,7 +229,17 @@ func (s *profilesSync) ListProfilesWarehouseInSpace(ctx context.Context, request
 
 // ListSelectiveSyncsFromWarehouseAndSpace - List Selective Syncs from Warehouse And Space
 // Returns the schema for a Space Warehouse connection, including Collections and Properties.
-func (s *profilesSync) ListSelectiveSyncsFromWarehouseAndSpace(ctx context.Context, request operations.ListSelectiveSyncsFromWarehouseAndSpaceRequest) (*operations.ListSelectiveSyncsFromWarehouseAndSpaceResponse, error) {
+func (s *ProfilesSync) ListSelectiveSyncsFromWarehouseAndSpace(ctx context.Context, request operations.ListSelectiveSyncsFromWarehouseAndSpaceRequest, opts ...operations.Option) (*operations.ListSelectiveSyncsFromWarehouseAndSpaceResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/spaces/{spaceId}/profiles-warehouses/{warehouseId}/selective-syncs", request, nil)
 	if err != nil {
@@ -201,8 +250,13 @@ func (s *profilesSync) ListSelectiveSyncsFromWarehouseAndSpace(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -236,12 +290,14 @@ func (s *profilesSync) ListSelectiveSyncsFromWarehouseAndSpace(ctx context.Conte
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.ListSelectiveSyncsFromWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.ListSelectiveSyncsFromWarehouseAndSpaceResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.ListSelectiveSyncsFromWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -250,12 +306,14 @@ func (s *profilesSync) ListSelectiveSyncsFromWarehouseAndSpace(ctx context.Conte
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -266,7 +324,17 @@ func (s *profilesSync) ListSelectiveSyncsFromWarehouseAndSpace(ctx context.Conte
 // Deletes an existing Profiles Warehouse.
 //
 // • When called, this endpoint may generate the `Profiles Sync Warehouse Deleted` event in the [audit trail](/tag/Audit-Trail).
-func (s *profilesSync) RemoveProfilesWarehouseFromSpace(ctx context.Context, request operations.RemoveProfilesWarehouseFromSpaceRequest) (*operations.RemoveProfilesWarehouseFromSpaceResponse, error) {
+func (s *ProfilesSync) RemoveProfilesWarehouseFromSpace(ctx context.Context, request operations.RemoveProfilesWarehouseFromSpaceRequest, opts ...operations.Option) (*operations.RemoveProfilesWarehouseFromSpaceResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/spaces/{spaceId}/profiles-warehouses/{warehouseId}", request, nil)
 	if err != nil {
@@ -277,8 +345,13 @@ func (s *profilesSync) RemoveProfilesWarehouseFromSpace(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -308,12 +381,14 @@ func (s *profilesSync) RemoveProfilesWarehouseFromSpace(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.RemoveProfilesWarehouseFromSpace200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.RemoveProfilesWarehouseFromSpaceResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RemoveProfilesWarehouseFromSpace200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -322,12 +397,14 @@ func (s *profilesSync) RemoveProfilesWarehouseFromSpace(ctx context.Context, req
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -338,14 +415,24 @@ func (s *profilesSync) RemoveProfilesWarehouseFromSpace(ctx context.Context, req
 // Updates an existing Profiles Warehouse.
 //
 // • When called, this endpoint may generate the `Profiles Sync Warehouse Updated` event in the [audit trail](/tag/Audit-Trail).
-func (s *profilesSync) UpdateProfilesWarehouseForSpaceWarehouse(ctx context.Context, request operations.UpdateProfilesWarehouseForSpaceWarehouseRequest) (*operations.UpdateProfilesWarehouseForSpaceWarehouseResponse, error) {
+func (s *ProfilesSync) UpdateProfilesWarehouseForSpaceWarehouse(ctx context.Context, request operations.UpdateProfilesWarehouseForSpaceWarehouseRequest, opts ...operations.Option) (*operations.UpdateProfilesWarehouseForSpaceWarehouseResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/spaces/{spaceId}/profiles-warehouses/{warehouseId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "UpdateProfilesWarehouseForSpaceWarehouseAlphaInput", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateProfilesWarehouseForSpaceWarehouseAlphaInput", "json", `request:"mediaType=application/vnd.segment.v1alpha+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -360,8 +447,13 @@ func (s *profilesSync) UpdateProfilesWarehouseForSpaceWarehouse(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -394,12 +486,14 @@ func (s *profilesSync) UpdateProfilesWarehouseForSpaceWarehouse(ctx context.Cont
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.UpdateProfilesWarehouseForSpaceWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateProfilesWarehouseForSpaceWarehouseResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateProfilesWarehouseForSpaceWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -408,12 +502,14 @@ func (s *profilesSync) UpdateProfilesWarehouseForSpaceWarehouse(ctx context.Cont
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -424,14 +520,24 @@ func (s *profilesSync) UpdateProfilesWarehouseForSpaceWarehouse(ctx context.Cont
 // Updates the schema for a Space Warehouse connection, including Collections and Properties.
 //
 // • When called, this endpoint may generate the `Profiles Sync Warehouse Modified` event in the [audit trail](/tag/Audit-Trail).
-func (s *profilesSync) UpdateSelectiveSyncForWarehouseAndSpace(ctx context.Context, request operations.UpdateSelectiveSyncForWarehouseAndSpaceRequest) (*operations.UpdateSelectiveSyncForWarehouseAndSpaceResponse, error) {
+func (s *ProfilesSync) UpdateSelectiveSyncForWarehouseAndSpace(ctx context.Context, request operations.UpdateSelectiveSyncForWarehouseAndSpaceRequest, opts ...operations.Option) (*operations.UpdateSelectiveSyncForWarehouseAndSpaceResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionAcceptHeaderOverride,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/spaces/{spaceId}/profiles-warehouses/{warehouseId}/selective-syncs", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput", "json", `request:"mediaType=application/vnd.segment.v1alpha+json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -446,8 +552,13 @@ func (s *profilesSync) UpdateSelectiveSyncForWarehouseAndSpace(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1alpha+json;q=0")
+	}
+
+	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -480,12 +591,14 @@ func (s *profilesSync) UpdateSelectiveSyncForWarehouseAndSpace(ctx context.Conte
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
-			var out *operations.UpdateSelectiveSyncForWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.UpdateSelectiveSyncForWarehouseAndSpaceResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.UpdateSelectiveSyncForWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSONObject = out
+			res.Object = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -494,12 +607,14 @@ func (s *profilesSync) UpdateSelectiveSyncForWarehouseAndSpace(ctx context.Conte
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.RequestErrorEnvelope
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.RequestErrorEnvelope
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.RequestErrorEnvelope = out
+			res.RequestErrorEnvelope = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

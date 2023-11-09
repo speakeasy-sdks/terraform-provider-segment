@@ -7,3 +7,10 @@ type CreateInvitesV1Output struct {
 	// The list of emails invited to the Workspace.
 	Emails []string `json:"emails"`
 }
+
+func (o *CreateInvitesV1Output) GetEmails() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Emails
+}

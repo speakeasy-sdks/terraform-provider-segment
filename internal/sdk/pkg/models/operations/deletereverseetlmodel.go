@@ -3,26 +3,78 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type DeleteReverseEtlModelRequest struct {
 	ModelID string `pathParam:"style=simple,explode=false,name=modelId"`
 }
 
-// DeleteReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON - OK
-type DeleteReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *DeleteReverseEtlModelRequest) GetModelID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ModelID
+}
+
+// DeleteReverseEtlModelResponseBody - OK
+type DeleteReverseEtlModelResponseBody struct {
 	// Defines the result of getting a Model.
 	Data *shared.DeleteReverseEtlModelOutput `json:"data,omitempty"`
 }
 
+func (o *DeleteReverseEtlModelResponseBody) GetData() *shared.DeleteReverseEtlModelOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type DeleteReverseEtlModelResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	DeleteReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteReverseEtlModel200ApplicationVndSegmentV1alphaPlusJSON
+	Object *DeleteReverseEtlModelResponseBody
+}
+
+func (o *DeleteReverseEtlModelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteReverseEtlModelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteReverseEtlModelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeleteReverseEtlModelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteReverseEtlModelResponse) GetObject() *DeleteReverseEtlModelResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type GetWarehousesCatalogRequest struct {
@@ -14,42 +14,136 @@ type GetWarehousesCatalogRequest struct {
 	Pagination shared.PaginationInput `queryParam:"style=deepObject,explode=true,name=pagination"`
 }
 
-// GetWarehousesCatalog200ApplicationVndSegmentV1betaPlusJSON - OK
-type GetWarehousesCatalog200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *GetWarehousesCatalogRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+// GetWarehousesCatalogCatalogResponse200ResponseBody - OK
+type GetWarehousesCatalogCatalogResponse200ResponseBody struct {
 	// Returns a list of all Warehouse catalog items contained within a given page.
 	Data *shared.GetWarehousesCatalogV1Output `json:"data,omitempty"`
 }
 
-// GetWarehousesCatalog200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetWarehousesCatalog200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetWarehousesCatalogCatalogResponse200ResponseBody) GetData() *shared.GetWarehousesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetWarehousesCatalogCatalogResponseResponseBody - OK
+type GetWarehousesCatalogCatalogResponseResponseBody struct {
 	// Returns a list of all Warehouse catalog items contained within a given page.
 	Data *shared.GetWarehousesCatalogV1Output `json:"data,omitempty"`
 }
 
-// GetWarehousesCatalog200ApplicationVndSegmentV1PlusJSON - OK
-type GetWarehousesCatalog200ApplicationVndSegmentV1PlusJSON struct {
+func (o *GetWarehousesCatalogCatalogResponseResponseBody) GetData() *shared.GetWarehousesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetWarehousesCatalogCatalogResponseBody - OK
+type GetWarehousesCatalogCatalogResponseBody struct {
 	// Returns a list of all Warehouse catalog items contained within a given page.
 	Data *shared.GetWarehousesCatalogV1Output `json:"data,omitempty"`
 }
 
-// GetWarehousesCatalog200ApplicationJSON - OK
-type GetWarehousesCatalog200ApplicationJSON struct {
+func (o *GetWarehousesCatalogCatalogResponseBody) GetData() *shared.GetWarehousesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetWarehousesCatalogResponseBody - OK
+type GetWarehousesCatalogResponseBody struct {
 	// Returns a list of all Warehouse catalog items contained within a given page.
 	Data *shared.GetWarehousesCatalogV1Output `json:"data,omitempty"`
+}
+
+func (o *GetWarehousesCatalogResponseBody) GetData() *shared.GetWarehousesCatalogV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type GetWarehousesCatalogResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *GetWarehousesCatalogResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *GetWarehousesCatalogCatalogResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *GetWarehousesCatalogCatalogResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *GetWarehousesCatalogCatalogResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	GetWarehousesCatalog200ApplicationJSONObject *GetWarehousesCatalog200ApplicationJSON
-	// OK
-	GetWarehousesCatalog200ApplicationVndSegmentV1PlusJSONObject *GetWarehousesCatalog200ApplicationVndSegmentV1PlusJSON
-	// OK
-	GetWarehousesCatalog200ApplicationVndSegmentV1alphaPlusJSONObject *GetWarehousesCatalog200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	GetWarehousesCatalog200ApplicationVndSegmentV1betaPlusJSONObject *GetWarehousesCatalog200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *GetWarehousesCatalogResponse) GetTwoHundredApplicationJSONObject() *GetWarehousesCatalogResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *GetWarehousesCatalogResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *GetWarehousesCatalogCatalogResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetWarehousesCatalogResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *GetWarehousesCatalogCatalogResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetWarehousesCatalogResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *GetWarehousesCatalogCatalogResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *GetWarehousesCatalogResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetWarehousesCatalogResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetWarehousesCatalogResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetWarehousesCatalogResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

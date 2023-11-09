@@ -25,3 +25,73 @@ type ComputedTraitSummary struct {
 	// User id who last updated the computed trait.
 	UpdatedBy string `json:"updatedBy"`
 }
+
+func (o *ComputedTraitSummary) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *ComputedTraitSummary) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *ComputedTraitSummary) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *ComputedTraitSummary) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *ComputedTraitSummary) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ComputedTraitSummary) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *ComputedTraitSummary) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *ComputedTraitSummary) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *ComputedTraitSummary) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
+func (o *ComputedTraitSummary) GetUpdatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedBy
+}

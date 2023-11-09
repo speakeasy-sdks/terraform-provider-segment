@@ -30,3 +30,66 @@ type ReverseEtlModel struct {
 	// The id for the attached Source.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *ReverseEtlModel) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *ReverseEtlModel) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *ReverseEtlModel) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ReverseEtlModel) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *ReverseEtlModel) GetQuery() string {
+	if o == nil {
+		return ""
+	}
+	return o.Query
+}
+
+func (o *ReverseEtlModel) GetQueryIdentifierColumn() string {
+	if o == nil {
+		return ""
+	}
+	return o.QueryIdentifierColumn
+}
+
+func (o *ReverseEtlModel) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.ScheduleConfig
+}
+
+func (o *ReverseEtlModel) GetScheduleStrategy() string {
+	if o == nil {
+		return ""
+	}
+	return o.ScheduleStrategy
+}
+
+func (o *ReverseEtlModel) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

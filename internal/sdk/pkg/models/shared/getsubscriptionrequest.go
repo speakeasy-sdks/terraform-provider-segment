@@ -50,3 +50,17 @@ type GetSubscriptionRequest struct {
 	// Type is communication medium used.
 	Type GetSubscriptionRequestType `json:"type"`
 }
+
+func (o *GetSubscriptionRequest) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *GetSubscriptionRequest) GetType() GetSubscriptionRequestType {
+	if o == nil {
+		return GetSubscriptionRequestType("")
+	}
+	return o.Type
+}

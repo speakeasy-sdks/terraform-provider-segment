@@ -37,3 +37,10 @@ type RemoveSourceConnectionFromWarehouseV1Output struct {
 	// The status of the request to disconnect the Source and Warehouse.
 	Status RemoveSourceConnectionFromWarehouseV1OutputStatus `json:"status"`
 }
+
+func (o *RemoveSourceConnectionFromWarehouseV1Output) GetStatus() RemoveSourceConnectionFromWarehouseV1OutputStatus {
+	if o == nil {
+		return RemoveSourceConnectionFromWarehouseV1OutputStatus("")
+	}
+	return o.Status
+}

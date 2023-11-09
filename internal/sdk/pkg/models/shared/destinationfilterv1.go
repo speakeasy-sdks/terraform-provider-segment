@@ -25,3 +25,73 @@ type DestinationFilterV1 struct {
 	// The timestamp of this filter's last change.
 	UpdatedAt string `json:"updatedAt"`
 }
+
+func (o *DestinationFilterV1) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *DestinationFilterV1) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *DestinationFilterV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *DestinationFilterV1) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *DestinationFilterV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *DestinationFilterV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationFilterV1) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *DestinationFilterV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *DestinationFilterV1) GetTitle() string {
+	if o == nil {
+		return ""
+	}
+	return o.Title
+}
+
+func (o *DestinationFilterV1) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}

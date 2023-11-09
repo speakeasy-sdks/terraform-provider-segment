@@ -17,3 +17,45 @@ type CreateFilterForDestinationV1Input struct {
 	// The title of the filter.
 	Title string `json:"title"`
 }
+
+func (o *CreateFilterForDestinationV1Input) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *CreateFilterForDestinationV1Input) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CreateFilterForDestinationV1Input) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateFilterForDestinationV1Input) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *CreateFilterForDestinationV1Input) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *CreateFilterForDestinationV1Input) GetTitle() string {
+	if o == nil {
+		return ""
+	}
+	return o.Title
+}

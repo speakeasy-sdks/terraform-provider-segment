@@ -26,8 +26,85 @@ type UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary struct {
 	UpdatedBy string `json:"updatedBy"`
 }
 
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary) GetUpdatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedBy
+}
+
 // UpdateComputedTraitForSpaceAlphaOutput - Computed Trait output for get and update.
 type UpdateComputedTraitForSpaceAlphaOutput struct {
 	// The computed trait summary output.
 	ComputedTrait UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary `json:"computedTrait"`
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTrait() UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary {
+	if o == nil {
+		return UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary{}
+	}
+	return o.ComputedTrait
 }

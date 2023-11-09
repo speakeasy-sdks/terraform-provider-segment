@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type UpdateProfilesWarehouseForSpaceWarehouseRequest struct {
@@ -13,18 +13,84 @@ type UpdateProfilesWarehouseForSpaceWarehouseRequest struct {
 	WarehouseID                                        string                                                    `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
-// UpdateProfilesWarehouseForSpaceWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
-type UpdateProfilesWarehouseForSpaceWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *UpdateProfilesWarehouseForSpaceWarehouseRequest) GetUpdateProfilesWarehouseForSpaceWarehouseAlphaInput() shared.UpdateProfilesWarehouseForSpaceWarehouseAlphaInput {
+	if o == nil {
+		return shared.UpdateProfilesWarehouseForSpaceWarehouseAlphaInput{}
+	}
+	return o.UpdateProfilesWarehouseForSpaceWarehouseAlphaInput
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
+// UpdateProfilesWarehouseForSpaceWarehouseResponseBody - OK
+type UpdateProfilesWarehouseForSpaceWarehouseResponseBody struct {
 	// Returns the updated Warehouse.
 	Data *shared.UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponseBody) GetData() *shared.UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type UpdateProfilesWarehouseForSpaceWarehouseResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	UpdateProfilesWarehouseForSpaceWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateProfilesWarehouseForSpaceWarehouse200ApplicationVndSegmentV1alphaPlusJSON
+	Object *UpdateProfilesWarehouseForSpaceWarehouseResponseBody
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetObject() *UpdateProfilesWarehouseForSpaceWarehouseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

@@ -5,8 +5,8 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
-	"segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -35,9 +34,9 @@ type AddPermissionsToUserV1InputResource struct {
 
 // AddPermissionsToUserV1InputResourceModel describes the resource data model.
 type AddPermissionsToUserV1InputResourceModel struct {
-	Errors      []RequestError      `tfsdk:"errors"`
-	Permissions []PermissionInputV1 `tfsdk:"permissions"`
-	UserID      types.String        `tfsdk:"user_id"`
+	Data        *AddPermissionsToUserGroupV1Output `tfsdk:"data"`
+	Permissions []PermissionInputV1                `tfsdk:"permissions"`
+	UserID      types.String                       `tfsdk:"user_id"`
 }
 
 func (r *AddPermissionsToUserV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -49,36 +48,73 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 		MarkdownDescription: "AddPermissionsToUserV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
+				Attributes: map[string]schema.Attribute{
+					"permissions": schema.ListNestedAttribute{
+						Computed: true,
+						NestedObject: schema.NestedAttributeObject{
+							Attributes: map[string]schema.Attribute{
+								"resources": schema.ListNestedAttribute{
+									Computed: true,
+									NestedObject: schema.NestedAttributeObject{
+										Attributes: map[string]schema.Attribute{
+											"id": schema.StringAttribute{
+												Computed:    true,
+												Description: `The id of this resource.`,
+											},
+											"labels": schema.ListNestedAttribute{
+												Computed: true,
+												NestedObject: schema.NestedAttributeObject{
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															Computed:    true,
+															Description: `A description of what this label represents.`,
+														},
+														"key": schema.StringAttribute{
+															Computed:    true,
+															Description: `The key identifier for this label.`,
+														},
+														"value": schema.StringAttribute{
+															Computed:    true,
+															Description: `The value of this label.`,
+														},
+													},
+												},
+												Description: `The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions.`,
+											},
+											"type": schema.StringAttribute{
+												Computed: true,
+												Validators: []validator.String{
+													stringvalidator.OneOf(
+														"FUNCTION",
+														"SOURCE",
+														"SPACE",
+														"WAREHOUSE",
+														"WORKSPACE",
+													),
+												},
+												MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
+													`The type for this resource.`,
+											},
+										},
+									},
+									Description: `The resources included with this permission.`,
+								},
+								"role_id": schema.StringAttribute{
+									Computed:    true,
+									Description: `The id of the role that applies to this permission.`,
+								},
+								"role_name": schema.StringAttribute{
+									Computed:    true,
+									Description: `The name of the role that applies to this permission.`,
+								},
 							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
 						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+						Description: `The new permissions.`,
 					},
 				},
+				Description: `Returns the user's permissions, including the added permissions.`,
 			},
 			"permissions": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -235,11 +271,11 @@ func (r *AddPermissionsToUserV1InputResource) Create(ctx context.Context, req re
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

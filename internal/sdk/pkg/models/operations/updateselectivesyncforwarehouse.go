@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type UpdateSelectiveSyncForWarehouseRequest struct {
@@ -12,42 +12,143 @@ type UpdateSelectiveSyncForWarehouseRequest struct {
 	WarehouseID                            string                                        `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
-// UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
-type UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *UpdateSelectiveSyncForWarehouseRequest) GetUpdateSelectiveSyncForWarehouseV1Input() shared.UpdateSelectiveSyncForWarehouseV1Input {
+	if o == nil {
+		return shared.UpdateSelectiveSyncForWarehouseV1Input{}
+	}
+	return o.UpdateSelectiveSyncForWarehouseV1Input
+}
+
+func (o *UpdateSelectiveSyncForWarehouseRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
+// UpdateSelectiveSyncForWarehouseSelectiveSyncResponse200ResponseBody - OK
+type UpdateSelectiveSyncForWarehouseSelectiveSyncResponse200ResponseBody struct {
 	// Results from updating the schema for a Warehouse/source pair.
 	Data *shared.UpdateSelectiveSyncForWarehouseV1Output `json:"data,omitempty"`
 }
 
-// UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
-type UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *UpdateSelectiveSyncForWarehouseSelectiveSyncResponse200ResponseBody) GetData() *shared.UpdateSelectiveSyncForWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// UpdateSelectiveSyncForWarehouseSelectiveSyncResponseResponseBody - OK
+type UpdateSelectiveSyncForWarehouseSelectiveSyncResponseResponseBody struct {
 	// Results from updating the schema for a Warehouse/source pair.
 	Data *shared.UpdateSelectiveSyncForWarehouseV1Output `json:"data,omitempty"`
 }
 
-// UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1PlusJSON - OK
-type UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1PlusJSON struct {
+func (o *UpdateSelectiveSyncForWarehouseSelectiveSyncResponseResponseBody) GetData() *shared.UpdateSelectiveSyncForWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// UpdateSelectiveSyncForWarehouseSelectiveSyncResponseBody - OK
+type UpdateSelectiveSyncForWarehouseSelectiveSyncResponseBody struct {
 	// Results from updating the schema for a Warehouse/source pair.
 	Data *shared.UpdateSelectiveSyncForWarehouseV1Output `json:"data,omitempty"`
 }
 
-// UpdateSelectiveSyncForWarehouse200ApplicationJSON - OK
-type UpdateSelectiveSyncForWarehouse200ApplicationJSON struct {
+func (o *UpdateSelectiveSyncForWarehouseSelectiveSyncResponseBody) GetData() *shared.UpdateSelectiveSyncForWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// UpdateSelectiveSyncForWarehouseResponseBody - OK
+type UpdateSelectiveSyncForWarehouseResponseBody struct {
 	// Results from updating the schema for a Warehouse/source pair.
 	Data *shared.UpdateSelectiveSyncForWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponseBody) GetData() *shared.UpdateSelectiveSyncForWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type UpdateSelectiveSyncForWarehouseResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *UpdateSelectiveSyncForWarehouseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *UpdateSelectiveSyncForWarehouseSelectiveSyncResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *UpdateSelectiveSyncForWarehouseSelectiveSyncResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *UpdateSelectiveSyncForWarehouseSelectiveSyncResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	UpdateSelectiveSyncForWarehouse200ApplicationJSONObject *UpdateSelectiveSyncForWarehouse200ApplicationJSON
-	// OK
-	UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1PlusJSONObject *UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1PlusJSON
-	// OK
-	UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *UpdateSelectiveSyncForWarehouse200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetTwoHundredApplicationJSONObject() *UpdateSelectiveSyncForWarehouseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *UpdateSelectiveSyncForWarehouseSelectiveSyncResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *UpdateSelectiveSyncForWarehouseSelectiveSyncResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *UpdateSelectiveSyncForWarehouseSelectiveSyncResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateSelectiveSyncForWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

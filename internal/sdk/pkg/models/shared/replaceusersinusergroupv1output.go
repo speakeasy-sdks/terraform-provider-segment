@@ -14,8 +14,43 @@ type ReplaceUsersInUserGroupV1OutputUserGroupV1 struct {
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
 
+func (o *ReplaceUsersInUserGroupV1OutputUserGroupV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ReplaceUsersInUserGroupV1OutputUserGroupV1) GetMemberCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.MemberCount
+}
+
+func (o *ReplaceUsersInUserGroupV1OutputUserGroupV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *ReplaceUsersInUserGroupV1OutputUserGroupV1) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}
+
 // ReplaceUsersInUserGroupV1Output - Returns the updated user group.
 type ReplaceUsersInUserGroupV1Output struct {
 	// The updated the user group.
 	UserGroup ReplaceUsersInUserGroupV1OutputUserGroupV1 `json:"userGroup"`
+}
+
+func (o *ReplaceUsersInUserGroupV1Output) GetUserGroup() ReplaceUsersInUserGroupV1OutputUserGroupV1 {
+	if o == nil {
+		return ReplaceUsersInUserGroupV1OutputUserGroupV1{}
+	}
+	return o.UserGroup
 }

@@ -10,10 +10,38 @@ type ReplaceAdvancedSyncScheduleForWarehouseV1OutputAdvancedWarehouseSyncSchedul
 	Timezone *string `json:"timezone,omitempty"`
 }
 
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output) GetTimes() []WarehouseAdvancedSyncV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Times
+}
+
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
+}
+
 // ReplaceAdvancedSyncScheduleForWarehouseV1Output - Returns the advanced sync schedule for a Warehouse.
 type ReplaceAdvancedSyncScheduleForWarehouseV1Output struct {
 	// Indicates if an advanced sync schedule is enabled for the Warehouse.
 	Enabled bool `json:"enabled"`
 	// The schedule that contains the overrides for the Warehouse, if enabled.
 	Schedule *ReplaceAdvancedSyncScheduleForWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output `json:"schedule,omitempty"`
+}
+
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Output) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Output) GetSchedule() *ReplaceAdvancedSyncScheduleForWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Schedule
 }

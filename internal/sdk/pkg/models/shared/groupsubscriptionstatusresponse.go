@@ -48,3 +48,31 @@ type GroupSubscriptionStatusResponse struct {
 	// The timestamp of this subscription status's last change.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
+
+func (o *GroupSubscriptionStatusResponse) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GroupSubscriptionStatusResponse) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GroupSubscriptionStatusResponse) GetStatus() GroupSubscriptionStatusResponseStatus {
+	if o == nil {
+		return GroupSubscriptionStatusResponseStatus("")
+	}
+	return o.Status
+}
+
+func (o *GroupSubscriptionStatusResponse) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}

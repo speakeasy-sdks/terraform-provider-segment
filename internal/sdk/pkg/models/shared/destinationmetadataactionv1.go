@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// DestinationMetadataActionV1Platform - The platform on which this action runs.
-type DestinationMetadataActionV1Platform string
+// Platform - The platform on which this action runs.
+type Platform string
 
 const (
-	DestinationMetadataActionV1PlatformCloud  DestinationMetadataActionV1Platform = "CLOUD"
-	DestinationMetadataActionV1PlatformMobile DestinationMetadataActionV1Platform = "MOBILE"
-	DestinationMetadataActionV1PlatformWeb    DestinationMetadataActionV1Platform = "WEB"
+	PlatformCloud  Platform = "CLOUD"
+	PlatformMobile Platform = "MOBILE"
+	PlatformWeb    Platform = "WEB"
 )
 
-func (e DestinationMetadataActionV1Platform) ToPointer() *DestinationMetadataActionV1Platform {
+func (e Platform) ToPointer() *Platform {
 	return &e
 }
 
-func (e *DestinationMetadataActionV1Platform) UnmarshalJSON(data []byte) error {
+func (e *Platform) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,10 +31,10 @@ func (e *DestinationMetadataActionV1Platform) UnmarshalJSON(data []byte) error {
 	case "MOBILE":
 		fallthrough
 	case "WEB":
-		*e = DestinationMetadataActionV1Platform(v)
+		*e = Platform(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DestinationMetadataActionV1Platform: %v", v)
+		return fmt.Errorf("invalid value for Platform: %v", v)
 	}
 }
 
@@ -53,7 +53,63 @@ type DestinationMetadataActionV1 struct {
 	// A human-readable name for the action.
 	Name string `json:"name"`
 	// The platform on which this action runs.
-	Platform DestinationMetadataActionV1Platform `json:"platform"`
+	Platform Platform `json:"platform"`
 	// A machine-readable key unique to the action definition.
 	Slug string `json:"slug"`
+}
+
+func (o *DestinationMetadataActionV1) GetDefaultTrigger() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultTrigger
+}
+
+func (o *DestinationMetadataActionV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *DestinationMetadataActionV1) GetFields() []DestinationMetadataActionFieldV1 {
+	if o == nil {
+		return []DestinationMetadataActionFieldV1{}
+	}
+	return o.Fields
+}
+
+func (o *DestinationMetadataActionV1) GetHidden() bool {
+	if o == nil {
+		return false
+	}
+	return o.Hidden
+}
+
+func (o *DestinationMetadataActionV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationMetadataActionV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *DestinationMetadataActionV1) GetPlatform() Platform {
+	if o == nil {
+		return Platform("")
+	}
+	return o.Platform
+}
+
+func (o *DestinationMetadataActionV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }

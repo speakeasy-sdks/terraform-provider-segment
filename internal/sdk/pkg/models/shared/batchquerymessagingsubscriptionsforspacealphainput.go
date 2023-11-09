@@ -7,3 +7,10 @@ type BatchQueryMessagingSubscriptionsForSpaceAlphaInput struct {
 	// A list of subscriptions to retrieve subscription status.
 	Subscriptions []GetSubscriptionRequest `json:"subscriptions"`
 }
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaInput) GetSubscriptions() []GetSubscriptionRequest {
+	if o == nil {
+		return []GetSubscriptionRequest{}
+	}
+	return o.Subscriptions
+}

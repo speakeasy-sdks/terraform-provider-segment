@@ -2,15 +2,43 @@
 
 package shared
 
-// GetSpaceAlphaOutputSpace - Space matching the given id.
-type GetSpaceAlphaOutputSpace struct {
+// Space matching the given id.
+type Space struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 }
 
+func (o *Space) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Space) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *Space) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
 // GetSpaceAlphaOutput - Response for the getSpaceById endpoint.
 type GetSpaceAlphaOutput struct {
 	// Space matching the given id.
-	Space *GetSpaceAlphaOutputSpace `json:"space"`
+	Space *Space `json:"space"`
+}
+
+func (o *GetSpaceAlphaOutput) GetSpace() *Space {
+	if o == nil {
+		return nil
+	}
+	return o.Space
 }

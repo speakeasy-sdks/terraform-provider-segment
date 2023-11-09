@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -34,8 +33,8 @@ type CreateInvitesV1InputResource struct {
 
 // CreateInvitesV1InputResourceModel describes the resource data model.
 type CreateInvitesV1InputResourceModel struct {
-	Errors  []RequestError `tfsdk:"errors"`
-	Invites []InviteV1     `tfsdk:"invites"`
+	Data    *CreateInvitesV1Output `tfsdk:"data"`
+	Invites []InviteV1             `tfsdk:"invites"`
 }
 
 func (r *CreateInvitesV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -47,36 +46,16 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 		MarkdownDescription: "CreateInvitesV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+				Attributes: map[string]schema.Attribute{
+					"emails": schema.ListAttribute{
+						Computed:    true,
+						ElementType: types.StringType,
+						Description: `The list of emails invited to the Workspace.`,
 					},
 				},
+				Description: `Returns the emails of the invited users.`,
 			},
 			"invites": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -240,11 +219,11 @@ func (r *CreateInvitesV1InputResource) Create(ctx context.Context, req resource.
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

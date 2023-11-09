@@ -5,9 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
-	"segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -15,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -33,9 +33,9 @@ type AddSourceToTrackingPlanV1InputResource struct {
 
 // AddSourceToTrackingPlanV1InputResourceModel describes the resource data model.
 type AddSourceToTrackingPlanV1InputResourceModel struct {
-	Errors         []RequestError `tfsdk:"errors"`
-	SourceID       types.String   `tfsdk:"source_id"`
-	TrackingPlanID types.String   `tfsdk:"tracking_plan_id"`
+	Data           *AddSourceToTrackingPlanV1Output `tfsdk:"data"`
+	SourceID       types.String                     `tfsdk:"source_id"`
+	TrackingPlanID types.String                     `tfsdk:"tracking_plan_id"`
 }
 
 func (r *AddSourceToTrackingPlanV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -47,36 +47,21 @@ func (r *AddSourceToTrackingPlanV1InputResource) Schema(ctx context.Context, req
 		MarkdownDescription: "AddSourceToTrackingPlanV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
+				Attributes: map[string]schema.Attribute{
+					"status": schema.StringAttribute{
+						Computed: true,
+						Validators: []validator.String{
+							stringvalidator.OneOf(
+								"SUCCESS",
+							),
 						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+						MarkdownDescription: `must be one of ["SUCCESS"]` + "\n" +
+							`The operation status.`,
 					},
 				},
+				Description: `Connects a Source to a Tracking Plan.`,
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -157,11 +142,11 @@ func (r *AddSourceToTrackingPlanV1InputResource) Create(ctx context.Context, req
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

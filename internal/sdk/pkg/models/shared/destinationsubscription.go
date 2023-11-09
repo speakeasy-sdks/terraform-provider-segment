@@ -23,3 +23,66 @@ type DestinationSubscription struct {
 	// FQL string that describes what events should trigger a Destination action.
 	Trigger string `json:"trigger"`
 }
+
+func (o *DestinationSubscription) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *DestinationSubscription) GetActionSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionSlug
+}
+
+func (o *DestinationSubscription) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *DestinationSubscription) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *DestinationSubscription) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationSubscription) GetModelID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModelID
+}
+
+func (o *DestinationSubscription) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *DestinationSubscription) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *DestinationSubscription) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}

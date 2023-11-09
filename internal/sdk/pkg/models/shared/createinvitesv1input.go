@@ -7,3 +7,10 @@ type CreateInvitesV1Input struct {
 	// The list of invites.
 	Invites []InviteV1 `json:"invites"`
 }
+
+func (o *CreateInvitesV1Input) GetInvites() []InviteV1 {
+	if o == nil {
+		return []InviteV1{}
+	}
+	return o.Invites
+}
