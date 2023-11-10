@@ -29,10 +29,52 @@ type ListSourcesFromTrackingPlanV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSourcesFromTrackingPlanV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSourcesFromTrackingPlanV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSourcesFromTrackingPlanV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSourcesFromTrackingPlanV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSourcesFromTrackingPlanV1Output - Lists all Sources associated with a Tracking Plan.
 type ListSourcesFromTrackingPlanV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListSourcesFromTrackingPlanV1OutputPaginationOutput `json:"pagination"`
 	// A paginated list of Sources associated with the Tracking Plan.
 	Sources []SourceV1 `json:"sources"`
+}
+
+func (o *ListSourcesFromTrackingPlanV1Output) GetPagination() ListSourcesFromTrackingPlanV1OutputPaginationOutput {
+	if o == nil {
+		return ListSourcesFromTrackingPlanV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSourcesFromTrackingPlanV1Output) GetSources() []SourceV1 {
+	if o == nil {
+		return []SourceV1{}
+	}
+	return o.Sources
 }

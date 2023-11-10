@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type ListInvitesFromUserGroupRequest struct {
@@ -15,42 +15,143 @@ type ListInvitesFromUserGroupRequest struct {
 	UserGroupID string                 `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
-// ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
-type ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *ListInvitesFromUserGroupRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListInvitesFromUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
+// ListInvitesFromUserGroupIAMGroupsResponse200ResponseBody - OK
+type ListInvitesFromUserGroupIAMGroupsResponse200ResponseBody struct {
 	// Returns the emails of invitees to a user group with the given group id.
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
 }
 
-// ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListInvitesFromUserGroupIAMGroupsResponse200ResponseBody) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListInvitesFromUserGroupIAMGroupsResponseResponseBody - OK
+type ListInvitesFromUserGroupIAMGroupsResponseResponseBody struct {
 	// Returns the emails of invitees to a user group with the given group id.
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
 }
 
-// ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON - OK
-type ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON struct {
+func (o *ListInvitesFromUserGroupIAMGroupsResponseResponseBody) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListInvitesFromUserGroupIAMGroupsResponseBody - OK
+type ListInvitesFromUserGroupIAMGroupsResponseBody struct {
 	// Returns the emails of invitees to a user group with the given group id.
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
 }
 
-// ListInvitesFromUserGroup200ApplicationJSON - OK
-type ListInvitesFromUserGroup200ApplicationJSON struct {
+func (o *ListInvitesFromUserGroupIAMGroupsResponseBody) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// ListInvitesFromUserGroupResponseBody - OK
+type ListInvitesFromUserGroupResponseBody struct {
 	// Returns the emails of invitees to a user group with the given group id.
 	Data *shared.ListInvitesFromUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *ListInvitesFromUserGroupResponseBody) GetData() *shared.ListInvitesFromUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type ListInvitesFromUserGroupResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *ListInvitesFromUserGroupResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *ListInvitesFromUserGroupIAMGroupsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *ListInvitesFromUserGroupIAMGroupsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *ListInvitesFromUserGroupIAMGroupsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	ListInvitesFromUserGroup200ApplicationJSONObject *ListInvitesFromUserGroup200ApplicationJSON
-	// OK
-	ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSONObject *ListInvitesFromUserGroup200ApplicationVndSegmentV1PlusJSON
-	// OK
-	ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *ListInvitesFromUserGroup200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *ListInvitesFromUserGroup200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetTwoHundredApplicationJSONObject() *ListInvitesFromUserGroupResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *ListInvitesFromUserGroupIAMGroupsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *ListInvitesFromUserGroupIAMGroupsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *ListInvitesFromUserGroupIAMGroupsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListInvitesFromUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

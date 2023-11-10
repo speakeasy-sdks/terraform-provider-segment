@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *CreateFilterForDestinationV1InputResourceModel) ToCreateSDKType() *shared.CreateFilterForDestinationV1Input {
@@ -59,32 +60,46 @@ func (r *CreateFilterForDestinationV1InputResourceModel) ToCreateSDKType() *shar
 	return &out
 }
 
-func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateFilterForDestinationResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateFilterForDestinationV1Output{}
+		r.Data.Filter.Actions = nil
+		for _, actionsItem := range resp.Data.Filter.Actions {
+			var actions1 DestinationFilterActionV1
+			if actions1.Fields == nil && len(actionsItem.Fields) > 0 {
+				actions1.Fields = make(map[string]types.String)
+				for key, value := range actionsItem.Fields {
+					result, _ := json.Marshal(value)
+					actions1.Fields[key] = types.StringValue(string(result))
+				}
+			}
+			if actionsItem.Path != nil {
+				actions1.Path = types.StringValue(*actionsItem.Path)
+			} else {
+				actions1.Path = types.StringNull()
+			}
+			if actionsItem.Percent != nil {
+				actions1.Percent = types.NumberValue(big.NewFloat(float64(*actionsItem.Percent)))
+			} else {
+				actions1.Percent = types.NumberNull()
+			}
+			actions1.Type = types.StringValue(string(actionsItem.Type))
+			r.Data.Filter.Actions = append(r.Data.Filter.Actions, actions1)
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
+		r.Data.Filter.CreatedAt = types.StringValue(resp.Data.Filter.CreatedAt)
+		if resp.Data.Filter.Description != nil {
+			r.Data.Filter.Description = types.StringValue(*resp.Data.Filter.Description)
 		} else {
-			errors1.Field = types.StringNull()
+			r.Data.Filter.Description = types.StringNull()
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+		r.Data.Filter.DestinationID = types.StringValue(resp.Data.Filter.DestinationID)
+		r.Data.Filter.Enabled = types.BoolValue(resp.Data.Filter.Enabled)
+		r.Data.Filter.ID = types.StringValue(resp.Data.Filter.ID)
+		r.Data.Filter.If = types.StringValue(resp.Data.Filter.If)
+		r.Data.Filter.SourceID = types.StringValue(resp.Data.Filter.SourceID)
+		r.Data.Filter.Title = types.StringValue(resp.Data.Filter.Title)
+		r.Data.Filter.UpdatedAt = types.StringValue(resp.Data.Filter.UpdatedAt)
 	}
 }

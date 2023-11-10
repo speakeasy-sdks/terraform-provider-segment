@@ -37,3 +37,10 @@ type DeleteUsersV1Output struct {
 	// A flag that indicates the status of a successful deletion operation.
 	Status DeleteUsersV1OutputStatus `json:"status"`
 }
+
+func (o *DeleteUsersV1Output) GetStatus() DeleteUsersV1OutputStatus {
+	if o == nil {
+		return DeleteUsersV1OutputStatus("")
+	}
+	return o.Status
+}

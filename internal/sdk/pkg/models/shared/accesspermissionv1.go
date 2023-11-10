@@ -11,3 +11,24 @@ type AccessPermissionV1 struct {
 	// The name of the role that applies to this permission.
 	RoleName string `json:"roleName"`
 }
+
+func (o *AccessPermissionV1) GetResources() []PermissionResourceV1 {
+	if o == nil {
+		return []PermissionResourceV1{}
+	}
+	return o.Resources
+}
+
+func (o *AccessPermissionV1) GetRoleID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RoleID
+}
+
+func (o *AccessPermissionV1) GetRoleName() string {
+	if o == nil {
+		return ""
+	}
+	return o.RoleName
+}

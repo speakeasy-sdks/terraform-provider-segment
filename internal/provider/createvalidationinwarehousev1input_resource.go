@@ -5,9 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -16,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
+	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -34,9 +35,9 @@ type CreateValidationInWarehouseV1InputResource struct {
 
 // CreateValidationInWarehouseV1InputResourceModel describes the resource data model.
 type CreateValidationInWarehouseV1InputResourceModel struct {
-	Errors     []RequestError          `tfsdk:"errors"`
-	MetadataID types.String            `tfsdk:"metadata_id"`
-	Settings   map[string]types.String `tfsdk:"settings"`
+	Data       *CreateValidationInWarehouseV1Output `tfsdk:"data"`
+	MetadataID types.String                         `tfsdk:"metadata_id"`
+	Settings   map[string]types.String              `tfsdk:"settings"`
 }
 
 func (r *CreateValidationInWarehouseV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -48,36 +49,22 @@ func (r *CreateValidationInWarehouseV1InputResource) Schema(ctx context.Context,
 		MarkdownDescription: "CreateValidationInWarehouseV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
+				Attributes: map[string]schema.Attribute{
+					"status": schema.StringAttribute{
+						Computed: true,
+						MarkdownDescription: `must be one of ["CONNECTED", "FAILED"]` + "\n" +
+							`Represents the status for the current connection settings.`,
+						Validators: []validator.String{
+							stringvalidator.OneOf(
+								"CONNECTED",
+								"FAILED",
+							),
 						},
 					},
 				},
+				Description: `Returns the status of a Warehouse connection settings after an attempt to connect to it.`,
 			},
 			"metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -92,10 +79,10 @@ func (r *CreateValidationInWarehouseV1InputResource) Schema(ctx context.Context,
 				},
 				Required:    true,
 				ElementType: types.StringType,
+				Description: `The settings to check.`,
 				Validators: []validator.Map{
 					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 				},
-				Description: `The settings to check.`,
 			},
 		},
 	}
@@ -156,11 +143,11 @@ func (r *CreateValidationInWarehouseV1InputResource) Create(ctx context.Context,
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

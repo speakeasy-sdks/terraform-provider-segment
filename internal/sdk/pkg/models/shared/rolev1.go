@@ -11,3 +11,24 @@ type RoleV1 struct {
 	// The human-readable name of the role.
 	Name string `json:"name"`
 }
+
+func (o *RoleV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *RoleV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *RoleV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}

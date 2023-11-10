@@ -29,10 +29,52 @@ type ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSelectiveSyncsFromWarehouseAndSourceV1Output - Results containing the Selective Sync configuration for a Warehouse.
 type ListSelectiveSyncsFromWarehouseAndSourceV1Output struct {
 	// Represents a list of Source, collection, and properties synced to the Warehouse.
 	Items []WarehouseSelectiveSyncItemV1 `json:"items"`
 	// Information about the pagination of this response.
 	Pagination ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1Output) GetItems() []WarehouseSelectiveSyncItemV1 {
+	if o == nil {
+		return []WarehouseSelectiveSyncItemV1{}
+	}
+	return o.Items
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1Output) GetPagination() ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput {
+	if o == nil {
+		return ListSelectiveSyncsFromWarehouseAndSourceV1OutputPaginationOutput{}
+	}
+	return o.Pagination
 }

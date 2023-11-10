@@ -13,3 +13,31 @@ type PermissionV1 struct {
 	// The name of the role associated with this permission.
 	RoleName string `json:"roleName"`
 }
+
+func (o *PermissionV1) GetLabels() []AllowedLabelBeta {
+	if o == nil {
+		return nil
+	}
+	return o.Labels
+}
+
+func (o *PermissionV1) GetResources() []PermissionResourceV1 {
+	if o == nil {
+		return []PermissionResourceV1{}
+	}
+	return o.Resources
+}
+
+func (o *PermissionV1) GetRoleID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RoleID
+}
+
+func (o *PermissionV1) GetRoleName() string {
+	if o == nil {
+		return ""
+	}
+	return o.RoleName
+}

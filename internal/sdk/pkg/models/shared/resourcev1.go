@@ -51,3 +51,17 @@ type ResourceV1 struct {
 	// The kind of resource this permission applies to.
 	Type ResourceV1Type `json:"type"`
 }
+
+func (o *ResourceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ResourceV1) GetType() ResourceV1Type {
+	if o == nil {
+		return ResourceV1Type("")
+	}
+	return o.Type
+}

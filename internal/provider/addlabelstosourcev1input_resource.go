@@ -5,18 +5,16 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
-	"segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -34,9 +32,9 @@ type AddLabelsToSourceV1InputResource struct {
 
 // AddLabelsToSourceV1InputResourceModel describes the resource data model.
 type AddLabelsToSourceV1InputResourceModel struct {
-	Errors   []RequestError `tfsdk:"errors"`
-	Labels   []LabelV1      `tfsdk:"labels"`
-	SourceID types.String   `tfsdk:"source_id"`
+	Data     *AddLabelsToSourceV1Output `tfsdk:"data"`
+	Labels   []LabelV1                  `tfsdk:"labels"`
+	SourceID types.String               `tfsdk:"source_id"`
 }
 
 func (r *AddLabelsToSourceV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -48,36 +46,31 @@ func (r *AddLabelsToSourceV1InputResource) Schema(ctx context.Context, req resou
 		MarkdownDescription: "AddLabelsToSourceV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
+				Attributes: map[string]schema.Attribute{
+					"labels": schema.ListNestedAttribute{
+						Computed: true,
+						NestedObject: schema.NestedAttributeObject{
+							Attributes: map[string]schema.Attribute{
+								"description": schema.StringAttribute{
+									Computed:    true,
+									Description: `An optional description of the purpose of this label.`,
+								},
+								"key": schema.StringAttribute{
+									Computed:    true,
+									Description: `The key that represents the name of this label.`,
+								},
+								"value": schema.StringAttribute{
+									Computed:    true,
+									Description: `The value associated with the key of this label.`,
+								},
 							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
 						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+						Description: `All labels applied to the Source.`,
 					},
 				},
+				Description: `Applies an existing label to an existing Source.`,
 			},
 			"labels": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -181,11 +174,11 @@ func (r *AddLabelsToSourceV1InputResource) Create(ctx context.Context, req resou
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

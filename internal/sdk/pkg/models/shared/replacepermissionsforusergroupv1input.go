@@ -7,3 +7,10 @@ type ReplacePermissionsForUserGroupV1Input struct {
 	// The permissions to replace with.
 	Permissions []PermissionInputV1 `json:"permissions"`
 }
+
+func (o *ReplacePermissionsForUserGroupV1Input) GetPermissions() []PermissionInputV1 {
+	if o == nil {
+		return []PermissionInputV1{}
+	}
+	return o.Permissions
+}

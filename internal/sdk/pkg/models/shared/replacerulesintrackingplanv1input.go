@@ -7,3 +7,10 @@ type ReplaceRulesInTrackingPlanV1Input struct {
 	// Rules to replace.
 	Rules []RuleInputV1 `json:"rules"`
 }
+
+func (o *ReplaceRulesInTrackingPlanV1Input) GetRules() []RuleInputV1 {
+	if o == nil {
+		return []RuleInputV1{}
+	}
+	return o.Rules
+}

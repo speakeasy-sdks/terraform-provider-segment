@@ -29,10 +29,52 @@ type ListConnectedWarehousesFromSourceV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListConnectedWarehousesFromSourceV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListConnectedWarehousesFromSourceV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListConnectedWarehousesFromSourceV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListConnectedWarehousesFromSourceV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListConnectedWarehousesFromSourceV1Output - Returns a list of Warehouses connected to a Source.
 type ListConnectedWarehousesFromSourceV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListConnectedWarehousesFromSourceV1OutputPaginationOutput `json:"pagination"`
 	// A list that contains the Warehouses connected to the Source.
 	Warehouses []WarehouseV1 `json:"warehouses"`
+}
+
+func (o *ListConnectedWarehousesFromSourceV1Output) GetPagination() ListConnectedWarehousesFromSourceV1OutputPaginationOutput {
+	if o == nil {
+		return ListConnectedWarehousesFromSourceV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListConnectedWarehousesFromSourceV1Output) GetWarehouses() []WarehouseV1 {
+	if o == nil {
+		return []WarehouseV1{}
+	}
+	return o.Warehouses
 }

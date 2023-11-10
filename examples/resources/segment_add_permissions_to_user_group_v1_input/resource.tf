@@ -3,7 +3,7 @@ resource "segment_add_permissions_to_user_group_v1_input" "my_addpermissionstous
     {
       resources = [
         {
-          id = "89bd9d8d-69a6-474e-8f46-7cc8796ed151"
+          id = "da097c3d-14ba-4809-84bf-04f02d149748"
           labels = [
             {
               description = "...my_description..."
@@ -11,7 +11,7 @@ resource "segment_add_permissions_to_user_group_v1_input" "my_addpermissionstous
               value       = "...my_value..."
             },
           ]
-          type = "WAREHOUSE"
+          type = "SOURCE"
         },
       ]
       role_id = "...my_role_id..."

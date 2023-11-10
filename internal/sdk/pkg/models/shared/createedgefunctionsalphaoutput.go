@@ -2,8 +2,8 @@
 
 package shared
 
-// CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha - Represents an Edge Function bundle.
-type CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha struct {
+// EdgeFunctionsAlpha - Represents an Edge Function bundle.
+type EdgeFunctionsAlpha struct {
 	// Creation date.
 	CreatedAt string `json:"createdAt"`
 	// Creating user's id.
@@ -18,8 +18,57 @@ type CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha struct {
 	Version float64 `json:"version"`
 }
 
+func (o *EdgeFunctionsAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *EdgeFunctionsAlpha) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *EdgeFunctionsAlpha) GetDownloadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.DownloadURL
+}
+
+func (o *EdgeFunctionsAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *EdgeFunctionsAlpha) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *EdgeFunctionsAlpha) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}
+
 // CreateEdgeFunctionsAlphaOutput - Output for CreateEdgeFunctions.
 type CreateEdgeFunctionsAlphaOutput struct {
 	// The created Edge Function.
-	EdgeFunctions CreateEdgeFunctionsAlphaOutputEdgeFunctionsAlpha `json:"edgeFunctions"`
+	EdgeFunctions EdgeFunctionsAlpha `json:"edgeFunctions"`
+}
+
+func (o *CreateEdgeFunctionsAlphaOutput) GetEdgeFunctions() EdgeFunctionsAlpha {
+	if o == nil {
+		return EdgeFunctionsAlpha{}
+	}
+	return o.EdgeFunctions
 }
