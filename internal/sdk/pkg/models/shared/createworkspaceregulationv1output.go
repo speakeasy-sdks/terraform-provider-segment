@@ -7,3 +7,10 @@ type CreateWorkspaceRegulationV1Output struct {
 	// The id of the created regulation.
 	RegulateID string `json:"regulateId"`
 }
+
+func (o *CreateWorkspaceRegulationV1Output) GetRegulateID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RegulateID
+}

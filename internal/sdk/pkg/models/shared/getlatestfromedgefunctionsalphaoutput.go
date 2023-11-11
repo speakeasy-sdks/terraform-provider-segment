@@ -18,8 +18,57 @@ type GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha struct {
 	Version float64 `json:"version"`
 }
 
+func (o *GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetDownloadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.DownloadURL
+}
+
+func (o *GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}
+
 // GetLatestFromEdgeFunctionsAlphaOutput - Output for GetLatestFromEdgeFunctions.
 type GetLatestFromEdgeFunctionsAlphaOutput struct {
 	// The latest version of Edge Function bundle.
 	EdgeFunctions GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha `json:"edgeFunctions"`
+}
+
+func (o *GetLatestFromEdgeFunctionsAlphaOutput) GetEdgeFunctions() GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha {
+	if o == nil {
+		return GetLatestFromEdgeFunctionsAlphaOutputEdgeFunctionsAlpha{}
+	}
+	return o.EdgeFunctions
 }

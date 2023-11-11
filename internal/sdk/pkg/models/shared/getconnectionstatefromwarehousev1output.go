@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// GetConnectionStateFromWarehouseV1OutputConnectionState - Represents the status for the current connection settings.
-type GetConnectionStateFromWarehouseV1OutputConnectionState string
+// ConnectionState - Represents the status for the current connection settings.
+type ConnectionState string
 
 const (
-	GetConnectionStateFromWarehouseV1OutputConnectionStateConnected GetConnectionStateFromWarehouseV1OutputConnectionState = "CONNECTED"
-	GetConnectionStateFromWarehouseV1OutputConnectionStateFailed    GetConnectionStateFromWarehouseV1OutputConnectionState = "FAILED"
+	ConnectionStateConnected ConnectionState = "CONNECTED"
+	ConnectionStateFailed    ConnectionState = "FAILED"
 )
 
-func (e GetConnectionStateFromWarehouseV1OutputConnectionState) ToPointer() *GetConnectionStateFromWarehouseV1OutputConnectionState {
+func (e ConnectionState) ToPointer() *ConnectionState {
 	return &e
 }
 
-func (e *GetConnectionStateFromWarehouseV1OutputConnectionState) UnmarshalJSON(data []byte) error {
+func (e *ConnectionState) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,15 +28,22 @@ func (e *GetConnectionStateFromWarehouseV1OutputConnectionState) UnmarshalJSON(d
 	case "CONNECTED":
 		fallthrough
 	case "FAILED":
-		*e = GetConnectionStateFromWarehouseV1OutputConnectionState(v)
+		*e = ConnectionState(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetConnectionStateFromWarehouseV1OutputConnectionState: %v", v)
+		return fmt.Errorf("invalid value for ConnectionState: %v", v)
 	}
 }
 
 // GetConnectionStateFromWarehouseV1Output - Returns the status of a Warehouse connection settings after an attempt to connect to it.
 type GetConnectionStateFromWarehouseV1Output struct {
 	// Represents the status for the current connection settings.
-	ConnectionState GetConnectionStateFromWarehouseV1OutputConnectionState `json:"connectionState"`
+	ConnectionState ConnectionState `json:"connectionState"`
+}
+
+func (o *GetConnectionStateFromWarehouseV1Output) GetConnectionState() ConnectionState {
+	if o == nil {
+		return ConnectionState("")
+	}
+	return o.ConnectionState
 }

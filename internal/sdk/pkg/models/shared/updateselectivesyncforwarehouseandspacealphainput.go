@@ -10,3 +10,17 @@ type UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput struct {
 	// Note: Selective Sync is not supported if the enableEventTables flag is false.
 	SyncOverrides []SpaceWarehouseSchemaOverride `json:"syncOverrides,omitempty"`
 }
+
+func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetEnableEventTables() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.EnableEventTables
+}
+
+func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetSyncOverrides() []SpaceWarehouseSchemaOverride {
+	if o == nil {
+		return nil
+	}
+	return o.SyncOverrides
+}

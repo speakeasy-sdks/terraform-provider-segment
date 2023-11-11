@@ -19,3 +19,31 @@ type CreateWarehouseV1Input struct {
 	// `/catalog/warehouses` endpoint.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *CreateWarehouseV1Input) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *CreateWarehouseV1Input) GetMetadataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetadataID
+}
+
+func (o *CreateWarehouseV1Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CreateWarehouseV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

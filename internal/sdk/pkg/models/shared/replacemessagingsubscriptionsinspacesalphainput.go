@@ -7,3 +7,10 @@ type ReplaceMessagingSubscriptionsInSpacesAlphaInput struct {
 	// An array of subscriptions.
 	Subscriptions []MessagesSubscriptionRequest `json:"subscriptions"`
 }
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaInput) GetSubscriptions() []MessagesSubscriptionRequest {
+	if o == nil {
+		return []MessagesSubscriptionRequest{}
+	}
+	return o.Subscriptions
+}

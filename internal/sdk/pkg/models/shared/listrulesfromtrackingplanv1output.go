@@ -29,10 +29,52 @@ type ListRulesFromTrackingPlanV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListRulesFromTrackingPlanV1OutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListRulesFromTrackingPlanV1OutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListRulesFromTrackingPlanV1OutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListRulesFromTrackingPlanV1OutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListRulesFromTrackingPlanV1Output - Lists a Tracking Plan's rules.
 type ListRulesFromTrackingPlanV1Output struct {
 	// Information about the pagination of this response.
 	Pagination ListRulesFromTrackingPlanV1OutputPaginationOutput `json:"pagination"`
 	// Rules associated with the given Tracking Plan.
 	Rules []RuleV1 `json:"rules"`
+}
+
+func (o *ListRulesFromTrackingPlanV1Output) GetPagination() ListRulesFromTrackingPlanV1OutputPaginationOutput {
+	if o == nil {
+		return ListRulesFromTrackingPlanV1OutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListRulesFromTrackingPlanV1Output) GetRules() []RuleV1 {
+	if o == nil {
+		return []RuleV1{}
+	}
+	return o.Rules
 }

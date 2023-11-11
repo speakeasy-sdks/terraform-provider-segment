@@ -10,3 +10,24 @@ type GetMessagingSubscriptionFailureResponse struct {
 	// This will be the exact type as given in the request.
 	Type string `json:"type"`
 }
+
+func (o *GetMessagingSubscriptionFailureResponse) GetErrors() []MessageSubscriptionResponseError {
+	if o == nil {
+		return []MessageSubscriptionResponseError{}
+	}
+	return o.Errors
+}
+
+func (o *GetMessagingSubscriptionFailureResponse) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *GetMessagingSubscriptionFailureResponse) GetType() string {
+	if o == nil {
+		return ""
+	}
+	return o.Type
+}

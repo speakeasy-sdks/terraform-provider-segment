@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type AddPermissionsToUserGroupRequest struct {
@@ -12,42 +12,143 @@ type AddPermissionsToUserGroupRequest struct {
 	UserGroupID                      string                                  `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
-// AddPermissionsToUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
-type AddPermissionsToUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *AddPermissionsToUserGroupRequest) GetAddPermissionsToUserGroupV1Input() shared.AddPermissionsToUserGroupV1Input {
+	if o == nil {
+		return shared.AddPermissionsToUserGroupV1Input{}
+	}
+	return o.AddPermissionsToUserGroupV1Input
+}
+
+func (o *AddPermissionsToUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
+// AddPermissionsToUserGroupIAMGroupsResponse200ResponseBody - OK
+type AddPermissionsToUserGroupIAMGroupsResponse200ResponseBody struct {
 	// Returns the group's permissions, including the added permissions.
 	Data *shared.AddPermissionsToUserGroupV1Output `json:"data,omitempty"`
 }
 
-// AddPermissionsToUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
-type AddPermissionsToUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *AddPermissionsToUserGroupIAMGroupsResponse200ResponseBody) GetData() *shared.AddPermissionsToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddPermissionsToUserGroupIAMGroupsResponseResponseBody - OK
+type AddPermissionsToUserGroupIAMGroupsResponseResponseBody struct {
 	// Returns the group's permissions, including the added permissions.
 	Data *shared.AddPermissionsToUserGroupV1Output `json:"data,omitempty"`
 }
 
-// AddPermissionsToUserGroup200ApplicationVndSegmentV1PlusJSON - OK
-type AddPermissionsToUserGroup200ApplicationVndSegmentV1PlusJSON struct {
+func (o *AddPermissionsToUserGroupIAMGroupsResponseResponseBody) GetData() *shared.AddPermissionsToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddPermissionsToUserGroupIAMGroupsResponseBody - OK
+type AddPermissionsToUserGroupIAMGroupsResponseBody struct {
 	// Returns the group's permissions, including the added permissions.
 	Data *shared.AddPermissionsToUserGroupV1Output `json:"data,omitempty"`
 }
 
-// AddPermissionsToUserGroup200ApplicationJSON - OK
-type AddPermissionsToUserGroup200ApplicationJSON struct {
+func (o *AddPermissionsToUserGroupIAMGroupsResponseBody) GetData() *shared.AddPermissionsToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// AddPermissionsToUserGroupResponseBody - OK
+type AddPermissionsToUserGroupResponseBody struct {
 	// Returns the group's permissions, including the added permissions.
 	Data *shared.AddPermissionsToUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *AddPermissionsToUserGroupResponseBody) GetData() *shared.AddPermissionsToUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type AddPermissionsToUserGroupResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *AddPermissionsToUserGroupResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *AddPermissionsToUserGroupIAMGroupsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *AddPermissionsToUserGroupIAMGroupsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *AddPermissionsToUserGroupIAMGroupsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	AddPermissionsToUserGroup200ApplicationJSONObject *AddPermissionsToUserGroup200ApplicationJSON
-	// OK
-	AddPermissionsToUserGroup200ApplicationVndSegmentV1PlusJSONObject *AddPermissionsToUserGroup200ApplicationVndSegmentV1PlusJSON
-	// OK
-	AddPermissionsToUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *AddPermissionsToUserGroup200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	AddPermissionsToUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *AddPermissionsToUserGroup200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetTwoHundredApplicationJSONObject() *AddPermissionsToUserGroupResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *AddPermissionsToUserGroupIAMGroupsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *AddPermissionsToUserGroupIAMGroupsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *AddPermissionsToUserGroupIAMGroupsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AddPermissionsToUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

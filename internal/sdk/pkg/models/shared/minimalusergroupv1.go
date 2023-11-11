@@ -9,3 +9,17 @@ type MinimalUserGroupV1 struct {
 	// The name of the user group.
 	Name string `json:"name"`
 }
+
+func (o *MinimalUserGroupV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *MinimalUserGroupV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
