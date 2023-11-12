@@ -29,10 +29,52 @@ type ListFunctionVersionsAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListFunctionVersionsAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListFunctionVersionsAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListFunctionVersionsAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListFunctionVersionsAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListFunctionVersionsAlphaOutput - Lists Versions of a Function.
 type ListFunctionVersionsAlphaOutput struct {
 	// Information about the pagination of this response.
 	Pagination ListFunctionVersionsAlphaOutputPaginationOutput `json:"pagination"`
 	// An array of Functions.
 	Versions []Version `json:"versions"`
+}
+
+func (o *ListFunctionVersionsAlphaOutput) GetPagination() ListFunctionVersionsAlphaOutputPaginationOutput {
+	if o == nil {
+		return ListFunctionVersionsAlphaOutputPaginationOutput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListFunctionVersionsAlphaOutput) GetVersions() []Version {
+	if o == nil {
+		return []Version{}
+	}
+	return o.Versions
 }

@@ -37,3 +37,10 @@ type DeleteSourceV1Output struct {
 	// The status of the Source deletion operation.
 	Status DeleteSourceV1OutputStatus `json:"status"`
 }
+
+func (o *DeleteSourceV1Output) GetStatus() DeleteSourceV1OutputStatus {
+	if o == nil {
+		return DeleteSourceV1OutputStatus("")
+	}
+	return o.Status
+}

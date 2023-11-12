@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// CreateTrackingPlanV1InputType - The Tracking Plan's type.
-type CreateTrackingPlanV1InputType string
+// Type - The Tracking Plan's type.
+type Type string
 
 const (
-	CreateTrackingPlanV1InputTypeEngage          CreateTrackingPlanV1InputType = "ENGAGE"
-	CreateTrackingPlanV1InputTypeLive            CreateTrackingPlanV1InputType = "LIVE"
-	CreateTrackingPlanV1InputTypePropertyLibrary CreateTrackingPlanV1InputType = "PROPERTY_LIBRARY"
-	CreateTrackingPlanV1InputTypeRuleLibrary     CreateTrackingPlanV1InputType = "RULE_LIBRARY"
-	CreateTrackingPlanV1InputTypeTemplate        CreateTrackingPlanV1InputType = "TEMPLATE"
+	TypeEngage          Type = "ENGAGE"
+	TypeLive            Type = "LIVE"
+	TypePropertyLibrary Type = "PROPERTY_LIBRARY"
+	TypeRuleLibrary     Type = "RULE_LIBRARY"
+	TypeTemplate        Type = "TEMPLATE"
 )
 
-func (e CreateTrackingPlanV1InputType) ToPointer() *CreateTrackingPlanV1InputType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *CreateTrackingPlanV1InputType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,10 +37,10 @@ func (e *CreateTrackingPlanV1InputType) UnmarshalJSON(data []byte) error {
 	case "RULE_LIBRARY":
 		fallthrough
 	case "TEMPLATE":
-		*e = CreateTrackingPlanV1InputType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateTrackingPlanV1InputType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -53,5 +53,26 @@ type CreateTrackingPlanV1Input struct {
 	// Config API note: equal to `displayName`.
 	Name string `json:"name"`
 	// The Tracking Plan's type.
-	Type CreateTrackingPlanV1InputType `json:"type"`
+	Type Type `json:"type"`
+}
+
+func (o *CreateTrackingPlanV1Input) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CreateTrackingPlanV1Input) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateTrackingPlanV1Input) GetType() Type {
+	if o == nil {
+		return Type("")
+	}
+	return o.Type
 }

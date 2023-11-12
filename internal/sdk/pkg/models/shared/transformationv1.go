@@ -30,3 +30,73 @@ type TransformationV1 struct {
 	// The Source associated with the Transformation.
 	SourceID string `json:"sourceId"`
 }
+
+func (o *TransformationV1) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *TransformationV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *TransformationV1) GetFqlDefinedProperties() []FQLDefinedPropertyV1 {
+	if o == nil {
+		return nil
+	}
+	return o.FqlDefinedProperties
+}
+
+func (o *TransformationV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *TransformationV1) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *TransformationV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *TransformationV1) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *TransformationV1) GetPropertyRenames() []PropertyRenameV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *TransformationV1) GetPropertyValueTransformations() []PropertyValueTransformationV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *TransformationV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}

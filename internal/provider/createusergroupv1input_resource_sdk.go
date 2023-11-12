@@ -3,10 +3,10 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *CreateUserGroupV1InputResourceModel) ToCreateSDKType() *shared.CreateUserGroupV1Input {
@@ -17,32 +17,84 @@ func (r *CreateUserGroupV1InputResourceModel) ToCreateSDKType() *shared.CreateUs
 	return &out
 }
 
-func (r *CreateUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+func (r *CreateUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateUserGroupResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &AddUsersToUserGroupV1Output{}
+		r.Data.UserGroup.ID = types.StringValue(resp.Data.UserGroup.ID)
+		r.Data.UserGroup.MemberCount = types.NumberValue(big.NewFloat(float64(resp.Data.UserGroup.MemberCount)))
+		r.Data.UserGroup.Name = types.StringValue(resp.Data.UserGroup.Name)
+		if len(r.Data.UserGroup.Permissions) > len(resp.Data.UserGroup.Permissions) {
+			r.Data.UserGroup.Permissions = r.Data.UserGroup.Permissions[:len(resp.Data.UserGroup.Permissions)]
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
-		} else {
-			errors1.Field = types.StringNull()
+		for permissionsCount, permissionsItem := range resp.Data.UserGroup.Permissions {
+			var permissions1 PermissionV1
+			if len(permissions1.Labels) > len(permissionsItem.Labels) {
+				permissions1.Labels = permissions1.Labels[:len(permissionsItem.Labels)]
+			}
+			for labelsCount, labelsItem := range permissionsItem.Labels {
+				var labels1 LabelV1
+				if labelsItem.Description != nil {
+					labels1.Description = types.StringValue(*labelsItem.Description)
+				} else {
+					labels1.Description = types.StringNull()
+				}
+				labels1.Key = types.StringValue(labelsItem.Key)
+				labels1.Value = types.StringValue(labelsItem.Value)
+				if labelsCount+1 > len(permissions1.Labels) {
+					permissions1.Labels = append(permissions1.Labels, labels1)
+				} else {
+					permissions1.Labels[labelsCount].Description = labels1.Description
+					permissions1.Labels[labelsCount].Key = labels1.Key
+					permissions1.Labels[labelsCount].Value = labels1.Value
+				}
+			}
+			if len(permissions1.Resources) > len(permissionsItem.Resources) {
+				permissions1.Resources = permissions1.Resources[:len(permissionsItem.Resources)]
+			}
+			for resourcesCount, resourcesItem := range permissionsItem.Resources {
+				var resources1 PermissionResourceV1
+				resources1.ID = types.StringValue(resourcesItem.ID)
+				if len(resources1.Labels) > len(resourcesItem.Labels) {
+					resources1.Labels = resources1.Labels[:len(resourcesItem.Labels)]
+				}
+				for labelsCount1, labelsItem1 := range resourcesItem.Labels {
+					var labels3 LabelV1
+					if labelsItem1.Description != nil {
+						labels3.Description = types.StringValue(*labelsItem1.Description)
+					} else {
+						labels3.Description = types.StringNull()
+					}
+					labels3.Key = types.StringValue(labelsItem1.Key)
+					labels3.Value = types.StringValue(labelsItem1.Value)
+					if labelsCount1+1 > len(resources1.Labels) {
+						resources1.Labels = append(resources1.Labels, labels3)
+					} else {
+						resources1.Labels[labelsCount1].Description = labels3.Description
+						resources1.Labels[labelsCount1].Key = labels3.Key
+						resources1.Labels[labelsCount1].Value = labels3.Value
+					}
+				}
+				resources1.Type = types.StringValue(string(resourcesItem.Type))
+				if resourcesCount+1 > len(permissions1.Resources) {
+					permissions1.Resources = append(permissions1.Resources, resources1)
+				} else {
+					permissions1.Resources[resourcesCount].ID = resources1.ID
+					permissions1.Resources[resourcesCount].Labels = resources1.Labels
+					permissions1.Resources[resourcesCount].Type = resources1.Type
+				}
+			}
+			permissions1.RoleID = types.StringValue(permissionsItem.RoleID)
+			permissions1.RoleName = types.StringValue(permissionsItem.RoleName)
+			if permissionsCount+1 > len(r.Data.UserGroup.Permissions) {
+				r.Data.UserGroup.Permissions = append(r.Data.UserGroup.Permissions, permissions1)
+			} else {
+				r.Data.UserGroup.Permissions[permissionsCount].Labels = permissions1.Labels
+				r.Data.UserGroup.Permissions[permissionsCount].Resources = permissions1.Resources
+				r.Data.UserGroup.Permissions[permissionsCount].RoleID = permissions1.RoleID
+				r.Data.UserGroup.Permissions[permissionsCount].RoleName = permissions1.RoleName
+			}
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
 	}
 }

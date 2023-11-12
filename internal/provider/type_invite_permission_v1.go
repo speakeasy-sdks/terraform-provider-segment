@@ -5,7 +5,7 @@ package provider
 import "github.com/hashicorp/terraform-plugin-framework/types"
 
 type InvitePermissionV1 struct {
-	Labels    []AllowedLabelBeta `tfsdk:"labels"`
-	Resources []ResourceV1       `tfsdk:"resources"`
-	RoleID    types.String       `tfsdk:"role_id"`
+	Labels    []LabelV1    `tfsdk:"labels"`
+	Resources []ResourceV1 `tfsdk:"resources"`
+	RoleID    types.String `tfsdk:"role_id"`
 }

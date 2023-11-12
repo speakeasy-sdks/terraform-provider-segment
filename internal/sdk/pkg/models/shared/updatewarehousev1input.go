@@ -17,3 +17,24 @@ type UpdateWarehouseV1Input struct {
 	// `/catalog/warehouses` endpoint.
 	Settings map[string]interface{} `json:"settings"`
 }
+
+func (o *UpdateWarehouseV1Input) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *UpdateWarehouseV1Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateWarehouseV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}

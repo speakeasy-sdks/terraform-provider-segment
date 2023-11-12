@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta - Represents a logo.
-type UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta struct {
+// UpdateWarehouseV1OutputLogosBeta - Represents a logo.
+type UpdateWarehouseV1OutputLogosBeta struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,20 +12,83 @@ type UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
-// UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
-type UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1 struct {
+func (o *UpdateWarehouseV1OutputLogosBeta) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *UpdateWarehouseV1OutputLogosBeta) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *UpdateWarehouseV1OutputLogosBeta) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// UpdateWarehouseV1OutputWarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
+type UpdateWarehouseV1OutputWarehouseMetadataV1 struct {
 	// A description, in English, of this object.
 	Description string `json:"description"`
 	// The id of this object.
 	ID string `json:"id"`
 	// Logo information for this object.
-	Logos UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1LogosBeta `json:"logos"`
+	Logos UpdateWarehouseV1OutputLogosBeta `json:"logos"`
 	// The name of this object.
 	Name string `json:"name"`
 	// The Integration options for this object.
 	Options []IntegrationOptionBeta `json:"options"`
 	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseMetadataV1) GetLogos() UpdateWarehouseV1OutputLogosBeta {
+	if o == nil {
+		return UpdateWarehouseV1OutputLogosBeta{}
+	}
+	return o.Logos
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // UpdateWarehouseV1OutputWarehouseV1 - Defines a data Warehouse used as a Destination for Segment data.
@@ -35,7 +98,7 @@ type UpdateWarehouseV1OutputWarehouseV1 struct {
 	// The id of the Warehouse.
 	ID string `json:"id"`
 	// The metadata for the Warehouse.
-	Metadata UpdateWarehouseV1OutputWarehouseV1WarehouseMetadataV1 `json:"metadata"`
+	Metadata UpdateWarehouseV1OutputWarehouseMetadataV1 `json:"metadata"`
 	// The settings associated with this Warehouse.
 	//
 	// Common settings are connection-related configuration used to connect to it, for example host, username, and port.
@@ -44,8 +107,50 @@ type UpdateWarehouseV1OutputWarehouseV1 struct {
 	WorkspaceID string `json:"workspaceId"`
 }
 
+func (o *UpdateWarehouseV1OutputWarehouseV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseV1) GetMetadata() UpdateWarehouseV1OutputWarehouseMetadataV1 {
+	if o == nil {
+		return UpdateWarehouseV1OutputWarehouseMetadataV1{}
+	}
+	return o.Metadata
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseV1) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *UpdateWarehouseV1OutputWarehouseV1) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
 // UpdateWarehouseV1Output - Returns the updated Warehouse.
 type UpdateWarehouseV1Output struct {
 	// The updated Warehouse.
 	Warehouse UpdateWarehouseV1OutputWarehouseV1 `json:"warehouse"`
+}
+
+func (o *UpdateWarehouseV1Output) GetWarehouse() UpdateWarehouseV1OutputWarehouseV1 {
+	if o == nil {
+		return UpdateWarehouseV1OutputWarehouseV1{}
+	}
+	return o.Warehouse
 }

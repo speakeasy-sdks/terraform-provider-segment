@@ -3,10 +3,9 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *AddLabelsToSourceV1InputResourceModel) ToCreateSDKType() *shared.AddLabelsToSourceV1Input {
@@ -32,32 +31,30 @@ func (r *AddLabelsToSourceV1InputResourceModel) ToCreateSDKType() *shared.AddLab
 	return &out
 }
 
-func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromCreateResponse(resp *operations.AddLabelsToSourceResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &AddLabelsToSourceV1Output{}
+		if len(r.Data.Labels) > len(resp.Data.Labels) {
+			r.Data.Labels = r.Data.Labels[:len(resp.Data.Labels)]
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
-		} else {
-			errors1.Field = types.StringNull()
+		for labelsCount, labelsItem := range resp.Data.Labels {
+			var labels1 LabelV1
+			if labelsItem.Description != nil {
+				labels1.Description = types.StringValue(*labelsItem.Description)
+			} else {
+				labels1.Description = types.StringNull()
+			}
+			labels1.Key = types.StringValue(labelsItem.Key)
+			labels1.Value = types.StringValue(labelsItem.Value)
+			if labelsCount+1 > len(r.Data.Labels) {
+				r.Data.Labels = append(r.Data.Labels, labels1)
+			} else {
+				r.Data.Labels[labelsCount].Description = labels1.Description
+				r.Data.Labels[labelsCount].Key = labels1.Key
+				r.Data.Labels[labelsCount].Value = labels1.Value
+			}
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
 	}
 }

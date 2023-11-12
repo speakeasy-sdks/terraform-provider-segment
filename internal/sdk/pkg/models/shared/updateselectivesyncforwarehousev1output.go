@@ -42,3 +42,17 @@ type UpdateSelectiveSyncForWarehouseV1Output struct {
 	// Warnings returned by the operation.
 	Warnings []string `json:"warnings"`
 }
+
+func (o *UpdateSelectiveSyncForWarehouseV1Output) GetStatus() UpdateSelectiveSyncForWarehouseV1OutputStatus {
+	if o == nil {
+		return UpdateSelectiveSyncForWarehouseV1OutputStatus("")
+	}
+	return o.Status
+}
+
+func (o *UpdateSelectiveSyncForWarehouseV1Output) GetWarnings() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Warnings
+}

@@ -7,24 +7,24 @@ import (
 	"fmt"
 )
 
-// GetRegulationV1OutputRegulationOverallStatus - The current status of the regulate request.
-type GetRegulationV1OutputRegulationOverallStatus string
+// OverallStatus - The current status of the regulate request.
+type OverallStatus string
 
 const (
-	GetRegulationV1OutputRegulationOverallStatusFailed         GetRegulationV1OutputRegulationOverallStatus = "FAILED"
-	GetRegulationV1OutputRegulationOverallStatusFinished       GetRegulationV1OutputRegulationOverallStatus = "FINISHED"
-	GetRegulationV1OutputRegulationOverallStatusInitialized    GetRegulationV1OutputRegulationOverallStatus = "INITIALIZED"
-	GetRegulationV1OutputRegulationOverallStatusInvalid        GetRegulationV1OutputRegulationOverallStatus = "INVALID"
-	GetRegulationV1OutputRegulationOverallStatusNotSupported   GetRegulationV1OutputRegulationOverallStatus = "NOT_SUPPORTED"
-	GetRegulationV1OutputRegulationOverallStatusPartialSuccess GetRegulationV1OutputRegulationOverallStatus = "PARTIAL_SUCCESS"
-	GetRegulationV1OutputRegulationOverallStatusRunning        GetRegulationV1OutputRegulationOverallStatus = "RUNNING"
+	OverallStatusFailed         OverallStatus = "FAILED"
+	OverallStatusFinished       OverallStatus = "FINISHED"
+	OverallStatusInitialized    OverallStatus = "INITIALIZED"
+	OverallStatusInvalid        OverallStatus = "INVALID"
+	OverallStatusNotSupported   OverallStatus = "NOT_SUPPORTED"
+	OverallStatusPartialSuccess OverallStatus = "PARTIAL_SUCCESS"
+	OverallStatusRunning        OverallStatus = "RUNNING"
 )
 
-func (e GetRegulationV1OutputRegulationOverallStatus) ToPointer() *GetRegulationV1OutputRegulationOverallStatus {
+func (e OverallStatus) ToPointer() *OverallStatus {
 	return &e
 }
 
-func (e *GetRegulationV1OutputRegulationOverallStatus) UnmarshalJSON(data []byte) error {
+func (e *OverallStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -43,15 +43,15 @@ func (e *GetRegulationV1OutputRegulationOverallStatus) UnmarshalJSON(data []byte
 	case "PARTIAL_SUCCESS":
 		fallthrough
 	case "RUNNING":
-		*e = GetRegulationV1OutputRegulationOverallStatus(v)
+		*e = OverallStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetRegulationV1OutputRegulationOverallStatus: %v", v)
+		return fmt.Errorf("invalid value for OverallStatus: %v", v)
 	}
 }
 
-// GetRegulationV1OutputRegulation - The regulate request.
-type GetRegulationV1OutputRegulation struct {
+// Regulation - The regulate request.
+type Regulation struct {
 	// The timestamp of the creation of the request.
 	CreatedAt string `json:"createdAt"`
 	// The timestamp of when the request finished.
@@ -59,15 +59,64 @@ type GetRegulationV1OutputRegulation struct {
 	// The id of the regulate request.
 	ID string `json:"id"`
 	// The current status of the regulate request.
-	OverallStatus GetRegulationV1OutputRegulationOverallStatus `json:"overallStatus"`
+	OverallStatus OverallStatus `json:"overallStatus"`
 	// The status of each stream including all the Destinations that correspond to the stream.
 	StreamStatus []StreamStatusV1 `json:"streamStatus"`
 	// The id of the Workspace that the regulate request belongs to.
 	WorkspaceID string `json:"workspaceId"`
 }
 
+func (o *Regulation) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *Regulation) GetFinishedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.FinishedAt
+}
+
+func (o *Regulation) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Regulation) GetOverallStatus() OverallStatus {
+	if o == nil {
+		return OverallStatus("")
+	}
+	return o.OverallStatus
+}
+
+func (o *Regulation) GetStreamStatus() []StreamStatusV1 {
+	if o == nil {
+		return []StreamStatusV1{}
+	}
+	return o.StreamStatus
+}
+
+func (o *Regulation) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
 // GetRegulationV1Output - The regulate request returned.
 type GetRegulationV1Output struct {
 	// The regulate request.
-	Regulation GetRegulationV1OutputRegulation `json:"regulation"`
+	Regulation Regulation `json:"regulation"`
+}
+
+func (o *GetRegulationV1Output) GetRegulation() Regulation {
+	if o == nil {
+		return Regulation{}
+	}
+	return o.Regulation
 }

@@ -31,8 +31,78 @@ type UpdateReverseEtlModelOutputReverseEtlModel struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetQuery() string {
+	if o == nil {
+		return ""
+	}
+	return o.Query
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetQueryIdentifierColumn() string {
+	if o == nil {
+		return ""
+	}
+	return o.QueryIdentifierColumn
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.ScheduleConfig
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetScheduleStrategy() string {
+	if o == nil {
+		return ""
+	}
+	return o.ScheduleStrategy
+}
+
+func (o *UpdateReverseEtlModelOutputReverseEtlModel) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // UpdateReverseEtlModelOutput - Defines the results of updating a Model.
 type UpdateReverseEtlModelOutput struct {
 	// The created Model.
 	ReverseEtlModel UpdateReverseEtlModelOutputReverseEtlModel `json:"reverseEtlModel"`
+}
+
+func (o *UpdateReverseEtlModelOutput) GetReverseEtlModel() UpdateReverseEtlModelOutputReverseEtlModel {
+	if o == nil {
+		return UpdateReverseEtlModelOutputReverseEtlModel{}
+	}
+	return o.ReverseEtlModel
 }

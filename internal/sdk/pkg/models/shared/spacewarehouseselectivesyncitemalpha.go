@@ -13,3 +13,31 @@ type SpaceWarehouseSelectiveSyncItemAlpha struct {
 	// The id of the Warehouse this sync belongs to.
 	WarehouseID string `json:"warehouseId"`
 }
+
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetCollection() string {
+	if o == nil {
+		return ""
+	}
+	return o.Collection
+}
+
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetProperties() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Properties
+}
+
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}

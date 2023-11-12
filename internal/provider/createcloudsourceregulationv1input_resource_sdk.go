@@ -3,20 +3,19 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *CreateCloudSourceRegulationV1InputResourceModel) ToCreateSDKType() *shared.CreateCloudSourceRegulationV1Input {
 	collection := r.Collection.ValueString()
-	regulationType := shared.CreateCloudSourceRegulationV1InputRegulationType(r.RegulationType.ValueString())
+	regulationType := shared.RegulationType(r.RegulationType.ValueString())
 	var subjectIds []string = nil
 	for _, subjectIdsItem := range r.SubjectIds {
 		subjectIds = append(subjectIds, subjectIdsItem.ValueString())
 	}
-	subjectType := shared.CreateCloudSourceRegulationV1InputSubjectType(r.SubjectType.ValueString())
+	subjectType := shared.SubjectType(r.SubjectType.ValueString())
 	out := shared.CreateCloudSourceRegulationV1Input{
 		Collection:     collection,
 		RegulationType: regulationType,
@@ -26,32 +25,11 @@ func (r *CreateCloudSourceRegulationV1InputResourceModel) ToCreateSDKType() *sha
 	return &out
 }
 
-func (r *CreateCloudSourceRegulationV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
-		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
-		} else {
-			errors1.Field = types.StringNull()
-		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+func (r *CreateCloudSourceRegulationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateCloudSourceRegulationResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateCloudSourceRegulationV1Output{}
+		r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
 	}
 }
