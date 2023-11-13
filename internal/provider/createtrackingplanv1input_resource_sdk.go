@@ -3,10 +3,9 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *CreateTrackingPlanV1InputResourceModel) ToCreateSDKType() *shared.CreateTrackingPlanV1Input {
@@ -17,7 +16,7 @@ func (r *CreateTrackingPlanV1InputResourceModel) ToCreateSDKType() *shared.Creat
 		description = nil
 	}
 	name := r.Name.ValueString()
-	typeVar := shared.CreateTrackingPlanV1InputType(r.Type.ValueString())
+	typeVar := shared.Type(r.Type.ValueString())
 	out := shared.CreateTrackingPlanV1Input{
 		Description: description,
 		Name:        name,
@@ -26,32 +25,37 @@ func (r *CreateTrackingPlanV1InputResourceModel) ToCreateSDKType() *shared.Creat
 	return &out
 }
 
-func (r *CreateTrackingPlanV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
+func (r *CreateTrackingPlanV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateTrackingPlanResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateTrackingPlanV1Output{}
+		if resp.Data.TrackingPlan.CreatedAt != nil {
+			r.Data.TrackingPlan.CreatedAt = types.StringValue(*resp.Data.TrackingPlan.CreatedAt)
 		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+			r.Data.TrackingPlan.CreatedAt = types.StringNull()
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
+		if resp.Data.TrackingPlan.Description != nil {
+			r.Data.TrackingPlan.Description = types.StringValue(*resp.Data.TrackingPlan.Description)
 		} else {
-			errors1.Field = types.StringNull()
+			r.Data.TrackingPlan.Description = types.StringNull()
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
+		r.Data.TrackingPlan.ID = types.StringValue(resp.Data.TrackingPlan.ID)
+		if resp.Data.TrackingPlan.Name != nil {
+			r.Data.TrackingPlan.Name = types.StringValue(*resp.Data.TrackingPlan.Name)
 		} else {
-			errors1.Message = types.StringNull()
+			r.Data.TrackingPlan.Name = types.StringNull()
 		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
+		if resp.Data.TrackingPlan.Slug != nil {
+			r.Data.TrackingPlan.Slug = types.StringValue(*resp.Data.TrackingPlan.Slug)
 		} else {
-			errors1.Status = types.NumberNull()
+			r.Data.TrackingPlan.Slug = types.StringNull()
 		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+		r.Data.TrackingPlan.Type = types.StringValue(string(resp.Data.TrackingPlan.Type))
+		if resp.Data.TrackingPlan.UpdatedAt != nil {
+			r.Data.TrackingPlan.UpdatedAt = types.StringValue(*resp.Data.TrackingPlan.UpdatedAt)
+		} else {
+			r.Data.TrackingPlan.UpdatedAt = types.StringNull()
+		}
 	}
 }

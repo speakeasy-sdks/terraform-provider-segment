@@ -7,3 +7,10 @@ type ListLabelsV1Output struct {
 	// All labels associated with the current Workspace.
 	Labels []LabelV1 `json:"labels"`
 }
+
+func (o *ListLabelsV1Output) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}

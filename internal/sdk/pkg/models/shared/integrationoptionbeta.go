@@ -19,3 +19,45 @@ type IntegrationOptionBeta struct {
 	// primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.
 	Type string `json:"type"`
 }
+
+func (o *IntegrationOptionBeta) GetDefaultValue() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultValue
+}
+
+func (o *IntegrationOptionBeta) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *IntegrationOptionBeta) GetLabel() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Label
+}
+
+func (o *IntegrationOptionBeta) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *IntegrationOptionBeta) GetRequired() bool {
+	if o == nil {
+		return false
+	}
+	return o.Required
+}
+
+func (o *IntegrationOptionBeta) GetType() string {
+	if o == nil {
+		return ""
+	}
+	return o.Type
+}

@@ -9,3 +9,17 @@ type InviteV1 struct {
 	// The permissions to attach to the invited user.
 	Permissions []InvitePermissionV1 `json:"permissions,omitempty"`
 }
+
+func (o *InviteV1) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *InviteV1) GetPermissions() []InvitePermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}

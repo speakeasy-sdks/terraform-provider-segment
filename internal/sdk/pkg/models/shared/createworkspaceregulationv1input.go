@@ -83,3 +83,24 @@ type CreateWorkspaceRegulationV1Input struct {
 	// The subject type. Use `objectId` for Cloud Source regulations.
 	SubjectType CreateWorkspaceRegulationV1InputSubjectType `json:"subjectType"`
 }
+
+func (o *CreateWorkspaceRegulationV1Input) GetRegulationType() CreateWorkspaceRegulationV1InputRegulationType {
+	if o == nil {
+		return CreateWorkspaceRegulationV1InputRegulationType("")
+	}
+	return o.RegulationType
+}
+
+func (o *CreateWorkspaceRegulationV1Input) GetSubjectIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.SubjectIds
+}
+
+func (o *CreateWorkspaceRegulationV1Input) GetSubjectType() CreateWorkspaceRegulationV1InputSubjectType {
+	if o == nil {
+		return CreateWorkspaceRegulationV1InputSubjectType("")
+	}
+	return o.SubjectType
+}

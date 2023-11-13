@@ -4,8 +4,8 @@ package provider
 
 import (
 	"context"
-	"segment/internal/sdk"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
@@ -88,6 +88,7 @@ func (p *SegmentProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 func (p *SegmentProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
+		NewAddConnectionFromSourceToWarehouseV1OutputResource,
 		NewAddLabelsToSourceV1InputResource,
 		NewAddPermissionsToUserGroupV1InputResource,
 		NewAddPermissionsToUserV1InputResource,
@@ -96,6 +97,7 @@ func (p *SegmentProvider) Resources(ctx context.Context) []func() resource.Resou
 		NewCreateCloudSourceRegulationV1InputResource,
 		NewCreateDestinationV1InputResource,
 		NewCreateFilterForDestinationV1InputResource,
+		NewCreateFunctionDeploymentV1OutputResource,
 		NewCreateFunctionV1InputResource,
 		NewCreateInvitesV1InputResource,
 		NewCreateLabelV1InputResource,

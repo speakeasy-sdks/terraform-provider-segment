@@ -9,3 +9,17 @@ type PermissionInputV1 struct {
 	// The role id of this permission.
 	RoleID string `json:"roleId"`
 }
+
+func (o *PermissionInputV1) GetResources() []PermissionResourceV1 {
+	if o == nil {
+		return []PermissionResourceV1{}
+	}
+	return o.Resources
+}
+
+func (o *PermissionInputV1) GetRoleID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RoleID
+}

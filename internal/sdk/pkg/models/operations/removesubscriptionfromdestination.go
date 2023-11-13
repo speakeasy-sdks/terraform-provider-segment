@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type RemoveSubscriptionFromDestinationRequest struct {
@@ -12,18 +12,77 @@ type RemoveSubscriptionFromDestinationRequest struct {
 	ID            string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-// RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON - OK
-type RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *RemoveSubscriptionFromDestinationRequest) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *RemoveSubscriptionFromDestinationRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+// RemoveSubscriptionFromDestinationResponseBody - OK
+type RemoveSubscriptionFromDestinationResponseBody struct {
 	// Returns a Destination deletion flag.
 	Data *shared.RemoveSubscriptionFromDestinationAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *RemoveSubscriptionFromDestinationResponseBody) GetData() *shared.RemoveSubscriptionFromDestinationAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type RemoveSubscriptionFromDestinationResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSONObject *RemoveSubscriptionFromDestination200ApplicationVndSegmentV1alphaPlusJSON
+	Object *RemoveSubscriptionFromDestinationResponseBody
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetObject() *RemoveSubscriptionFromDestinationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

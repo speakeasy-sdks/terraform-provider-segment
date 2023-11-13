@@ -3,50 +3,144 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type GetUserGroupRequest struct {
 	UserGroupID string `pathParam:"style=simple,explode=false,name=userGroupId"`
 }
 
-// GetUserGroup200ApplicationVndSegmentV1betaPlusJSON - OK
-type GetUserGroup200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *GetUserGroupRequest) GetUserGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserGroupID
+}
+
+// GetUserGroupIAMGroupsResponse200ResponseBody - OK
+type GetUserGroupIAMGroupsResponse200ResponseBody struct {
 	// Returns a user group with the given id.
 	Data *shared.GetUserGroupV1Output `json:"data,omitempty"`
 }
 
-// GetUserGroup200ApplicationVndSegmentV1alphaPlusJSON - OK
-type GetUserGroup200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *GetUserGroupIAMGroupsResponse200ResponseBody) GetData() *shared.GetUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetUserGroupIAMGroupsResponseResponseBody - OK
+type GetUserGroupIAMGroupsResponseResponseBody struct {
 	// Returns a user group with the given id.
 	Data *shared.GetUserGroupV1Output `json:"data,omitempty"`
 }
 
-// GetUserGroup200ApplicationVndSegmentV1PlusJSON - OK
-type GetUserGroup200ApplicationVndSegmentV1PlusJSON struct {
+func (o *GetUserGroupIAMGroupsResponseResponseBody) GetData() *shared.GetUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetUserGroupIAMGroupsResponseBody - OK
+type GetUserGroupIAMGroupsResponseBody struct {
 	// Returns a user group with the given id.
 	Data *shared.GetUserGroupV1Output `json:"data,omitempty"`
 }
 
-// GetUserGroup200ApplicationJSON - OK
-type GetUserGroup200ApplicationJSON struct {
+func (o *GetUserGroupIAMGroupsResponseBody) GetData() *shared.GetUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// GetUserGroupResponseBody - OK
+type GetUserGroupResponseBody struct {
 	// Returns a user group with the given id.
 	Data *shared.GetUserGroupV1Output `json:"data,omitempty"`
+}
+
+func (o *GetUserGroupResponseBody) GetData() *shared.GetUserGroupV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type GetUserGroupResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *GetUserGroupResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *GetUserGroupIAMGroupsResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *GetUserGroupIAMGroupsResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *GetUserGroupIAMGroupsResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	GetUserGroup200ApplicationJSONObject *GetUserGroup200ApplicationJSON
-	// OK
-	GetUserGroup200ApplicationVndSegmentV1PlusJSONObject *GetUserGroup200ApplicationVndSegmentV1PlusJSON
-	// OK
-	GetUserGroup200ApplicationVndSegmentV1alphaPlusJSONObject *GetUserGroup200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	GetUserGroup200ApplicationVndSegmentV1betaPlusJSONObject *GetUserGroup200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *GetUserGroupResponse) GetTwoHundredApplicationJSONObject() *GetUserGroupResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *GetUserGroupResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *GetUserGroupIAMGroupsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *GetUserGroupResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *GetUserGroupIAMGroupsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *GetUserGroupResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *GetUserGroupIAMGroupsResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *GetUserGroupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetUserGroupResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *GetUserGroupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetUserGroupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

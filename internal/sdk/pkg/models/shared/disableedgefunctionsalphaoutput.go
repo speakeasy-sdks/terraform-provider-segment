@@ -18,8 +18,57 @@ type DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha struct {
 	Version float64 `json:"version"`
 }
 
+func (o *DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetDownloadURL() string {
+	if o == nil {
+		return ""
+	}
+	return o.DownloadURL
+}
+
+func (o *DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}
+
 // DisableEdgeFunctionsAlphaOutput - Output for DisableEdgeFunctions.
 type DisableEdgeFunctionsAlphaOutput struct {
 	// The latest version of Edge Function bundle.
 	EdgeFunctions DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha `json:"edgeFunctions"`
+}
+
+func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctions() DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha {
+	if o == nil {
+		return DisableEdgeFunctionsAlphaOutputEdgeFunctionsAlpha{}
+	}
+	return o.EdgeFunctions
 }

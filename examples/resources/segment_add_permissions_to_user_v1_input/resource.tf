@@ -3,7 +3,7 @@ resource "segment_add_permissions_to_user_v1_input" "my_addpermissionstouserv1in
     {
       resources = [
         {
-          id = "05dfc2dd-f7cc-478c-a1ba-928fc816742c"
+          id = "cd6da11d-c06a-4bf6-8342-52089d9c8a56"
           labels = [
             {
               description = "...my_description..."

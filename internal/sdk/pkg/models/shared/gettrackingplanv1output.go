@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// GetTrackingPlanV1OutputTrackingPlanV1Type - The Tracking Plan's type.
-type GetTrackingPlanV1OutputTrackingPlanV1Type string
+// GetTrackingPlanV1OutputType - The Tracking Plan's type.
+type GetTrackingPlanV1OutputType string
 
 const (
-	GetTrackingPlanV1OutputTrackingPlanV1TypeEngage          GetTrackingPlanV1OutputTrackingPlanV1Type = "ENGAGE"
-	GetTrackingPlanV1OutputTrackingPlanV1TypeLive            GetTrackingPlanV1OutputTrackingPlanV1Type = "LIVE"
-	GetTrackingPlanV1OutputTrackingPlanV1TypePropertyLibrary GetTrackingPlanV1OutputTrackingPlanV1Type = "PROPERTY_LIBRARY"
-	GetTrackingPlanV1OutputTrackingPlanV1TypeRuleLibrary     GetTrackingPlanV1OutputTrackingPlanV1Type = "RULE_LIBRARY"
-	GetTrackingPlanV1OutputTrackingPlanV1TypeTemplate        GetTrackingPlanV1OutputTrackingPlanV1Type = "TEMPLATE"
+	GetTrackingPlanV1OutputTypeEngage          GetTrackingPlanV1OutputType = "ENGAGE"
+	GetTrackingPlanV1OutputTypeLive            GetTrackingPlanV1OutputType = "LIVE"
+	GetTrackingPlanV1OutputTypePropertyLibrary GetTrackingPlanV1OutputType = "PROPERTY_LIBRARY"
+	GetTrackingPlanV1OutputTypeRuleLibrary     GetTrackingPlanV1OutputType = "RULE_LIBRARY"
+	GetTrackingPlanV1OutputTypeTemplate        GetTrackingPlanV1OutputType = "TEMPLATE"
 )
 
-func (e GetTrackingPlanV1OutputTrackingPlanV1Type) ToPointer() *GetTrackingPlanV1OutputTrackingPlanV1Type {
+func (e GetTrackingPlanV1OutputType) ToPointer() *GetTrackingPlanV1OutputType {
 	return &e
 }
 
-func (e *GetTrackingPlanV1OutputTrackingPlanV1Type) UnmarshalJSON(data []byte) error {
+func (e *GetTrackingPlanV1OutputType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,10 +37,10 @@ func (e *GetTrackingPlanV1OutputTrackingPlanV1Type) UnmarshalJSON(data []byte) e
 	case "RULE_LIBRARY":
 		fallthrough
 	case "TEMPLATE":
-		*e = GetTrackingPlanV1OutputTrackingPlanV1Type(v)
+		*e = GetTrackingPlanV1OutputType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetTrackingPlanV1OutputTrackingPlanV1Type: %v", v)
+		return fmt.Errorf("invalid value for GetTrackingPlanV1OutputType: %v", v)
 	}
 }
 
@@ -65,15 +65,71 @@ type GetTrackingPlanV1OutputTrackingPlanV1 struct {
 	// Config API note: equal to `name`.
 	Slug *string `json:"slug,omitempty"`
 	// The Tracking Plan's type.
-	Type GetTrackingPlanV1OutputTrackingPlanV1Type `json:"type"`
+	Type GetTrackingPlanV1OutputType `json:"type"`
 	// The timestamp of the last change to the Tracking Plan.
 	//
 	// Config API note: equal to `updateTime`.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetSlug() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Slug
+}
+
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetType() GetTrackingPlanV1OutputType {
+	if o == nil {
+		return GetTrackingPlanV1OutputType("")
+	}
+	return o.Type
+}
+
+func (o *GetTrackingPlanV1OutputTrackingPlanV1) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}
+
 // GetTrackingPlanV1Output - Gets a single Tracking Plan.
 type GetTrackingPlanV1Output struct {
 	// The requested Tracking Plan.
 	TrackingPlan GetTrackingPlanV1OutputTrackingPlanV1 `json:"trackingPlan"`
+}
+
+func (o *GetTrackingPlanV1Output) GetTrackingPlan() GetTrackingPlanV1OutputTrackingPlanV1 {
+	if o == nil {
+		return GetTrackingPlanV1OutputTrackingPlanV1{}
+	}
+	return o.TrackingPlan
 }

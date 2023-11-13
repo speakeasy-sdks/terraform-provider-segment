@@ -3,10 +3,9 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *AddPermissionsToUserGroupV1InputResourceModel) ToCreateSDKType() *shared.AddPermissionsToUserGroupV1Input {
@@ -50,32 +49,60 @@ func (r *AddPermissionsToUserGroupV1InputResourceModel) ToCreateSDKType() *share
 	return &out
 }
 
-func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
-		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *operations.AddPermissionsToUserGroupResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &AddPermissionsToUserGroupV1Output{}
+		if len(r.Data.Permissions) > len(resp.Data.Permissions) {
+			r.Data.Permissions = r.Data.Permissions[:len(resp.Data.Permissions)]
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
-		} else {
-			errors1.Field = types.StringNull()
+		for permissionsCount, permissionsItem := range resp.Data.Permissions {
+			var permissions1 AccessPermissionV1
+			if len(permissions1.Resources) > len(permissionsItem.Resources) {
+				permissions1.Resources = permissions1.Resources[:len(permissionsItem.Resources)]
+			}
+			for resourcesCount, resourcesItem := range permissionsItem.Resources {
+				var resources1 PermissionResourceV1
+				resources1.ID = types.StringValue(resourcesItem.ID)
+				if len(resources1.Labels) > len(resourcesItem.Labels) {
+					resources1.Labels = resources1.Labels[:len(resourcesItem.Labels)]
+				}
+				for labelsCount, labelsItem := range resourcesItem.Labels {
+					var labels1 LabelV1
+					if labelsItem.Description != nil {
+						labels1.Description = types.StringValue(*labelsItem.Description)
+					} else {
+						labels1.Description = types.StringNull()
+					}
+					labels1.Key = types.StringValue(labelsItem.Key)
+					labels1.Value = types.StringValue(labelsItem.Value)
+					if labelsCount+1 > len(resources1.Labels) {
+						resources1.Labels = append(resources1.Labels, labels1)
+					} else {
+						resources1.Labels[labelsCount].Description = labels1.Description
+						resources1.Labels[labelsCount].Key = labels1.Key
+						resources1.Labels[labelsCount].Value = labels1.Value
+					}
+				}
+				resources1.Type = types.StringValue(string(resourcesItem.Type))
+				if resourcesCount+1 > len(permissions1.Resources) {
+					permissions1.Resources = append(permissions1.Resources, resources1)
+				} else {
+					permissions1.Resources[resourcesCount].ID = resources1.ID
+					permissions1.Resources[resourcesCount].Labels = resources1.Labels
+					permissions1.Resources[resourcesCount].Type = resources1.Type
+				}
+			}
+			permissions1.RoleID = types.StringValue(permissionsItem.RoleID)
+			permissions1.RoleName = types.StringValue(permissionsItem.RoleName)
+			if permissionsCount+1 > len(r.Data.Permissions) {
+				r.Data.Permissions = append(r.Data.Permissions, permissions1)
+			} else {
+				r.Data.Permissions[permissionsCount].Resources = permissions1.Resources
+				r.Data.Permissions[permissionsCount].RoleID = permissions1.RoleID
+				r.Data.Permissions[permissionsCount].RoleName = permissions1.RoleName
+			}
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
 	}
 }

@@ -37,3 +37,10 @@ type UpdateTrackingPlanV1Output struct {
 	// The operation status.
 	Status UpdateTrackingPlanV1OutputStatus `json:"status"`
 }
+
+func (o *UpdateTrackingPlanV1Output) GetStatus() UpdateTrackingPlanV1OutputStatus {
+	if o == nil {
+		return UpdateTrackingPlanV1OutputStatus("")
+	}
+	return o.Status
+}

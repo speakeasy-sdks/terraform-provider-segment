@@ -29,10 +29,52 @@ type ListComputedTraitsAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListComputedTraitsAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListComputedTraitsAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListComputedTraitsAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListComputedTraitsAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListComputedTraitsAlphaOutput - List computed traits endpoint output.
 type ListComputedTraitsAlphaOutput struct {
 	// A list of computed trait summary results.
 	ComputedTraits []ComputedTraitSummary `json:"computedTraits"`
 	// Information about the pagination of this response.
 	Pagination ListComputedTraitsAlphaOutputPaginationOutput `json:"pagination"`
+}
+
+func (o *ListComputedTraitsAlphaOutput) GetComputedTraits() []ComputedTraitSummary {
+	if o == nil {
+		return []ComputedTraitSummary{}
+	}
+	return o.ComputedTraits
+}
+
+func (o *ListComputedTraitsAlphaOutput) GetPagination() ListComputedTraitsAlphaOutputPaginationOutput {
+	if o == nil {
+		return ListComputedTraitsAlphaOutputPaginationOutput{}
+	}
+	return o.Pagination
 }
