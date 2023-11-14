@@ -37,3 +37,10 @@ type DeleteReverseEtlModelOutput struct {
 	// The result of the deletion.
 	Status DeleteReverseEtlModelOutputStatus `json:"status"`
 }
+
+func (o *DeleteReverseEtlModelOutput) GetStatus() DeleteReverseEtlModelOutputStatus {
+	if o == nil {
+		return DeleteReverseEtlModelOutputStatus("")
+	}
+	return o.Status
+}

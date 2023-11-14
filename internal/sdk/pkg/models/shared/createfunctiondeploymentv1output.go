@@ -7,37 +7,51 @@ import (
 	"fmt"
 )
 
-type CreateFunctionDeploymentV1OutputFunctionDeploymentStatus string
+type CreateFunctionDeploymentV1OutputStatus string
 
 const (
-	CreateFunctionDeploymentV1OutputFunctionDeploymentStatusSuccess CreateFunctionDeploymentV1OutputFunctionDeploymentStatus = "SUCCESS"
+	CreateFunctionDeploymentV1OutputStatusSuccess CreateFunctionDeploymentV1OutputStatus = "SUCCESS"
 )
 
-func (e CreateFunctionDeploymentV1OutputFunctionDeploymentStatus) ToPointer() *CreateFunctionDeploymentV1OutputFunctionDeploymentStatus {
+func (e CreateFunctionDeploymentV1OutputStatus) ToPointer() *CreateFunctionDeploymentV1OutputStatus {
 	return &e
 }
 
-func (e *CreateFunctionDeploymentV1OutputFunctionDeploymentStatus) UnmarshalJSON(data []byte) error {
+func (e *CreateFunctionDeploymentV1OutputStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "SUCCESS":
-		*e = CreateFunctionDeploymentV1OutputFunctionDeploymentStatus(v)
+		*e = CreateFunctionDeploymentV1OutputStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateFunctionDeploymentV1OutputFunctionDeploymentStatus: %v", v)
+		return fmt.Errorf("invalid value for CreateFunctionDeploymentV1OutputStatus: %v", v)
 	}
 }
 
-// CreateFunctionDeploymentV1OutputFunctionDeployment - The status of the operation.
-type CreateFunctionDeploymentV1OutputFunctionDeployment struct {
-	Status CreateFunctionDeploymentV1OutputFunctionDeploymentStatus `json:"status"`
+// FunctionDeployment - The status of the operation.
+type FunctionDeployment struct {
+	Status CreateFunctionDeploymentV1OutputStatus `json:"status"`
+}
+
+func (o *FunctionDeployment) GetStatus() CreateFunctionDeploymentV1OutputStatus {
+	if o == nil {
+		return CreateFunctionDeploymentV1OutputStatus("")
+	}
+	return o.Status
 }
 
 // CreateFunctionDeploymentV1Output - Updates the deployment for a Source Function instance.
 type CreateFunctionDeploymentV1Output struct {
 	// The status of the operation.
-	FunctionDeployment CreateFunctionDeploymentV1OutputFunctionDeployment `json:"functionDeployment"`
+	FunctionDeployment FunctionDeployment `json:"functionDeployment"`
+}
+
+func (o *CreateFunctionDeploymentV1Output) GetFunctionDeployment() FunctionDeployment {
+	if o == nil {
+		return FunctionDeployment{}
+	}
+	return o.FunctionDeployment
 }

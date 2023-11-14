@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type DeleteInvitesRequest struct {
@@ -14,42 +14,136 @@ type DeleteInvitesRequest struct {
 	Emails []string `queryParam:"style=deepObject,explode=true,name=emails"`
 }
 
-// DeleteInvites200ApplicationVndSegmentV1betaPlusJSON - OK
-type DeleteInvites200ApplicationVndSegmentV1betaPlusJSON struct {
+func (o *DeleteInvitesRequest) GetEmails() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Emails
+}
+
+// DeleteInvitesIAMUsersResponse200ResponseBody - OK
+type DeleteInvitesIAMUsersResponse200ResponseBody struct {
 	// Returns the status of the removal operation.
 	Data *shared.DeleteInvitesV1Output `json:"data,omitempty"`
 }
 
-// DeleteInvites200ApplicationVndSegmentV1alphaPlusJSON - OK
-type DeleteInvites200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *DeleteInvitesIAMUsersResponse200ResponseBody) GetData() *shared.DeleteInvitesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteInvitesIAMUsersResponseResponseBody - OK
+type DeleteInvitesIAMUsersResponseResponseBody struct {
 	// Returns the status of the removal operation.
 	Data *shared.DeleteInvitesV1Output `json:"data,omitempty"`
 }
 
-// DeleteInvites200ApplicationVndSegmentV1PlusJSON - OK
-type DeleteInvites200ApplicationVndSegmentV1PlusJSON struct {
+func (o *DeleteInvitesIAMUsersResponseResponseBody) GetData() *shared.DeleteInvitesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteInvitesIAMUsersResponseBody - OK
+type DeleteInvitesIAMUsersResponseBody struct {
 	// Returns the status of the removal operation.
 	Data *shared.DeleteInvitesV1Output `json:"data,omitempty"`
 }
 
-// DeleteInvites200ApplicationJSON - OK
-type DeleteInvites200ApplicationJSON struct {
+func (o *DeleteInvitesIAMUsersResponseBody) GetData() *shared.DeleteInvitesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// DeleteInvitesResponseBody - OK
+type DeleteInvitesResponseBody struct {
 	// Returns the status of the removal operation.
 	Data *shared.DeleteInvitesV1Output `json:"data,omitempty"`
+}
+
+func (o *DeleteInvitesResponseBody) GetData() *shared.DeleteInvitesV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type DeleteInvitesResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *DeleteInvitesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *DeleteInvitesIAMUsersResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *DeleteInvitesIAMUsersResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *DeleteInvitesIAMUsersResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	DeleteInvites200ApplicationJSONObject *DeleteInvites200ApplicationJSON
-	// OK
-	DeleteInvites200ApplicationVndSegmentV1PlusJSONObject *DeleteInvites200ApplicationVndSegmentV1PlusJSON
-	// OK
-	DeleteInvites200ApplicationVndSegmentV1alphaPlusJSONObject *DeleteInvites200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	DeleteInvites200ApplicationVndSegmentV1betaPlusJSONObject *DeleteInvites200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *DeleteInvitesResponse) GetTwoHundredApplicationJSONObject() *DeleteInvitesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *DeleteInvitesResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *DeleteInvitesIAMUsersResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *DeleteInvitesResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *DeleteInvitesIAMUsersResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *DeleteInvitesResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *DeleteInvitesIAMUsersResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *DeleteInvitesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteInvitesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *DeleteInvitesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteInvitesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

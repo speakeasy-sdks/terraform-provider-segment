@@ -18,3 +18,45 @@ type CreateDestinationSubscriptionAlphaInput struct {
 	// The FQL statement.
 	Trigger string `json:"trigger"`
 }
+
+func (o *CreateDestinationSubscriptionAlphaInput) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *CreateDestinationSubscriptionAlphaInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateDestinationSubscriptionAlphaInput) GetModelID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModelID
+}
+
+func (o *CreateDestinationSubscriptionAlphaInput) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateDestinationSubscriptionAlphaInput) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *CreateDestinationSubscriptionAlphaInput) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}

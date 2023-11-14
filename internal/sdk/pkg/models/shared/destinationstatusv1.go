@@ -57,3 +57,38 @@ type DestinationStatusV1 struct {
 	Name       string                    `json:"name"`
 	Status     DestinationStatusV1Status `json:"status"`
 }
+
+func (o *DestinationStatusV1) GetErrString() string {
+	if o == nil {
+		return ""
+	}
+	return o.ErrString
+}
+
+func (o *DestinationStatusV1) GetFinishedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.FinishedAt
+}
+
+func (o *DestinationStatusV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *DestinationStatusV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *DestinationStatusV1) GetStatus() DestinationStatusV1Status {
+	if o == nil {
+		return DestinationStatusV1Status("")
+	}
+	return o.Status
+}

@@ -16,7 +16,7 @@ terraform {
   required_providers {
     segment = {
       source  = "scentregroup/segment"
-      version = "0.1.3"
+      version = "0.2.0"
     }
   }
 }
@@ -28,11 +28,13 @@ provider "segment" {
 <!-- End SDK Installation -->
 
 <!-- Start SDK Example Usage -->
-## Testing the provider locally
+### Testing the provider locally
 
 Should you want to validate a change locally, the `--debug` flag allows you to execute the provider against a terraform instance locally.
 
 This also allows for debuggers (e.g. delve) to be attached to the provider.
+
+### Example
 
 ```sh
 go run main.go --debug
@@ -47,6 +49,10 @@ TF_REATTACH_PROVIDERS=... terraform apply
 <!-- Start SDK Available Operations -->
 
 <!-- End SDK Available Operations -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 Terraform allows you to use local provider builds by setting a `dev_overrides` block in a configuration file called `.terraformrc`. This block overrides all other configured installation methods.
 

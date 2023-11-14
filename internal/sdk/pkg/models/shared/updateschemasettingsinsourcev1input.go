@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations - The common group event on violations.
+// CommonEventOnViolations - The common group event on violations.
 //
 // Config API note: equal to `commonGroupEventOnViolations`.
-type UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations string
+type CommonEventOnViolations string
 
 const (
-	UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolationsAllow      UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations = "ALLOW"
-	UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolationsBlock      UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations = "BLOCK"
-	UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolationsOmitTraits UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations = "OMIT_TRAITS"
+	CommonEventOnViolationsAllow      CommonEventOnViolations = "ALLOW"
+	CommonEventOnViolationsBlock      CommonEventOnViolations = "BLOCK"
+	CommonEventOnViolationsOmitTraits CommonEventOnViolations = "OMIT_TRAITS"
 )
 
-func (e UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations) ToPointer() *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations {
+func (e CommonEventOnViolations) ToPointer() *CommonEventOnViolations {
 	return &e
 }
 
-func (e *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations) UnmarshalJSON(data []byte) error {
+func (e *CommonEventOnViolations) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,15 +33,15 @@ func (e *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnVi
 	case "BLOCK":
 		fallthrough
 	case "OMIT_TRAITS":
-		*e = UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations(v)
+		*e = CommonEventOnViolations(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations: %v", v)
+		return fmt.Errorf("invalid value for CommonEventOnViolations: %v", v)
 	}
 }
 
-// UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1 - Group settings.
-type UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1 struct {
+// GroupSourceSettingsV1 - Group settings.
+type GroupSourceSettingsV1 struct {
 	// Enable to allow group traits on violations.
 	//
 	// Config API note: equal to `allowGroupTraitsOnViolations`.
@@ -53,25 +53,46 @@ type UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1 struct {
 	// The common group event on violations.
 	//
 	// Config API note: equal to `commonGroupEventOnViolations`.
-	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
+	CommonEventOnViolations *CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
 
-// UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations - The common identify event on violations.
+func (o *GroupSourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *GroupSourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *GroupSourceSettingsV1) GetCommonEventOnViolations() *CommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}
+
+// UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations - The common identify event on violations.
 //
 // Config API note: equal to `commonIdentifyEventOnViolations`.
-type UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations string
+type UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations string
 
 const (
-	UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolationsAllow      UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations = "ALLOW"
-	UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolationsBlock      UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations = "BLOCK"
-	UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolationsOmitTraits UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations = "OMIT_TRAITS"
+	UpdateSchemaSettingsInSourceV1InputCommonEventOnViolationsAllow      UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations = "ALLOW"
+	UpdateSchemaSettingsInSourceV1InputCommonEventOnViolationsBlock      UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations = "BLOCK"
+	UpdateSchemaSettingsInSourceV1InputCommonEventOnViolationsOmitTraits UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations = "OMIT_TRAITS"
 )
 
-func (e UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations) ToPointer() *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations {
+func (e UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations) ToPointer() *UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations {
 	return &e
 }
 
-func (e *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations) UnmarshalJSON(data []byte) error {
+func (e *UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -82,15 +103,15 @@ func (e *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventO
 	case "BLOCK":
 		fallthrough
 	case "OMIT_TRAITS":
-		*e = UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations(v)
+		*e = UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations: %v", v)
+		return fmt.Errorf("invalid value for UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations: %v", v)
 	}
 }
 
-// UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 - Identify settings.
-type UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 struct {
+// IdentifySourceSettingsV1 - Identify settings.
+type IdentifySourceSettingsV1 struct {
 	// Enable to allow identify traits on violations.
 	//
 	// Config API note: equal to `allowIdentifyTraitsOnViolations`.
@@ -102,25 +123,46 @@ type UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 struct {
 	// The common identify event on violations.
 	//
 	// Config API note: equal to `commonIdentifyEventOnViolations`.
-	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
+	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
 }
 
-// UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations - The common track event on violations.
+func (o *IdentifySourceSettingsV1) GetAllowTraitsOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowTraitsOnViolations
+}
+
+func (o *IdentifySourceSettingsV1) GetAllowUnplannedTraits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedTraits
+}
+
+func (o *IdentifySourceSettingsV1) GetCommonEventOnViolations() *UpdateSchemaSettingsInSourceV1InputCommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
+}
+
+// UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations - The common track event on violations.
 //
 // Config API note: equal to `commonTrackEventOnViolations`.
-type UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations string
+type UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations string
 
 const (
-	UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolationsAllow          UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations = "ALLOW"
-	UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolationsBlock          UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations = "BLOCK"
-	UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolationsOmitProperties UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations = "OMIT_PROPERTIES"
+	UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolationsAllow          UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations = "ALLOW"
+	UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolationsBlock          UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations = "BLOCK"
+	UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolationsOmitProperties UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations = "OMIT_PROPERTIES"
 )
 
-func (e UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations) ToPointer() *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations {
+func (e UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations) ToPointer() *UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations {
 	return &e
 }
 
-func (e *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations) UnmarshalJSON(data []byte) error {
+func (e *UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -131,15 +173,15 @@ func (e *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnVi
 	case "BLOCK":
 		fallthrough
 	case "OMIT_PROPERTIES":
-		*e = UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations(v)
+		*e = UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations: %v", v)
+		return fmt.Errorf("invalid value for UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations: %v", v)
 	}
 }
 
-// UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 - Track settings.
-type UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 struct {
+// TrackSourceSettingsV1 - Track settings.
+type TrackSourceSettingsV1 struct {
 	// Allow track event on violations.
 	//
 	// Config API note: equal to `allowTrackEventOnViolations`.
@@ -159,7 +201,42 @@ type UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 struct {
 	// The common track event on violations.
 	//
 	// Config API note: equal to `commonTrackEventOnViolations`.
-	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1CommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
+	CommonEventOnViolations *UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations `json:"commonEventOnViolations,omitempty"`
+}
+
+func (o *TrackSourceSettingsV1) GetAllowEventOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowEventOnViolations
+}
+
+func (o *TrackSourceSettingsV1) GetAllowPropertiesOnViolations() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowPropertiesOnViolations
+}
+
+func (o *TrackSourceSettingsV1) GetAllowUnplannedEventProperties() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEventProperties
+}
+
+func (o *TrackSourceSettingsV1) GetAllowUnplannedEvents() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowUnplannedEvents
+}
+
+func (o *TrackSourceSettingsV1) GetCommonEventOnViolations() *UpdateSchemaSettingsInSourceV1InputSchemasCommonEventOnViolations {
+	if o == nil {
+		return nil
+	}
+	return o.CommonEventOnViolations
 }
 
 // UpdateSchemaSettingsInSourceV1Input - Input to update a Source's settings.
@@ -169,9 +246,44 @@ type UpdateSchemaSettingsInSourceV1Input struct {
 	// Source id to forward violations to.
 	ForwardingViolationsTo *string `json:"forwardingViolationsTo,omitempty"`
 	// Group settings.
-	Group *UpdateSchemaSettingsInSourceV1InputGroupSourceSettingsV1 `json:"group,omitempty"`
+	Group *GroupSourceSettingsV1 `json:"group,omitempty"`
 	// Identify settings.
-	Identify *UpdateSchemaSettingsInSourceV1InputIdentifySourceSettingsV1 `json:"identify,omitempty"`
+	Identify *IdentifySourceSettingsV1 `json:"identify,omitempty"`
 	// Track settings.
-	Track *UpdateSchemaSettingsInSourceV1InputTrackSourceSettingsV1 `json:"track,omitempty"`
+	Track *TrackSourceSettingsV1 `json:"track,omitempty"`
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetForwardingBlockedEventsTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ForwardingBlockedEventsTo
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetForwardingViolationsTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ForwardingViolationsTo
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetGroup() *GroupSourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Group
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetIdentify() *IdentifySourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Identify
+}
+
+func (o *UpdateSchemaSettingsInSourceV1Input) GetTrack() *TrackSourceSettingsV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Track
 }

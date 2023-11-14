@@ -29,10 +29,52 @@ type ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListProfilesWarehouseInSpaceAlphaOutput - Returns all Profiles Warehouse based on spaceID and pagination.
 type ListProfilesWarehouseInSpaceAlphaOutput struct {
 	// Information about the pagination of this response.
 	Pagination *ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput `json:"pagination,omitempty"`
 	// A list of Warehouses that belong to the Workspace.
 	ProfilesWarehouses []ProfilesWarehouseAlpha `json:"profilesWarehouses"`
+}
+
+func (o *ListProfilesWarehouseInSpaceAlphaOutput) GetPagination() *ListProfilesWarehouseInSpaceAlphaOutputPaginationOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
+}
+
+func (o *ListProfilesWarehouseInSpaceAlphaOutput) GetProfilesWarehouses() []ProfilesWarehouseAlpha {
+	if o == nil {
+		return []ProfilesWarehouseAlpha{}
+	}
+	return o.ProfilesWarehouses
 }

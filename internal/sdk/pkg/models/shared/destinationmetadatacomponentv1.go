@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// DestinationMetadataComponentV1Owner - The owner of this component. Either 'SEGMENT' or 'PARTNER'.
-type DestinationMetadataComponentV1Owner string
+// Owner - The owner of this component. Either 'SEGMENT' or 'PARTNER'.
+type Owner string
 
 const (
-	DestinationMetadataComponentV1OwnerPartner DestinationMetadataComponentV1Owner = "PARTNER"
-	DestinationMetadataComponentV1OwnerSegment DestinationMetadataComponentV1Owner = "SEGMENT"
+	OwnerPartner Owner = "PARTNER"
+	OwnerSegment Owner = "SEGMENT"
 )
 
-func (e DestinationMetadataComponentV1Owner) ToPointer() *DestinationMetadataComponentV1Owner {
+func (e Owner) ToPointer() *Owner {
 	return &e
 }
 
-func (e *DestinationMetadataComponentV1Owner) UnmarshalJSON(data []byte) error {
+func (e *Owner) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,10 +28,10 @@ func (e *DestinationMetadataComponentV1Owner) UnmarshalJSON(data []byte) error {
 	case "PARTNER":
 		fallthrough
 	case "SEGMENT":
-		*e = DestinationMetadataComponentV1Owner(v)
+		*e = Owner(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DestinationMetadataComponentV1Owner: %v", v)
+		return fmt.Errorf("invalid value for Owner: %v", v)
 	}
 }
 
@@ -74,7 +74,28 @@ type DestinationMetadataComponentV1 struct {
 	// Link to the repository hosting the code for this component.
 	Code string `json:"code"`
 	// The owner of this component. Either 'SEGMENT' or 'PARTNER'.
-	Owner *DestinationMetadataComponentV1Owner `json:"owner,omitempty"`
+	Owner *Owner `json:"owner,omitempty"`
 	// The component type.
 	Type DestinationMetadataComponentV1Type `json:"type"`
+}
+
+func (o *DestinationMetadataComponentV1) GetCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.Code
+}
+
+func (o *DestinationMetadataComponentV1) GetOwner() *Owner {
+	if o == nil {
+		return nil
+	}
+	return o.Owner
+}
+
+func (o *DestinationMetadataComponentV1) GetType() DestinationMetadataComponentV1Type {
+	if o == nil {
+		return DestinationMetadataComponentV1Type("")
+	}
+	return o.Type
 }

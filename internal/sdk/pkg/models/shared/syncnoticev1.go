@@ -11,3 +11,24 @@ type SyncNoticeV1 struct {
 	// The human-readable message that describes the notice.
 	Message string `json:"message"`
 }
+
+func (o *SyncNoticeV1) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *SyncNoticeV1) GetLevel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Level
+}
+
+func (o *SyncNoticeV1) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
+}

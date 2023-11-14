@@ -59,3 +59,38 @@ type UpsertRuleV1 struct {
 	// Version of this rule.
 	Version float64 `json:"version"`
 }
+
+func (o *UpsertRuleV1) GetJSONSchema() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.JSONSchema
+}
+
+func (o *UpsertRuleV1) GetKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Key
+}
+
+func (o *UpsertRuleV1) GetNewKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewKey
+}
+
+func (o *UpsertRuleV1) GetType() UpsertRuleV1Type {
+	if o == nil {
+		return UpsertRuleV1Type("")
+	}
+	return o.Type
+}
+
+func (o *UpsertRuleV1) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}

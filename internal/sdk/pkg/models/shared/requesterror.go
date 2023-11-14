@@ -15,3 +15,38 @@ type RequestError struct {
 	// The type for this error (validation, server, unknown, etc).
 	Type string `json:"type"`
 }
+
+func (o *RequestError) GetData() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+func (o *RequestError) GetField() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Field
+}
+
+func (o *RequestError) GetMessage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Message
+}
+
+func (o *RequestError) GetStatus() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *RequestError) GetType() string {
+	if o == nil {
+		return ""
+	}
+	return o.Type
+}

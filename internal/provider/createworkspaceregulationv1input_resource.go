@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -34,10 +33,10 @@ type CreateWorkspaceRegulationV1InputResource struct {
 
 // CreateWorkspaceRegulationV1InputResourceModel describes the resource data model.
 type CreateWorkspaceRegulationV1InputResourceModel struct {
-	Errors         []RequestError `tfsdk:"errors"`
-	RegulationType types.String   `tfsdk:"regulation_type"`
-	SubjectIds     []types.String `tfsdk:"subject_ids"`
-	SubjectType    types.String   `tfsdk:"subject_type"`
+	Data           *CreateCloudSourceRegulationV1Output `tfsdk:"data"`
+	RegulationType types.String                         `tfsdk:"regulation_type"`
+	SubjectIds     []types.String                       `tfsdk:"subject_ids"`
+	SubjectType    types.String                         `tfsdk:"subject_type"`
 }
 
 func (r *CreateWorkspaceRegulationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -49,42 +48,23 @@ func (r *CreateWorkspaceRegulationV1InputResource) Schema(ctx context.Context, r
 		MarkdownDescription: "CreateWorkspaceRegulationV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
-			"errors": schema.ListNestedAttribute{
+			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
+				Attributes: map[string]schema.Attribute{
+					"regulate_id": schema.StringAttribute{
+						Computed:    true,
+						Description: `The id of the created regulation.`,
 					},
 				},
+				Description: `The output of a create Workspace regulation call.`,
 			},
 			"regulation_type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 				Required: true,
+				MarkdownDescription: `must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]` + "\n" +
+					`The regulation type to create.`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"DELETE_INTERNAL",
@@ -94,8 +74,6 @@ func (r *CreateWorkspaceRegulationV1InputResource) Schema(ctx context.Context, r
 						"UNSUPPRESS",
 					),
 				},
-				MarkdownDescription: `must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]` + "\n" +
-					`The regulation type to create.`,
 			},
 			"subject_ids": schema.ListAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -112,14 +90,14 @@ func (r *CreateWorkspaceRegulationV1InputResource) Schema(ctx context.Context, r
 					stringplanmodifier.RequiresReplace(),
 				},
 				Required: true,
+				MarkdownDescription: `must be one of ["OBJECT_ID", "USER_ID"]` + "\n" +
+					`The subject type. Use ` + "`" + `objectId` + "`" + ` for Cloud Source regulations.`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"OBJECT_ID",
 						"USER_ID",
 					),
 				},
-				MarkdownDescription: `must be one of ["OBJECT_ID", "USER_ID"]` + "\n" +
-					`The subject type. Use ` + "`" + `objectId` + "`" + ` for Cloud Source regulations.`,
 			},
 		},
 	}
@@ -180,11 +158,11 @@ func (r *CreateWorkspaceRegulationV1InputResource) Create(ctx context.Context, r
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

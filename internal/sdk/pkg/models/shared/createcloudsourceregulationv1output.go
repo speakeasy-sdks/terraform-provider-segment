@@ -7,3 +7,10 @@ type CreateCloudSourceRegulationV1Output struct {
 	// The id of the created regulation.
 	RegulateID string `json:"regulateId"`
 }
+
+func (o *CreateCloudSourceRegulationV1Output) GetRegulateID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RegulateID
+}

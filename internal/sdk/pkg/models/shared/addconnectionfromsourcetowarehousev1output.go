@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// AddConnectionFromSourceToWarehouseV1OutputStatus - The status of the connection between the Source and Warehouse.
-type AddConnectionFromSourceToWarehouseV1OutputStatus string
+// Status - The status of the connection between the Source and Warehouse.
+type Status string
 
 const (
-	AddConnectionFromSourceToWarehouseV1OutputStatusConnected    AddConnectionFromSourceToWarehouseV1OutputStatus = "CONNECTED"
-	AddConnectionFromSourceToWarehouseV1OutputStatusNotConnected AddConnectionFromSourceToWarehouseV1OutputStatus = "NOT_CONNECTED"
+	StatusConnected    Status = "CONNECTED"
+	StatusNotConnected Status = "NOT_CONNECTED"
 )
 
-func (e AddConnectionFromSourceToWarehouseV1OutputStatus) ToPointer() *AddConnectionFromSourceToWarehouseV1OutputStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *AddConnectionFromSourceToWarehouseV1OutputStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,15 +28,22 @@ func (e *AddConnectionFromSourceToWarehouseV1OutputStatus) UnmarshalJSON(data []
 	case "CONNECTED":
 		fallthrough
 	case "NOT_CONNECTED":
-		*e = AddConnectionFromSourceToWarehouseV1OutputStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for AddConnectionFromSourceToWarehouseV1OutputStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
 // AddConnectionFromSourceToWarehouseV1Output - Response indicating whether the connection was successful.
 type AddConnectionFromSourceToWarehouseV1Output struct {
 	// The status of the connection between the Source and Warehouse.
-	Status AddConnectionFromSourceToWarehouseV1OutputStatus `json:"status"`
+	Status Status `json:"status"`
+}
+
+func (o *AddConnectionFromSourceToWarehouseV1Output) GetStatus() Status {
+	if o == nil {
+		return Status("")
+	}
+	return o.Status
 }

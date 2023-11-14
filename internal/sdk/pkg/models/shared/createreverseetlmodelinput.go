@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// CreateReverseEtlModelInputScheduleStrategy - Determines the strategy used for triggering syncs, which will be used in
+// ScheduleStrategy - Determines the strategy used for triggering syncs, which will be used in
 // conjunction with scheduleConfig.
-type CreateReverseEtlModelInputScheduleStrategy string
+type ScheduleStrategy string
 
 const (
-	CreateReverseEtlModelInputScheduleStrategyManual       CreateReverseEtlModelInputScheduleStrategy = "MANUAL"
-	CreateReverseEtlModelInputScheduleStrategyPeriodic     CreateReverseEtlModelInputScheduleStrategy = "PERIODIC"
-	CreateReverseEtlModelInputScheduleStrategySpecificDays CreateReverseEtlModelInputScheduleStrategy = "SPECIFIC_DAYS"
+	ScheduleStrategyManual       ScheduleStrategy = "MANUAL"
+	ScheduleStrategyPeriodic     ScheduleStrategy = "PERIODIC"
+	ScheduleStrategySpecificDays ScheduleStrategy = "SPECIFIC_DAYS"
 )
 
-func (e CreateReverseEtlModelInputScheduleStrategy) ToPointer() *CreateReverseEtlModelInputScheduleStrategy {
+func (e ScheduleStrategy) ToPointer() *ScheduleStrategy {
 	return &e
 }
 
-func (e *CreateReverseEtlModelInputScheduleStrategy) UnmarshalJSON(data []byte) error {
+func (e *ScheduleStrategy) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -32,10 +32,10 @@ func (e *CreateReverseEtlModelInputScheduleStrategy) UnmarshalJSON(data []byte) 
 	case "PERIODIC":
 		fallthrough
 	case "SPECIFIC_DAYS":
-		*e = CreateReverseEtlModelInputScheduleStrategy(v)
+		*e = ScheduleStrategy(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateReverseEtlModelInputScheduleStrategy: %v", v)
+		return fmt.Errorf("invalid value for ScheduleStrategy: %v", v)
 	}
 }
 
@@ -59,7 +59,63 @@ type CreateReverseEtlModelInput struct {
 	ScheduleConfig map[string]interface{} `json:"scheduleConfig"`
 	// Determines the strategy used for triggering syncs, which will be used in
 	// conjunction with scheduleConfig.
-	ScheduleStrategy CreateReverseEtlModelInputScheduleStrategy `json:"scheduleStrategy"`
+	ScheduleStrategy ScheduleStrategy `json:"scheduleStrategy"`
 	// Indicates which Source to attach this model to.
 	SourceID string `json:"sourceId"`
+}
+
+func (o *CreateReverseEtlModelInput) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *CreateReverseEtlModelInput) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateReverseEtlModelInput) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateReverseEtlModelInput) GetQuery() string {
+	if o == nil {
+		return ""
+	}
+	return o.Query
+}
+
+func (o *CreateReverseEtlModelInput) GetQueryIdentifierColumn() string {
+	if o == nil {
+		return ""
+	}
+	return o.QueryIdentifierColumn
+}
+
+func (o *CreateReverseEtlModelInput) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.ScheduleConfig
+}
+
+func (o *CreateReverseEtlModelInput) GetScheduleStrategy() ScheduleStrategy {
+	if o == nil {
+		return ScheduleStrategy("")
+	}
+	return o.ScheduleStrategy
+}
+
+func (o *CreateReverseEtlModelInput) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
 }

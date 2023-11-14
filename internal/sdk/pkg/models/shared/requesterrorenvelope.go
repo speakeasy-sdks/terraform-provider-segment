@@ -6,3 +6,10 @@ package shared
 type RequestErrorEnvelope struct {
 	Errors []RequestError `json:"errors"`
 }
+
+func (o *RequestErrorEnvelope) GetErrors() []RequestError {
+	if o == nil {
+		return []RequestError{}
+	}
+	return o.Errors
+}
