@@ -44,3 +44,17 @@ type GroupSubscriptionStatus struct {
 	// The user subscribed, unsubscribed, or on initial status.
 	Status GroupSubscriptionStatusStatus `json:"status"`
 }
+
+func (o *GroupSubscriptionStatus) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GroupSubscriptionStatus) GetStatus() GroupSubscriptionStatusStatus {
+	if o == nil {
+		return GroupSubscriptionStatusStatus("")
+	}
+	return o.Status
+}

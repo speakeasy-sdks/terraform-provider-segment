@@ -5,8 +5,8 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *CreateWarehouseV1InputResourceModel) ToCreateSDKType() *shared.CreateWarehouseV1Input {
@@ -38,32 +38,70 @@ func (r *CreateWarehouseV1InputResourceModel) ToCreateSDKType() *shared.CreateWa
 	return &out
 }
 
-func (r *CreateWarehouseV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
+func (r *CreateWarehouseV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateWarehouseResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateWarehouseV1Output{}
+		r.Data.Warehouse.Enabled = types.BoolValue(resp.Data.Warehouse.Enabled)
+		r.Data.Warehouse.ID = types.StringValue(resp.Data.Warehouse.ID)
+		r.Data.Warehouse.Metadata.Description = types.StringValue(resp.Data.Warehouse.Metadata.Description)
+		r.Data.Warehouse.Metadata.ID = types.StringValue(resp.Data.Warehouse.Metadata.ID)
+		if resp.Data.Warehouse.Metadata.Logos.Alt != nil {
+			r.Data.Warehouse.Metadata.Logos.Alt = types.StringValue(*resp.Data.Warehouse.Metadata.Logos.Alt)
 		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+			r.Data.Warehouse.Metadata.Logos.Alt = types.StringNull()
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
+		r.Data.Warehouse.Metadata.Logos.Default = types.StringValue(resp.Data.Warehouse.Metadata.Logos.Default)
+		if resp.Data.Warehouse.Metadata.Logos.Mark != nil {
+			r.Data.Warehouse.Metadata.Logos.Mark = types.StringValue(*resp.Data.Warehouse.Metadata.Logos.Mark)
 		} else {
-			errors1.Field = types.StringNull()
+			r.Data.Warehouse.Metadata.Logos.Mark = types.StringNull()
 		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
+		r.Data.Warehouse.Metadata.Name = types.StringValue(resp.Data.Warehouse.Metadata.Name)
+		if len(r.Data.Warehouse.Metadata.Options) > len(resp.Data.Warehouse.Metadata.Options) {
+			r.Data.Warehouse.Metadata.Options = r.Data.Warehouse.Metadata.Options[:len(resp.Data.Warehouse.Metadata.Options)]
 		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
+		for optionsCount, optionsItem := range resp.Data.Warehouse.Metadata.Options {
+			var options1 IntegrationOptionBeta
+			if optionsItem.DefaultValue == nil {
+				options1.DefaultValue = types.StringNull()
+			} else {
+				defaultValueResult, _ := json.Marshal(optionsItem.DefaultValue)
+				options1.DefaultValue = types.StringValue(string(defaultValueResult))
+			}
+			if optionsItem.Description != nil {
+				options1.Description = types.StringValue(*optionsItem.Description)
+			} else {
+				options1.Description = types.StringNull()
+			}
+			if optionsItem.Label != nil {
+				options1.Label = types.StringValue(*optionsItem.Label)
+			} else {
+				options1.Label = types.StringNull()
+			}
+			options1.Name = types.StringValue(optionsItem.Name)
+			options1.Required = types.BoolValue(optionsItem.Required)
+			options1.Type = types.StringValue(optionsItem.Type)
+			if optionsCount+1 > len(r.Data.Warehouse.Metadata.Options) {
+				r.Data.Warehouse.Metadata.Options = append(r.Data.Warehouse.Metadata.Options, options1)
+			} else {
+				r.Data.Warehouse.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
+				r.Data.Warehouse.Metadata.Options[optionsCount].Description = options1.Description
+				r.Data.Warehouse.Metadata.Options[optionsCount].Label = options1.Label
+				r.Data.Warehouse.Metadata.Options[optionsCount].Name = options1.Name
+				r.Data.Warehouse.Metadata.Options[optionsCount].Required = options1.Required
+				r.Data.Warehouse.Metadata.Options[optionsCount].Type = options1.Type
+			}
 		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+		r.Data.Warehouse.Metadata.Slug = types.StringValue(resp.Data.Warehouse.Metadata.Slug)
+		if r.Data.Warehouse.Settings == nil && len(resp.Data.Warehouse.Settings) > 0 {
+			r.Data.Warehouse.Settings = make(map[string]types.String)
+			for key, value := range resp.Data.Warehouse.Settings {
+				result, _ := json.Marshal(value)
+				r.Data.Warehouse.Settings[key] = types.StringValue(string(result))
+			}
+		}
+		r.Data.Warehouse.WorkspaceID = types.StringValue(resp.Data.Warehouse.WorkspaceID)
 	}
 }

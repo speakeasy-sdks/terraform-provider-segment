@@ -64,3 +64,52 @@ type RuleV1 struct {
 	// Version of this rule.
 	Version float64 `json:"version"`
 }
+
+func (o *RuleV1) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *RuleV1) GetDeprecatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DeprecatedAt
+}
+
+func (o *RuleV1) GetJSONSchema() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.JSONSchema
+}
+
+func (o *RuleV1) GetKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Key
+}
+
+func (o *RuleV1) GetType() RuleV1Type {
+	if o == nil {
+		return RuleV1Type("")
+	}
+	return o.Type
+}
+
+func (o *RuleV1) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}
+
+func (o *RuleV1) GetVersion() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Version
+}

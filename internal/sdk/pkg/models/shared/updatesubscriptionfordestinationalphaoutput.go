@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription - The Destination subscription.
-type UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription struct {
+// UpdateSubscriptionForDestinationAlphaOutputSubscription - The Destination subscription.
+type UpdateSubscriptionForDestinationAlphaOutputSubscription struct {
 	// The unique identifier for the Destination action to trigger.
 	ActionID string `json:"actionId"`
 	// The URL-friendly key for the associated Destination action.
@@ -25,8 +25,78 @@ type UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription struct {
 	Trigger string `json:"trigger"`
 }
 
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetActionSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionSlug
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetModelID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModelID
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutputSubscription) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}
+
 // UpdateSubscriptionForDestinationAlphaOutput - Returns the updated Destination subscription.
 type UpdateSubscriptionForDestinationAlphaOutput struct {
 	// The Destination subscription.
-	Subscription UpdateSubscriptionForDestinationAlphaOutputDestinationSubscription `json:"subscription"`
+	Subscription UpdateSubscriptionForDestinationAlphaOutputSubscription `json:"subscription"`
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscription() UpdateSubscriptionForDestinationAlphaOutputSubscription {
+	if o == nil {
+		return UpdateSubscriptionForDestinationAlphaOutputSubscription{}
+	}
+	return o.Subscription
 }

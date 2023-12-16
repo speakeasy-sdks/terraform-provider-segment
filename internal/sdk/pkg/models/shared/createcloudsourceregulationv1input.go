@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// CreateCloudSourceRegulationV1InputRegulationType - The regulation type to create.
-type CreateCloudSourceRegulationV1InputRegulationType string
+// RegulationType - The regulation type to create.
+type RegulationType string
 
 const (
-	CreateCloudSourceRegulationV1InputRegulationTypeDeleteInternal     CreateCloudSourceRegulationV1InputRegulationType = "DELETE_INTERNAL"
-	CreateCloudSourceRegulationV1InputRegulationTypeDeleteOnly         CreateCloudSourceRegulationV1InputRegulationType = "DELETE_ONLY"
-	CreateCloudSourceRegulationV1InputRegulationTypeSuppressOnly       CreateCloudSourceRegulationV1InputRegulationType = "SUPPRESS_ONLY"
-	CreateCloudSourceRegulationV1InputRegulationTypeSuppressWithDelete CreateCloudSourceRegulationV1InputRegulationType = "SUPPRESS_WITH_DELETE"
-	CreateCloudSourceRegulationV1InputRegulationTypeUnsuppress         CreateCloudSourceRegulationV1InputRegulationType = "UNSUPPRESS"
+	RegulationTypeDeleteInternal     RegulationType = "DELETE_INTERNAL"
+	RegulationTypeDeleteOnly         RegulationType = "DELETE_ONLY"
+	RegulationTypeSuppressOnly       RegulationType = "SUPPRESS_ONLY"
+	RegulationTypeSuppressWithDelete RegulationType = "SUPPRESS_WITH_DELETE"
+	RegulationTypeUnsuppress         RegulationType = "UNSUPPRESS"
 )
 
-func (e CreateCloudSourceRegulationV1InputRegulationType) ToPointer() *CreateCloudSourceRegulationV1InputRegulationType {
+func (e RegulationType) ToPointer() *RegulationType {
 	return &e
 }
 
-func (e *CreateCloudSourceRegulationV1InputRegulationType) UnmarshalJSON(data []byte) error {
+func (e *RegulationType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,35 +37,35 @@ func (e *CreateCloudSourceRegulationV1InputRegulationType) UnmarshalJSON(data []
 	case "SUPPRESS_WITH_DELETE":
 		fallthrough
 	case "UNSUPPRESS":
-		*e = CreateCloudSourceRegulationV1InputRegulationType(v)
+		*e = RegulationType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateCloudSourceRegulationV1InputRegulationType: %v", v)
+		return fmt.Errorf("invalid value for RegulationType: %v", v)
 	}
 }
 
-// CreateCloudSourceRegulationV1InputSubjectType - The subject type. Must be `objectId` for Cloud Sources.
-type CreateCloudSourceRegulationV1InputSubjectType string
+// SubjectType - The subject type. Must be `objectId` for Cloud Sources.
+type SubjectType string
 
 const (
-	CreateCloudSourceRegulationV1InputSubjectTypeObjectID CreateCloudSourceRegulationV1InputSubjectType = "OBJECT_ID"
+	SubjectTypeObjectID SubjectType = "OBJECT_ID"
 )
 
-func (e CreateCloudSourceRegulationV1InputSubjectType) ToPointer() *CreateCloudSourceRegulationV1InputSubjectType {
+func (e SubjectType) ToPointer() *SubjectType {
 	return &e
 }
 
-func (e *CreateCloudSourceRegulationV1InputSubjectType) UnmarshalJSON(data []byte) error {
+func (e *SubjectType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "OBJECT_ID":
-		*e = CreateCloudSourceRegulationV1InputSubjectType(v)
+		*e = SubjectType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateCloudSourceRegulationV1InputSubjectType: %v", v)
+		return fmt.Errorf("invalid value for SubjectType: %v", v)
 	}
 }
 
@@ -74,11 +74,39 @@ type CreateCloudSourceRegulationV1Input struct {
 	// The Cloud Source collection to regulate.
 	Collection string `json:"collection"`
 	// The regulation type to create.
-	RegulationType CreateCloudSourceRegulationV1InputRegulationType `json:"regulationType"`
+	RegulationType RegulationType `json:"regulationType"`
 	// The list of `userId` or `objectId` values of the subjects to regulate.
 	//
 	// Config API note: equal to `parent` but allows an array.
 	SubjectIds []string `json:"subjectIds"`
 	// The subject type. Must be `objectId` for Cloud Sources.
-	SubjectType CreateCloudSourceRegulationV1InputSubjectType `json:"subjectType"`
+	SubjectType SubjectType `json:"subjectType"`
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetCollection() string {
+	if o == nil {
+		return ""
+	}
+	return o.Collection
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetRegulationType() RegulationType {
+	if o == nil {
+		return RegulationType("")
+	}
+	return o.RegulationType
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetSubjectIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.SubjectIds
+}
+
+func (o *CreateCloudSourceRegulationV1Input) GetSubjectType() SubjectType {
+	if o == nil {
+		return SubjectType("")
+	}
+	return o.SubjectType
 }

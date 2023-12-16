@@ -2,11 +2,8 @@
 
 package shared
 
-// ListUsersV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListUsersV1OutputPaginationOutput struct {
+// ListUsersV1OutputPagination - Information about the pagination of this response.
+type ListUsersV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListUsersV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListUsersV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListUsersV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListUsersV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListUsersV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListUsersV1Output - Returns the list of users.
 type ListUsersV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListUsersV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListUsersV1OutputPagination `json:"pagination"`
 	// The list of users.
 	Users []UserV1 `json:"users"`
+}
+
+func (o *ListUsersV1Output) GetPagination() ListUsersV1OutputPagination {
+	if o == nil {
+		return ListUsersV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListUsersV1Output) GetUsers() []UserV1 {
+	if o == nil {
+		return []UserV1{}
+	}
+	return o.Users
 }

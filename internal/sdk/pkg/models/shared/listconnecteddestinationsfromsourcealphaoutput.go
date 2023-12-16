@@ -2,11 +2,8 @@
 
 package shared
 
-// ListConnectedDestinationsFromSourceAlphaOutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListConnectedDestinationsFromSourceAlphaOutputPaginationOutput struct {
+// ListConnectedDestinationsFromSourceAlphaOutputPagination - Information about the pagination of this response.
+type ListConnectedDestinationsFromSourceAlphaOutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListConnectedDestinationsFromSourceAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListConnectedDestinationsFromSourceAlphaOutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListConnectedDestinationsFromSourceAlphaOutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListConnectedDestinationsFromSourceAlphaOutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListConnectedDestinationsFromSourceAlphaOutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListConnectedDestinationsFromSourceAlphaOutput - Returns a list of Destinations connected to a Source.
 type ListConnectedDestinationsFromSourceAlphaOutput struct {
 	// A list that contains the Destinations connected to the Source.
 	Destinations []DestinationV1 `json:"destinations"`
 	// Information about the pagination of this response.
-	Pagination ListConnectedDestinationsFromSourceAlphaOutputPaginationOutput `json:"pagination"`
+	Pagination ListConnectedDestinationsFromSourceAlphaOutputPagination `json:"pagination"`
+}
+
+func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetDestinations() []DestinationV1 {
+	if o == nil {
+		return []DestinationV1{}
+	}
+	return o.Destinations
+}
+
+func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPagination() ListConnectedDestinationsFromSourceAlphaOutputPagination {
+	if o == nil {
+		return ListConnectedDestinationsFromSourceAlphaOutputPagination{}
+	}
+	return o.Pagination
 }

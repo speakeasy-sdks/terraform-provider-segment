@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateTransformationV1OutputTransformationV1 - Represents a Transformation.
-type UpdateTransformationV1OutputTransformationV1 struct {
+// UpdateTransformationV1OutputTransformation - The updated Transformation.
+type UpdateTransformationV1OutputTransformation struct {
 	// The optional Destination metadata associated with the Transformation.
 	DestinationMetadataID *string `json:"destinationMetadataId,omitempty"`
 	// If the Transformation is enabled.
@@ -31,8 +31,85 @@ type UpdateTransformationV1OutputTransformationV1 struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *UpdateTransformationV1OutputTransformation) GetDestinationMetadataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationMetadataID
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetFqlDefinedProperties() []FQLDefinedPropertyV1 {
+	if o == nil {
+		return nil
+	}
+	return o.FqlDefinedProperties
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetNewEventName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewEventName
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetPropertyRenames() []PropertyRenameV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyRenames
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetPropertyValueTransformations() []PropertyValueTransformationV1 {
+	if o == nil {
+		return nil
+	}
+	return o.PropertyValueTransformations
+}
+
+func (o *UpdateTransformationV1OutputTransformation) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // UpdateTransformationV1Output - The output of an updated Transformation.
 type UpdateTransformationV1Output struct {
 	// The updated Transformation.
-	Transformation UpdateTransformationV1OutputTransformationV1 `json:"transformation"`
+	Transformation UpdateTransformationV1OutputTransformation `json:"transformation"`
+}
+
+func (o *UpdateTransformationV1Output) GetTransformation() UpdateTransformationV1OutputTransformation {
+	if o == nil {
+		return UpdateTransformationV1OutputTransformation{}
+	}
+	return o.Transformation
 }

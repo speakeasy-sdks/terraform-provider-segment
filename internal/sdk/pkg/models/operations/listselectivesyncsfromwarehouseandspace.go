@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
 type ListSelectiveSyncsFromWarehouseAndSpaceRequest struct {
@@ -16,18 +16,84 @@ type ListSelectiveSyncsFromWarehouseAndSpaceRequest struct {
 	WarehouseID string                 `pathParam:"style=simple,explode=false,name=warehouseId"`
 }
 
-// ListSelectiveSyncsFromWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSON - OK
-type ListSelectiveSyncsFromWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceRequest) GetPagination() shared.PaginationInput {
+	if o == nil {
+		return shared.PaginationInput{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceRequest) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceRequest) GetWarehouseID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WarehouseID
+}
+
+// ListSelectiveSyncsFromWarehouseAndSpaceResponseBody - OK
+type ListSelectiveSyncsFromWarehouseAndSpaceResponseBody struct {
 	// Results containing the Selective Sync configuration for a Space Warehouse Connection.
 	Data *shared.ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput `json:"data,omitempty"`
 }
 
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceResponseBody) GetData() *shared.ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type ListSelectiveSyncsFromWarehouseAndSpaceResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
-	ListSelectiveSyncsFromWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSONObject *ListSelectiveSyncsFromWarehouseAndSpace200ApplicationVndSegmentV1alphaPlusJSON
+	Object *ListSelectiveSyncsFromWarehouseAndSpaceResponseBody
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceResponse) GetObject() *ListSelectiveSyncsFromWarehouseAndSpaceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.Object
 }

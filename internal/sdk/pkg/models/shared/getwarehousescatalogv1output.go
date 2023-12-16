@@ -2,11 +2,8 @@
 
 package shared
 
-// GetWarehousesCatalogV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type GetWarehousesCatalogV1OutputPaginationOutput struct {
+// GetWarehousesCatalogV1OutputPagination - Information about the pagination of this response.
+type GetWarehousesCatalogV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type GetWarehousesCatalogV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetWarehousesCatalogV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetWarehousesCatalogV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetWarehousesCatalogV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetWarehousesCatalogV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetWarehousesCatalogV1Output - Returns a list of all Warehouse catalog items contained within a given page.
 type GetWarehousesCatalogV1Output struct {
 	// Information about the pagination of this response.
-	Pagination GetWarehousesCatalogV1OutputPaginationOutput `json:"pagination"`
+	Pagination GetWarehousesCatalogV1OutputPagination `json:"pagination"`
 	// All Warehouse catalog items contained within the requested page.
 	WarehousesCatalog []WarehouseMetadataV1 `json:"warehousesCatalog"`
+}
+
+func (o *GetWarehousesCatalogV1Output) GetPagination() GetWarehousesCatalogV1OutputPagination {
+	if o == nil {
+		return GetWarehousesCatalogV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *GetWarehousesCatalogV1Output) GetWarehousesCatalog() []WarehouseMetadataV1 {
+	if o == nil {
+		return []WarehouseMetadataV1{}
+	}
+	return o.WarehousesCatalog
 }

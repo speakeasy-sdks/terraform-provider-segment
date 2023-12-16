@@ -7,8 +7,8 @@ import (
 	"fmt"
 )
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1LogosBeta - Represents a logo.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1LogosBeta struct {
+// GetDestinationV1OutputLogos - The Destination's logos.
+type GetDestinationV1OutputLogos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -17,24 +17,45 @@ type GetDestinationV1OutputDestinationV1DestinationMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1Status - Support status of the Destination.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1Status string
+func (o *GetDestinationV1OutputLogos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *GetDestinationV1OutputLogos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *GetDestinationV1OutputLogos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// GetDestinationV1OutputStatus - Support status of the Destination.
+type GetDestinationV1OutputStatus string
 
 const (
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusDeprecated       GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "DEPRECATED"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusPrivateBeta      GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "PRIVATE_BETA"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusPrivateBuilding  GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "PRIVATE_BUILDING"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusPrivateSubmitted GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "PRIVATE_SUBMITTED"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusPublic           GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "PUBLIC"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusPublicBeta       GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "PUBLIC_BETA"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1StatusUnavailable      GetDestinationV1OutputDestinationV1DestinationMetadataV1Status = "UNAVAILABLE"
+	GetDestinationV1OutputStatusDeprecated       GetDestinationV1OutputStatus = "DEPRECATED"
+	GetDestinationV1OutputStatusPrivateBeta      GetDestinationV1OutputStatus = "PRIVATE_BETA"
+	GetDestinationV1OutputStatusPrivateBuilding  GetDestinationV1OutputStatus = "PRIVATE_BUILDING"
+	GetDestinationV1OutputStatusPrivateSubmitted GetDestinationV1OutputStatus = "PRIVATE_SUBMITTED"
+	GetDestinationV1OutputStatusPublic           GetDestinationV1OutputStatus = "PUBLIC"
+	GetDestinationV1OutputStatusPublicBeta       GetDestinationV1OutputStatus = "PUBLIC_BETA"
+	GetDestinationV1OutputStatusUnavailable      GetDestinationV1OutputStatus = "UNAVAILABLE"
 )
 
-func (e GetDestinationV1OutputDestinationV1DestinationMetadataV1Status) ToPointer() *GetDestinationV1OutputDestinationV1DestinationMetadataV1Status {
+func (e GetDestinationV1OutputStatus) ToPointer() *GetDestinationV1OutputStatus {
 	return &e
 }
 
-func (e *GetDestinationV1OutputDestinationV1DestinationMetadataV1Status) UnmarshalJSON(data []byte) error {
+func (e *GetDestinationV1OutputStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -53,30 +74,30 @@ func (e *GetDestinationV1OutputDestinationV1DestinationMetadataV1Status) Unmarsh
 	case "PUBLIC_BETA":
 		fallthrough
 	case "UNAVAILABLE":
-		*e = GetDestinationV1OutputDestinationV1DestinationMetadataV1Status(v)
+		*e = GetDestinationV1OutputStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetDestinationV1OutputDestinationV1DestinationMetadataV1Status: %v", v)
+		return fmt.Errorf("invalid value for GetDestinationV1OutputStatus: %v", v)
 	}
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances - This Destination's support level for cloud mode instances.
+// GetDestinationV1OutputCloudModeInstances - This Destination's support level for cloud mode instances.
 // The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances string
+type GetDestinationV1OutputCloudModeInstances string
 
 const (
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstancesZero     GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances = "0"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstancesOne      GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances = "1"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstancesMultiple GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances = "MULTIPLE"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstancesNone     GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances = "NONE"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstancesSingle   GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances = "SINGLE"
+	GetDestinationV1OutputCloudModeInstancesZero     GetDestinationV1OutputCloudModeInstances = "0"
+	GetDestinationV1OutputCloudModeInstancesOne      GetDestinationV1OutputCloudModeInstances = "1"
+	GetDestinationV1OutputCloudModeInstancesMultiple GetDestinationV1OutputCloudModeInstances = "MULTIPLE"
+	GetDestinationV1OutputCloudModeInstancesNone     GetDestinationV1OutputCloudModeInstances = "NONE"
+	GetDestinationV1OutputCloudModeInstancesSingle   GetDestinationV1OutputCloudModeInstances = "SINGLE"
 )
 
-func (e GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances) ToPointer() *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances {
+func (e GetDestinationV1OutputCloudModeInstances) ToPointer() *GetDestinationV1OutputCloudModeInstances {
 	return &e
 }
 
-func (e *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances) UnmarshalJSON(data []byte) error {
+func (e *GetDestinationV1OutputCloudModeInstances) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -91,30 +112,30 @@ func (e *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMeta
 	case "NONE":
 		fallthrough
 	case "SINGLE":
-		*e = GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances(v)
+		*e = GetDestinationV1OutputCloudModeInstances(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances: %v", v)
+		return fmt.Errorf("invalid value for GetDestinationV1OutputCloudModeInstances: %v", v)
 	}
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances - This Destination's support level for device mode instances.
+// GetDestinationV1OutputDeviceModeInstances - This Destination's support level for device mode instances.
 // Support for multiple device mode instances is currently not planned.
 // The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances string
+type GetDestinationV1OutputDeviceModeInstances string
 
 const (
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstancesZero   GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances = "0"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstancesOne    GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances = "1"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstancesNone   GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances = "NONE"
-	GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstancesSingle GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances = "SINGLE"
+	GetDestinationV1OutputDeviceModeInstancesZero   GetDestinationV1OutputDeviceModeInstances = "0"
+	GetDestinationV1OutputDeviceModeInstancesOne    GetDestinationV1OutputDeviceModeInstances = "1"
+	GetDestinationV1OutputDeviceModeInstancesNone   GetDestinationV1OutputDeviceModeInstances = "NONE"
+	GetDestinationV1OutputDeviceModeInstancesSingle GetDestinationV1OutputDeviceModeInstances = "SINGLE"
 )
 
-func (e GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances) ToPointer() *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances {
+func (e GetDestinationV1OutputDeviceModeInstances) ToPointer() *GetDestinationV1OutputDeviceModeInstances {
 	return &e
 }
 
-func (e *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances) UnmarshalJSON(data []byte) error {
+func (e *GetDestinationV1OutputDeviceModeInstances) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -127,32 +148,71 @@ func (e *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMeta
 	case "NONE":
 		fallthrough
 	case "SINGLE":
-		*e = GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances(v)
+		*e = GetDestinationV1OutputDeviceModeInstances(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances: %v", v)
+		return fmt.Errorf("invalid value for GetDestinationV1OutputDeviceModeInstances: %v", v)
 	}
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1 - Represents features that a given Destination supports.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1 struct {
+// GetDestinationV1OutputSupportedFeatures - Features that this Destination supports.
+//
+// Config API note: holds `browserUnbundling` fields.
+type GetDestinationV1OutputSupportedFeatures struct {
 	// Whether this Destination supports browser unbundling.
 	BrowserUnbundling *bool `json:"browserUnbundling,omitempty"`
 	// Whether this Destination supports public browser unbundling.
 	BrowserUnbundlingPublic *bool `json:"browserUnbundlingPublic,omitempty"`
 	// This Destination's support level for cloud mode instances.
 	// The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.
-	CloudModeInstances *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1CloudModeInstances `json:"cloudModeInstances,omitempty"`
+	CloudModeInstances *GetDestinationV1OutputCloudModeInstances `json:"cloudModeInstances,omitempty"`
 	// This Destination's support level for device mode instances.
 	// Support for multiple device mode instances is currently not planned.
 	// The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.
-	DeviceModeInstances *GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1DeviceModeInstances `json:"deviceModeInstances,omitempty"`
+	DeviceModeInstances *GetDestinationV1OutputDeviceModeInstances `json:"deviceModeInstances,omitempty"`
 	// Whether this Destination supports replays.
 	Replay *bool `json:"replay,omitempty"`
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 - Represents methods that a given Destination supports.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 struct {
+func (o *GetDestinationV1OutputSupportedFeatures) GetBrowserUnbundling() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.BrowserUnbundling
+}
+
+func (o *GetDestinationV1OutputSupportedFeatures) GetBrowserUnbundlingPublic() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.BrowserUnbundlingPublic
+}
+
+func (o *GetDestinationV1OutputSupportedFeatures) GetCloudModeInstances() *GetDestinationV1OutputCloudModeInstances {
+	if o == nil {
+		return nil
+	}
+	return o.CloudModeInstances
+}
+
+func (o *GetDestinationV1OutputSupportedFeatures) GetDeviceModeInstances() *GetDestinationV1OutputDeviceModeInstances {
+	if o == nil {
+		return nil
+	}
+	return o.DeviceModeInstances
+}
+
+func (o *GetDestinationV1OutputSupportedFeatures) GetReplay() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Replay
+}
+
+// GetDestinationV1OutputSupportedMethods - Methods that this Destination supports.
+//
+// Config API note: equal to `methods`.
+type GetDestinationV1OutputSupportedMethods struct {
 	// Identifies if the Destination supports the `alias` method.
 	Alias *bool `json:"alias,omitempty"`
 	// Identifies if the Destination supports the `group` method.
@@ -165,8 +225,45 @@ type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadata
 	Track *bool `json:"track,omitempty"`
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 - Represents platforms that a given Destination supports.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 struct {
+func (o *GetDestinationV1OutputSupportedMethods) GetAlias() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Alias
+}
+
+func (o *GetDestinationV1OutputSupportedMethods) GetGroup() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Group
+}
+
+func (o *GetDestinationV1OutputSupportedMethods) GetIdentify() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Identify
+}
+
+func (o *GetDestinationV1OutputSupportedMethods) GetPageview() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Pageview
+}
+
+func (o *GetDestinationV1OutputSupportedMethods) GetTrack() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Track
+}
+
+// GetDestinationV1OutputSupportedPlatforms - Platforms from which the Destination receives events.
+//
+// Config API note: equal to `platforms`.
+type GetDestinationV1OutputSupportedPlatforms struct {
 	// Whether this Destination supports browser events.
 	Browser *bool `json:"browser,omitempty"`
 	// Whether this Destination supports mobile events.
@@ -175,10 +272,29 @@ type GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadata
 	Server *bool `json:"server,omitempty"`
 }
 
-// GetDestinationV1OutputDestinationV1DestinationMetadataV1 - Represents a Destination within Segment.
-//
-// A Destination is a target for Segment to forward data to, and represents a tool or storage Destination.
-type GetDestinationV1OutputDestinationV1DestinationMetadataV1 struct {
+func (o *GetDestinationV1OutputSupportedPlatforms) GetBrowser() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Browser
+}
+
+func (o *GetDestinationV1OutputSupportedPlatforms) GetMobile() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Mobile
+}
+
+func (o *GetDestinationV1OutputSupportedPlatforms) GetServer() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Server
+}
+
+// GetDestinationV1OutputMetadata - The metadata of the Destination of which this Destination is an instance of. For example, Google Analytics or Amplitude.
+type GetDestinationV1OutputMetadata struct {
 	// Actions available for the Destination.
 	Actions []DestinationMetadataActionV1 `json:"actions"`
 	// A list of categories with which the Destination is associated.
@@ -194,7 +310,7 @@ type GetDestinationV1OutputDestinationV1DestinationMetadataV1 struct {
 	// Config API note: analogous to `name`.
 	ID string `json:"id"`
 	// The Destination's logos.
-	Logos GetDestinationV1OutputDestinationV1DestinationMetadataV1LogosBeta `json:"logos"`
+	Logos GetDestinationV1OutputLogos `json:"logos"`
 	// The user-friendly name of the Destination.
 	//
 	// Config API note: equal to `displayName`.
@@ -212,33 +328,167 @@ type GetDestinationV1OutputDestinationV1DestinationMetadataV1 struct {
 	// The slug used to identify the Destination in the Segment app.
 	Slug string `json:"slug"`
 	// Support status of the Destination.
-	Status GetDestinationV1OutputDestinationV1DestinationMetadataV1Status `json:"status"`
+	Status GetDestinationV1OutputStatus `json:"status"`
 	// Features that this Destination supports.
 	//
 	// Config API note: holds `browserUnbundling` fields.
-	SupportedFeatures GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataFeaturesV1 `json:"supportedFeatures"`
+	SupportedFeatures GetDestinationV1OutputSupportedFeatures `json:"supportedFeatures"`
 	// Methods that this Destination supports.
 	//
 	// Config API note: equal to `methods`.
-	SupportedMethods GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataMethodsV1 `json:"supportedMethods"`
+	SupportedMethods GetDestinationV1OutputSupportedMethods `json:"supportedMethods"`
 	// Platforms from which the Destination receives events.
 	//
 	// Config API note: equal to `platforms`.
-	SupportedPlatforms GetDestinationV1OutputDestinationV1DestinationMetadataV1DestinationMetadataPlatformsV1 `json:"supportedPlatforms"`
+	SupportedPlatforms GetDestinationV1OutputSupportedPlatforms `json:"supportedPlatforms"`
 	// A list of supported regions for this Destination.
 	SupportedRegions []string `json:"supportedRegions,omitempty"`
 	// A website URL for this Destination.
 	Website string `json:"website"`
 }
 
-// GetDestinationV1OutputDestinationV1 - Business tools or apps that you can connect to the data flowing through Segment.
-//
-// This is equal to the Destination object in Config API, with the following fields omitted:
-// - catalogId
-// - createTime
-// - updateTime
-// - connectionMode.
-type GetDestinationV1OutputDestinationV1 struct {
+func (o *GetDestinationV1OutputMetadata) GetActions() []DestinationMetadataActionV1 {
+	if o == nil {
+		return []DestinationMetadataActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *GetDestinationV1OutputMetadata) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *GetDestinationV1OutputMetadata) GetComponents() []DestinationMetadataComponentV1 {
+	if o == nil {
+		return []DestinationMetadataComponentV1{}
+	}
+	return o.Components
+}
+
+func (o *GetDestinationV1OutputMetadata) GetContacts() []Contact {
+	if o == nil {
+		return nil
+	}
+	return o.Contacts
+}
+
+func (o *GetDestinationV1OutputMetadata) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *GetDestinationV1OutputMetadata) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetDestinationV1OutputMetadata) GetLogos() GetDestinationV1OutputLogos {
+	if o == nil {
+		return GetDestinationV1OutputLogos{}
+	}
+	return o.Logos
+}
+
+func (o *GetDestinationV1OutputMetadata) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetDestinationV1OutputMetadata) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *GetDestinationV1OutputMetadata) GetPartnerOwned() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.PartnerOwned
+}
+
+func (o *GetDestinationV1OutputMetadata) GetPresets() []DestinationMetadataSubscriptionPresetV1 {
+	if o == nil {
+		return []DestinationMetadataSubscriptionPresetV1{}
+	}
+	return o.Presets
+}
+
+func (o *GetDestinationV1OutputMetadata) GetPreviousNames() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.PreviousNames
+}
+
+func (o *GetDestinationV1OutputMetadata) GetRegionEndpoints() []string {
+	if o == nil {
+		return nil
+	}
+	return o.RegionEndpoints
+}
+
+func (o *GetDestinationV1OutputMetadata) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *GetDestinationV1OutputMetadata) GetStatus() GetDestinationV1OutputStatus {
+	if o == nil {
+		return GetDestinationV1OutputStatus("")
+	}
+	return o.Status
+}
+
+func (o *GetDestinationV1OutputMetadata) GetSupportedFeatures() GetDestinationV1OutputSupportedFeatures {
+	if o == nil {
+		return GetDestinationV1OutputSupportedFeatures{}
+	}
+	return o.SupportedFeatures
+}
+
+func (o *GetDestinationV1OutputMetadata) GetSupportedMethods() GetDestinationV1OutputSupportedMethods {
+	if o == nil {
+		return GetDestinationV1OutputSupportedMethods{}
+	}
+	return o.SupportedMethods
+}
+
+func (o *GetDestinationV1OutputMetadata) GetSupportedPlatforms() GetDestinationV1OutputSupportedPlatforms {
+	if o == nil {
+		return GetDestinationV1OutputSupportedPlatforms{}
+	}
+	return o.SupportedPlatforms
+}
+
+func (o *GetDestinationV1OutputMetadata) GetSupportedRegions() []string {
+	if o == nil {
+		return nil
+	}
+	return o.SupportedRegions
+}
+
+func (o *GetDestinationV1OutputMetadata) GetWebsite() string {
+	if o == nil {
+		return ""
+	}
+	return o.Website
+}
+
+// GetDestinationV1OutputDestination - The Destination looked up.
+type GetDestinationV1OutputDestination struct {
 	// Whether this instance of a Destination receives data.
 	Enabled bool `json:"enabled"`
 	// The unique identifier of this instance of a Destination.
@@ -246,7 +496,7 @@ type GetDestinationV1OutputDestinationV1 struct {
 	// Config API note: analogous to `name`.
 	ID string `json:"id"`
 	// The metadata of the Destination of which this Destination is an instance of. For example, Google Analytics or Amplitude.
-	Metadata GetDestinationV1OutputDestinationV1DestinationMetadataV1 `json:"metadata"`
+	Metadata GetDestinationV1OutputMetadata `json:"metadata"`
 	// The name of this instance of a Destination.
 	//
 	// Config API note: equal to `displayName`.
@@ -261,8 +511,57 @@ type GetDestinationV1OutputDestinationV1 struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *GetDestinationV1OutputDestination) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetDestinationV1OutputDestination) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetDestinationV1OutputDestination) GetMetadata() GetDestinationV1OutputMetadata {
+	if o == nil {
+		return GetDestinationV1OutputMetadata{}
+	}
+	return o.Metadata
+}
+
+func (o *GetDestinationV1OutputDestination) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *GetDestinationV1OutputDestination) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *GetDestinationV1OutputDestination) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // GetDestinationV1Output - Returns a single Destination by its id.
 type GetDestinationV1Output struct {
 	// The Destination looked up.
-	Destination GetDestinationV1OutputDestinationV1 `json:"destination"`
+	Destination GetDestinationV1OutputDestination `json:"destination"`
+}
+
+func (o *GetDestinationV1Output) GetDestination() GetDestinationV1OutputDestination {
+	if o == nil {
+		return GetDestinationV1OutputDestination{}
+	}
+	return o.Destination
 }

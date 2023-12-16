@@ -2,8 +2,8 @@
 
 package shared
 
-// ReplaceUsersInUserGroupV1OutputUserGroupV1 - A set of users with a set of shared permissions.
-type ReplaceUsersInUserGroupV1OutputUserGroupV1 struct {
+// ReplaceUsersInUserGroupV1OutputUserGroup - The updated the user group.
+type ReplaceUsersInUserGroupV1OutputUserGroup struct {
 	// The id of the user group.
 	ID string `json:"id"`
 	// The number of members in the user group.
@@ -14,8 +14,43 @@ type ReplaceUsersInUserGroupV1OutputUserGroupV1 struct {
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
 
+func (o *ReplaceUsersInUserGroupV1OutputUserGroup) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ReplaceUsersInUserGroupV1OutputUserGroup) GetMemberCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.MemberCount
+}
+
+func (o *ReplaceUsersInUserGroupV1OutputUserGroup) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *ReplaceUsersInUserGroupV1OutputUserGroup) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}
+
 // ReplaceUsersInUserGroupV1Output - Returns the updated user group.
 type ReplaceUsersInUserGroupV1Output struct {
 	// The updated the user group.
-	UserGroup ReplaceUsersInUserGroupV1OutputUserGroupV1 `json:"userGroup"`
+	UserGroup ReplaceUsersInUserGroupV1OutputUserGroup `json:"userGroup"`
+}
+
+func (o *ReplaceUsersInUserGroupV1Output) GetUserGroup() ReplaceUsersInUserGroupV1OutputUserGroup {
+	if o == nil {
+		return ReplaceUsersInUserGroupV1OutputUserGroup{}
+	}
+	return o.UserGroup
 }

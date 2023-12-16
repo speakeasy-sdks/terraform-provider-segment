@@ -23,3 +23,59 @@ type SyncV1 struct {
 	// The status of the sync.
 	Status string `json:"status"`
 }
+
+func (o *SyncV1) GetCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Count
+}
+
+func (o *SyncV1) GetDuration() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Duration
+}
+
+func (o *SyncV1) GetEnd() *string {
+	if o == nil {
+		return nil
+	}
+	return o.End
+}
+
+func (o *SyncV1) GetHumanDuration() string {
+	if o == nil {
+		return ""
+	}
+	return o.HumanDuration
+}
+
+func (o *SyncV1) GetNotices() []SyncNoticeV1 {
+	if o == nil {
+		return []SyncNoticeV1{}
+	}
+	return o.Notices
+}
+
+func (o *SyncV1) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *SyncV1) GetStart() string {
+	if o == nil {
+		return ""
+	}
+	return o.Start
+}
+
+func (o *SyncV1) GetStatus() string {
+	if o == nil {
+		return ""
+	}
+	return o.Status
+}

@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary - Defines a Computed trait.
-type UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary struct {
+// UpdateComputedTraitForSpaceAlphaOutputComputedTrait - The computed trait summary output.
+type UpdateComputedTraitForSpaceAlphaOutputComputedTrait struct {
 	// The timestamp of the computed trait's creation.
 	CreatedAt string `json:"createdAt"`
 	// User id who created the computed trait.
@@ -26,8 +26,85 @@ type UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary struct {
 	UpdatedBy string `json:"updatedBy"`
 }
 
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutputComputedTrait) GetUpdatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedBy
+}
+
 // UpdateComputedTraitForSpaceAlphaOutput - Computed Trait output for get and update.
 type UpdateComputedTraitForSpaceAlphaOutput struct {
 	// The computed trait summary output.
-	ComputedTrait UpdateComputedTraitForSpaceAlphaOutputComputedTraitSummary `json:"computedTrait"`
+	ComputedTrait UpdateComputedTraitForSpaceAlphaOutputComputedTrait `json:"computedTrait"`
+}
+
+func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTrait() UpdateComputedTraitForSpaceAlphaOutputComputedTrait {
+	if o == nil {
+		return UpdateComputedTraitForSpaceAlphaOutputComputedTrait{}
+	}
+	return o.ComputedTrait
 }

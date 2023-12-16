@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -17,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
+	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -35,8 +35,8 @@ type CreateSourceV1InputResource struct {
 
 // CreateSourceV1InputResourceModel describes the resource data model.
 type CreateSourceV1InputResourceModel struct {
+	Data       *CreateSourceV1Output   `tfsdk:"data"`
 	Enabled    types.Bool              `tfsdk:"enabled"`
-	Errors     []RequestError          `tfsdk:"errors"`
 	MetadataID types.String            `tfsdk:"metadata_id"`
 	Settings   map[string]types.String `tfsdk:"settings"`
 	Slug       types.String            `tfsdk:"slug"`
@@ -51,43 +51,180 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 		MarkdownDescription: "CreateSourceV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"source": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"enabled": schema.BoolAttribute{
+								Computed:    true,
+								Description: `Enable to receive data from the Source.`,
+							},
+							"id": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The id of the Source.` + "\n" +
+									`` + "\n" +
+									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
+							},
+							"labels": schema.ListNestedAttribute{
+								Computed: true,
+								NestedObject: schema.NestedAttributeObject{
+									Attributes: map[string]schema.Attribute{
+										"description": schema.StringAttribute{
+											Computed:    true,
+											Description: `An optional description of the purpose of this label.`,
+										},
+										"key": schema.StringAttribute{
+											Computed:    true,
+											Description: `The key that represents the name of this label.`,
+										},
+										"value": schema.StringAttribute{
+											Computed:    true,
+											Description: `The value associated with the key of this label.`,
+										},
+									},
+								},
+								Description: `A list of labels applied to the Source.`,
+							},
+							"metadata": schema.SingleNestedAttribute{
+								Computed: true,
+								Attributes: map[string]schema.Attribute{
+									"categories": schema.ListAttribute{
+										Computed:    true,
+										ElementType: types.StringType,
+										Description: `A list of categories this Source belongs to.`,
+									},
+									"description": schema.StringAttribute{
+										Computed:    true,
+										Description: `The description of this Source.`,
+									},
+									"id": schema.StringAttribute{
+										Computed: true,
+										MarkdownDescription: `The id for this Source metadata in the Segment catalog.` + "\n" +
+											`` + "\n" +
+											`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
+									},
+									"is_cloud_event_source": schema.BoolAttribute{
+										Computed:    true,
+										Description: `True if this is a Cloud Event Source.`,
+									},
+									"logos": schema.SingleNestedAttribute{
+										Computed: true,
+										Attributes: map[string]schema.Attribute{
+											"alt": schema.StringAttribute{
+												Computed:    true,
+												Description: `The alternative text for this logo.`,
+											},
+											"default": schema.StringAttribute{
+												Computed:    true,
+												Description: `The default URL for this logo.`,
+											},
+											"mark": schema.StringAttribute{
+												Computed:    true,
+												Description: `The logo mark.`,
+											},
+										},
+										Description: `The logos for this Source.`,
+									},
+									"name": schema.StringAttribute{
+										Computed: true,
+										MarkdownDescription: `The user-friendly name of this Source.` + "\n" +
+											`` + "\n" +
+											`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
+									},
+									"options": schema.ListNestedAttribute{
+										Computed: true,
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"default_value": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `Parsed as JSON.` + "\n" +
+														`An optional default value for the field.`,
+													Validators: []validator.String{
+														validators.IsValidJSON(),
+													},
+												},
+												"description": schema.StringAttribute{
+													Computed:    true,
+													Description: `An optional short text description of the field.`,
+												},
+												"label": schema.StringAttribute{
+													Computed:    true,
+													Description: `An optional label for this field.`,
+												},
+												"name": schema.StringAttribute{
+													Computed:    true,
+													Description: `The name identifying this option in the context of a Segment Integration.`,
+												},
+												"required": schema.BoolAttribute{
+													Computed:    true,
+													Description: `Whether this is a required option when setting up the Integration.`,
+												},
+												"type": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `Defines the type for this option in the schema. Types are most commonly strings, but may also represent other` + "\n" +
+														`primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.`,
+												},
+											},
+										},
+										Description: `Options for this Source.`,
+									},
+									"slug": schema.StringAttribute{
+										Computed: true,
+										MarkdownDescription: `The slug that identifies this Source in the Segment app.` + "\n" +
+											`` + "\n" +
+											`Config API note: equal to ` + "`" + `name` + "`" + `.`,
+									},
+								},
+								MarkdownDescription: `The metadata for the Source.` + "\n" +
+									`` + "\n" +
+									`Config API note: includes ` + "`" + `catalogName` + "`" + ` and ` + "`" + `catalogId` + "`" + `.`,
+							},
+							"name": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The name of the Source.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
+							},
+							"settings": schema.MapAttribute{
+								Computed:    true,
+								ElementType: types.StringType,
+								Description: `The settings associated with the Source.`,
+								Validators: []validator.Map{
+									mapvalidator.ValueStringsAre(validators.IsValidJSON()),
+								},
+							},
+							"slug": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The slug used to identify the Source in the Segment app.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `name` + "`" + `.`,
+							},
+							"workspace_id": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The id of the Workspace that owns the Source.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `parent` + "`" + `.`,
+							},
+							"write_keys": schema.ListAttribute{
+								Computed:    true,
+								ElementType: types.StringType,
+								MarkdownDescription: `The write keys used to send data from the Source. This field is left empty when the current token does not have the` + "\n" +
+									`'source admin' permission.`,
+							},
+						},
+						Description: `The newly created Source.`,
+					},
+				},
+				Description: `Returns a newly created Source.`,
+			},
 			"enabled": schema.BoolAttribute{
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplace(),
 				},
 				Required:    true,
 				Description: `Enable to allow this Source to send data. Defaults to true.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -104,10 +241,10 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 				},
 				Optional:    true,
 				ElementType: types.StringType,
+				Description: `A key-value object that contains instance-specific settings for the Source.`,
 				Validators: []validator.Map{
 					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 				},
-				Description: `A key-value object that contains instance-specific settings for the Source.`,
 			},
 			"slug": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -175,11 +312,11 @@ func (r *CreateSourceV1InputResource) Create(ctx context.Context, req resource.C
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

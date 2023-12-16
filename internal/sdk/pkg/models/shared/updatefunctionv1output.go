@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// UpdateFunctionV1OutputFunctionV1ResourceType - The Function type.
+// UpdateFunctionV1OutputResourceType - The Function type.
 //
 // Config API note: equal to `type`.
-type UpdateFunctionV1OutputFunctionV1ResourceType string
+type UpdateFunctionV1OutputResourceType string
 
 const (
-	UpdateFunctionV1OutputFunctionV1ResourceTypeDestination       UpdateFunctionV1OutputFunctionV1ResourceType = "DESTINATION"
-	UpdateFunctionV1OutputFunctionV1ResourceTypeInsertDestination UpdateFunctionV1OutputFunctionV1ResourceType = "INSERT_DESTINATION"
-	UpdateFunctionV1OutputFunctionV1ResourceTypeSource            UpdateFunctionV1OutputFunctionV1ResourceType = "SOURCE"
+	UpdateFunctionV1OutputResourceTypeDestination       UpdateFunctionV1OutputResourceType = "DESTINATION"
+	UpdateFunctionV1OutputResourceTypeInsertDestination UpdateFunctionV1OutputResourceType = "INSERT_DESTINATION"
+	UpdateFunctionV1OutputResourceTypeSource            UpdateFunctionV1OutputResourceType = "SOURCE"
 )
 
-func (e UpdateFunctionV1OutputFunctionV1ResourceType) ToPointer() *UpdateFunctionV1OutputFunctionV1ResourceType {
+func (e UpdateFunctionV1OutputResourceType) ToPointer() *UpdateFunctionV1OutputResourceType {
 	return &e
 }
 
-func (e *UpdateFunctionV1OutputFunctionV1ResourceType) UnmarshalJSON(data []byte) error {
+func (e *UpdateFunctionV1OutputResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,15 +33,15 @@ func (e *UpdateFunctionV1OutputFunctionV1ResourceType) UnmarshalJSON(data []byte
 	case "INSERT_DESTINATION":
 		fallthrough
 	case "SOURCE":
-		*e = UpdateFunctionV1OutputFunctionV1ResourceType(v)
+		*e = UpdateFunctionV1OutputResourceType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for UpdateFunctionV1OutputFunctionV1ResourceType: %v", v)
+		return fmt.Errorf("invalid value for UpdateFunctionV1OutputResourceType: %v", v)
 	}
 }
 
-// UpdateFunctionV1OutputFunctionV1 - Represents a Function.
-type UpdateFunctionV1OutputFunctionV1 struct {
+// UpdateFunctionV1OutputFunction - The updated Function object.
+type UpdateFunctionV1OutputFunction struct {
 	// The max count of the batch for this Function.
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty"`
 	// The catalog id of this Function.
@@ -69,13 +69,118 @@ type UpdateFunctionV1OutputFunctionV1 struct {
 	// The Function type.
 	//
 	// Config API note: equal to `type`.
-	ResourceType *UpdateFunctionV1OutputFunctionV1ResourceType `json:"resourceType,omitempty"`
+	ResourceType *UpdateFunctionV1OutputResourceType `json:"resourceType,omitempty"`
 	// The list of settings for this Function.
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetBatchMaxCount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchMaxCount
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetCatalogID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CatalogID
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetCreatedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedBy
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetDeployedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DeployedAt
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetIsLatestVersion() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsLatestVersion
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetLogoURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LogoURL
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetPreviewWebhookURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PreviewWebhookURL
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetResourceType() *UpdateFunctionV1OutputResourceType {
+	if o == nil {
+		return nil
+	}
+	return o.ResourceType
+}
+
+func (o *UpdateFunctionV1OutputFunction) GetSettings() []FunctionSettingV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
 }
 
 // UpdateFunctionV1Output - Create a Function.
 type UpdateFunctionV1Output struct {
 	// The updated Function object.
-	Function UpdateFunctionV1OutputFunctionV1 `json:"function"`
+	Function UpdateFunctionV1OutputFunction `json:"function"`
+}
+
+func (o *UpdateFunctionV1Output) GetFunction() UpdateFunctionV1OutputFunction {
+	if o == nil {
+		return UpdateFunctionV1OutputFunction{}
+	}
+	return o.Function
 }

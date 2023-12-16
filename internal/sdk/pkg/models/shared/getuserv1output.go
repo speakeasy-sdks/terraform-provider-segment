@@ -2,8 +2,8 @@
 
 package shared
 
-// GetUserV1OutputUserV1 - A user belonging to a Segment Workspace.
-type GetUserV1OutputUserV1 struct {
+// User - The user object.
+type User struct {
 	// The email address associated with this user.
 	Email string `json:"email"`
 	// The unique identifier of this user.
@@ -16,8 +16,43 @@ type GetUserV1OutputUserV1 struct {
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
 
+func (o *User) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *User) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *User) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *User) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}
+
 // GetUserV1Output - Returns the user.
 type GetUserV1Output struct {
 	// The user object.
-	User GetUserV1OutputUserV1 `json:"user"`
+	User User `json:"user"`
+}
+
+func (o *GetUserV1Output) GetUser() User {
+	if o == nil {
+		return User{}
+	}
+	return o.User
 }

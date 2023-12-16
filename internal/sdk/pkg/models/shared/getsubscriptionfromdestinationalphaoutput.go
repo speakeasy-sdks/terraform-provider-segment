@@ -2,8 +2,8 @@
 
 package shared
 
-// GetSubscriptionFromDestinationAlphaOutputDestinationSubscription - The Destination subscription.
-type GetSubscriptionFromDestinationAlphaOutputDestinationSubscription struct {
+// Subscription - The Destination subscription.
+type Subscription struct {
 	// The unique identifier for the Destination action to trigger.
 	ActionID string `json:"actionId"`
 	// The URL-friendly key for the associated Destination action.
@@ -25,8 +25,78 @@ type GetSubscriptionFromDestinationAlphaOutputDestinationSubscription struct {
 	Trigger string `json:"trigger"`
 }
 
+func (o *Subscription) GetActionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionID
+}
+
+func (o *Subscription) GetActionSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.ActionSlug
+}
+
+func (o *Subscription) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *Subscription) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *Subscription) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Subscription) GetModelID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModelID
+}
+
+func (o *Subscription) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *Subscription) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *Subscription) GetTrigger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Trigger
+}
+
 // GetSubscriptionFromDestinationAlphaOutput - Returns a subscription for a given subscription id.
 type GetSubscriptionFromDestinationAlphaOutput struct {
 	// The Destination subscription.
-	Subscription GetSubscriptionFromDestinationAlphaOutputDestinationSubscription `json:"subscription"`
+	Subscription Subscription `json:"subscription"`
+}
+
+func (o *GetSubscriptionFromDestinationAlphaOutput) GetSubscription() Subscription {
+	if o == nil {
+		return Subscription{}
+	}
+	return o.Subscription
 }

@@ -2,11 +2,8 @@
 
 package shared
 
-// ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput struct {
+// ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination - Information about the pagination of this response.
+type ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,12 +26,61 @@ type ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ReplaceMessagingSubscriptionsInSpacesAlphaOutput - Output for the endpoint.
 type ReplaceMessagingSubscriptionsInSpacesAlphaOutput struct {
 	// Array of failure subscription status.
 	Failures []MessageSubscriptionResponse `json:"failures"`
 	// Information about the pagination of this response.
-	Pagination *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPaginationOutput `json:"pagination,omitempty"`
+	Pagination *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination `json:"pagination,omitempty"`
 	// Array of successful subscription status.
 	Successes []MessageSubscriptionResponse `json:"successes"`
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetFailures() []MessageSubscriptionResponse {
+	if o == nil {
+		return []MessageSubscriptionResponse{}
+	}
+	return o.Failures
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPagination() *ReplaceMessagingSubscriptionsInSpacesAlphaOutputPagination {
+	if o == nil {
+		return nil
+	}
+	return o.Pagination
+}
+
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetSuccesses() []MessageSubscriptionResponse {
+	if o == nil {
+		return []MessageSubscriptionResponse{}
+	}
+	return o.Successes
 }

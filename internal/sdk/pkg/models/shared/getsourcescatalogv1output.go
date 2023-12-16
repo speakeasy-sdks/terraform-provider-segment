@@ -2,11 +2,8 @@
 
 package shared
 
-// GetSourcesCatalogV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type GetSourcesCatalogV1OutputPaginationOutput struct {
+// GetSourcesCatalogV1OutputPagination - Information about the pagination of this response.
+type GetSourcesCatalogV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type GetSourcesCatalogV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetSourcesCatalogV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetSourcesCatalogV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetSourcesCatalogV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetSourcesCatalogV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetSourcesCatalogV1Output - Returns a list of all Source catalog items contained within a given page.
 type GetSourcesCatalogV1Output struct {
 	// Information about the pagination of this response.
-	Pagination GetSourcesCatalogV1OutputPaginationOutput `json:"pagination"`
+	Pagination GetSourcesCatalogV1OutputPagination `json:"pagination"`
 	// All Source catalog items contained within the requested page.
 	SourcesCatalog []SourceMetadataV1 `json:"sourcesCatalog"`
+}
+
+func (o *GetSourcesCatalogV1Output) GetPagination() GetSourcesCatalogV1OutputPagination {
+	if o == nil {
+		return GetSourcesCatalogV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *GetSourcesCatalogV1Output) GetSourcesCatalog() []SourceMetadataV1 {
+	if o == nil {
+		return []SourceMetadataV1{}
+	}
+	return o.SourcesCatalog
 }

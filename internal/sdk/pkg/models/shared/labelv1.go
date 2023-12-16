@@ -21,3 +21,24 @@ type LabelV1 struct {
 	// The value associated with the key of this label.
 	Value string `json:"value"`
 }
+
+func (o *LabelV1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *LabelV1) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *LabelV1) GetValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.Value
+}

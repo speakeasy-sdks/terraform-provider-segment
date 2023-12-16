@@ -2,11 +2,8 @@
 
 package shared
 
-// ListUserGroupsFromUserV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListUserGroupsFromUserV1OutputPaginationOutput struct {
+// ListUserGroupsFromUserV1OutputPagination - Information about the pagination of this response.
+type ListUserGroupsFromUserV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListUserGroupsFromUserV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListUserGroupsFromUserV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListUserGroupsFromUserV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListUserGroupsFromUserV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListUserGroupsFromUserV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListUserGroupsFromUserV1Output - Returns all user groups the user belongs to.
 type ListUserGroupsFromUserV1Output struct {
 	// The user groups that the user belongs to.
 	Groups []MinimalUserGroupV1 `json:"groups"`
 	// Information about the pagination of this response.
-	Pagination ListUserGroupsFromUserV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListUserGroupsFromUserV1OutputPagination `json:"pagination"`
+}
+
+func (o *ListUserGroupsFromUserV1Output) GetGroups() []MinimalUserGroupV1 {
+	if o == nil {
+		return []MinimalUserGroupV1{}
+	}
+	return o.Groups
+}
+
+func (o *ListUserGroupsFromUserV1Output) GetPagination() ListUserGroupsFromUserV1OutputPagination {
+	if o == nil {
+		return ListUserGroupsFromUserV1OutputPagination{}
+	}
+	return o.Pagination
 }

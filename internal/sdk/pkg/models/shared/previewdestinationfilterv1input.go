@@ -2,8 +2,8 @@
 
 package shared
 
-// PreviewDestinationFilterV1InputPreviewDestinationFilterV1 - A simplified Destination filter that includes the if and actions for a DestinationFilterV1.
-type PreviewDestinationFilterV1InputPreviewDestinationFilterV1 struct {
+// PreviewDestinationFilterV1InputFilter - The filter to preview.
+type PreviewDestinationFilterV1InputFilter struct {
 	// The filtering action to take on events that match the "if" statement.
 	// Action types must be one of: "drop", "allow_properties", "drop_properties" or "sample".
 	Actions []DestinationFilterActionV1 `json:"actions"`
@@ -13,11 +13,39 @@ type PreviewDestinationFilterV1InputPreviewDestinationFilterV1 struct {
 	If string `json:"if"`
 }
 
+func (o *PreviewDestinationFilterV1InputFilter) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *PreviewDestinationFilterV1InputFilter) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
 // PreviewDestinationFilterV1Input - Input of the Destination filter to preview.
 // For guidance on using FQL, see the Segment documentation site.
 type PreviewDestinationFilterV1Input struct {
 	// The filter to preview.
-	Filter PreviewDestinationFilterV1InputPreviewDestinationFilterV1 `json:"filter"`
+	Filter PreviewDestinationFilterV1InputFilter `json:"filter"`
 	// The JSON payload to apply the filter to.
 	Payload map[string]interface{} `json:"payload"`
+}
+
+func (o *PreviewDestinationFilterV1Input) GetFilter() PreviewDestinationFilterV1InputFilter {
+	if o == nil {
+		return PreviewDestinationFilterV1InputFilter{}
+	}
+	return o.Filter
+}
+
+func (o *PreviewDestinationFilterV1Input) GetPayload() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Payload
 }

@@ -2,8 +2,8 @@
 
 package shared
 
-// AddUsersToUserGroupV1OutputUserGroupV1 - A set of users with a set of shared permissions.
-type AddUsersToUserGroupV1OutputUserGroupV1 struct {
+// UserGroup - The updated the user group.
+type UserGroup struct {
 	// The id of the user group.
 	ID string `json:"id"`
 	// The number of members in the user group.
@@ -14,8 +14,43 @@ type AddUsersToUserGroupV1OutputUserGroupV1 struct {
 	Permissions []PermissionV1 `json:"permissions,omitempty"`
 }
 
+func (o *UserGroup) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UserGroup) GetMemberCount() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.MemberCount
+}
+
+func (o *UserGroup) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UserGroup) GetPermissions() []PermissionV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Permissions
+}
+
 // AddUsersToUserGroupV1Output - Returns the updated user group.
 type AddUsersToUserGroupV1Output struct {
 	// The updated the user group.
-	UserGroup AddUsersToUserGroupV1OutputUserGroupV1 `json:"userGroup"`
+	UserGroup UserGroup `json:"userGroup"`
+}
+
+func (o *AddUsersToUserGroupV1Output) GetUserGroup() UserGroup {
+	if o == nil {
+		return UserGroup{}
+	}
+	return o.UserGroup
 }

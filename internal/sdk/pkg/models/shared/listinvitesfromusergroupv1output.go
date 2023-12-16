@@ -2,11 +2,8 @@
 
 package shared
 
-// ListInvitesFromUserGroupV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListInvitesFromUserGroupV1OutputPaginationOutput struct {
+// ListInvitesFromUserGroupV1OutputPagination - Information about the pagination of this response.
+type ListInvitesFromUserGroupV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListInvitesFromUserGroupV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListInvitesFromUserGroupV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListInvitesFromUserGroupV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListInvitesFromUserGroupV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListInvitesFromUserGroupV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListInvitesFromUserGroupV1Output - Returns the emails of invitees to a user group with the given group id.
 type ListInvitesFromUserGroupV1Output struct {
 	// The emails of the invitees to the user group.
 	Emails []string `json:"emails"`
 	// Information about the pagination of this response.
-	Pagination ListInvitesFromUserGroupV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListInvitesFromUserGroupV1OutputPagination `json:"pagination"`
+}
+
+func (o *ListInvitesFromUserGroupV1Output) GetEmails() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Emails
+}
+
+func (o *ListInvitesFromUserGroupV1Output) GetPagination() ListInvitesFromUserGroupV1OutputPagination {
+	if o == nil {
+		return ListInvitesFromUserGroupV1OutputPagination{}
+	}
+	return o.Pagination
 }

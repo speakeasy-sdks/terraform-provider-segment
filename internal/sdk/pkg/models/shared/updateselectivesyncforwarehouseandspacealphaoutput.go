@@ -40,3 +40,10 @@ type UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput struct {
 	// Status of the update operation.
 	Status UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutputStatus `json:"status"`
 }
+
+func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput) GetStatus() UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutputStatus {
+	if o == nil {
+		return UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutputStatus("")
+	}
+	return o.Status
+}

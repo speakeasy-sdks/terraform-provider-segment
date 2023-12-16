@@ -2,8 +2,8 @@
 
 package shared
 
-// SourceAlphaSourceMetadataV1LogosBeta - Represents a logo.
-type SourceAlphaSourceMetadataV1LogosBeta struct {
+// SourceAlphaLogos - The logos for this Source.
+type SourceAlphaLogos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,8 +12,31 @@ type SourceAlphaSourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
-// SourceAlphaSourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
-type SourceAlphaSourceMetadataV1 struct {
+func (o *SourceAlphaLogos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *SourceAlphaLogos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *SourceAlphaLogos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// SourceAlphaMetadata - The metadata for the Source.
+//
+// Config API note: includes `catalogName` and `catalogId`.
+type SourceAlphaMetadata struct {
 	// A list of categories this Source belongs to.
 	Categories []string `json:"categories"`
 	// The description of this Source.
@@ -25,7 +48,7 @@ type SourceAlphaSourceMetadataV1 struct {
 	// True if this is a Cloud Event Source.
 	IsCloudEventSource bool `json:"isCloudEventSource"`
 	// The logos for this Source.
-	Logos SourceAlphaSourceMetadataV1LogosBeta `json:"logos"`
+	Logos SourceAlphaLogos `json:"logos"`
 	// The user-friendly name of this Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -36,6 +59,62 @@ type SourceAlphaSourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *SourceAlphaMetadata) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *SourceAlphaMetadata) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *SourceAlphaMetadata) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceAlphaMetadata) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *SourceAlphaMetadata) GetLogos() SourceAlphaLogos {
+	if o == nil {
+		return SourceAlphaLogos{}
+	}
+	return o.Logos
+}
+
+func (o *SourceAlphaMetadata) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *SourceAlphaMetadata) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *SourceAlphaMetadata) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // SourceAlpha - Defines a data Source for Segment data.
@@ -51,7 +130,7 @@ type SourceAlpha struct {
 	// The metadata for the Source.
 	//
 	// Config API note: includes `catalogName` and `catalogId`.
-	Metadata SourceAlphaSourceMetadataV1 `json:"metadata"`
+	Metadata SourceAlphaMetadata `json:"metadata"`
 	// The name of the Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -69,4 +148,67 @@ type SourceAlpha struct {
 	// The write keys used to send data from the Source. This field is left empty when the current token does not have the
 	// 'source admin' permission.
 	WriteKeys []string `json:"writeKeys"`
+}
+
+func (o *SourceAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *SourceAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceAlpha) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *SourceAlpha) GetMetadata() SourceAlphaMetadata {
+	if o == nil {
+		return SourceAlphaMetadata{}
+	}
+	return o.Metadata
+}
+
+func (o *SourceAlpha) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *SourceAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *SourceAlpha) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *SourceAlpha) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *SourceAlpha) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
 }

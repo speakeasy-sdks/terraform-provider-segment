@@ -2,14 +2,35 @@
 
 package shared
 
-// SourceMetadataV1LogosBeta - Represents a logo.
-type SourceMetadataV1LogosBeta struct {
+// SourceMetadataV1Logos - The logos for this Source.
+type SourceMetadataV1Logos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
 	Default string `json:"default"`
 	// The logo mark.
 	Mark *string `json:"mark,omitempty"`
+}
+
+func (o *SourceMetadataV1Logos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *SourceMetadataV1Logos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *SourceMetadataV1Logos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
 }
 
 // SourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
@@ -25,7 +46,7 @@ type SourceMetadataV1 struct {
 	// True if this is a Cloud Event Source.
 	IsCloudEventSource bool `json:"isCloudEventSource"`
 	// The logos for this Source.
-	Logos SourceMetadataV1LogosBeta `json:"logos"`
+	Logos SourceMetadataV1Logos `json:"logos"`
 	// The user-friendly name of this Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -36,4 +57,60 @@ type SourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *SourceMetadataV1) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *SourceMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *SourceMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceMetadataV1) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *SourceMetadataV1) GetLogos() SourceMetadataV1Logos {
+	if o == nil {
+		return SourceMetadataV1Logos{}
+	}
+	return o.Logos
+}
+
+func (o *SourceMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *SourceMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *SourceMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }

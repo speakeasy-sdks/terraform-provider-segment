@@ -2,11 +2,8 @@
 
 package shared
 
-// ListConnectedWarehousesFromSourceV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListConnectedWarehousesFromSourceV1OutputPaginationOutput struct {
+// ListConnectedWarehousesFromSourceV1OutputPagination - Information about the pagination of this response.
+type ListConnectedWarehousesFromSourceV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListConnectedWarehousesFromSourceV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListConnectedWarehousesFromSourceV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListConnectedWarehousesFromSourceV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListConnectedWarehousesFromSourceV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListConnectedWarehousesFromSourceV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListConnectedWarehousesFromSourceV1Output - Returns a list of Warehouses connected to a Source.
 type ListConnectedWarehousesFromSourceV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListConnectedWarehousesFromSourceV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListConnectedWarehousesFromSourceV1OutputPagination `json:"pagination"`
 	// A list that contains the Warehouses connected to the Source.
 	Warehouses []WarehouseV1 `json:"warehouses"`
+}
+
+func (o *ListConnectedWarehousesFromSourceV1Output) GetPagination() ListConnectedWarehousesFromSourceV1OutputPagination {
+	if o == nil {
+		return ListConnectedWarehousesFromSourceV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListConnectedWarehousesFromSourceV1Output) GetWarehouses() []WarehouseV1 {
+	if o == nil {
+		return []WarehouseV1{}
+	}
+	return o.Warehouses
 }

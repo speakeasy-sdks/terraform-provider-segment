@@ -2,8 +2,8 @@
 
 package shared
 
-// CreateFilterForDestinationV1OutputDestinationFilterV1 - Represents a Destination filter.
-type CreateFilterForDestinationV1OutputDestinationFilterV1 struct {
+// Filter - The newly created Destination filter.
+type Filter struct {
 	// A list of actions this filter performs.
 	Actions []DestinationFilterActionV1 `json:"actions"`
 	// The timestamp of this filter's creation.
@@ -26,8 +26,85 @@ type CreateFilterForDestinationV1OutputDestinationFilterV1 struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
+func (o *Filter) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *Filter) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *Filter) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *Filter) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *Filter) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *Filter) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Filter) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *Filter) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *Filter) GetTitle() string {
+	if o == nil {
+		return ""
+	}
+	return o.Title
+}
+
+func (o *Filter) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
 // CreateFilterForDestinationV1Output - Output for CreateDestinationFiltersV1.
 type CreateFilterForDestinationV1Output struct {
 	// The newly created Destination filter.
-	Filter CreateFilterForDestinationV1OutputDestinationFilterV1 `json:"filter"`
+	Filter Filter `json:"filter"`
+}
+
+func (o *CreateFilterForDestinationV1Output) GetFilter() Filter {
+	if o == nil {
+		return Filter{}
+	}
+	return o.Filter
 }

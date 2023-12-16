@@ -2,14 +2,35 @@
 
 package shared
 
-// WarehouseMetadataV1LogosBeta - Represents a logo.
-type WarehouseMetadataV1LogosBeta struct {
+// WarehouseMetadataV1Logos - Logo information for this object.
+type WarehouseMetadataV1Logos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
 	Default string `json:"default"`
 	// The logo mark.
 	Mark *string `json:"mark,omitempty"`
+}
+
+func (o *WarehouseMetadataV1Logos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *WarehouseMetadataV1Logos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *WarehouseMetadataV1Logos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
 }
 
 // WarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
@@ -19,11 +40,53 @@ type WarehouseMetadataV1 struct {
 	// The id of this object.
 	ID string `json:"id"`
 	// Logo information for this object.
-	Logos WarehouseMetadataV1LogosBeta `json:"logos"`
+	Logos WarehouseMetadataV1Logos `json:"logos"`
 	// The name of this object.
 	Name string `json:"name"`
 	// The Integration options for this object.
 	Options []IntegrationOptionBeta `json:"options"`
 	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
+}
+
+func (o *WarehouseMetadataV1) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *WarehouseMetadataV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *WarehouseMetadataV1) GetLogos() WarehouseMetadataV1Logos {
+	if o == nil {
+		return WarehouseMetadataV1Logos{}
+	}
+	return o.Logos
+}
+
+func (o *WarehouseMetadataV1) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *WarehouseMetadataV1) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *WarehouseMetadataV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }

@@ -2,8 +2,8 @@
 
 package shared
 
-// CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha - The created instance.
-type CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha struct {
+// InsertFunctionInstance - The created instance.
+type InsertFunctionInstance struct {
 	ClassID           string                 `json:"classId"`
 	CreatedAt         string                 `json:"createdAt"`
 	Enabled           bool                   `json:"enabled"`
@@ -15,8 +15,78 @@ type CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha struct {
 	UpdatedAt         string                 `json:"updatedAt"`
 }
 
+func (o *InsertFunctionInstance) GetClassID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ClassID
+}
+
+func (o *InsertFunctionInstance) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *InsertFunctionInstance) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *InsertFunctionInstance) GetEncryptedSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.EncryptedSettings
+}
+
+func (o *InsertFunctionInstance) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *InsertFunctionInstance) GetIntegrationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.IntegrationID
+}
+
+func (o *InsertFunctionInstance) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *InsertFunctionInstance) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *InsertFunctionInstance) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
 // CreateInsertFunctionInstanceAlphaOutput - Creates an insert Function instance.
 type CreateInsertFunctionInstanceAlphaOutput struct {
 	// The created instance.
-	InsertFunctionInstance CreateInsertFunctionInstanceAlphaOutputInsertFunctionInstanceAlpha `json:"insertFunctionInstance"`
+	InsertFunctionInstance InsertFunctionInstance `json:"insertFunctionInstance"`
+}
+
+func (o *CreateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstance() InsertFunctionInstance {
+	if o == nil {
+		return InsertFunctionInstance{}
+	}
+	return o.InsertFunctionInstance
 }

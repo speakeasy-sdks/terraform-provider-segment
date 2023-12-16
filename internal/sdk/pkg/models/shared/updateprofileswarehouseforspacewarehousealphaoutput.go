@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta - Represents a logo.
-type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta struct {
+// UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos - Logo information for this object.
+type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,14 +12,35 @@ type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWa
 	Mark *string `json:"mark,omitempty"`
 }
 
-// UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
-type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1 struct {
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata - The metadata for the Warehouse.
+type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata struct {
 	// A description, in English, of this object.
 	Description string `json:"description"`
 	// The id of this object.
 	ID string `json:"id"`
 	// Logo information for this object.
-	Logos UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta `json:"logos"`
+	Logos UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos `json:"logos"`
 	// The name of this object.
 	Name string `json:"name"`
 	// The Integration options for this object.
@@ -28,14 +49,56 @@ type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWa
 	Slug string `json:"slug"`
 }
 
-// UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlpha - Defines a Profiles data Warehouse used as a Destination for Segment data.
-type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlpha struct {
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata) GetLogos() UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos {
+	if o == nil {
+		return UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputLogos{}
+	}
+	return o.Logos
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+// UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse - The updated Warehouse.
+type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse struct {
 	// When set to true, this Warehouse receives data.
 	Enabled bool `json:"enabled"`
 	// The id of the Warehouse.
 	ID string `json:"id"`
 	// The metadata for the Warehouse.
-	Metadata UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlphaWarehouseMetadataV1 `json:"metadata"`
+	Metadata UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata `json:"metadata"`
 	// The custom schema name that Segment uses on the Warehouse side.
 	SchemaName *string `json:"schemaName,omitempty"`
 	// The settings associated with this Warehouse.
@@ -48,8 +111,64 @@ type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlpha s
 	WorkspaceID string `json:"workspaceId"`
 }
 
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetMetadata() UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata {
+	if o == nil {
+		return UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputMetadata{}
+	}
+	return o.Metadata
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetSchemaName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SchemaName
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
 // UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput - Returns the updated Warehouse.
 type UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput struct {
 	// The updated Warehouse.
-	ProfilesWarehouse UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouseAlpha `json:"profilesWarehouse"`
+	ProfilesWarehouse UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse `json:"profilesWarehouse"`
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseAlphaOutput) GetProfilesWarehouse() UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse {
+	if o == nil {
+		return UpdateProfilesWarehouseForSpaceWarehouseAlphaOutputProfilesWarehouse{}
+	}
+	return o.ProfilesWarehouse
 }

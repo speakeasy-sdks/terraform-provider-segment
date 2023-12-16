@@ -2,11 +2,8 @@
 
 package shared
 
-// ListInvitesV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListInvitesV1OutputPaginationOutput struct {
+// ListInvitesV1OutputPagination - Information about the pagination of this response.
+type ListInvitesV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListInvitesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListInvitesV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListInvitesV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListInvitesV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListInvitesV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListInvitesV1Output - Returns the list of invites.
 type ListInvitesV1Output struct {
 	// The list of invites.
 	Invites []string `json:"invites"`
 	// Information about the pagination of this response.
-	Pagination ListInvitesV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListInvitesV1OutputPagination `json:"pagination"`
+}
+
+func (o *ListInvitesV1Output) GetInvites() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Invites
+}
+
+func (o *ListInvitesV1Output) GetPagination() ListInvitesV1OutputPagination {
+	if o == nil {
+		return ListInvitesV1OutputPagination{}
+	}
+	return o.Pagination
 }

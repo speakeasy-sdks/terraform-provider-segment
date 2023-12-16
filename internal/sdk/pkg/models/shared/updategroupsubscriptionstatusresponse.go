@@ -46,3 +46,24 @@ type UpdateGroupSubscriptionStatusResponse struct {
 	// The user subscribed, unsubscribed, or on initial status.
 	Status UpdateGroupSubscriptionStatusResponseStatus `json:"status"`
 }
+
+func (o *UpdateGroupSubscriptionStatusResponse) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateGroupSubscriptionStatusResponse) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateGroupSubscriptionStatusResponse) GetStatus() UpdateGroupSubscriptionStatusResponseStatus {
+	if o == nil {
+		return UpdateGroupSubscriptionStatusResponseStatus("")
+	}
+	return o.Status
+}

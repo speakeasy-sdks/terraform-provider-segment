@@ -3,10 +3,9 @@
 package provider
 
 import (
-	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"math/big"
-	"segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
 func (r *CreateLabelV1InputResourceModel) ToCreateSDKType() *shared.CreateLabelV1Input {
@@ -18,7 +17,7 @@ func (r *CreateLabelV1InputResourceModel) ToCreateSDKType() *shared.CreateLabelV
 	}
 	key := r.Label.Key.ValueString()
 	value := r.Label.Value.ValueString()
-	label := shared.CreateLabelV1InputLabelV1{
+	label := shared.Label{
 		Description: description,
 		Key:         key,
 		Value:       value,
@@ -29,32 +28,17 @@ func (r *CreateLabelV1InputResourceModel) ToCreateSDKType() *shared.CreateLabelV
 	return &out
 }
 
-func (r *CreateLabelV1InputResourceModel) RefreshFromCreateResponse(resp *shared.RequestErrorEnvelope) {
-	r.Errors = nil
-	for _, errorsItem := range resp.Errors {
-		var errors1 RequestError
-		if errorsItem.Data == nil {
-			errors1.Data = types.StringNull()
+func (r *CreateLabelV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateLabelResponseBody) {
+	if resp.Data == nil {
+		r.Data = nil
+	} else {
+		r.Data = &CreateLabelV1Output{}
+		if resp.Data.Label.Description != nil {
+			r.Data.Label.Description = types.StringValue(*resp.Data.Label.Description)
 		} else {
-			dataResult, _ := json.Marshal(errorsItem.Data)
-			errors1.Data = types.StringValue(string(dataResult))
+			r.Data.Label.Description = types.StringNull()
 		}
-		if errorsItem.Field != nil {
-			errors1.Field = types.StringValue(*errorsItem.Field)
-		} else {
-			errors1.Field = types.StringNull()
-		}
-		if errorsItem.Message != nil {
-			errors1.Message = types.StringValue(*errorsItem.Message)
-		} else {
-			errors1.Message = types.StringNull()
-		}
-		if errorsItem.Status != nil {
-			errors1.Status = types.NumberValue(big.NewFloat(float64(*errorsItem.Status)))
-		} else {
-			errors1.Status = types.NumberNull()
-		}
-		errors1.Type = types.StringValue(errorsItem.Type)
-		r.Errors = append(r.Errors, errors1)
+		r.Data.Label.Key = types.StringValue(resp.Data.Label.Key)
+		r.Data.Label.Value = types.StringValue(resp.Data.Label.Value)
 	}
 }

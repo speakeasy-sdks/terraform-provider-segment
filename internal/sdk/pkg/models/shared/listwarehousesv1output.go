@@ -2,11 +2,8 @@
 
 package shared
 
-// ListWarehousesV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListWarehousesV1OutputPaginationOutput struct {
+// ListWarehousesV1OutputPagination - Information about the pagination of this response.
+type ListWarehousesV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListWarehousesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListWarehousesV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListWarehousesV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListWarehousesV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListWarehousesV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListWarehousesV1Output - Returns a list of Warehouses that belong to a Workspace.
 type ListWarehousesV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListWarehousesV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListWarehousesV1OutputPagination `json:"pagination"`
 	// A list of Warehouses that belong to the Workspace.
 	Warehouses []WarehouseV1 `json:"warehouses"`
+}
+
+func (o *ListWarehousesV1Output) GetPagination() ListWarehousesV1OutputPagination {
+	if o == nil {
+		return ListWarehousesV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListWarehousesV1Output) GetWarehouses() []WarehouseV1 {
+	if o == nil {
+		return []WarehouseV1{}
+	}
+	return o.Warehouses
 }

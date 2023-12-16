@@ -2,11 +2,8 @@
 
 package shared
 
-// ListReverseEtlModelsOutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListReverseEtlModelsOutputPaginationOutput struct {
+// ListReverseEtlModelsOutputPagination - Information about the pagination of this response.
+type ListReverseEtlModelsOutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListReverseEtlModelsOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListReverseEtlModelsOutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListReverseEtlModelsOutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListReverseEtlModelsOutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListReverseEtlModelsOutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListReverseEtlModelsOutput - Defines the result of listing Models.
 type ListReverseEtlModelsOutput struct {
 	// A list of Models that belong to the Workspace.
 	Models []ReverseEtlModel `json:"models"`
 	// Information about the pagination of this response.
-	Pagination ListReverseEtlModelsOutputPaginationOutput `json:"pagination"`
+	Pagination ListReverseEtlModelsOutputPagination `json:"pagination"`
+}
+
+func (o *ListReverseEtlModelsOutput) GetModels() []ReverseEtlModel {
+	if o == nil {
+		return []ReverseEtlModel{}
+	}
+	return o.Models
+}
+
+func (o *ListReverseEtlModelsOutput) GetPagination() ListReverseEtlModelsOutputPagination {
+	if o == nil {
+		return ListReverseEtlModelsOutputPagination{}
+	}
+	return o.Pagination
 }

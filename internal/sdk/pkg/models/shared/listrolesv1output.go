@@ -2,11 +2,8 @@
 
 package shared
 
-// ListRolesV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListRolesV1OutputPaginationOutput struct {
+// ListRolesV1OutputPagination - Information about the pagination of this response.
+type ListRolesV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListRolesV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListRolesV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListRolesV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListRolesV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListRolesV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListRolesV1Output - Returns the list of roles.
 type ListRolesV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListRolesV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListRolesV1OutputPagination `json:"pagination"`
 	// The list of roles.
 	Roles []RoleV1 `json:"roles"`
+}
+
+func (o *ListRolesV1Output) GetPagination() ListRolesV1OutputPagination {
+	if o == nil {
+		return ListRolesV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListRolesV1Output) GetRoles() []RoleV1 {
+	if o == nil {
+		return []RoleV1{}
+	}
+	return o.Roles
 }

@@ -2,11 +2,8 @@
 
 package shared
 
-// ListUsersFromUserGroupV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListUsersFromUserGroupV1OutputPaginationOutput struct {
+// ListUsersFromUserGroupV1OutputPagination - Information about the pagination of this response.
+type ListUsersFromUserGroupV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListUsersFromUserGroupV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListUsersFromUserGroupV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListUsersFromUserGroupV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListUsersFromUserGroupV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListUsersFromUserGroupV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListUsersFromUserGroupV1Output - Returns the members of a user group with the given group id.
 type ListUsersFromUserGroupV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListUsersFromUserGroupV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListUsersFromUserGroupV1OutputPagination `json:"pagination"`
 	// The users of the user group.
 	Users []MinimalUserV1 `json:"users"`
+}
+
+func (o *ListUsersFromUserGroupV1Output) GetPagination() ListUsersFromUserGroupV1OutputPagination {
+	if o == nil {
+		return ListUsersFromUserGroupV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListUsersFromUserGroupV1Output) GetUsers() []MinimalUserV1 {
+	if o == nil {
+		return []MinimalUserV1{}
+	}
+	return o.Users
 }

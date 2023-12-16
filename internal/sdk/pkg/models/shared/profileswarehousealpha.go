@@ -2,8 +2,8 @@
 
 package shared
 
-// ProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta - Represents a logo.
-type ProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta struct {
+// ProfilesWarehouseAlphaLogos - Logo information for this object.
+type ProfilesWarehouseAlphaLogos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,20 +12,83 @@ type ProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
-// ProfilesWarehouseAlphaWarehouseMetadataV1 - The metadata for an instance of Segment’s data Warehouse product.
-type ProfilesWarehouseAlphaWarehouseMetadataV1 struct {
+func (o *ProfilesWarehouseAlphaLogos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *ProfilesWarehouseAlphaLogos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *ProfilesWarehouseAlphaLogos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// ProfilesWarehouseAlphaMetadata - The metadata for the Warehouse.
+type ProfilesWarehouseAlphaMetadata struct {
 	// A description, in English, of this object.
 	Description string `json:"description"`
 	// The id of this object.
 	ID string `json:"id"`
 	// Logo information for this object.
-	Logos ProfilesWarehouseAlphaWarehouseMetadataV1LogosBeta `json:"logos"`
+	Logos ProfilesWarehouseAlphaLogos `json:"logos"`
 	// The name of this object.
 	Name string `json:"name"`
 	// The Integration options for this object.
 	Options []IntegrationOptionBeta `json:"options"`
 	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
+}
+
+func (o *ProfilesWarehouseAlphaMetadata) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *ProfilesWarehouseAlphaMetadata) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ProfilesWarehouseAlphaMetadata) GetLogos() ProfilesWarehouseAlphaLogos {
+	if o == nil {
+		return ProfilesWarehouseAlphaLogos{}
+	}
+	return o.Logos
+}
+
+func (o *ProfilesWarehouseAlphaMetadata) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *ProfilesWarehouseAlphaMetadata) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *ProfilesWarehouseAlphaMetadata) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // ProfilesWarehouseAlpha - Defines a Profiles data Warehouse used as a Destination for Segment data.
@@ -35,7 +98,7 @@ type ProfilesWarehouseAlpha struct {
 	// The id of the Warehouse.
 	ID string `json:"id"`
 	// The metadata for the Warehouse.
-	Metadata ProfilesWarehouseAlphaWarehouseMetadataV1 `json:"metadata"`
+	Metadata ProfilesWarehouseAlphaMetadata `json:"metadata"`
 	// The custom schema name that Segment uses on the Warehouse side.
 	SchemaName *string `json:"schemaName,omitempty"`
 	// The settings associated with this Warehouse.
@@ -46,4 +109,53 @@ type ProfilesWarehouseAlpha struct {
 	SpaceID string `json:"spaceId"`
 	// The id of the Workspace that owns this Warehouse.
 	WorkspaceID string `json:"workspaceId"`
+}
+
+func (o *ProfilesWarehouseAlpha) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *ProfilesWarehouseAlpha) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *ProfilesWarehouseAlpha) GetMetadata() ProfilesWarehouseAlphaMetadata {
+	if o == nil {
+		return ProfilesWarehouseAlphaMetadata{}
+	}
+	return o.Metadata
+}
+
+func (o *ProfilesWarehouseAlpha) GetSchemaName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SchemaName
+}
+
+func (o *ProfilesWarehouseAlpha) GetSettings() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.Settings
+}
+
+func (o *ProfilesWarehouseAlpha) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *ProfilesWarehouseAlpha) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
 }

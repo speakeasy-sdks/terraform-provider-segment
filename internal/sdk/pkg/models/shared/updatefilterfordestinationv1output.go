@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateFilterForDestinationV1OutputDestinationFilterV1 - Represents a Destination filter.
-type UpdateFilterForDestinationV1OutputDestinationFilterV1 struct {
+// UpdateFilterForDestinationV1OutputFilter - The updated Destination filter.
+type UpdateFilterForDestinationV1OutputFilter struct {
 	// A list of actions this filter performs.
 	Actions []DestinationFilterActionV1 `json:"actions"`
 	// The timestamp of this filter's creation.
@@ -26,8 +26,85 @@ type UpdateFilterForDestinationV1OutputDestinationFilterV1 struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
+func (o *UpdateFilterForDestinationV1OutputFilter) GetActions() []DestinationFilterActionV1 {
+	if o == nil {
+		return []DestinationFilterActionV1{}
+	}
+	return o.Actions
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetDestinationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DestinationID
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetIf() string {
+	if o == nil {
+		return ""
+	}
+	return o.If
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetTitle() string {
+	if o == nil {
+		return ""
+	}
+	return o.Title
+}
+
+func (o *UpdateFilterForDestinationV1OutputFilter) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
 // UpdateFilterForDestinationV1Output - Output for UpdateDestinationFilterV1.
 type UpdateFilterForDestinationV1Output struct {
 	// The updated Destination filter.
-	Filter UpdateFilterForDestinationV1OutputDestinationFilterV1 `json:"filter"`
+	Filter UpdateFilterForDestinationV1OutputFilter `json:"filter"`
+}
+
+func (o *UpdateFilterForDestinationV1Output) GetFilter() UpdateFilterForDestinationV1OutputFilter {
+	if o == nil {
+		return UpdateFilterForDestinationV1OutputFilter{}
+	}
+	return o.Filter
 }

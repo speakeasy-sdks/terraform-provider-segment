@@ -2,7 +2,7 @@
 
 package shared
 
-// GetReverseEtlModelOutputReverseEtlModel - Defines a Reverse ETL Model.
+// GetReverseEtlModelOutputReverseEtlModel - The requested Model.
 type GetReverseEtlModelOutputReverseEtlModel struct {
 	// A longer, more descriptive explanation of the Model.
 	Description string `json:"description"`
@@ -31,8 +31,78 @@ type GetReverseEtlModelOutputReverseEtlModel struct {
 	SourceID string `json:"sourceId"`
 }
 
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetQuery() string {
+	if o == nil {
+		return ""
+	}
+	return o.Query
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetQueryIdentifierColumn() string {
+	if o == nil {
+		return ""
+	}
+	return o.QueryIdentifierColumn
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		return map[string]interface{}{}
+	}
+	return o.ScheduleConfig
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetScheduleStrategy() string {
+	if o == nil {
+		return ""
+	}
+	return o.ScheduleStrategy
+}
+
+func (o *GetReverseEtlModelOutputReverseEtlModel) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
 // GetReverseEtlModelOutput - Defines the result of getting a Model.
 type GetReverseEtlModelOutput struct {
 	// The requested Model.
 	ReverseEtlModel GetReverseEtlModelOutputReverseEtlModel `json:"reverseEtlModel"`
+}
+
+func (o *GetReverseEtlModelOutput) GetReverseEtlModel() GetReverseEtlModelOutputReverseEtlModel {
+	if o == nil {
+		return GetReverseEtlModelOutputReverseEtlModel{}
+	}
+	return o.ReverseEtlModel
 }

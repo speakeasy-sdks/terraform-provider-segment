@@ -2,12 +2,26 @@
 
 package shared
 
-// GetAdvancedSyncScheduleFromWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output - Defines the advanced sync schedule for a Warehouse.
-type GetAdvancedSyncScheduleFromWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output struct {
+// Schedule - The schedule that contains the schedule overrides for the specified Warehouse, if enabled.
+type Schedule struct {
 	// A list that contains the times when syncs should occur.
 	Times []WarehouseAdvancedSyncV1 `json:"times,omitempty"`
 	// A TZ-database timezone for this sync schedule.
 	Timezone *string `json:"timezone,omitempty"`
+}
+
+func (o *Schedule) GetTimes() []WarehouseAdvancedSyncV1 {
+	if o == nil {
+		return nil
+	}
+	return o.Times
+}
+
+func (o *Schedule) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
 }
 
 // GetAdvancedSyncScheduleFromWarehouseV1Output - Returns the advanced sync schedule for a Warehouse.
@@ -15,5 +29,19 @@ type GetAdvancedSyncScheduleFromWarehouseV1Output struct {
 	// Indicates if an advanced sync schedule is enabled for this Warehouse.
 	Enabled bool `json:"enabled"`
 	// The schedule that contains the schedule overrides for the specified Warehouse, if enabled.
-	Schedule *GetAdvancedSyncScheduleFromWarehouseV1OutputAdvancedWarehouseSyncScheduleV1Output `json:"schedule,omitempty"`
+	Schedule *Schedule `json:"schedule,omitempty"`
+}
+
+func (o *GetAdvancedSyncScheduleFromWarehouseV1Output) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *GetAdvancedSyncScheduleFromWarehouseV1Output) GetSchedule() *Schedule {
+	if o == nil {
+		return nil
+	}
+	return o.Schedule
 }

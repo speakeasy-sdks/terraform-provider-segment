@@ -2,8 +2,8 @@
 
 package shared
 
-// SourceV1SourceMetadataV1LogosBeta - Represents a logo.
-type SourceV1SourceMetadataV1LogosBeta struct {
+// SourceV1Logos - The logos for this Source.
+type SourceV1Logos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,8 +12,31 @@ type SourceV1SourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
-// SourceV1SourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
-type SourceV1SourceMetadataV1 struct {
+func (o *SourceV1Logos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *SourceV1Logos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *SourceV1Logos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// SourceV1Metadata - The metadata for the Source.
+//
+// Config API note: includes `catalogName` and `catalogId`.
+type SourceV1Metadata struct {
 	// A list of categories this Source belongs to.
 	Categories []string `json:"categories"`
 	// The description of this Source.
@@ -25,7 +48,7 @@ type SourceV1SourceMetadataV1 struct {
 	// True if this is a Cloud Event Source.
 	IsCloudEventSource bool `json:"isCloudEventSource"`
 	// The logos for this Source.
-	Logos SourceV1SourceMetadataV1LogosBeta `json:"logos"`
+	Logos SourceV1Logos `json:"logos"`
 	// The user-friendly name of this Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -36,6 +59,62 @@ type SourceV1SourceMetadataV1 struct {
 	//
 	// Config API note: equal to `name`.
 	Slug string `json:"slug"`
+}
+
+func (o *SourceV1Metadata) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *SourceV1Metadata) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *SourceV1Metadata) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceV1Metadata) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *SourceV1Metadata) GetLogos() SourceV1Logos {
+	if o == nil {
+		return SourceV1Logos{}
+	}
+	return o.Logos
+}
+
+func (o *SourceV1Metadata) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *SourceV1Metadata) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *SourceV1Metadata) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
 }
 
 // SourceV1 - Defines a data Source for Segment data.
@@ -51,7 +130,7 @@ type SourceV1 struct {
 	// The metadata for the Source.
 	//
 	// Config API note: includes `catalogName` and `catalogId`.
-	Metadata SourceV1SourceMetadataV1 `json:"metadata"`
+	Metadata SourceV1Metadata `json:"metadata"`
 	// The name of the Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -69,4 +148,67 @@ type SourceV1 struct {
 	// The write keys used to send data from the Source. This field is left empty when the current token does not have the
 	// 'source admin' permission.
 	WriteKeys []string `json:"writeKeys"`
+}
+
+func (o *SourceV1) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *SourceV1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *SourceV1) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *SourceV1) GetMetadata() SourceV1Metadata {
+	if o == nil {
+		return SourceV1Metadata{}
+	}
+	return o.Metadata
+}
+
+func (o *SourceV1) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *SourceV1) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *SourceV1) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *SourceV1) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *SourceV1) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
 }

@@ -5,7 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -33,10 +32,10 @@ type CreateTrackingPlanV1InputResource struct {
 
 // CreateTrackingPlanV1InputResourceModel describes the resource data model.
 type CreateTrackingPlanV1InputResourceModel struct {
-	Description types.String   `tfsdk:"description"`
-	Errors      []RequestError `tfsdk:"errors"`
-	Name        types.String   `tfsdk:"name"`
-	Type        types.String   `tfsdk:"type"`
+	Data        *CreateTrackingPlanV1Output `tfsdk:"data"`
+	Description types.String                `tfsdk:"description"`
+	Name        types.String                `tfsdk:"name"`
+	Type        types.String                `tfsdk:"type"`
 }
 
 func (r *CreateTrackingPlanV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -48,43 +47,72 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 		MarkdownDescription: "CreateTrackingPlanV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"tracking_plan": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"created_at": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The timestamp of this Tracking Plan's creation.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `createTime` + "`" + `.`,
+							},
+							"description": schema.StringAttribute{
+								Computed:    true,
+								Description: `The Tracking Plan's description.`,
+							},
+							"id": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The Tracking Plan's identifier.` + "\n" +
+									`` + "\n" +
+									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
+							},
+							"name": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The Tracking Plan's name.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
+							},
+							"slug": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `URL-friendly slug of this Tracking Plan.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `name` + "`" + `.`,
+							},
+							"type": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
+									`The Tracking Plan's type.`,
+								Validators: []validator.String{
+									stringvalidator.OneOf(
+										"ENGAGE",
+										"LIVE",
+										"PROPERTY_LIBRARY",
+										"RULE_LIBRARY",
+										"TEMPLATE",
+									),
+								},
+							},
+							"updated_at": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The timestamp of the last change to the Tracking Plan.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `updateTime` + "`" + `.`,
+							},
+						},
+						Description: `The created Tracking Plan.`,
+					},
+				},
+				Description: `Result of a CreateTrackingPlan call.`,
+			},
 			"description": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 				Optional:    true,
 				Description: `The Tracking Plan's description.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -100,6 +128,8 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 					stringplanmodifier.RequiresReplace(),
 				},
 				Required: true,
+				MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
+					`The Tracking Plan's type.`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"ENGAGE",
@@ -109,8 +139,6 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 						"TEMPLATE",
 					),
 				},
-				MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
-					`The Tracking Plan's type.`,
 			},
 		},
 	}
@@ -171,11 +199,11 @@ func (r *CreateTrackingPlanV1InputResource) Create(ctx context.Context, req reso
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

@@ -2,11 +2,8 @@
 
 package shared
 
-// ListComputedTraitsAlphaOutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListComputedTraitsAlphaOutputPaginationOutput struct {
+// ListComputedTraitsAlphaOutputPagination - Information about the pagination of this response.
+type ListComputedTraitsAlphaOutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListComputedTraitsAlphaOutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListComputedTraitsAlphaOutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListComputedTraitsAlphaOutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListComputedTraitsAlphaOutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListComputedTraitsAlphaOutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListComputedTraitsAlphaOutput - List computed traits endpoint output.
 type ListComputedTraitsAlphaOutput struct {
 	// A list of computed trait summary results.
 	ComputedTraits []ComputedTraitSummary `json:"computedTraits"`
 	// Information about the pagination of this response.
-	Pagination ListComputedTraitsAlphaOutputPaginationOutput `json:"pagination"`
+	Pagination ListComputedTraitsAlphaOutputPagination `json:"pagination"`
+}
+
+func (o *ListComputedTraitsAlphaOutput) GetComputedTraits() []ComputedTraitSummary {
+	if o == nil {
+		return []ComputedTraitSummary{}
+	}
+	return o.ComputedTraits
+}
+
+func (o *ListComputedTraitsAlphaOutput) GetPagination() ListComputedTraitsAlphaOutputPagination {
+	if o == nil {
+		return ListComputedTraitsAlphaOutputPagination{}
+	}
+	return o.Pagination
 }

@@ -2,11 +2,8 @@
 
 package shared
 
-// ListSuppressionsV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListSuppressionsV1OutputPaginationOutput struct {
+// ListSuppressionsV1OutputPagination - Information about the pagination of this response.
+type ListSuppressionsV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,17 +26,73 @@ type ListSuppressionsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
-type ListSuppressionsV1OutputSuppressed struct {
+func (o *ListSuppressionsV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSuppressionsV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSuppressionsV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSuppressionsV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
+type Suppressed struct {
 	SubjectIds  []string `json:"subjectIds"`
 	SubjectType string   `json:"subjectType"`
+}
+
+func (o *Suppressed) GetSubjectIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.SubjectIds
+}
+
+func (o *Suppressed) GetSubjectType() string {
+	if o == nil {
+		return ""
+	}
+	return o.SubjectType
 }
 
 // ListSuppressionsV1Output - The output of a list suppressed call for a Workspace.
 type ListSuppressionsV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListSuppressionsV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListSuppressionsV1OutputPagination `json:"pagination"`
 	// An array that lists the suppressions from the Workspace.
 	//
 	// Config API note: equal to `attributes`.
-	Suppressed []ListSuppressionsV1OutputSuppressed `json:"suppressed"`
+	Suppressed []Suppressed `json:"suppressed"`
+}
+
+func (o *ListSuppressionsV1Output) GetPagination() ListSuppressionsV1OutputPagination {
+	if o == nil {
+		return ListSuppressionsV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSuppressionsV1Output) GetSuppressed() []Suppressed {
+	if o == nil {
+		return []Suppressed{}
+	}
+	return o.Suppressed
 }

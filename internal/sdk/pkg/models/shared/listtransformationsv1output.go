@@ -2,11 +2,8 @@
 
 package shared
 
-// ListTransformationsV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListTransformationsV1OutputPaginationOutput struct {
+// ListTransformationsV1OutputPagination - Information about the pagination of this response.
+type ListTransformationsV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListTransformationsV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListTransformationsV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListTransformationsV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListTransformationsV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListTransformationsV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListTransformationsV1Output - Lists the Transformations associated with the current Workspace.
 type ListTransformationsV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListTransformationsV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListTransformationsV1OutputPagination `json:"pagination"`
 	// A paginated list of Transformations.
 	Transformations []TransformationV1 `json:"transformations"`
+}
+
+func (o *ListTransformationsV1Output) GetPagination() ListTransformationsV1OutputPagination {
+	if o == nil {
+		return ListTransformationsV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListTransformationsV1Output) GetTransformations() []TransformationV1 {
+	if o == nil {
+		return []TransformationV1{}
+	}
+	return o.Transformations
 }

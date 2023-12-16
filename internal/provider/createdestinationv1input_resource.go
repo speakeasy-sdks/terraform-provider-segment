@@ -5,9 +5,10 @@ package provider
 import (
 	"context"
 	"fmt"
-	"segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -17,7 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"segment/internal/validators"
+	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -35,12 +36,12 @@ type CreateDestinationV1InputResource struct {
 
 // CreateDestinationV1InputResourceModel describes the resource data model.
 type CreateDestinationV1InputResourceModel struct {
-	Enabled    types.Bool              `tfsdk:"enabled"`
-	Errors     []RequestError          `tfsdk:"errors"`
-	MetadataID types.String            `tfsdk:"metadata_id"`
-	Name       types.String            `tfsdk:"name"`
-	Settings   map[string]types.String `tfsdk:"settings"`
-	SourceID   types.String            `tfsdk:"source_id"`
+	Data       *CreateDestinationV1Output `tfsdk:"data"`
+	Enabled    types.Bool                 `tfsdk:"enabled"`
+	MetadataID types.String               `tfsdk:"metadata_id"`
+	Name       types.String               `tfsdk:"name"`
+	Settings   map[string]types.String    `tfsdk:"settings"`
+	SourceID   types.String               `tfsdk:"source_id"`
 }
 
 func (r *CreateDestinationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -52,43 +53,493 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 		MarkdownDescription: "CreateDestinationV1Input Resource",
 
 		Attributes: map[string]schema.Attribute{
+			"data": schema.SingleNestedAttribute{
+				Computed: true,
+				Attributes: map[string]schema.Attribute{
+					"destination": schema.SingleNestedAttribute{
+						Computed: true,
+						Attributes: map[string]schema.Attribute{
+							"enabled": schema.BoolAttribute{
+								Computed:    true,
+								Description: `Whether this instance of a Destination receives data.`,
+							},
+							"id": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The unique identifier of this instance of a Destination.` + "\n" +
+									`` + "\n" +
+									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
+							},
+							"metadata": schema.SingleNestedAttribute{
+								Computed: true,
+								Attributes: map[string]schema.Attribute{
+									"actions": schema.ListNestedAttribute{
+										Computed: true,
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"default_trigger": schema.StringAttribute{
+													Computed:    true,
+													Description: `The default value used as the trigger when connecting this action.`,
+												},
+												"description": schema.StringAttribute{
+													Computed:    true,
+													Description: `A human-readable description of the action. May include Markdown.`,
+												},
+												"fields": schema.ListNestedAttribute{
+													Computed: true,
+													NestedObject: schema.NestedAttributeObject{
+														Attributes: map[string]schema.Attribute{
+															"allow_null": schema.BoolAttribute{
+																Computed:    true,
+																Description: `Whether this field allows null values.`,
+															},
+															"choices": schema.StringAttribute{
+																Computed: true,
+																MarkdownDescription: `Parsed as JSON.` + "\n" +
+																	`A list of machine-readable value/label pairs to populate a static dropdown.`,
+																Validators: []validator.String{
+																	validators.IsValidJSON(),
+																},
+															},
+															"default_value": schema.StringAttribute{
+																Computed: true,
+																MarkdownDescription: `Parsed as JSON.` + "\n" +
+																	`A default value that is saved the first time an action is created.`,
+																Validators: []validator.String{
+																	validators.IsValidJSON(),
+																},
+															},
+															"description": schema.StringAttribute{
+																Computed:    true,
+																Description: `A human-readable description of this value. You can use Markdown.`,
+															},
+															"dynamic": schema.BoolAttribute{
+																Computed:    true,
+																Description: `Whether this field should execute a dynamic request to fetch choices to populate a dropdown. When true, ` + "`" + `choices` + "`" + ` is ignored.`,
+															},
+															"field_key": schema.StringAttribute{
+																Computed:    true,
+																Description: `A unique machine-readable key for the field. Should ideally match the expected key in the action\'s API request.`,
+															},
+															"id": schema.StringAttribute{
+																Computed:    true,
+																Description: `The primary key of the field.`,
+															},
+															"label": schema.StringAttribute{
+																Computed:    true,
+																Description: `A human-readable label for this value.`,
+															},
+															"multiple": schema.BoolAttribute{
+																Computed:    true,
+																Description: `Whether a user can provide multiples of this field.`,
+															},
+															"placeholder": schema.StringAttribute{
+																Computed:    true,
+																Description: `An example value displayed but not saved.`,
+															},
+															"required": schema.BoolAttribute{
+																Computed:    true,
+																Description: `Whether this field is required.`,
+															},
+															"sort_order": schema.NumberAttribute{
+																Computed:    true,
+																Description: `The order this particular field is (used in the UI for displaying the fields in a specified order).`,
+															},
+															"type": schema.StringAttribute{
+																Computed: true,
+																MarkdownDescription: `must be one of ["BOOLEAN", "DATETIME", "HIDDEN", "INTEGER", "NUMBER", "OBJECT", "PASSWORD", "STRING", "TEXT"]` + "\n" +
+																	`The data type for this value.`,
+																Validators: []validator.String{
+																	stringvalidator.OneOf(
+																		"BOOLEAN",
+																		"DATETIME",
+																		"HIDDEN",
+																		"INTEGER",
+																		"NUMBER",
+																		"OBJECT",
+																		"PASSWORD",
+																		"STRING",
+																		"TEXT",
+																	),
+																},
+															},
+														},
+													},
+													Description: `The fields expected in order to perform the action.`,
+												},
+												"hidden": schema.BoolAttribute{
+													Computed:    true,
+													Description: `Whether the action should be hidden.`,
+												},
+												"id": schema.StringAttribute{
+													Computed:    true,
+													Description: `The primary key of the action.`,
+												},
+												"name": schema.StringAttribute{
+													Computed:    true,
+													Description: `A human-readable name for the action.`,
+												},
+												"platform": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `must be one of ["CLOUD", "MOBILE", "WEB"]` + "\n" +
+														`The platform on which this action runs.`,
+													Validators: []validator.String{
+														stringvalidator.OneOf(
+															"CLOUD",
+															"MOBILE",
+															"WEB",
+														),
+													},
+												},
+												"slug": schema.StringAttribute{
+													Computed:    true,
+													Description: `A machine-readable key unique to the action definition.`,
+												},
+											},
+										},
+										Description: `Actions available for the Destination.`,
+									},
+									"categories": schema.ListAttribute{
+										Computed:    true,
+										ElementType: types.StringType,
+										Description: `A list of categories with which the Destination is associated.`,
+									},
+									"components": schema.ListNestedAttribute{
+										Computed: true,
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"code": schema.StringAttribute{
+													Computed:    true,
+													Description: `Link to the repository hosting the code for this component.`,
+												},
+												"owner": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `must be one of ["PARTNER", "SEGMENT"]` + "\n" +
+														`The owner of this component. Either 'SEGMENT' or 'PARTNER'.`,
+													Validators: []validator.String{
+														stringvalidator.OneOf(
+															"PARTNER",
+															"SEGMENT",
+														),
+													},
+												},
+												"type": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `must be one of ["ANDROID", "BROWSER", "IOS", "SERVER"]` + "\n" +
+														`The component type.`,
+													Validators: []validator.String{
+														stringvalidator.OneOf(
+															"ANDROID",
+															"BROWSER",
+															"IOS",
+															"SERVER",
+														),
+													},
+												},
+											},
+										},
+										Description: `A list of components this Destination provides.`,
+									},
+									"contacts": schema.ListNestedAttribute{
+										Computed: true,
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"email": schema.StringAttribute{
+													Computed:    true,
+													Description: `Email of this contact.`,
+												},
+												"is_primary": schema.BoolAttribute{
+													Computed:    true,
+													Description: `Whether this is a primary contact.`,
+												},
+												"name": schema.StringAttribute{
+													Computed:    true,
+													Description: `Name of this contact.`,
+												},
+												"role": schema.StringAttribute{
+													Computed:    true,
+													Description: `Role of this contact.`,
+												},
+											},
+										},
+										Description: `Contact info for Integration Owners.`,
+									},
+									"description": schema.StringAttribute{
+										Computed:    true,
+										Description: `The description of the Destination.`,
+									},
+									"id": schema.StringAttribute{
+										Computed: true,
+										MarkdownDescription: `The id of the Destination metadata.` + "\n" +
+											`` + "\n" +
+											`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
+									},
+									"logos": schema.SingleNestedAttribute{
+										Computed: true,
+										Attributes: map[string]schema.Attribute{
+											"alt": schema.StringAttribute{
+												Computed:    true,
+												Description: `The alternative text for this logo.`,
+											},
+											"default": schema.StringAttribute{
+												Computed:    true,
+												Description: `The default URL for this logo.`,
+											},
+											"mark": schema.StringAttribute{
+												Computed:    true,
+												Description: `The logo mark.`,
+											},
+										},
+										Description: `The Destination's logos.`,
+									},
+									"name": schema.StringAttribute{
+										Computed: true,
+										MarkdownDescription: `The user-friendly name of the Destination.` + "\n" +
+											`` + "\n" +
+											`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
+									},
+									"options": schema.ListNestedAttribute{
+										Computed: true,
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"default_value": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `Parsed as JSON.` + "\n" +
+														`An optional default value for the field.`,
+													Validators: []validator.String{
+														validators.IsValidJSON(),
+													},
+												},
+												"description": schema.StringAttribute{
+													Computed:    true,
+													Description: `An optional short text description of the field.`,
+												},
+												"label": schema.StringAttribute{
+													Computed:    true,
+													Description: `An optional label for this field.`,
+												},
+												"name": schema.StringAttribute{
+													Computed:    true,
+													Description: `The name identifying this option in the context of a Segment Integration.`,
+												},
+												"required": schema.BoolAttribute{
+													Computed:    true,
+													Description: `Whether this is a required option when setting up the Integration.`,
+												},
+												"type": schema.StringAttribute{
+													Computed: true,
+													MarkdownDescription: `Defines the type for this option in the schema. Types are most commonly strings, but may also represent other` + "\n" +
+														`primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.`,
+												},
+											},
+										},
+										Description: `Options configured for the Destination.`,
+									},
+									"partner_owned": schema.BoolAttribute{
+										Computed:    true,
+										Description: `Partner Owned flag.`,
+									},
+									"presets": schema.ListNestedAttribute{
+										Computed: true,
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"action_id": schema.StringAttribute{
+													Computed:    true,
+													Description: `The unique identifier for the Destination Action to trigger.`,
+												},
+												"fields": schema.MapAttribute{
+													Computed:    true,
+													ElementType: types.StringType,
+													Description: `The default settings for action fields.`,
+													Validators: []validator.Map{
+														mapvalidator.ValueStringsAre(validators.IsValidJSON()),
+													},
+												},
+												"name": schema.StringAttribute{
+													Computed:    true,
+													Description: `The name of the subscription.`,
+												},
+												"trigger": schema.StringAttribute{
+													Computed:    true,
+													Description: `FQL string that describes what events should trigger an action. See https://segment.com/docs/config-api/fql/ for more information regarding Segment's Filter Query Language (FQL).`,
+												},
+											},
+										},
+										Description: `Predefined Destination subscriptions that can optionally be applied when connecting a new instance of the Destination.`,
+									},
+									"previous_names": schema.ListAttribute{
+										Computed:    true,
+										ElementType: types.StringType,
+										Description: `A list of names previously used by the Destination.`,
+									},
+									"region_endpoints": schema.ListAttribute{
+										Computed:    true,
+										ElementType: types.StringType,
+										Description: `The list of regional endpoints for this Destination.`,
+									},
+									"slug": schema.StringAttribute{
+										Computed:    true,
+										Description: `The slug used to identify the Destination in the Segment app.`,
+									},
+									"status": schema.StringAttribute{
+										Computed: true,
+										MarkdownDescription: `must be one of ["DEPRECATED", "PRIVATE_BETA", "PRIVATE_BUILDING", "PRIVATE_SUBMITTED", "PUBLIC", "PUBLIC_BETA", "UNAVAILABLE"]` + "\n" +
+											`Support status of the Destination.`,
+										Validators: []validator.String{
+											stringvalidator.OneOf(
+												"DEPRECATED",
+												"PRIVATE_BETA",
+												"PRIVATE_BUILDING",
+												"PRIVATE_SUBMITTED",
+												"PUBLIC",
+												"PUBLIC_BETA",
+												"UNAVAILABLE",
+											),
+										},
+									},
+									"supported_features": schema.SingleNestedAttribute{
+										Computed: true,
+										Attributes: map[string]schema.Attribute{
+											"browser_unbundling": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Whether this Destination supports browser unbundling.`,
+											},
+											"browser_unbundling_public": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Whether this Destination supports public browser unbundling.`,
+											},
+											"cloud_mode_instances": schema.StringAttribute{
+												Computed: true,
+												MarkdownDescription: `must be one of ["0", "1", "MULTIPLE", "NONE", "SINGLE"]` + "\n" +
+													`This Destination's support level for cloud mode instances.` + "\n" +
+													`The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.`,
+												Validators: []validator.String{
+													stringvalidator.OneOf(
+														"0",
+														"1",
+														"MULTIPLE",
+														"NONE",
+														"SINGLE",
+													),
+												},
+											},
+											"device_mode_instances": schema.StringAttribute{
+												Computed: true,
+												MarkdownDescription: `must be one of ["0", "1", "NONE", "SINGLE"]` + "\n" +
+													`This Destination's support level for device mode instances.` + "\n" +
+													`Support for multiple device mode instances is currently not planned.` + "\n" +
+													`The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.`,
+												Validators: []validator.String{
+													stringvalidator.OneOf(
+														"0",
+														"1",
+														"NONE",
+														"SINGLE",
+													),
+												},
+											},
+											"replay": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Whether this Destination supports replays.`,
+											},
+										},
+										MarkdownDescription: `Features that this Destination supports.` + "\n" +
+											`` + "\n" +
+											`Config API note: holds ` + "`" + `browserUnbundling` + "`" + ` fields.`,
+									},
+									"supported_methods": schema.SingleNestedAttribute{
+										Computed: true,
+										Attributes: map[string]schema.Attribute{
+											"alias": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Identifies if the Destination supports the ` + "`" + `alias` + "`" + ` method.`,
+											},
+											"group": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Identifies if the Destination supports the ` + "`" + `group` + "`" + ` method.`,
+											},
+											"identify": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Identifies if the Destination supports the ` + "`" + `identify` + "`" + ` method.`,
+											},
+											"pageview": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Identifies if the Destination supports the ` + "`" + `pageview` + "`" + ` method.`,
+											},
+											"track": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Identifies if the Destination supports the ` + "`" + `track` + "`" + ` method.`,
+											},
+										},
+										MarkdownDescription: `Methods that this Destination supports.` + "\n" +
+											`` + "\n" +
+											`Config API note: equal to ` + "`" + `methods` + "`" + `.`,
+									},
+									"supported_platforms": schema.SingleNestedAttribute{
+										Computed: true,
+										Attributes: map[string]schema.Attribute{
+											"browser": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Whether this Destination supports browser events.`,
+											},
+											"mobile": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Whether this Destination supports mobile events.`,
+											},
+											"server": schema.BoolAttribute{
+												Computed:    true,
+												Description: `Whether this Destination supports server events.`,
+											},
+										},
+										MarkdownDescription: `Platforms from which the Destination receives events.` + "\n" +
+											`` + "\n" +
+											`Config API note: equal to ` + "`" + `platforms` + "`" + `.`,
+									},
+									"supported_regions": schema.ListAttribute{
+										Computed:    true,
+										ElementType: types.StringType,
+										Description: `A list of supported regions for this Destination.`,
+									},
+									"website": schema.StringAttribute{
+										Computed:    true,
+										Description: `A website URL for this Destination.`,
+									},
+								},
+								Description: `The metadata of the Destination of which this Destination is an instance of. For example, Google Analytics or Amplitude.`,
+							},
+							"name": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The name of this instance of a Destination.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
+							},
+							"settings": schema.MapAttribute{
+								Computed:    true,
+								ElementType: types.StringType,
+								MarkdownDescription: `The collection of settings associated with a Destination.` + "\n" +
+									`` + "\n" +
+									`Config API note: equal to ` + "`" + `config` + "`" + `.`,
+								Validators: []validator.Map{
+									mapvalidator.ValueStringsAre(validators.IsValidJSON()),
+								},
+							},
+							"source_id": schema.StringAttribute{
+								Computed: true,
+								MarkdownDescription: `The id of a Source connected to this instance of a Destination.` + "\n" +
+									`` + "\n" +
+									`Config API note: analogous to ` + "`" + `parent` + "`" + `.`,
+							},
+						},
+						Description: `The created Destination.`,
+					},
+				},
+				Description: `Creates a new Destination.`,
+			},
 			"enabled": schema.BoolAttribute{
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplace(),
 				},
 				Optional:    true,
 				Description: `Whether this Destination should receive data.`,
-			},
-			"errors": schema.ListNestedAttribute{
-				Computed: true,
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"data": schema.StringAttribute{
-							Computed: true,
-							Validators: []validator.String{
-								validators.IsValidJSON(),
-							},
-							MarkdownDescription: `Parsed as JSON.` + "\n" +
-								`Any extra data associated with this error.`,
-						},
-						"field": schema.StringAttribute{
-							Computed:    true,
-							Description: `The name of an input field from the request that triggered this error.`,
-						},
-						"message": schema.StringAttribute{
-							Computed:    true,
-							Description: `An error message attached to this error.`,
-						},
-						"status": schema.NumberAttribute{
-							Computed:    true,
-							Description: `Http status code.`,
-						},
-						"type": schema.StringAttribute{
-							Computed:    true,
-							Description: `The type for this error (validation, server, unknown, etc).`,
-						},
-					},
-				},
 			},
 			"metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -112,13 +563,13 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 				},
 				Required:    true,
 				ElementType: types.StringType,
-				Validators: []validator.Map{
-					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
-				},
 				MarkdownDescription: `An object that contains settings for the Destination based on the "required" and "advanced" settings present in the` + "\n" +
 					`Destination metadata.` + "\n" +
 					`` + "\n" +
 					`Config API note: equal to ` + "`" + `config` + "`" + `.`,
+				Validators: []validator.Map{
+					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
+				},
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -188,11 +639,11 @@ func (r *CreateDestinationV1InputResource) Create(ctx context.Context, req resou
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.RequestErrorEnvelope == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.RequestErrorEnvelope)
+	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

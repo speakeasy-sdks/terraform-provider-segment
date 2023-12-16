@@ -3,46 +3,133 @@
 package operations
 
 import (
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 	"net/http"
-	"segment/internal/sdk/pkg/models/shared"
 )
 
-// CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON - OK
-type CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON struct {
+// CreateValidationInWarehouseWarehousesResponse200ResponseBody - OK
+type CreateValidationInWarehouseWarehousesResponse200ResponseBody struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
 }
 
-// CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON - OK
-type CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON struct {
+func (o *CreateValidationInWarehouseWarehousesResponse200ResponseBody) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateValidationInWarehouseWarehousesResponseResponseBody - OK
+type CreateValidationInWarehouseWarehousesResponseResponseBody struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
 }
 
-// CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON - OK
-type CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON struct {
+func (o *CreateValidationInWarehouseWarehousesResponseResponseBody) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateValidationInWarehouseWarehousesResponseBody - OK
+type CreateValidationInWarehouseWarehousesResponseBody struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
 }
 
-// CreateValidationInWarehouse200ApplicationJSON - OK
-type CreateValidationInWarehouse200ApplicationJSON struct {
+func (o *CreateValidationInWarehouseWarehousesResponseBody) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+// CreateValidationInWarehouseResponseBody - OK
+type CreateValidationInWarehouseResponseBody struct {
 	// Returns the status of a Warehouse connection settings after an attempt to connect to it.
 	Data *shared.CreateValidationInWarehouseV1Output `json:"data,omitempty"`
+}
+
+func (o *CreateValidationInWarehouseResponseBody) GetData() *shared.CreateValidationInWarehouseV1Output {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
 
 type CreateValidationInWarehouseResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *CreateValidationInWarehouseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1PlusJSONObject *CreateValidationInWarehouseWarehousesResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1alphaPlusJSONObject *CreateValidationInWarehouseWarehousesResponseResponseBody
+	// OK
+	TwoHundredApplicationVndSegmentV1betaPlusJSONObject *CreateValidationInWarehouseWarehousesResponse200ResponseBody
+	// HTTP response content type for this operation
 	ContentType string
 	// Resource not found
 	RequestErrorEnvelope *shared.RequestErrorEnvelope
-	StatusCode           int
-	RawResponse          *http.Response
-	// OK
-	CreateValidationInWarehouse200ApplicationJSONObject *CreateValidationInWarehouse200ApplicationJSON
-	// OK
-	CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSONObject *CreateValidationInWarehouse200ApplicationVndSegmentV1PlusJSON
-	// OK
-	CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSONObject *CreateValidationInWarehouse200ApplicationVndSegmentV1alphaPlusJSON
-	// OK
-	CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSONObject *CreateValidationInWarehouse200ApplicationVndSegmentV1betaPlusJSON
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *CreateValidationInWarehouseResponse) GetTwoHundredApplicationJSONObject() *CreateValidationInWarehouseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetTwoHundredApplicationVndSegmentV1PlusJSONObject() *CreateValidationInWarehouseWarehousesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1PlusJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetTwoHundredApplicationVndSegmentV1alphaPlusJSONObject() *CreateValidationInWarehouseWarehousesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetTwoHundredApplicationVndSegmentV1betaPlusJSONObject() *CreateValidationInWarehouseWarehousesResponse200ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationVndSegmentV1betaPlusJSONObject
+}
+
+func (o *CreateValidationInWarehouseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateValidationInWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
+}
+
+func (o *CreateValidationInWarehouseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateValidationInWarehouseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

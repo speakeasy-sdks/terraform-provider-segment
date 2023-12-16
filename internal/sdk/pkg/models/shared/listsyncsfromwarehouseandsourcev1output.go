@@ -2,11 +2,8 @@
 
 package shared
 
-// ListSyncsFromWarehouseAndSourceV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListSyncsFromWarehouseAndSourceV1OutputPaginationOutput struct {
+// ListSyncsFromWarehouseAndSourceV1OutputPagination - Information about the pagination of this response.
+type ListSyncsFromWarehouseAndSourceV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,11 +26,53 @@ type ListSyncsFromWarehouseAndSourceV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSyncsFromWarehouseAndSourceV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSyncsFromWarehouseAndSourceV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSyncsFromWarehouseAndSourceV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSyncsFromWarehouseAndSourceV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSyncsFromWarehouseAndSourceV1Output - Returns a list that contains the most recent syncs for a Warehouse-source pair, filtered and constrained by a given
 // set of pagination parameters.
 type ListSyncsFromWarehouseAndSourceV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListSyncsFromWarehouseAndSourceV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListSyncsFromWarehouseAndSourceV1OutputPagination `json:"pagination"`
 	// A list that contains the latest syncs for the specified Warehouse-source pair.
 	Reports []SyncV1 `json:"reports"`
+}
+
+func (o *ListSyncsFromWarehouseAndSourceV1Output) GetPagination() ListSyncsFromWarehouseAndSourceV1OutputPagination {
+	if o == nil {
+		return ListSyncsFromWarehouseAndSourceV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSyncsFromWarehouseAndSourceV1Output) GetReports() []SyncV1 {
+	if o == nil {
+		return []SyncV1{}
+	}
+	return o.Reports
 }

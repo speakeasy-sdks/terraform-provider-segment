@@ -2,11 +2,8 @@
 
 package shared
 
-// ListSourcesFromTrackingPlanV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type ListSourcesFromTrackingPlanV1OutputPaginationOutput struct {
+// ListSourcesFromTrackingPlanV1OutputPagination - Information about the pagination of this response.
+type ListSourcesFromTrackingPlanV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type ListSourcesFromTrackingPlanV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *ListSourcesFromTrackingPlanV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *ListSourcesFromTrackingPlanV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListSourcesFromTrackingPlanV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *ListSourcesFromTrackingPlanV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // ListSourcesFromTrackingPlanV1Output - Lists all Sources associated with a Tracking Plan.
 type ListSourcesFromTrackingPlanV1Output struct {
 	// Information about the pagination of this response.
-	Pagination ListSourcesFromTrackingPlanV1OutputPaginationOutput `json:"pagination"`
+	Pagination ListSourcesFromTrackingPlanV1OutputPagination `json:"pagination"`
 	// A paginated list of Sources associated with the Tracking Plan.
 	Sources []SourceV1 `json:"sources"`
+}
+
+func (o *ListSourcesFromTrackingPlanV1Output) GetPagination() ListSourcesFromTrackingPlanV1OutputPagination {
+	if o == nil {
+		return ListSourcesFromTrackingPlanV1OutputPagination{}
+	}
+	return o.Pagination
+}
+
+func (o *ListSourcesFromTrackingPlanV1Output) GetSources() []SourceV1 {
+	if o == nil {
+		return []SourceV1{}
+	}
+	return o.Sources
 }

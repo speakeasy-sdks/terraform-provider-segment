@@ -2,8 +2,8 @@
 
 package shared
 
-// GetAudienceAlphaOutputAudienceSummary - Defines an Audience.
-type GetAudienceAlphaOutputAudienceSummary struct {
+// Audience - The audience summary output.
+type Audience struct {
 	// Date the audience was created.
 	CreatedAt string `json:"createdAt"`
 	// User id who created the audience.
@@ -26,8 +26,85 @@ type GetAudienceAlphaOutputAudienceSummary struct {
 	UpdatedBy string `json:"updatedBy"`
 }
 
+func (o *Audience) GetCreatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedAt
+}
+
+func (o *Audience) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *Audience) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *Audience) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *Audience) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Audience) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *Audience) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *Audience) GetSpaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SpaceID
+}
+
+func (o *Audience) GetUpdatedAt() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedAt
+}
+
+func (o *Audience) GetUpdatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.UpdatedBy
+}
+
 // GetAudienceAlphaOutput - Audience output for update.
 type GetAudienceAlphaOutput struct {
 	// The audience summary output.
-	Audience GetAudienceAlphaOutputAudienceSummary `json:"audience"`
+	Audience Audience `json:"audience"`
+}
+
+func (o *GetAudienceAlphaOutput) GetAudience() Audience {
+	if o == nil {
+		return Audience{}
+	}
+	return o.Audience
 }

@@ -2,11 +2,8 @@
 
 package shared
 
-// GetDestinationsCatalogV1OutputPaginationOutput - Pagination metadata for a list response.
-//
-// Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a
-// paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
-type GetDestinationsCatalogV1OutputPaginationOutput struct {
+// GetDestinationsCatalogV1OutputPagination - Information about the pagination of this response.
+type GetDestinationsCatalogV1OutputPagination struct {
 	// The current cursor within a collection.
 	//
 	// Consumers of the API must treat this value as opaque.
@@ -29,10 +26,52 @@ type GetDestinationsCatalogV1OutputPaginationOutput struct {
 	TotalEntries *float64 `json:"totalEntries,omitempty"`
 }
 
+func (o *GetDestinationsCatalogV1OutputPagination) GetCurrent() string {
+	if o == nil {
+		return ""
+	}
+	return o.Current
+}
+
+func (o *GetDestinationsCatalogV1OutputPagination) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetDestinationsCatalogV1OutputPagination) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
+func (o *GetDestinationsCatalogV1OutputPagination) GetTotalEntries() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalEntries
+}
+
 // GetDestinationsCatalogV1Output - Returns a list of all Destination catalog items contained within a given page.
 type GetDestinationsCatalogV1Output struct {
 	// All Destination catalog items contained within the requested page.
 	DestinationsCatalog []DestinationMetadataV1 `json:"destinationsCatalog"`
 	// Information about the pagination of this response.
-	Pagination GetDestinationsCatalogV1OutputPaginationOutput `json:"pagination"`
+	Pagination GetDestinationsCatalogV1OutputPagination `json:"pagination"`
+}
+
+func (o *GetDestinationsCatalogV1Output) GetDestinationsCatalog() []DestinationMetadataV1 {
+	if o == nil {
+		return []DestinationMetadataV1{}
+	}
+	return o.DestinationsCatalog
+}
+
+func (o *GetDestinationsCatalogV1Output) GetPagination() GetDestinationsCatalogV1OutputPagination {
+	if o == nil {
+		return GetDestinationsCatalogV1OutputPagination{}
+	}
+	return o.Pagination
 }

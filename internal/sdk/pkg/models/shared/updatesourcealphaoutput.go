@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta - Represents a logo.
-type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta struct {
+// UpdateSourceAlphaOutputLogos - The logos for this Source.
+type UpdateSourceAlphaOutputLogos struct {
 	// The alternative text for this logo.
 	Alt *string `json:"alt,omitempty"`
 	// The default URL for this logo.
@@ -12,8 +12,31 @@ type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta struct {
 	Mark *string `json:"mark,omitempty"`
 }
 
-// UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 - A website, server library, mobile SDK, or cloud application which can send data into Segment.
-type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
+func (o *UpdateSourceAlphaOutputLogos) GetAlt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Alt
+}
+
+func (o *UpdateSourceAlphaOutputLogos) GetDefault() string {
+	if o == nil {
+		return ""
+	}
+	return o.Default
+}
+
+func (o *UpdateSourceAlphaOutputLogos) GetMark() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Mark
+}
+
+// UpdateSourceAlphaOutputMetadata - The metadata for the Source.
+//
+// Config API note: includes `catalogName` and `catalogId`.
+type UpdateSourceAlphaOutputMetadata struct {
 	// A list of categories this Source belongs to.
 	Categories []string `json:"categories"`
 	// The description of this Source.
@@ -25,7 +48,7 @@ type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
 	// True if this is a Cloud Event Source.
 	IsCloudEventSource bool `json:"isCloudEventSource"`
 	// The logos for this Source.
-	Logos UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1LogosBeta `json:"logos"`
+	Logos UpdateSourceAlphaOutputLogos `json:"logos"`
 	// The user-friendly name of this Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -38,8 +61,64 @@ type UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 struct {
 	Slug string `json:"slug"`
 }
 
-// UpdateSourceAlphaOutputSourceAlpha - Defines a data Source for Segment data.
-type UpdateSourceAlphaOutputSourceAlpha struct {
+func (o *UpdateSourceAlphaOutputMetadata) GetCategories() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Categories
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetIsCloudEventSource() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsCloudEventSource
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetLogos() UpdateSourceAlphaOutputLogos {
+	if o == nil {
+		return UpdateSourceAlphaOutputLogos{}
+	}
+	return o.Logos
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetOptions() []IntegrationOptionBeta {
+	if o == nil {
+		return []IntegrationOptionBeta{}
+	}
+	return o.Options
+}
+
+func (o *UpdateSourceAlphaOutputMetadata) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+// UpdateSourceAlphaOutputSource - The updated Source.
+type UpdateSourceAlphaOutputSource struct {
 	// Enable to receive data from the Source.
 	Enabled bool `json:"enabled"`
 	// The id of the Source.
@@ -51,7 +130,7 @@ type UpdateSourceAlphaOutputSourceAlpha struct {
 	// The metadata for the Source.
 	//
 	// Config API note: includes `catalogName` and `catalogId`.
-	Metadata UpdateSourceAlphaOutputSourceAlphaSourceMetadataV1 `json:"metadata"`
+	Metadata UpdateSourceAlphaOutputMetadata `json:"metadata"`
 	// The name of the Source.
 	//
 	// Config API note: equal to `displayName`.
@@ -71,8 +150,78 @@ type UpdateSourceAlphaOutputSourceAlpha struct {
 	WriteKeys []string `json:"writeKeys"`
 }
 
+func (o *UpdateSourceAlphaOutputSource) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetLabels() []LabelV1 {
+	if o == nil {
+		return []LabelV1{}
+	}
+	return o.Labels
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetMetadata() UpdateSourceAlphaOutputMetadata {
+	if o == nil {
+		return UpdateSourceAlphaOutputMetadata{}
+	}
+	return o.Metadata
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.Slug
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}
+
+func (o *UpdateSourceAlphaOutputSource) GetWriteKeys() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.WriteKeys
+}
+
 // UpdateSourceAlphaOutput - Returns the updated Source.
 type UpdateSourceAlphaOutput struct {
 	// The updated Source.
-	Source UpdateSourceAlphaOutputSourceAlpha `json:"source"`
+	Source UpdateSourceAlphaOutputSource `json:"source"`
+}
+
+func (o *UpdateSourceAlphaOutput) GetSource() UpdateSourceAlphaOutputSource {
+	if o == nil {
+		return UpdateSourceAlphaOutputSource{}
+	}
+	return o.Source
 }

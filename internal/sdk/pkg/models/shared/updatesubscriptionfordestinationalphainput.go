@@ -2,8 +2,8 @@
 
 package shared
 
-// UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput - The input parameters for updating a Destination subscription.
-type UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput struct {
+// Input - A set of valid Destination input params required for updating.
+type Input struct {
 	// Is the subscription enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The user-defined name for the subscription.
@@ -14,8 +14,43 @@ type UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInpu
 	Trigger *string `json:"trigger,omitempty"`
 }
 
+func (o *Input) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *Input) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Settings
+}
+
+func (o *Input) GetTrigger() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Trigger
+}
+
 // UpdateSubscriptionForDestinationAlphaInput - The basic input parameters for updating a Destination subscription.
 type UpdateSubscriptionForDestinationAlphaInput struct {
 	// A set of valid Destination input params required for updating.
-	Input UpdateSubscriptionForDestinationAlphaInputDestinationSubscriptionUpdateInput `json:"input"`
+	Input Input `json:"input"`
+}
+
+func (o *UpdateSubscriptionForDestinationAlphaInput) GetInput() Input {
+	if o == nil {
+		return Input{}
+	}
+	return o.Input
 }
