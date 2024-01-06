@@ -4,18 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateFunctionDeploymentV1OutputResourceModel) ToCreateSDKType() *operations.CreateFunctionDeploymentRequest {
-	functionID := r.FunctionID.ValueString()
-	out := operations.CreateFunctionDeploymentRequest{
-		FunctionID: functionID,
-	}
-	return &out
-}
-
-func (r *CreateFunctionDeploymentV1OutputResourceModel) RefreshFromCreateResponse(resp *shared.CreateFunctionDeploymentV1Output) {
+func (r *CreateFunctionDeploymentV1OutputResourceModel) RefreshFromSharedCreateFunctionDeploymentV1Output(resp *shared.CreateFunctionDeploymentV1Output) {
 	r.FunctionDeployment.Status = types.StringValue(string(resp.FunctionDeployment.Status))
 }

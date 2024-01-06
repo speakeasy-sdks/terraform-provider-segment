@@ -5,9 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -15,6 +12,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -48,21 +50,36 @@ func (r *AddLabelsToSourceV1InputResource) Schema(ctx context.Context, req resou
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"labels": schema.ListNestedAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.List{
+							speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+						},
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									Computed:    true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{
+										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+									},
 									Description: `An optional description of the purpose of this label.`,
 								},
 								"key": schema.StringAttribute{
-									Computed:    true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{
+										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+									},
 									Description: `The key that represents the name of this label.`,
 								},
 								"value": schema.StringAttribute{
-									Computed:    true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{
+										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+									},
 									Description: `The value associated with the key of this label.`,
 								},
 							},
@@ -74,28 +91,28 @@ func (r *AddLabelsToSourceV1InputResource) Schema(ctx context.Context, req resou
 			},
 			"labels": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
-					listplanmodifier.RequiresReplace(),
+					listplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Optional:    true,
 							Description: `An optional description of the purpose of this label.`,
 						},
 						"key": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `The key that represents the name of this label.`,
 						},
 						"value": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `The value associated with the key of this label.`,
@@ -106,7 +123,7 @@ func (r *AddLabelsToSourceV1InputResource) Schema(ctx context.Context, req resou
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 			},
@@ -136,14 +153,14 @@ func (r *AddLabelsToSourceV1InputResource) Configure(ctx context.Context, req re
 
 func (r *AddLabelsToSourceV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *AddLabelsToSourceV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -152,7 +169,7 @@ func (r *AddLabelsToSourceV1InputResource) Create(ctx context.Context, req resou
 		return
 	}
 
-	addLabelsToSourceV1Input := *data.ToCreateSDKType()
+	addLabelsToSourceV1Input := *data.ToSharedAddLabelsToSourceV1Input()
 	sourceID := data.SourceID.ValueString()
 	request := operations.AddLabelsToSourceRequest{
 		AddLabelsToSourceV1Input: addLabelsToSourceV1Input,
@@ -178,7 +195,8 @@ func (r *AddLabelsToSourceV1InputResource) Create(ctx context.Context, req resou
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsAddLabelsToSourceResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -210,6 +228,13 @@ func (r *AddLabelsToSourceV1InputResource) Read(ctx context.Context, req resourc
 
 func (r *AddLabelsToSourceV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *AddLabelsToSourceV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

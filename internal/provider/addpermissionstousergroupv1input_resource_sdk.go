@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *AddPermissionsToUserGroupV1InputResourceModel) ToCreateSDKType() *shared.AddPermissionsToUserGroupV1Input {
+func (r *AddPermissionsToUserGroupV1InputResourceModel) ToSharedAddPermissionsToUserGroupV1Input() *shared.AddPermissionsToUserGroupV1Input {
 	var permissions []shared.PermissionInputV1 = nil
 	for _, permissionsItem := range r.Permissions {
 		var resources []shared.PermissionResourceV1 = nil
@@ -49,7 +49,7 @@ func (r *AddPermissionsToUserGroupV1InputResourceModel) ToCreateSDKType() *share
 	return &out
 }
 
-func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *operations.AddPermissionsToUserGroupResponseBody) {
+func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromOperationsAddPermissionsToUserGroupResponseBody(resp *operations.AddPermissionsToUserGroupResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

@@ -5,9 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -16,6 +13,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -49,9 +50,15 @@ func (r *AddSourceToTrackingPlanV1InputResource) Schema(ctx context.Context, req
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"status": schema.StringAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.String{
+							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+						},
 						MarkdownDescription: `must be one of ["SUCCESS"]` + "\n" +
 							`The operation status.`,
 						Validators: []validator.String{
@@ -65,7 +72,7 @@ func (r *AddSourceToTrackingPlanV1InputResource) Schema(ctx context.Context, req
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `The id of the Source associated with the Tracking Plan.` + "\n" +
@@ -74,7 +81,7 @@ func (r *AddSourceToTrackingPlanV1InputResource) Schema(ctx context.Context, req
 			},
 			"tracking_plan_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 			},
@@ -104,14 +111,14 @@ func (r *AddSourceToTrackingPlanV1InputResource) Configure(ctx context.Context, 
 
 func (r *AddSourceToTrackingPlanV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *AddSourceToTrackingPlanV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -120,7 +127,7 @@ func (r *AddSourceToTrackingPlanV1InputResource) Create(ctx context.Context, req
 		return
 	}
 
-	addSourceToTrackingPlanV1Input := *data.ToCreateSDKType()
+	addSourceToTrackingPlanV1Input := *data.ToSharedAddSourceToTrackingPlanV1Input()
 	trackingPlanID := data.TrackingPlanID.ValueString()
 	request := operations.AddSourceToTrackingPlanRequest{
 		AddSourceToTrackingPlanV1Input: addSourceToTrackingPlanV1Input,
@@ -146,7 +153,8 @@ func (r *AddSourceToTrackingPlanV1InputResource) Create(ctx context.Context, req
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsAddSourceToTrackingPlanResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -178,6 +186,13 @@ func (r *AddSourceToTrackingPlanV1InputResource) Read(ctx context.Context, req r
 
 func (r *AddSourceToTrackingPlanV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *AddSourceToTrackingPlanV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

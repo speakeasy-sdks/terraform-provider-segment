@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,6 +15,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_boolplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/boolplanmodifier"
+	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
+	speakeasy_numberplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/numberplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -54,67 +58,112 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 		Attributes: map[string]schema.Attribute{
 			"code": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				Description: `The Function code.`,
 			},
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"function": schema.SingleNestedAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.Object{
+							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+						},
 						Attributes: map[string]schema.Attribute{
 							"batch_max_count": schema.NumberAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Number{
+									speakeasy_numberplanmodifier.SuppressDiff(speakeasy_numberplanmodifier.Standard),
+								},
 								Description: `The max count of the batch for this Function.`,
 							},
 							"catalog_id": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The catalog id of this Function.`,
 							},
 							"code": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The Function code.`,
 							},
 							"created_at": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The time this Function was created.`,
 							},
 							"created_by": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The id of the user who created this Function.`,
 							},
 							"deployed_at": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The time of this Function's last deployment.`,
 							},
 							"description": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `A description for this Function.`,
 							},
 							"display_name": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `A display name for this Function.`,
 							},
 							"id": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `An identifier for this Function.`,
 							},
 							"is_latest_version": schema.BoolAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{
+									speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+								},
 								Description: `Whether the deployment of this Function is the latest version.`,
 							},
 							"logo_url": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The URL of the logo for this Function.`,
 							},
 							"preview_webhook_url": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The preview webhook URL for this Function.`,
 							},
 							"resource_type": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]` + "\n" +
 									`The Function type.` + "\n" +
 									`` + "\n" +
@@ -129,30 +178,51 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 							},
 							"settings": schema.ListNestedAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.List{
+									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{
+												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+											},
 											Description: `A description of this Function Setting.`,
 										},
 										"label": schema.StringAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{
+												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+											},
 											Description: `The label for this Function Setting.`,
 										},
 										"name": schema.StringAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{
+												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+											},
 											Description: `The name of this Function Setting.`,
 										},
 										"required": schema.BoolAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{
+												speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+											},
 											Description: `Whether this Function Setting is required.`,
 										},
 										"sensitive": schema.BoolAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{
+												speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+											},
 											Description: `Whether this Function Setting contains sensitive information.`,
 										},
 										"type": schema.StringAttribute{
 											Computed: true,
+											PlanModifiers: []planmodifier.String{
+												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+											},
 											MarkdownDescription: `must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]` + "\n" +
 												`The type of this Function Setting.`,
 											Validators: []validator.String{
@@ -176,14 +246,14 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 			},
 			"description": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
 				Description: `A description for this Function.`,
 			},
 			"display_name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `A display name for this Function.` + "\n" +
@@ -192,14 +262,14 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 			},
 			"logo_url": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
 				Description: `The URL of the logo for this Function.`,
 			},
 			"resource_type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]` + "\n" +
@@ -216,49 +286,49 @@ func (r *CreateFunctionV1InputResource) Schema(ctx context.Context, req resource
 			},
 			"settings": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
-					listplanmodifier.RequiresReplace(),
+					listplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional: true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `A description of this Function Setting.`,
 						},
 						"label": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `The label for this Function Setting.`,
 						},
 						"name": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `The name of this Function Setting.`,
 						},
 						"required": schema.BoolAttribute{
 							PlanModifiers: []planmodifier.Bool{
-								boolplanmodifier.RequiresReplace(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `Whether this Function Setting is required.`,
 						},
 						"sensitive": schema.BoolAttribute{
 							PlanModifiers: []planmodifier.Bool{
-								boolplanmodifier.RequiresReplace(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `Whether this Function Setting contains sensitive information.`,
 						},
 						"type": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required: true,
 							MarkdownDescription: `must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]` + "\n" +
@@ -302,14 +372,14 @@ func (r *CreateFunctionV1InputResource) Configure(ctx context.Context, req resou
 
 func (r *CreateFunctionV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateFunctionV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -318,7 +388,7 @@ func (r *CreateFunctionV1InputResource) Create(ctx context.Context, req resource
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedCreateFunctionV1Input()
 	res, err := r.client.Functions.CreateFunction(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -339,7 +409,8 @@ func (r *CreateFunctionV1InputResource) Create(ctx context.Context, req resource
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateFunctionResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -371,6 +442,13 @@ func (r *CreateFunctionV1InputResource) Read(ctx context.Context, req resource.R
 
 func (r *CreateFunctionV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateFunctionV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

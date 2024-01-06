@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -18,6 +16,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_boolplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/boolplanmodifier"
+	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
+	speakeasy_mapplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/mapplanmodifier"
+	speakeasy_numberplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/numberplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
@@ -55,45 +60,78 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"destination": schema.SingleNestedAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.Object{
+							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+						},
 						Attributes: map[string]schema.Attribute{
 							"enabled": schema.BoolAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{
+									speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+								},
 								Description: `Whether this instance of a Destination receives data.`,
 							},
 							"id": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The unique identifier of this instance of a Destination.` + "\n" +
 									`` + "\n" +
 									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
 							},
 							"metadata": schema.SingleNestedAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.Object{
+									speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+								},
 								Attributes: map[string]schema.Attribute{
 									"actions": schema.ListNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"default_trigger": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `The default value used as the trigger when connecting this action.`,
 												},
 												"description": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `A human-readable description of the action. May include Markdown.`,
 												},
 												"fields": schema.ListNestedAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.List{
+														speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+													},
 													NestedObject: schema.NestedAttributeObject{
 														Attributes: map[string]schema.Attribute{
 															"allow_null": schema.BoolAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Bool{
+																	speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+																},
 																Description: `Whether this field allows null values.`,
 															},
 															"choices": schema.StringAttribute{
 																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																MarkdownDescription: `Parsed as JSON.` + "\n" +
 																	`A list of machine-readable value/label pairs to populate a static dropdown.`,
 																Validators: []validator.String{
@@ -102,6 +140,9 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 															},
 															"default_value": schema.StringAttribute{
 																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																MarkdownDescription: `Parsed as JSON.` + "\n" +
 																	`A default value that is saved the first time an action is created.`,
 																Validators: []validator.String{
@@ -109,43 +150,73 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 																},
 															},
 															"description": schema.StringAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																Description: `A human-readable description of this value. You can use Markdown.`,
 															},
 															"dynamic": schema.BoolAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Bool{
+																	speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+																},
 																Description: `Whether this field should execute a dynamic request to fetch choices to populate a dropdown. When true, ` + "`" + `choices` + "`" + ` is ignored.`,
 															},
 															"field_key": schema.StringAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																Description: `A unique machine-readable key for the field. Should ideally match the expected key in the action\'s API request.`,
 															},
 															"id": schema.StringAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																Description: `The primary key of the field.`,
 															},
 															"label": schema.StringAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																Description: `A human-readable label for this value.`,
 															},
 															"multiple": schema.BoolAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Bool{
+																	speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+																},
 																Description: `Whether a user can provide multiples of this field.`,
 															},
 															"placeholder": schema.StringAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																Description: `An example value displayed but not saved.`,
 															},
 															"required": schema.BoolAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Bool{
+																	speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+																},
 																Description: `Whether this field is required.`,
 															},
 															"sort_order": schema.NumberAttribute{
-																Computed:    true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Number{
+																	speakeasy_numberplanmodifier.SuppressDiff(speakeasy_numberplanmodifier.Standard),
+																},
 																Description: `The order this particular field is (used in the UI for displaying the fields in a specified order).`,
 															},
 															"type": schema.StringAttribute{
 																Computed: true,
+																PlanModifiers: []planmodifier.String{
+																	speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																},
 																MarkdownDescription: `must be one of ["BOOLEAN", "DATETIME", "HIDDEN", "INTEGER", "NUMBER", "OBJECT", "PASSWORD", "STRING", "TEXT"]` + "\n" +
 																	`The data type for this value.`,
 																Validators: []validator.String{
@@ -167,19 +238,31 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 													Description: `The fields expected in order to perform the action.`,
 												},
 												"hidden": schema.BoolAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{
+														speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+													},
 													Description: `Whether the action should be hidden.`,
 												},
 												"id": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `The primary key of the action.`,
 												},
 												"name": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `A human-readable name for the action.`,
 												},
 												"platform": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `must be one of ["CLOUD", "MOBILE", "WEB"]` + "\n" +
 														`The platform on which this action runs.`,
 													Validators: []validator.String{
@@ -191,7 +274,10 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 													},
 												},
 												"slug": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `A machine-readable key unique to the action definition.`,
 												},
 											},
@@ -199,20 +285,32 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 										Description: `Actions available for the Destination.`,
 									},
 									"categories": schema.ListAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										ElementType: types.StringType,
 										Description: `A list of categories with which the Destination is associated.`,
 									},
 									"components": schema.ListNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"code": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `Link to the repository hosting the code for this component.`,
 												},
 												"owner": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `must be one of ["PARTNER", "SEGMENT"]` + "\n" +
 														`The owner of this component. Either 'SEGMENT' or 'PARTNER'.`,
 													Validators: []validator.String{
@@ -224,6 +322,9 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 												},
 												"type": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `must be one of ["ANDROID", "BROWSER", "IOS", "SERVER"]` + "\n" +
 														`The component type.`,
 													Validators: []validator.String{
@@ -241,22 +342,37 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 									},
 									"contacts": schema.ListNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"email": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `Email of this contact.`,
 												},
 												"is_primary": schema.BoolAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{
+														speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+													},
 													Description: `Whether this is a primary contact.`,
 												},
 												"name": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `Name of this contact.`,
 												},
 												"role": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `Role of this contact.`,
 												},
 											},
@@ -264,28 +380,46 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 										Description: `Contact info for Integration Owners.`,
 									},
 									"description": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `The description of the Destination.`,
 									},
 									"id": schema.StringAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										MarkdownDescription: `The id of the Destination metadata.` + "\n" +
 											`` + "\n" +
 											`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
 									},
 									"logos": schema.SingleNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.Object{
+											speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+										},
 										Attributes: map[string]schema.Attribute{
 											"alt": schema.StringAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												Description: `The alternative text for this logo.`,
 											},
 											"default": schema.StringAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												Description: `The default URL for this logo.`,
 											},
 											"mark": schema.StringAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												Description: `The logo mark.`,
 											},
 										},
@@ -293,16 +427,25 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 									},
 									"name": schema.StringAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										MarkdownDescription: `The user-friendly name of the Destination.` + "\n" +
 											`` + "\n" +
 											`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
 									},
 									"options": schema.ListNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"default_value": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `Parsed as JSON.` + "\n" +
 														`An optional default value for the field.`,
 													Validators: []validator.String{
@@ -310,23 +453,38 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 													},
 												},
 												"description": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `An optional short text description of the field.`,
 												},
 												"label": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `An optional label for this field.`,
 												},
 												"name": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `The name identifying this option in the context of a Segment Integration.`,
 												},
 												"required": schema.BoolAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{
+														speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+													},
 													Description: `Whether this is a required option when setting up the Integration.`,
 												},
 												"type": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `Defines the type for this option in the schema. Types are most commonly strings, but may also represent other` + "\n" +
 														`primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.`,
 												},
@@ -335,19 +493,31 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 										Description: `Options configured for the Destination.`,
 									},
 									"partner_owned": schema.BoolAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{
+											speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+										},
 										Description: `Partner Owned flag.`,
 									},
 									"presets": schema.ListNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"action_id": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `The unique identifier for the Destination Action to trigger.`,
 												},
 												"fields": schema.MapAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Map{
+														speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
+													},
 													ElementType: types.StringType,
 													Description: `The default settings for action fields.`,
 													Validators: []validator.Map{
@@ -355,11 +525,17 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 													},
 												},
 												"name": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `The name of the subscription.`,
 												},
 												"trigger": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `FQL string that describes what events should trigger an action. See https://segment.com/docs/config-api/fql/ for more information regarding Segment's Filter Query Language (FQL).`,
 												},
 											},
@@ -367,21 +543,33 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 										Description: `Predefined Destination subscriptions that can optionally be applied when connecting a new instance of the Destination.`,
 									},
 									"previous_names": schema.ListAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										ElementType: types.StringType,
 										Description: `A list of names previously used by the Destination.`,
 									},
 									"region_endpoints": schema.ListAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										ElementType: types.StringType,
 										Description: `The list of regional endpoints for this Destination.`,
 									},
 									"slug": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `The slug used to identify the Destination in the Segment app.`,
 									},
 									"status": schema.StringAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										MarkdownDescription: `must be one of ["DEPRECATED", "PRIVATE_BETA", "PRIVATE_BUILDING", "PRIVATE_SUBMITTED", "PUBLIC", "PUBLIC_BETA", "UNAVAILABLE"]` + "\n" +
 											`Support status of the Destination.`,
 										Validators: []validator.String{
@@ -398,17 +586,29 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 									},
 									"supported_features": schema.SingleNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.Object{
+											speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+										},
 										Attributes: map[string]schema.Attribute{
 											"browser_unbundling": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Whether this Destination supports browser unbundling.`,
 											},
 											"browser_unbundling_public": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Whether this Destination supports public browser unbundling.`,
 											},
 											"cloud_mode_instances": schema.StringAttribute{
 												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												MarkdownDescription: `must be one of ["0", "1", "MULTIPLE", "NONE", "SINGLE"]` + "\n" +
 													`This Destination's support level for cloud mode instances.` + "\n" +
 													`The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.`,
@@ -424,6 +624,9 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 											},
 											"device_mode_instances": schema.StringAttribute{
 												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												MarkdownDescription: `must be one of ["0", "1", "NONE", "SINGLE"]` + "\n" +
 													`This Destination's support level for device mode instances.` + "\n" +
 													`Support for multiple device mode instances is currently not planned.` + "\n" +
@@ -438,7 +641,10 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 												},
 											},
 											"replay": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Whether this Destination supports replays.`,
 											},
 										},
@@ -448,25 +654,43 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 									},
 									"supported_methods": schema.SingleNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.Object{
+											speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+										},
 										Attributes: map[string]schema.Attribute{
 											"alias": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Identifies if the Destination supports the ` + "`" + `alias` + "`" + ` method.`,
 											},
 											"group": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Identifies if the Destination supports the ` + "`" + `group` + "`" + ` method.`,
 											},
 											"identify": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Identifies if the Destination supports the ` + "`" + `identify` + "`" + ` method.`,
 											},
 											"pageview": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Identifies if the Destination supports the ` + "`" + `pageview` + "`" + ` method.`,
 											},
 											"track": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Identifies if the Destination supports the ` + "`" + `track` + "`" + ` method.`,
 											},
 										},
@@ -476,17 +700,29 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 									},
 									"supported_platforms": schema.SingleNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.Object{
+											speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+										},
 										Attributes: map[string]schema.Attribute{
 											"browser": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Whether this Destination supports browser events.`,
 											},
 											"mobile": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Whether this Destination supports mobile events.`,
 											},
 											"server": schema.BoolAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{
+													speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+												},
 												Description: `Whether this Destination supports server events.`,
 											},
 										},
@@ -495,12 +731,18 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 											`Config API note: equal to ` + "`" + `platforms` + "`" + `.`,
 									},
 									"supported_regions": schema.ListAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										ElementType: types.StringType,
 										Description: `A list of supported regions for this Destination.`,
 									},
 									"website": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `A website URL for this Destination.`,
 									},
 								},
@@ -508,12 +750,18 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 							},
 							"name": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The name of this instance of a Destination.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
 							},
 							"settings": schema.MapAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Map{
+									speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
+								},
 								ElementType: types.StringType,
 								MarkdownDescription: `The collection of settings associated with a Destination.` + "\n" +
 									`` + "\n" +
@@ -524,6 +772,9 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 							},
 							"source_id": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The id of a Source connected to this instance of a Destination.` + "\n" +
 									`` + "\n" +
 									`Config API note: analogous to ` + "`" + `parent` + "`" + `.`,
@@ -536,21 +787,21 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 			},
 			"enabled": schema.BoolAttribute{
 				PlanModifiers: []planmodifier.Bool{
-					boolplanmodifier.RequiresReplace(),
+					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
 				Description: `Whether this Destination should receive data.`,
 			},
 			"metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				Description: `The id of the metadata to link to the new Destination.`,
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional: true,
 				MarkdownDescription: `Defines the display name of the Destination.` + "\n" +
@@ -559,7 +810,7 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 			},
 			"settings": schema.MapAttribute{
 				PlanModifiers: []planmodifier.Map{
-					mapplanmodifier.RequiresReplace(),
+					mapplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				ElementType: types.StringType,
@@ -573,7 +824,7 @@ func (r *CreateDestinationV1InputResource) Schema(ctx context.Context, req resou
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `The id of the Source to connect to this Destination instance.` + "\n" +
@@ -606,14 +857,14 @@ func (r *CreateDestinationV1InputResource) Configure(ctx context.Context, req re
 
 func (r *CreateDestinationV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateDestinationV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -622,7 +873,7 @@ func (r *CreateDestinationV1InputResource) Create(ctx context.Context, req resou
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedCreateDestinationV1Input()
 	res, err := r.client.Destinations.CreateDestination(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -643,7 +894,8 @@ func (r *CreateDestinationV1InputResource) Create(ctx context.Context, req resou
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateDestinationResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -675,6 +927,13 @@ func (r *CreateDestinationV1InputResource) Read(ctx context.Context, req resourc
 
 func (r *CreateDestinationV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateDestinationV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

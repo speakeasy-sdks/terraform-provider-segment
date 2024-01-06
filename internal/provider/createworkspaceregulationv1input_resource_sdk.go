@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateWorkspaceRegulationV1InputResourceModel) ToCreateSDKType() *shared.CreateWorkspaceRegulationV1Input {
+func (r *CreateWorkspaceRegulationV1InputResourceModel) ToSharedCreateWorkspaceRegulationV1Input() *shared.CreateWorkspaceRegulationV1Input {
 	regulationType := shared.CreateWorkspaceRegulationV1InputRegulationType(r.RegulationType.ValueString())
 	var subjectIds []string = nil
 	for _, subjectIdsItem := range r.SubjectIds {
@@ -23,7 +23,7 @@ func (r *CreateWorkspaceRegulationV1InputResourceModel) ToCreateSDKType() *share
 	return &out
 }
 
-func (r *CreateWorkspaceRegulationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateWorkspaceRegulationResponseBody) {
+func (r *CreateWorkspaceRegulationV1InputResourceModel) RefreshFromOperationsCreateWorkspaceRegulationResponseBody(resp *operations.CreateWorkspaceRegulationResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,6 +15,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_boolplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/boolplanmodifier"
+	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
+	speakeasy_mapplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/mapplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
@@ -53,57 +57,99 @@ func (r *CreateWarehouseV1InputResource) Schema(ctx context.Context, req resourc
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"warehouse": schema.SingleNestedAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.Object{
+							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+						},
 						Attributes: map[string]schema.Attribute{
 							"enabled": schema.BoolAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{
+									speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+								},
 								Description: `When set to true, this Warehouse receives data.`,
 							},
 							"id": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The id of the Warehouse.`,
 							},
 							"metadata": schema.SingleNestedAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.Object{
+									speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+								},
 								Attributes: map[string]schema.Attribute{
 									"description": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `A description, in English, of this object.`,
 									},
 									"id": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `The id of this object.`,
 									},
 									"logos": schema.SingleNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.Object{
+											speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+										},
 										Attributes: map[string]schema.Attribute{
 											"alt": schema.StringAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												Description: `The alternative text for this logo.`,
 											},
 											"default": schema.StringAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												Description: `The default URL for this logo.`,
 											},
 											"mark": schema.StringAttribute{
-												Computed:    true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{
+													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+												},
 												Description: `The logo mark.`,
 											},
 										},
 										Description: `Logo information for this object.`,
 									},
 									"name": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `The name of this object.`,
 									},
 									"options": schema.ListNestedAttribute{
 										Computed: true,
+										PlanModifiers: []planmodifier.List{
+											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"default_value": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `Parsed as JSON.` + "\n" +
 														`An optional default value for the field.`,
 													Validators: []validator.String{
@@ -111,23 +157,38 @@ func (r *CreateWarehouseV1InputResource) Schema(ctx context.Context, req resourc
 													},
 												},
 												"description": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `An optional short text description of the field.`,
 												},
 												"label": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `An optional label for this field.`,
 												},
 												"name": schema.StringAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													Description: `The name identifying this option in the context of a Segment Integration.`,
 												},
 												"required": schema.BoolAttribute{
-													Computed:    true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{
+														speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
+													},
 													Description: `Whether this is a required option when setting up the Integration.`,
 												},
 												"type": schema.StringAttribute{
 													Computed: true,
+													PlanModifiers: []planmodifier.String{
+														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+													},
 													MarkdownDescription: `Defines the type for this option in the schema. Types are most commonly strings, but may also represent other` + "\n" +
 														`primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.`,
 												},
@@ -136,14 +197,20 @@ func (r *CreateWarehouseV1InputResource) Schema(ctx context.Context, req resourc
 										Description: `The Integration options for this object.`,
 									},
 									"slug": schema.StringAttribute{
-										Computed:    true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{
+											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+										},
 										Description: `A human-readable, unique identifier for object.`,
 									},
 								},
 								Description: `The metadata for the Warehouse.`,
 							},
 							"settings": schema.MapAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Map{
+									speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
+								},
 								ElementType: types.StringType,
 								MarkdownDescription: `The settings associated with this Warehouse.` + "\n" +
 									`` + "\n" +
@@ -153,7 +220,10 @@ func (r *CreateWarehouseV1InputResource) Schema(ctx context.Context, req resourc
 								},
 							},
 							"workspace_id": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The id of the Workspace that owns this Warehouse.`,
 							},
 						},
@@ -164,28 +234,28 @@ func (r *CreateWarehouseV1InputResource) Schema(ctx context.Context, req resourc
 			},
 			"enabled": schema.BoolAttribute{
 				PlanModifiers: []planmodifier.Bool{
-					boolplanmodifier.RequiresReplace(),
+					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
 				Description: `Enable to allow this Warehouse to receive data. Defaults to true.`,
 			},
 			"metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				Description: `The Warehouse metadata to use.`,
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
 				Description: `An optional human-readable name for this Warehouse.`,
 			},
 			"settings": schema.MapAttribute{
 				PlanModifiers: []planmodifier.Map{
-					mapplanmodifier.RequiresReplace(),
+					mapplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				ElementType: types.StringType,
@@ -226,14 +296,14 @@ func (r *CreateWarehouseV1InputResource) Configure(ctx context.Context, req reso
 
 func (r *CreateWarehouseV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateWarehouseV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -242,7 +312,7 @@ func (r *CreateWarehouseV1InputResource) Create(ctx context.Context, req resourc
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedCreateWarehouseV1Input()
 	res, err := r.client.Warehouses.CreateWarehouse(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -263,7 +333,8 @@ func (r *CreateWarehouseV1InputResource) Create(ctx context.Context, req resourc
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateWarehouseResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -295,6 +366,13 @@ func (r *CreateWarehouseV1InputResource) Read(ctx context.Context, req resource.
 
 func (r *CreateWarehouseV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateWarehouseV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

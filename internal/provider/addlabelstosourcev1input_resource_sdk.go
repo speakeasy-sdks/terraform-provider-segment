@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *AddLabelsToSourceV1InputResourceModel) ToCreateSDKType() *shared.AddLabelsToSourceV1Input {
+func (r *AddLabelsToSourceV1InputResourceModel) ToSharedAddLabelsToSourceV1Input() *shared.AddLabelsToSourceV1Input {
 	var labels []shared.LabelV1 = nil
 	for _, labelsItem := range r.Labels {
 		description := new(string)
@@ -31,7 +31,7 @@ func (r *AddLabelsToSourceV1InputResourceModel) ToCreateSDKType() *shared.AddLab
 	return &out
 }
 
-func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromCreateResponse(resp *operations.AddLabelsToSourceResponseBody) {
+func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromOperationsAddLabelsToSourceResponseBody(resp *operations.AddLabelsToSourceResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

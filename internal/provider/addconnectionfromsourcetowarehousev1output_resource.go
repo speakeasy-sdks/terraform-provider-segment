@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -15,6 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -48,12 +49,15 @@ func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Schema(ctx context.
 		Attributes: map[string]schema.Attribute{
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 			},
 			"status": schema.StringAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+				},
 				MarkdownDescription: `must be one of ["CONNECTED", "NOT_CONNECTED"]` + "\n" +
 					`The status of the connection between the Source and Warehouse.`,
 				Validators: []validator.String{
@@ -65,7 +69,7 @@ func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Schema(ctx context.
 			},
 			"warehouse_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 			},
@@ -95,14 +99,14 @@ func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Configure(ctx conte
 
 func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *AddConnectionFromSourceToWarehouseV1OutputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -111,7 +115,12 @@ func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Create(ctx context.
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	sourceID := data.SourceID.ValueString()
+	warehouseID := data.WarehouseID.ValueString()
+	request := operations.AddConnectionFromSourceToWarehouseRequest{
+		SourceID:    sourceID,
+		WarehouseID: warehouseID,
+	}
 	res, err := r.client.Warehouses.AddConnectionFromSourceToWarehouse(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -128,11 +137,12 @@ func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Create(ctx context.
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.TwoHundredApplicationJSONObject == nil || res.TwoHundredApplicationJSONObject.Data == nil {
+	if res.TwoHundredApplicationJSONObject == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject.Data)
+	data.RefreshFromSharedAddConnectionFromSourceToWarehouseV1Output(res.TwoHundredApplicationJSONObject.Data)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -164,6 +174,13 @@ func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Read(ctx context.Co
 
 func (r *AddConnectionFromSourceToWarehouseV1OutputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *AddConnectionFromSourceToWarehouseV1OutputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateLabelV1InputResourceModel) ToCreateSDKType() *shared.CreateLabelV1Input {
+func (r *CreateLabelV1InputResourceModel) ToSharedCreateLabelV1Input() *shared.CreateLabelV1Input {
 	description := new(string)
 	if !r.Label.Description.IsUnknown() && !r.Label.Description.IsNull() {
 		*description = r.Label.Description.ValueString()
@@ -28,7 +28,7 @@ func (r *CreateLabelV1InputResourceModel) ToCreateSDKType() *shared.CreateLabelV
 	return &out
 }
 
-func (r *CreateLabelV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateLabelResponseBody) {
+func (r *CreateLabelV1InputResourceModel) RefreshFromOperationsCreateLabelResponseBody(resp *operations.CreateLabelResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

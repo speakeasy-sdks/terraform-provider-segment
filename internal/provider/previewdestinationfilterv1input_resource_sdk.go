@@ -9,7 +9,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *PreviewDestinationFilterV1InputResourceModel) ToCreateSDKType() *shared.PreviewDestinationFilterV1Input {
+func (r *PreviewDestinationFilterV1InputResourceModel) ToSharedPreviewDestinationFilterV1Input() *shared.PreviewDestinationFilterV1Input {
 	var actions []shared.DestinationFilterActionV1 = nil
 	for _, actionsItem := range r.Filter.Actions {
 		fields := make(map[string]interface{})
@@ -56,7 +56,7 @@ func (r *PreviewDestinationFilterV1InputResourceModel) ToCreateSDKType() *shared
 	return &out
 }
 
-func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromCreateResponse(resp *operations.PreviewDestinationFilterResponseBody) {
+func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromOperationsPreviewDestinationFilterResponseBody(resp *operations.PreviewDestinationFilterResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

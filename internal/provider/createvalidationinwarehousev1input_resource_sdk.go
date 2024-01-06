@@ -9,7 +9,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateValidationInWarehouseV1InputResourceModel) ToCreateSDKType() *shared.CreateValidationInWarehouseV1Input {
+func (r *CreateValidationInWarehouseV1InputResourceModel) ToSharedCreateValidationInWarehouseV1Input() *shared.CreateValidationInWarehouseV1Input {
 	metadataID := r.MetadataID.ValueString()
 	settings := make(map[string]interface{})
 	for settingsKey, settingsValue := range r.Settings {
@@ -24,7 +24,7 @@ func (r *CreateValidationInWarehouseV1InputResourceModel) ToCreateSDKType() *sha
 	return &out
 }
 
-func (r *CreateValidationInWarehouseV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateValidationInWarehouseResponseBody) {
+func (r *CreateValidationInWarehouseV1InputResourceModel) RefreshFromOperationsCreateValidationInWarehouseResponseBody(resp *operations.CreateValidationInWarehouseResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

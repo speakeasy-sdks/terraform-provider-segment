@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateTrackingPlanV1InputResourceModel) ToCreateSDKType() *shared.CreateTrackingPlanV1Input {
+func (r *CreateTrackingPlanV1InputResourceModel) ToSharedCreateTrackingPlanV1Input() *shared.CreateTrackingPlanV1Input {
 	description := new(string)
 	if !r.Description.IsUnknown() && !r.Description.IsNull() {
 		*description = r.Description.ValueString()
@@ -25,7 +25,7 @@ func (r *CreateTrackingPlanV1InputResourceModel) ToCreateSDKType() *shared.Creat
 	return &out
 }
 
-func (r *CreateTrackingPlanV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateTrackingPlanResponseBody) {
+func (r *CreateTrackingPlanV1InputResourceModel) RefreshFromOperationsCreateTrackingPlanResponseBody(resp *operations.CreateTrackingPlanResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

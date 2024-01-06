@@ -9,7 +9,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateSourceV1InputResourceModel) ToCreateSDKType() *shared.CreateSourceV1Input {
+func (r *CreateSourceV1InputResourceModel) ToSharedCreateSourceV1Input() *shared.CreateSourceV1Input {
 	enabled := r.Enabled.ValueBool()
 	metadataID := r.MetadataID.ValueString()
 	settings := make(map[string]interface{})
@@ -28,7 +28,7 @@ func (r *CreateSourceV1InputResourceModel) ToCreateSDKType() *shared.CreateSourc
 	return &out
 }
 
-func (r *CreateSourceV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateSourceResponseBody) {
+func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResponseBody(resp *operations.CreateSourceResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateTransformationV1InputResourceModel) ToCreateSDKType() *shared.CreateTransformationV1Input {
+func (r *CreateTransformationV1InputResourceModel) ToSharedCreateTransformationV1Input() *shared.CreateTransformationV1Input {
 	destinationMetadataID := new(string)
 	if !r.DestinationMetadataID.IsUnknown() && !r.DestinationMetadataID.IsNull() {
 		*destinationMetadataID = r.DestinationMetadataID.ValueString()
@@ -69,7 +69,7 @@ func (r *CreateTransformationV1InputResourceModel) ToCreateSDKType() *shared.Cre
 	return &out
 }
 
-func (r *CreateTransformationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateTransformationResponseBody) {
+func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTransformationResponseBody(resp *operations.CreateTransformationResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

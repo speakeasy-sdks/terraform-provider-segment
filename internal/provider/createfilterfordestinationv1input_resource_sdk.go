@@ -10,7 +10,7 @@ import (
 	"math/big"
 )
 
-func (r *CreateFilterForDestinationV1InputResourceModel) ToCreateSDKType() *shared.CreateFilterForDestinationV1Input {
+func (r *CreateFilterForDestinationV1InputResourceModel) ToSharedCreateFilterForDestinationV1Input() *shared.CreateFilterForDestinationV1Input {
 	var actions []shared.DestinationFilterActionV1 = nil
 	for _, actionsItem := range r.Actions {
 		fields := make(map[string]interface{})
@@ -60,7 +60,7 @@ func (r *CreateFilterForDestinationV1InputResourceModel) ToCreateSDKType() *shar
 	return &out
 }
 
-func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateFilterForDestinationResponseBody) {
+func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromOperationsCreateFilterForDestinationResponseBody(resp *operations.CreateFilterForDestinationResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

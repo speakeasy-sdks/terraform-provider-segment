@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -15,6 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -49,40 +50,64 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"tracking_plan": schema.SingleNestedAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.Object{
+							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+						},
 						Attributes: map[string]schema.Attribute{
 							"created_at": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The timestamp of this Tracking Plan's creation.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `createTime` + "`" + `.`,
 							},
 							"description": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The Tracking Plan's description.`,
 							},
 							"id": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The Tracking Plan's identifier.` + "\n" +
 									`` + "\n" +
 									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
 							},
 							"name": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The Tracking Plan's name.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
 							},
 							"slug": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `URL-friendly slug of this Tracking Plan.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `name` + "`" + `.`,
 							},
 							"type": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
 									`The Tracking Plan's type.`,
 								Validators: []validator.String{
@@ -97,6 +122,9 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 							},
 							"updated_at": schema.StringAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								MarkdownDescription: `The timestamp of the last change to the Tracking Plan.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `updateTime` + "`" + `.`,
@@ -109,14 +137,14 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 			},
 			"description": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
 				Description: `The Tracking Plan's description.`,
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `The Tracking Plan's name.` + "\n" +
@@ -125,7 +153,7 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 			},
 			"type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
@@ -166,14 +194,14 @@ func (r *CreateTrackingPlanV1InputResource) Configure(ctx context.Context, req r
 
 func (r *CreateTrackingPlanV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateTrackingPlanV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -182,7 +210,7 @@ func (r *CreateTrackingPlanV1InputResource) Create(ctx context.Context, req reso
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedCreateTrackingPlanV1Input()
 	res, err := r.client.TrackingPlans.CreateTrackingPlan(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -203,7 +231,8 @@ func (r *CreateTrackingPlanV1InputResource) Create(ctx context.Context, req reso
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateTrackingPlanResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -235,6 +264,13 @@ func (r *CreateTrackingPlanV1InputResource) Read(ctx context.Context, req resour
 
 func (r *CreateTrackingPlanV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateTrackingPlanV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

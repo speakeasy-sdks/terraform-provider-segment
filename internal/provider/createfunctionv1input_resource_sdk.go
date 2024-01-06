@@ -9,7 +9,7 @@ import (
 	"math/big"
 )
 
-func (r *CreateFunctionV1InputResourceModel) ToCreateSDKType() *shared.CreateFunctionV1Input {
+func (r *CreateFunctionV1InputResourceModel) ToSharedCreateFunctionV1Input() *shared.CreateFunctionV1Input {
 	code := r.Code.ValueString()
 	description := new(string)
 	if !r.Description.IsUnknown() && !r.Description.IsNull() {
@@ -53,7 +53,7 @@ func (r *CreateFunctionV1InputResourceModel) ToCreateSDKType() *shared.CreateFun
 	return &out
 }
 
-func (r *CreateFunctionV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateFunctionResponseBody) {
+func (r *CreateFunctionV1InputResourceModel) RefreshFromOperationsCreateFunctionResponseBody(resp *operations.CreateFunctionResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

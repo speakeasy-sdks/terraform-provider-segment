@@ -5,9 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,6 +14,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -52,9 +53,15 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"regulate_id": schema.StringAttribute{
-						Computed:    true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{
+							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+						},
 						Description: `The id of the created regulation.`,
 					},
 				},
@@ -62,7 +69,7 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 			},
 			"regulation_type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]` + "\n" +
@@ -79,13 +86,13 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 			},
 			"subject_ids": schema.ListAttribute{
 				PlanModifiers: []planmodifier.List{
-					listplanmodifier.RequiresReplace(),
+					listplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				ElementType: types.StringType,
@@ -95,7 +102,7 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 			},
 			"subject_type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				MarkdownDescription: `must be one of ["USER_ID"]` + "\n" +
@@ -132,14 +139,14 @@ func (r *CreateSourceRegulationV1InputResource) Configure(ctx context.Context, r
 
 func (r *CreateSourceRegulationV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateSourceRegulationV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -148,7 +155,7 @@ func (r *CreateSourceRegulationV1InputResource) Create(ctx context.Context, req 
 		return
 	}
 
-	createSourceRegulationV1Input := *data.ToCreateSDKType()
+	createSourceRegulationV1Input := *data.ToSharedCreateSourceRegulationV1Input()
 	sourceID := data.SourceID.ValueString()
 	request := operations.CreateSourceRegulationRequest{
 		CreateSourceRegulationV1Input: createSourceRegulationV1Input,
@@ -174,7 +181,8 @@ func (r *CreateSourceRegulationV1InputResource) Create(ctx context.Context, req 
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateSourceRegulationResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -206,6 +214,13 @@ func (r *CreateSourceRegulationV1InputResource) Read(ctx context.Context, req re
 
 func (r *CreateSourceRegulationV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateSourceRegulationV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

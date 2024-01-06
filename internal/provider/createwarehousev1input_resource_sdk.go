@@ -9,7 +9,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateWarehouseV1InputResourceModel) ToCreateSDKType() *shared.CreateWarehouseV1Input {
+func (r *CreateWarehouseV1InputResourceModel) ToSharedCreateWarehouseV1Input() *shared.CreateWarehouseV1Input {
 	enabled := new(bool)
 	if !r.Enabled.IsUnknown() && !r.Enabled.IsNull() {
 		*enabled = r.Enabled.ValueBool()
@@ -38,7 +38,7 @@ func (r *CreateWarehouseV1InputResourceModel) ToCreateSDKType() *shared.CreateWa
 	return &out
 }
 
-func (r *CreateWarehouseV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateWarehouseResponseBody) {
+func (r *CreateWarehouseV1InputResourceModel) RefreshFromOperationsCreateWarehouseResponseBody(resp *operations.CreateWarehouseResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

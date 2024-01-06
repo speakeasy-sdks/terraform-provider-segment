@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateInvitesV1InputResourceModel) ToCreateSDKType() *shared.CreateInvitesV1Input {
+func (r *CreateInvitesV1InputResourceModel) ToSharedCreateInvitesV1Input() *shared.CreateInvitesV1Input {
 	var invites []shared.InviteV1 = nil
 	for _, invitesItem := range r.Invites {
 		email := invitesItem.Email.ValueString()
@@ -57,7 +57,7 @@ func (r *CreateInvitesV1InputResourceModel) ToCreateSDKType() *shared.CreateInvi
 	return &out
 }
 
-func (r *CreateInvitesV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateInvitesResponseBody) {
+func (r *CreateInvitesV1InputResourceModel) RefreshFromOperationsCreateInvitesResponseBody(resp *operations.CreateInvitesResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

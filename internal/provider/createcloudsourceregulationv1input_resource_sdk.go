@@ -8,7 +8,7 @@ import (
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *CreateCloudSourceRegulationV1InputResourceModel) ToCreateSDKType() *shared.CreateCloudSourceRegulationV1Input {
+func (r *CreateCloudSourceRegulationV1InputResourceModel) ToSharedCreateCloudSourceRegulationV1Input() *shared.CreateCloudSourceRegulationV1Input {
 	collection := r.Collection.ValueString()
 	regulationType := shared.RegulationType(r.RegulationType.ValueString())
 	var subjectIds []string = nil
@@ -25,7 +25,7 @@ func (r *CreateCloudSourceRegulationV1InputResourceModel) ToCreateSDKType() *sha
 	return &out
 }
 
-func (r *CreateCloudSourceRegulationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateCloudSourceRegulationResponseBody) {
+func (r *CreateCloudSourceRegulationV1InputResourceModel) RefreshFromOperationsCreateCloudSourceRegulationResponseBody(resp *operations.CreateCloudSourceRegulationResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

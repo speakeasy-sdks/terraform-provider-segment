@@ -9,7 +9,7 @@ import (
 	"math/big"
 )
 
-func (r *CreateUserGroupV1InputResourceModel) ToCreateSDKType() *shared.CreateUserGroupV1Input {
+func (r *CreateUserGroupV1InputResourceModel) ToSharedCreateUserGroupV1Input() *shared.CreateUserGroupV1Input {
 	name := r.Name.ValueString()
 	out := shared.CreateUserGroupV1Input{
 		Name: name,
@@ -17,7 +17,7 @@ func (r *CreateUserGroupV1InputResourceModel) ToCreateSDKType() *shared.CreateUs
 	return &out
 }
 
-func (r *CreateUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateUserGroupResponseBody) {
+func (r *CreateUserGroupV1InputResourceModel) RefreshFromOperationsCreateUserGroupResponseBody(resp *operations.CreateUserGroupResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

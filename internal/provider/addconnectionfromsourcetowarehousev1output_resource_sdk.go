@@ -4,20 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
 )
 
-func (r *AddConnectionFromSourceToWarehouseV1OutputResourceModel) ToCreateSDKType() *operations.AddConnectionFromSourceToWarehouseRequest {
-	sourceID := r.SourceID.ValueString()
-	warehouseID := r.WarehouseID.ValueString()
-	out := operations.AddConnectionFromSourceToWarehouseRequest{
-		SourceID:    sourceID,
-		WarehouseID: warehouseID,
-	}
-	return &out
-}
-
-func (r *AddConnectionFromSourceToWarehouseV1OutputResourceModel) RefreshFromCreateResponse(resp *shared.AddConnectionFromSourceToWarehouseV1Output) {
+func (r *AddConnectionFromSourceToWarehouseV1OutputResourceModel) RefreshFromSharedAddConnectionFromSourceToWarehouseV1Output(resp *shared.AddConnectionFromSourceToWarehouseV1Output) {
 	r.Status = types.StringValue(string(resp.Status))
 }

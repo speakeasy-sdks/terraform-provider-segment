@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -15,6 +13,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
+	speakeasy_numberplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/numberplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -47,40 +50,70 @@ func (r *CreateUserGroupV1InputResource) Schema(ctx context.Context, req resourc
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"user_group": schema.SingleNestedAttribute{
 						Computed: true,
+						PlanModifiers: []planmodifier.Object{
+							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+						},
 						Attributes: map[string]schema.Attribute{
 							"id": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The id of the user group.`,
 							},
 							"member_count": schema.NumberAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Number{
+									speakeasy_numberplanmodifier.SuppressDiff(speakeasy_numberplanmodifier.Standard),
+								},
 								Description: `The number of members in the user group.`,
 							},
 							"name": schema.StringAttribute{
-								Computed:    true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{
+									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+								},
 								Description: `The name of the user group.`,
 							},
 							"permissions": schema.ListNestedAttribute{
 								Computed: true,
+								PlanModifiers: []planmodifier.List{
+									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"labels": schema.ListNestedAttribute{
 											Computed: true,
+											PlanModifiers: []planmodifier.List{
+												speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+											},
 											NestedObject: schema.NestedAttributeObject{
 												Attributes: map[string]schema.Attribute{
 													"description": schema.StringAttribute{
-														Computed:    true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{
+															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+														},
 														Description: `A description of what this label represents.`,
 													},
 													"key": schema.StringAttribute{
-														Computed:    true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{
+															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+														},
 														Description: `The key identifier for this label.`,
 													},
 													"value": schema.StringAttribute{
-														Computed:    true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{
+															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+														},
 														Description: `The value of this label.`,
 													},
 												},
@@ -89,26 +122,44 @@ func (r *CreateUserGroupV1InputResource) Schema(ctx context.Context, req resourc
 										},
 										"resources": schema.ListNestedAttribute{
 											Computed: true,
+											PlanModifiers: []planmodifier.List{
+												speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+											},
 											NestedObject: schema.NestedAttributeObject{
 												Attributes: map[string]schema.Attribute{
 													"id": schema.StringAttribute{
-														Computed:    true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{
+															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+														},
 														Description: `The id of this resource.`,
 													},
 													"labels": schema.ListNestedAttribute{
 														Computed: true,
+														PlanModifiers: []planmodifier.List{
+															speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+														},
 														NestedObject: schema.NestedAttributeObject{
 															Attributes: map[string]schema.Attribute{
 																"description": schema.StringAttribute{
-																	Computed:    true,
+																	Computed: true,
+																	PlanModifiers: []planmodifier.String{
+																		speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																	},
 																	Description: `A description of what this label represents.`,
 																},
 																"key": schema.StringAttribute{
-																	Computed:    true,
+																	Computed: true,
+																	PlanModifiers: []planmodifier.String{
+																		speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																	},
 																	Description: `The key identifier for this label.`,
 																},
 																"value": schema.StringAttribute{
-																	Computed:    true,
+																	Computed: true,
+																	PlanModifiers: []planmodifier.String{
+																		speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+																	},
 																	Description: `The value of this label.`,
 																},
 															},
@@ -117,6 +168,9 @@ func (r *CreateUserGroupV1InputResource) Schema(ctx context.Context, req resourc
 													},
 													"type": schema.StringAttribute{
 														Computed: true,
+														PlanModifiers: []planmodifier.String{
+															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+														},
 														MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
 															`The type for this resource.`,
 														Validators: []validator.String{
@@ -134,11 +188,17 @@ func (r *CreateUserGroupV1InputResource) Schema(ctx context.Context, req resourc
 											Description: `The resources associated with this permission.`,
 										},
 										"role_id": schema.StringAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{
+												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+											},
 											Description: `The id of the role associated with this permission.`,
 										},
 										"role_name": schema.StringAttribute{
-											Computed:    true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{
+												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
+											},
 											Description: `The name of the role associated with this permission.`,
 										},
 									},
@@ -153,7 +213,7 @@ func (r *CreateUserGroupV1InputResource) Schema(ctx context.Context, req resourc
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				Description: `The name of the user group to create.`,
@@ -184,14 +244,14 @@ func (r *CreateUserGroupV1InputResource) Configure(ctx context.Context, req reso
 
 func (r *CreateUserGroupV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateUserGroupV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -200,7 +260,7 @@ func (r *CreateUserGroupV1InputResource) Create(ctx context.Context, req resourc
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedCreateUserGroupV1Input()
 	res, err := r.client.IAMGroups.CreateUserGroup(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -221,7 +281,8 @@ func (r *CreateUserGroupV1InputResource) Create(ctx context.Context, req resourc
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateUserGroupResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -253,6 +314,13 @@ func (r *CreateUserGroupV1InputResource) Read(ctx context.Context, req resource.
 
 func (r *CreateUserGroupV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateUserGroupV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

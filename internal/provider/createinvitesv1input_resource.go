@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -16,6 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -48,9 +49,15 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"emails": schema.ListAttribute{
-						Computed:    true,
+						Computed: true,
+						PlanModifiers: []planmodifier.List{
+							speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
+						},
 						ElementType: types.StringType,
 						Description: `The list of emails invited to the Workspace.`,
 					},
@@ -59,49 +66,49 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 			},
 			"invites": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
-					listplanmodifier.RequiresReplace(),
+					listplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"email": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
 							Description: `The invited user's email to attach the permissions to.`,
 						},
 						"permissions": schema.ListNestedAttribute{
 							PlanModifiers: []planmodifier.List{
-								listplanmodifier.RequiresReplace(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Optional: true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"labels": schema.ListNestedAttribute{
 										PlanModifiers: []planmodifier.List{
-											listplanmodifier.RequiresReplace(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										},
 										Optional: true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"description": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
-														stringplanmodifier.RequiresReplace(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Optional:    true,
 													Description: `A description of what this label represents.`,
 												},
 												"key": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
-														stringplanmodifier.RequiresReplace(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
 													Description: `The key identifier for this label.`,
 												},
 												"value": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
-														stringplanmodifier.RequiresReplace(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
 													Description: `The value of this label.`,
@@ -112,21 +119,21 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 									},
 									"resources": schema.ListNestedAttribute{
 										PlanModifiers: []planmodifier.List{
-											listplanmodifier.RequiresReplace(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										},
 										Optional: true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"id": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
-														stringplanmodifier.RequiresReplace(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
 													Description: `The id of this resource.`,
 												},
 												"type": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
-														stringplanmodifier.RequiresReplace(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required: true,
 													MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
@@ -147,7 +154,7 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 									},
 									"role_id": schema.StringAttribute{
 										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.RequiresReplace(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										},
 										Required:    true,
 										Description: `The id of the role.`,
@@ -186,14 +193,14 @@ func (r *CreateInvitesV1InputResource) Configure(ctx context.Context, req resour
 
 func (r *CreateInvitesV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *CreateInvitesV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -202,7 +209,7 @@ func (r *CreateInvitesV1InputResource) Create(ctx context.Context, req resource.
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedCreateInvitesV1Input()
 	res, err := r.client.IAMUsers.CreateInvites(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -223,7 +230,8 @@ func (r *CreateInvitesV1InputResource) Create(ctx context.Context, req resource.
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsCreateInvitesResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -255,6 +263,13 @@ func (r *CreateInvitesV1InputResource) Read(ctx context.Context, req resource.Re
 
 func (r *CreateInvitesV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *CreateInvitesV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

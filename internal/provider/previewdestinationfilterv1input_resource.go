@@ -5,8 +5,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -20,6 +18,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	speakeasy_mapplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/mapplanmodifier"
+	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
@@ -54,9 +55,15 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
+				PlanModifiers: []planmodifier.Object{
+					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+				},
 				Attributes: map[string]schema.Attribute{
 					"input_payload": schema.MapAttribute{
-						Computed:    true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Map{
+							speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
+						},
 						ElementType: types.StringType,
 						Description: `The pre-filter JSON input.`,
 						Validators: []validator.Map{
@@ -64,7 +71,10 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 						},
 					},
 					"result": schema.SingleNestedAttribute{
-						Computed:    true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{
+							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
+						},
 						Attributes:  map[string]schema.Attribute{},
 						Description: `The filtered JSON output.`,
 					},
@@ -74,20 +84,20 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 			},
 			"filter": schema.SingleNestedAttribute{
 				PlanModifiers: []planmodifier.Object{
-					objectplanmodifier.RequiresReplace(),
+					objectplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required: true,
 				Attributes: map[string]schema.Attribute{
 					"actions": schema.ListNestedAttribute{
 						PlanModifiers: []planmodifier.List{
-							listplanmodifier.RequiresReplace(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Required: true,
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"fields": schema.MapAttribute{
 									PlanModifiers: []planmodifier.Map{
-										mapplanmodifier.RequiresReplace(),
+										mapplanmodifier.RequiresReplaceIfConfigured(),
 									},
 									Optional:    true,
 									ElementType: types.StringType,
@@ -99,7 +109,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 								},
 								"path": schema.StringAttribute{
 									PlanModifiers: []planmodifier.String{
-										stringplanmodifier.RequiresReplace(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									},
 									Optional: true,
 									MarkdownDescription: `The JSON path to a property within a payload object from which Segment generates a deterministic` + "\n" +
@@ -107,7 +117,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 								},
 								"percent": schema.NumberAttribute{
 									PlanModifiers: []planmodifier.Number{
-										numberplanmodifier.RequiresReplace(),
+										numberplanmodifier.RequiresReplaceIfConfigured(),
 									},
 									Optional: true,
 									MarkdownDescription: `A decimal between 0 and 1 used for 'sample' type events and` + "\n" +
@@ -115,7 +125,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 								},
 								"type": schema.StringAttribute{
 									PlanModifiers: []planmodifier.String{
-										stringplanmodifier.RequiresReplace(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									},
 									Required: true,
 									MarkdownDescription: `must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]` + "\n" +
@@ -136,7 +146,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 					},
 					"if": schema.StringAttribute{
 						PlanModifiers: []planmodifier.String{
-							stringplanmodifier.RequiresReplace(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Required: true,
 						MarkdownDescription: `A FQL statement which determines if the provided filter's actions will apply to the provided JSON payload.` + "\n" +
@@ -148,7 +158,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 			},
 			"payload": schema.MapAttribute{
 				PlanModifiers: []planmodifier.Map{
-					mapplanmodifier.RequiresReplace(),
+					mapplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
 				ElementType: types.StringType,
@@ -183,14 +193,14 @@ func (r *PreviewDestinationFilterV1InputResource) Configure(ctx context.Context,
 
 func (r *PreviewDestinationFilterV1InputResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data *PreviewDestinationFilterV1InputResourceModel
-	var item types.Object
+	var plan types.Object
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &item)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resp.Diagnostics.Append(item.As(ctx, &data, basetypes.ObjectAsOptions{
+	resp.Diagnostics.Append(plan.As(ctx, &data, basetypes.ObjectAsOptions{
 		UnhandledNullAsEmpty:    true,
 		UnhandledUnknownAsEmpty: true,
 	})...)
@@ -199,7 +209,7 @@ func (r *PreviewDestinationFilterV1InputResource) Create(ctx context.Context, re
 		return
 	}
 
-	request := *data.ToCreateSDKType()
+	request := *data.ToSharedPreviewDestinationFilterV1Input()
 	res, err := r.client.DestinationFilters.PreviewDestinationFilter(ctx, request)
 	if err != nil {
 		resp.Diagnostics.AddError("failure to invoke API", err.Error())
@@ -220,7 +230,8 @@ func (r *PreviewDestinationFilterV1InputResource) Create(ctx context.Context, re
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.TwoHundredApplicationJSONObject)
+	data.RefreshFromOperationsPreviewDestinationFilterResponseBody(res.TwoHundredApplicationJSONObject)
+	refreshPlan(ctx, plan, &data, resp.Diagnostics)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -252,6 +263,13 @@ func (r *PreviewDestinationFilterV1InputResource) Read(ctx context.Context, req 
 
 func (r *PreviewDestinationFilterV1InputResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var data *PreviewDestinationFilterV1InputResourceModel
+	var plan types.Object
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	merge(ctx, req, resp, &data)
 	if resp.Diagnostics.HasError() {
 		return

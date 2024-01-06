@@ -10,7 +10,7 @@ import (
 	"math/big"
 )
 
-func (r *CreateDestinationV1InputResourceModel) ToCreateSDKType() *shared.CreateDestinationV1Input {
+func (r *CreateDestinationV1InputResourceModel) ToSharedCreateDestinationV1Input() *shared.CreateDestinationV1Input {
 	enabled := new(bool)
 	if !r.Enabled.IsUnknown() && !r.Enabled.IsNull() {
 		*enabled = r.Enabled.ValueBool()
@@ -41,7 +41,7 @@ func (r *CreateDestinationV1InputResourceModel) ToCreateSDKType() *shared.Create
 	return &out
 }
 
-func (r *CreateDestinationV1InputResourceModel) RefreshFromCreateResponse(resp *operations.CreateDestinationResponseBody) {
+func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDestinationResponseBody(resp *operations.CreateDestinationResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {

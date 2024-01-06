@@ -9,7 +9,7 @@ import (
 	"math/big"
 )
 
-func (r *AddUsersToUserGroupV1InputResourceModel) ToCreateSDKType() *shared.AddUsersToUserGroupV1Input {
+func (r *AddUsersToUserGroupV1InputResourceModel) ToSharedAddUsersToUserGroupV1Input() *shared.AddUsersToUserGroupV1Input {
 	var emails []string = nil
 	for _, emailsItem := range r.Emails {
 		emails = append(emails, emailsItem.ValueString())
@@ -20,7 +20,7 @@ func (r *AddUsersToUserGroupV1InputResourceModel) ToCreateSDKType() *shared.AddU
 	return &out
 }
 
-func (r *AddUsersToUserGroupV1InputResourceModel) RefreshFromCreateResponse(resp *operations.AddUsersToUserGroupResponseBody) {
+func (r *AddUsersToUserGroupV1InputResourceModel) RefreshFromOperationsAddUsersToUserGroupResponseBody(resp *operations.AddUsersToUserGroupResponseBody) {
 	if resp.Data == nil {
 		r.Data = nil
 	} else {
