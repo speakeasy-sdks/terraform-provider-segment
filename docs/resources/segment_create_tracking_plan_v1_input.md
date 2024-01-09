@@ -28,12 +28,12 @@ resource "segment_create_tracking_plan_v1_input" "my_createtrackingplanv1input" 
 - `name` (String) The Tracking Plan's name.
 
 Config API note: equal to `displayName`.
-- `type` (String) must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]
-The Tracking Plan's type.
+Requires replacement if changed.
+- `type` (String) The Tracking Plan's type. Requires replacement if changed. ; must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]
 
 ### Optional
 
-- `description` (String) The Tracking Plan's description.
+- `description` (String) The Tracking Plan's description. Requires replacement if changed.
 
 ### Read-Only
 
@@ -64,8 +64,7 @@ Config API note: equal to `displayName`.
 - `slug` (String) URL-friendly slug of this Tracking Plan.
 
 Config API note: equal to `name`.
-- `type` (String) must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]
-The Tracking Plan's type.
+- `type` (String) The Tracking Plan's type. must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]
 - `updated_at` (String) The timestamp of the last change to the Tracking Plan.
 
 Config API note: equal to `updateTime`.

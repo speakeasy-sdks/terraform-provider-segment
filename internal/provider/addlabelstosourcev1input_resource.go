@@ -12,9 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -50,36 +47,21 @@ func (r *AddLabelsToSourceV1InputResource) Schema(ctx context.Context, req resou
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"labels": schema.ListNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.List{
-							speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-						},
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									Computed: true,
-									PlanModifiers: []planmodifier.String{
-										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-									},
+									Computed:    true,
 									Description: `An optional description of the purpose of this label.`,
 								},
 								"key": schema.StringAttribute{
-									Computed: true,
-									PlanModifiers: []planmodifier.String{
-										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-									},
+									Computed:    true,
 									Description: `The key that represents the name of this label.`,
 								},
 								"value": schema.StringAttribute{
-									Computed: true,
-									PlanModifiers: []planmodifier.String{
-										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-									},
+									Computed:    true,
 									Description: `The value associated with the key of this label.`,
 								},
 							},
@@ -101,31 +83,32 @@ func (r *AddLabelsToSourceV1InputResource) Schema(ctx context.Context, req resou
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Optional:    true,
-							Description: `An optional description of the purpose of this label.`,
+							Description: `An optional description of the purpose of this label. Requires replacement if changed. `,
 						},
 						"key": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The key that represents the name of this label.`,
+							Description: `The key that represents the name of this label. Requires replacement if changed. `,
 						},
 						"value": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The value associated with the key of this label.`,
+							Description: `The value associated with the key of this label. Requires replacement if changed. `,
 						},
 					},
 				},
-				Description: `The labels to associate with a Source.`,
+				Description: `The labels to associate with a Source. Requires replacement if changed. `,
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 		},
 	}

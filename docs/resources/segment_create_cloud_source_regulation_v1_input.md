@@ -29,15 +29,14 @@ resource "segment_create_cloud_source_regulation_v1_input" "my_createcloudsource
 
 ### Required
 
-- `collection` (String) The Cloud Source collection to regulate.
-- `regulation_type` (String) must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]
-The regulation type to create.
-- `source_id` (String)
+- `collection` (String) The Cloud Source collection to regulate. Requires replacement if changed.
+- `regulation_type` (String) The regulation type to create. Requires replacement if changed. ; must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]
+- `source_id` (String) Requires replacement if changed.
 - `subject_ids` (List of String) The list of `userId` or `objectId` values of the subjects to regulate.
 
 Config API note: equal to `parent` but allows an array.
-- `subject_type` (String) must be one of ["OBJECT_ID"]
-The subject type. Must be `objectId` for Cloud Sources.
+Requires replacement if changed.
+- `subject_type` (String) The subject type. Must be `objectId` for Cloud Sources. Requires replacement if changed. ; must be one of ["OBJECT_ID"]
 
 ### Read-Only
 

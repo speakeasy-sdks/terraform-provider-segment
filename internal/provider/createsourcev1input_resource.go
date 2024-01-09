@@ -15,11 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_boolplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/boolplanmodifier"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_mapplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/mapplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
@@ -57,58 +52,34 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"source": schema.SingleNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
 						Attributes: map[string]schema.Attribute{
 							"enabled": schema.BoolAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.Bool{
-									speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `Enable to receive data from the Source.`,
 							},
 							"id": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The id of the Source.` + "\n" +
 									`` + "\n" +
 									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
 							},
 							"labels": schema.ListNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `An optional description of the purpose of this label.`,
 										},
 										"key": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The key that represents the name of this label.`,
 										},
 										"value": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The value associated with the key of this label.`,
 										},
 									},
@@ -117,66 +88,39 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 							},
 							"metadata": schema.SingleNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.Object{
-									speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-								},
 								Attributes: map[string]schema.Attribute{
 									"categories": schema.ListAttribute{
-										Computed: true,
-										PlanModifiers: []planmodifier.List{
-											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-										},
+										Computed:    true,
 										ElementType: types.StringType,
 										Description: `A list of categories this Source belongs to.`,
 									},
 									"description": schema.StringAttribute{
-										Computed: true,
-										PlanModifiers: []planmodifier.String{
-											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-										},
+										Computed:    true,
 										Description: `The description of this Source.`,
 									},
 									"id": schema.StringAttribute{
 										Computed: true,
-										PlanModifiers: []planmodifier.String{
-											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-										},
 										MarkdownDescription: `The id for this Source metadata in the Segment catalog.` + "\n" +
 											`` + "\n" +
 											`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
 									},
 									"is_cloud_event_source": schema.BoolAttribute{
-										Computed: true,
-										PlanModifiers: []planmodifier.Bool{
-											speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
-										},
+										Computed:    true,
 										Description: `True if this is a Cloud Event Source.`,
 									},
 									"logos": schema.SingleNestedAttribute{
 										Computed: true,
-										PlanModifiers: []planmodifier.Object{
-											speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-										},
 										Attributes: map[string]schema.Attribute{
 											"alt": schema.StringAttribute{
-												Computed: true,
-												PlanModifiers: []planmodifier.String{
-													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-												},
+												Computed:    true,
 												Description: `The alternative text for this logo.`,
 											},
 											"default": schema.StringAttribute{
-												Computed: true,
-												PlanModifiers: []planmodifier.String{
-													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-												},
+												Computed:    true,
 												Description: `The default URL for this logo.`,
 											},
 											"mark": schema.StringAttribute{
-												Computed: true,
-												PlanModifiers: []planmodifier.String{
-													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-												},
+												Computed:    true,
 												Description: `The logo mark.`,
 											},
 										},
@@ -184,64 +128,39 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 									},
 									"name": schema.StringAttribute{
 										Computed: true,
-										PlanModifiers: []planmodifier.String{
-											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-										},
 										MarkdownDescription: `The user-friendly name of this Source.` + "\n" +
 											`` + "\n" +
 											`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
 									},
 									"options": schema.ListNestedAttribute{
 										Computed: true,
-										PlanModifiers: []planmodifier.List{
-											speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-										},
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"default_value": schema.StringAttribute{
-													Computed: true,
-													PlanModifiers: []planmodifier.String{
-														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-													},
-													MarkdownDescription: `Parsed as JSON.` + "\n" +
-														`An optional default value for the field.`,
+													Computed:    true,
+													Description: `An optional default value for the field. Parsed as JSON.`,
 													Validators: []validator.String{
 														validators.IsValidJSON(),
 													},
 												},
 												"description": schema.StringAttribute{
-													Computed: true,
-													PlanModifiers: []planmodifier.String{
-														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-													},
+													Computed:    true,
 													Description: `An optional short text description of the field.`,
 												},
 												"label": schema.StringAttribute{
-													Computed: true,
-													PlanModifiers: []planmodifier.String{
-														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-													},
+													Computed:    true,
 													Description: `An optional label for this field.`,
 												},
 												"name": schema.StringAttribute{
-													Computed: true,
-													PlanModifiers: []planmodifier.String{
-														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-													},
+													Computed:    true,
 													Description: `The name identifying this option in the context of a Segment Integration.`,
 												},
 												"required": schema.BoolAttribute{
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{
-														speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
-													},
+													Computed:    true,
 													Description: `Whether this is a required option when setting up the Integration.`,
 												},
 												"type": schema.StringAttribute{
 													Computed: true,
-													PlanModifiers: []planmodifier.String{
-														speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-													},
 													MarkdownDescription: `Defines the type for this option in the schema. Types are most commonly strings, but may also represent other` + "\n" +
 														`primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.`,
 												},
@@ -251,9 +170,6 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 									},
 									"slug": schema.StringAttribute{
 										Computed: true,
-										PlanModifiers: []planmodifier.String{
-											speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-										},
 										MarkdownDescription: `The slug that identifies this Source in the Segment app.` + "\n" +
 											`` + "\n" +
 											`Config API note: equal to ` + "`" + `name` + "`" + `.`,
@@ -265,18 +181,12 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 							},
 							"name": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The name of the Source.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
 							},
 							"settings": schema.MapAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.Map{
-									speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
-								},
+								Computed:    true,
 								ElementType: types.StringType,
 								Description: `The settings associated with the Source.`,
 								Validators: []validator.Map{
@@ -285,27 +195,18 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 							},
 							"slug": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The slug used to identify the Source in the Segment app.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `name` + "`" + `.`,
 							},
 							"workspace_id": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The id of the Workspace that owns the Source.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `parent` + "`" + `.`,
 							},
 							"write_keys": schema.ListAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
+								Computed:    true,
 								ElementType: types.StringType,
 								MarkdownDescription: `The write keys used to send data from the Source. This field is left empty when the current token does not have the` + "\n" +
 									`'source admin' permission.`,
@@ -321,7 +222,7 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `Enable to allow this Source to send data. Defaults to true.`,
+				Description: `Enable to allow this Source to send data. Defaults to true. Requires replacement if changed. `,
 			},
 			"metadata_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -330,7 +231,8 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 				Required: true,
 				MarkdownDescription: `The id of the Source metadata from which this instance of the Source derives.` + "\n" +
 					`` + "\n" +
-					`All Source metadata is available under ` + "`" + `/catalog/sources` + "`" + `.`,
+					`All Source metadata is available under ` + "`" + `/catalog/sources` + "`" + `.` + "\n" +
+					`Requires replacement if changed. `,
 			},
 			"settings": schema.MapAttribute{
 				PlanModifiers: []planmodifier.Map{
@@ -338,7 +240,7 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 				},
 				Optional:    true,
 				ElementType: types.StringType,
-				Description: `A key-value object that contains instance-specific settings for the Source.`,
+				Description: `A key-value object that contains instance-specific settings for the Source. Requires replacement if changed. `,
 				Validators: []validator.Map{
 					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 				},
@@ -348,7 +250,7 @@ func (r *CreateSourceV1InputResource) Schema(ctx context.Context, req resource.S
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The slug by which to identify the Source in the Segment app.`,
+				Description: `The slug by which to identify the Source in the Segment app. Requires replacement if changed. `,
 			},
 		},
 	}

@@ -39,16 +39,16 @@ resource "segment_create_filter_for_destination_v1_input" "my_createfilterfordes
 
 ### Required
 
-- `actions` (Attributes List) Actions for the Destination filter. (see [below for nested schema](#nestedatt--actions))
-- `destination_id` (String)
-- `enabled` (Boolean) When set to true, the Destination filter is active.
-- `if` (String) The filter's condition.
-- `source_id` (String) The id of the Source associated with this filter.
-- `title` (String) The title of the filter.
+- `actions` (Attributes List) Actions for the Destination filter. Requires replacement if changed. (see [below for nested schema](#nestedatt--actions))
+- `destination_id` (String) Requires replacement if changed.
+- `enabled` (Boolean) When set to true, the Destination filter is active. Requires replacement if changed.
+- `if` (String) The filter's condition. Requires replacement if changed.
+- `source_id` (String) The id of the Source associated with this filter. Requires replacement if changed.
+- `title` (String) The title of the filter. Requires replacement if changed.
 
 ### Optional
 
-- `description` (String) The description of the filter.
+- `description` (String) The description of the filter. Requires replacement if changed.
 
 ### Read-Only
 
@@ -59,17 +59,19 @@ resource "segment_create_filter_for_destination_v1_input" "my_createfilterfordes
 
 Required:
 
-- `type` (String) must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]
-The kind of Transformation to apply to any matched properties.
+- `type` (String) The kind of Transformation to apply to any matched properties. Requires replacement if changed. ; must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]
 
 Optional:
 
 - `fields` (Map of String) A dictionary of paths to object keys that this filter applies to.
   The literal string '' represents the top level of the object.
+Requires replacement if changed.
 - `path` (String) The JSON path to a property within a payload object from which Segment generates a deterministic
 sampling rate.
+Requires replacement if changed.
 - `percent` (Number) A decimal between 0 and 1 used for 'sample' type events and
 influences the likelihood of sampling to occur.
+Requires replacement if changed.
 
 
 <a id="nestedatt--data"></a>
@@ -106,7 +108,6 @@ Read-Only:
 sampling rate.
 - `percent` (Number) A decimal between 0 and 1 used for 'sample' type events and
 influences the likelihood of sampling to occur.
-- `type` (String) must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]
-The kind of Transformation to apply to any matched properties.
+- `type` (String) The kind of Transformation to apply to any matched properties. must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]
 
 

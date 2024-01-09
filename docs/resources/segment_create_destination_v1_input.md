@@ -30,21 +30,24 @@ resource "segment_create_destination_v1_input" "my_createdestinationv1input" {
 
 ### Required
 
-- `metadata_id` (String) The id of the metadata to link to the new Destination.
+- `metadata_id` (String) The id of the metadata to link to the new Destination. Requires replacement if changed.
 - `settings` (Map of String) An object that contains settings for the Destination based on the "required" and "advanced" settings present in the
 Destination metadata.
 
 Config API note: equal to `config`.
+Requires replacement if changed.
 - `source_id` (String) The id of the Source to connect to this Destination instance.
 
 Config API note: analogous to `parent`.
+Requires replacement if changed.
 
 ### Optional
 
-- `enabled` (Boolean) Whether this Destination should receive data.
+- `enabled` (Boolean) Whether this Destination should receive data. Requires replacement if changed.
 - `name` (String) Defines the display name of the Destination.
 
 Config API note: equal to `displayName`.
+Requires replacement if changed.
 
 ### Read-Only
 
@@ -100,8 +103,7 @@ Config API note: equal to `displayName`.
 - `previous_names` (List of String) A list of names previously used by the Destination.
 - `region_endpoints` (List of String) The list of regional endpoints for this Destination.
 - `slug` (String) The slug used to identify the Destination in the Segment app.
-- `status` (String) must be one of ["DEPRECATED", "PRIVATE_BETA", "PRIVATE_BUILDING", "PRIVATE_SUBMITTED", "PUBLIC", "PUBLIC_BETA", "UNAVAILABLE"]
-Support status of the Destination.
+- `status` (String) Support status of the Destination. must be one of ["DEPRECATED", "PRIVATE_BETA", "PRIVATE_BUILDING", "PRIVATE_SUBMITTED", "PUBLIC", "PUBLIC_BETA", "UNAVAILABLE"]
 - `supported_features` (Attributes) Features that this Destination supports.
 
 Config API note: holds `browserUnbundling` fields. (see [below for nested schema](#nestedatt--data--destination--metadata--supported_features))
@@ -125,8 +127,7 @@ Read-Only:
 - `hidden` (Boolean) Whether the action should be hidden.
 - `id` (String) The primary key of the action.
 - `name` (String) A human-readable name for the action.
-- `platform` (String) must be one of ["CLOUD", "MOBILE", "WEB"]
-The platform on which this action runs.
+- `platform` (String) The platform on which this action runs. must be one of ["CLOUD", "MOBILE", "WEB"]
 - `slug` (String) A machine-readable key unique to the action definition.
 
 <a id="nestedatt--data--destination--metadata--website--fields"></a>
@@ -135,10 +136,8 @@ The platform on which this action runs.
 Read-Only:
 
 - `allow_null` (Boolean) Whether this field allows null values.
-- `choices` (String) Parsed as JSON.
-A list of machine-readable value/label pairs to populate a static dropdown.
-- `default_value` (String) Parsed as JSON.
-A default value that is saved the first time an action is created.
+- `choices` (String) A list of machine-readable value/label pairs to populate a static dropdown. Parsed as JSON.
+- `default_value` (String) A default value that is saved the first time an action is created. Parsed as JSON.
 - `description` (String) A human-readable description of this value. You can use Markdown.
 - `dynamic` (Boolean) Whether this field should execute a dynamic request to fetch choices to populate a dropdown. When true, `choices` is ignored.
 - `field_key` (String) A unique machine-readable key for the field. Should ideally match the expected key in the action\'s API request.
@@ -148,8 +147,7 @@ A default value that is saved the first time an action is created.
 - `placeholder` (String) An example value displayed but not saved.
 - `required` (Boolean) Whether this field is required.
 - `sort_order` (Number) The order this particular field is (used in the UI for displaying the fields in a specified order).
-- `type` (String) must be one of ["BOOLEAN", "DATETIME", "HIDDEN", "INTEGER", "NUMBER", "OBJECT", "PASSWORD", "STRING", "TEXT"]
-The data type for this value.
+- `type` (String) The data type for this value. must be one of ["BOOLEAN", "DATETIME", "HIDDEN", "INTEGER", "NUMBER", "OBJECT", "PASSWORD", "STRING", "TEXT"]
 
 
 
@@ -159,10 +157,8 @@ The data type for this value.
 Read-Only:
 
 - `code` (String) Link to the repository hosting the code for this component.
-- `owner` (String) must be one of ["PARTNER", "SEGMENT"]
-The owner of this component. Either 'SEGMENT' or 'PARTNER'.
-- `type` (String) must be one of ["ANDROID", "BROWSER", "IOS", "SERVER"]
-The component type.
+- `owner` (String) The owner of this component. Either 'SEGMENT' or 'PARTNER'. must be one of ["PARTNER", "SEGMENT"]
+- `type` (String) The component type. must be one of ["ANDROID", "BROWSER", "IOS", "SERVER"]
 
 
 <a id="nestedatt--data--destination--metadata--contacts"></a>
@@ -191,8 +187,7 @@ Read-Only:
 
 Read-Only:
 
-- `default_value` (String) Parsed as JSON.
-An optional default value for the field.
+- `default_value` (String) An optional default value for the field. Parsed as JSON.
 - `description` (String) An optional short text description of the field.
 - `label` (String) An optional label for this field.
 - `name` (String) The name identifying this option in the context of a Segment Integration.
@@ -219,13 +214,13 @@ Read-Only:
 
 - `browser_unbundling` (Boolean) Whether this Destination supports browser unbundling.
 - `browser_unbundling_public` (Boolean) Whether this Destination supports public browser unbundling.
-- `cloud_mode_instances` (String) must be one of ["0", "1", "MULTIPLE", "NONE", "SINGLE"]
-This Destination's support level for cloud mode instances.
+- `cloud_mode_instances` (String) This Destination's support level for cloud mode instances.
 The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.
-- `device_mode_instances` (String) must be one of ["0", "1", "NONE", "SINGLE"]
-This Destination's support level for device mode instances.
+must be one of ["0", "1", "MULTIPLE", "NONE", "SINGLE"]
+- `device_mode_instances` (String) This Destination's support level for device mode instances.
 Support for multiple device mode instances is currently not planned.
 The values '0' and 'NONE', and '1' and 'SINGLE' are equivalent.
+must be one of ["0", "1", "NONE", "SINGLE"]
 - `replay` (Boolean) Whether this Destination supports replays.
 
 

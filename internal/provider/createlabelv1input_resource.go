@@ -12,8 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -47,35 +45,20 @@ func (r *CreateLabelV1InputResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"label": schema.SingleNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
 						Attributes: map[string]schema.Attribute{
 							"description": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `An optional description of the purpose of this label.`,
 							},
 							"key": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The key that represents the name of this label.`,
 							},
 							"value": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The value associated with the key of this label.`,
 							},
 						},
@@ -95,24 +78,24 @@ func (r *CreateLabelV1InputResource) Schema(ctx context.Context, req resource.Sc
 							stringplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Optional:    true,
-						Description: `An optional description of the purpose of this label.`,
+						Description: `An optional description of the purpose of this label. Requires replacement if changed. `,
 					},
 					"key": schema.StringAttribute{
 						PlanModifiers: []planmodifier.String{
 							stringplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Required:    true,
-						Description: `The key that represents the name of this label.`,
+						Description: `The key that represents the name of this label. Requires replacement if changed. `,
 					},
 					"value": schema.StringAttribute{
 						PlanModifiers: []planmodifier.String{
 							stringplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Required:    true,
-						Description: `The value associated with the key of this label.`,
+						Description: `The value associated with the key of this label. Requires replacement if changed. `,
 					},
 				},
-				Description: `The new label to create in the Workspace.`,
+				Description: `The new label to create in the Workspace. Requires replacement if changed. `,
 			},
 		},
 	}

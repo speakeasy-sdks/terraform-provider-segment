@@ -74,11 +74,7 @@ func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTr
 		r.Data = nil
 	} else {
 		r.Data = &CreateTransformationV1Output{}
-		if resp.Data.Transformation.DestinationMetadataID != nil {
-			r.Data.Transformation.DestinationMetadataID = types.StringValue(*resp.Data.Transformation.DestinationMetadataID)
-		} else {
-			r.Data.Transformation.DestinationMetadataID = types.StringNull()
-		}
+		r.Data.Transformation.DestinationMetadataID = types.StringPointerValue(resp.Data.Transformation.DestinationMetadataID)
 		r.Data.Transformation.Enabled = types.BoolValue(resp.Data.Transformation.Enabled)
 		if len(r.Data.Transformation.FqlDefinedProperties) > len(resp.Data.Transformation.FqlDefinedProperties) {
 			r.Data.Transformation.FqlDefinedProperties = r.Data.Transformation.FqlDefinedProperties[:len(resp.Data.Transformation.FqlDefinedProperties)]
@@ -97,11 +93,7 @@ func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTr
 		r.Data.Transformation.ID = types.StringValue(resp.Data.Transformation.ID)
 		r.Data.Transformation.If = types.StringValue(resp.Data.Transformation.If)
 		r.Data.Transformation.Name = types.StringValue(resp.Data.Transformation.Name)
-		if resp.Data.Transformation.NewEventName != nil {
-			r.Data.Transformation.NewEventName = types.StringValue(*resp.Data.Transformation.NewEventName)
-		} else {
-			r.Data.Transformation.NewEventName = types.StringNull()
-		}
+		r.Data.Transformation.NewEventName = types.StringPointerValue(resp.Data.Transformation.NewEventName)
 		if len(r.Data.Transformation.PropertyRenames) > len(resp.Data.Transformation.PropertyRenames) {
 			r.Data.Transformation.PropertyRenames = r.Data.Transformation.PropertyRenames[:len(resp.Data.Transformation.PropertyRenames)]
 		}

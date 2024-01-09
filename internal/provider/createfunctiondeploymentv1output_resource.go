@@ -13,8 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -49,15 +47,9 @@ func (r *CreateFunctionDeploymentV1OutputResource) Schema(ctx context.Context, r
 		Attributes: map[string]schema.Attribute{
 			"function_deployment": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"status": schema.StringAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.String{
-							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-						},
+						Computed:    true,
 						Description: `must be one of ["SUCCESS"]`,
 						Validators: []validator.String{
 							stringvalidator.OneOf(
@@ -72,7 +64,8 @@ func (r *CreateFunctionDeploymentV1OutputResource) Schema(ctx context.Context, r
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 		},
 	}

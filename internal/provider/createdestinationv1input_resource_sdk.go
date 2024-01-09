@@ -53,15 +53,8 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 		}
 		for actionsCount, actionsItem := range resp.Data.Destination.Metadata.Actions {
 			var actions1 DestinationMetadataActionV1
-			if actionsItem.DefaultTrigger != nil {
-				actions1.DefaultTrigger = types.StringValue(*actionsItem.DefaultTrigger)
-			} else {
-				actions1.DefaultTrigger = types.StringNull()
-			}
+			actions1.DefaultTrigger = types.StringPointerValue(actionsItem.DefaultTrigger)
 			actions1.Description = types.StringValue(actionsItem.Description)
-			if len(actions1.Fields) > len(actionsItem.Fields) {
-				actions1.Fields = actions1.Fields[:len(actionsItem.Fields)]
-			}
 			for fieldsCount, fieldsItem := range actionsItem.Fields {
 				var fields1 DestinationMetadataActionFieldV1
 				fields1.AllowNull = types.BoolValue(fieldsItem.AllowNull)
@@ -83,11 +76,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				fields1.ID = types.StringValue(fieldsItem.ID)
 				fields1.Label = types.StringValue(fieldsItem.Label)
 				fields1.Multiple = types.BoolValue(fieldsItem.Multiple)
-				if fieldsItem.Placeholder != nil {
-					fields1.Placeholder = types.StringValue(*fieldsItem.Placeholder)
-				} else {
-					fields1.Placeholder = types.StringNull()
-				}
+				fields1.Placeholder = types.StringPointerValue(fieldsItem.Placeholder)
 				fields1.Required = types.BoolValue(fieldsItem.Required)
 				fields1.SortOrder = types.NumberValue(big.NewFloat(float64(fieldsItem.SortOrder)))
 				fields1.Type = types.StringValue(string(fieldsItem.Type))
@@ -157,21 +146,9 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 		for contactsCount, contactsItem := range resp.Data.Destination.Metadata.Contacts {
 			var contacts1 Contact
 			contacts1.Email = types.StringValue(contactsItem.Email)
-			if contactsItem.IsPrimary != nil {
-				contacts1.IsPrimary = types.BoolValue(*contactsItem.IsPrimary)
-			} else {
-				contacts1.IsPrimary = types.BoolNull()
-			}
-			if contactsItem.Name != nil {
-				contacts1.Name = types.StringValue(*contactsItem.Name)
-			} else {
-				contacts1.Name = types.StringNull()
-			}
-			if contactsItem.Role != nil {
-				contacts1.Role = types.StringValue(*contactsItem.Role)
-			} else {
-				contacts1.Role = types.StringNull()
-			}
+			contacts1.IsPrimary = types.BoolPointerValue(contactsItem.IsPrimary)
+			contacts1.Name = types.StringPointerValue(contactsItem.Name)
+			contacts1.Role = types.StringPointerValue(contactsItem.Role)
 			if contactsCount+1 > len(r.Data.Destination.Metadata.Contacts) {
 				r.Data.Destination.Metadata.Contacts = append(r.Data.Destination.Metadata.Contacts, contacts1)
 			} else {
@@ -183,17 +160,9 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 		}
 		r.Data.Destination.Metadata.Description = types.StringValue(resp.Data.Destination.Metadata.Description)
 		r.Data.Destination.Metadata.ID = types.StringValue(resp.Data.Destination.Metadata.ID)
-		if resp.Data.Destination.Metadata.Logos.Alt != nil {
-			r.Data.Destination.Metadata.Logos.Alt = types.StringValue(*resp.Data.Destination.Metadata.Logos.Alt)
-		} else {
-			r.Data.Destination.Metadata.Logos.Alt = types.StringNull()
-		}
+		r.Data.Destination.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Destination.Metadata.Logos.Alt)
 		r.Data.Destination.Metadata.Logos.Default = types.StringValue(resp.Data.Destination.Metadata.Logos.Default)
-		if resp.Data.Destination.Metadata.Logos.Mark != nil {
-			r.Data.Destination.Metadata.Logos.Mark = types.StringValue(*resp.Data.Destination.Metadata.Logos.Mark)
-		} else {
-			r.Data.Destination.Metadata.Logos.Mark = types.StringNull()
-		}
+		r.Data.Destination.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Destination.Metadata.Logos.Mark)
 		r.Data.Destination.Metadata.Name = types.StringValue(resp.Data.Destination.Metadata.Name)
 		if len(r.Data.Destination.Metadata.Options) > len(resp.Data.Destination.Metadata.Options) {
 			r.Data.Destination.Metadata.Options = r.Data.Destination.Metadata.Options[:len(resp.Data.Destination.Metadata.Options)]
@@ -206,16 +175,8 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				defaultValueResult1, _ := json.Marshal(optionsItem.DefaultValue)
 				options1.DefaultValue = types.StringValue(string(defaultValueResult1))
 			}
-			if optionsItem.Description != nil {
-				options1.Description = types.StringValue(*optionsItem.Description)
-			} else {
-				options1.Description = types.StringNull()
-			}
-			if optionsItem.Label != nil {
-				options1.Label = types.StringValue(*optionsItem.Label)
-			} else {
-				options1.Label = types.StringNull()
-			}
+			options1.Description = types.StringPointerValue(optionsItem.Description)
+			options1.Label = types.StringPointerValue(optionsItem.Label)
 			options1.Name = types.StringValue(optionsItem.Name)
 			options1.Required = types.BoolValue(optionsItem.Required)
 			options1.Type = types.StringValue(optionsItem.Type)
@@ -230,18 +191,14 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				r.Data.Destination.Metadata.Options[optionsCount].Type = options1.Type
 			}
 		}
-		if resp.Data.Destination.Metadata.PartnerOwned != nil {
-			r.Data.Destination.Metadata.PartnerOwned = types.BoolValue(*resp.Data.Destination.Metadata.PartnerOwned)
-		} else {
-			r.Data.Destination.Metadata.PartnerOwned = types.BoolNull()
-		}
+		r.Data.Destination.Metadata.PartnerOwned = types.BoolPointerValue(resp.Data.Destination.Metadata.PartnerOwned)
 		if len(r.Data.Destination.Metadata.Presets) > len(resp.Data.Destination.Metadata.Presets) {
 			r.Data.Destination.Metadata.Presets = r.Data.Destination.Metadata.Presets[:len(resp.Data.Destination.Metadata.Presets)]
 		}
 		for presetsCount, presetsItem := range resp.Data.Destination.Metadata.Presets {
 			var presets1 DestinationMetadataSubscriptionPresetV1
 			presets1.ActionID = types.StringValue(presetsItem.ActionID)
-			if presets1.Fields == nil && len(presetsItem.Fields) > 0 {
+			if len(presetsItem.Fields) > 0 {
 				presets1.Fields = make(map[string]types.String)
 				for key, value := range presetsItem.Fields {
 					result, _ := json.Marshal(value)
@@ -269,16 +226,8 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 		}
 		r.Data.Destination.Metadata.Slug = types.StringValue(resp.Data.Destination.Metadata.Slug)
 		r.Data.Destination.Metadata.Status = types.StringValue(string(resp.Data.Destination.Metadata.Status))
-		if resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling != nil {
-			r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling = types.BoolValue(*resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling)
-		} else {
-			r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic != nil {
-			r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic = types.BoolValue(*resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic)
-		} else {
-			r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic = types.BoolNull()
-		}
+		r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling)
+		r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic)
 		if resp.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances != nil {
 			r.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances = types.StringValue(string(*resp.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances))
 		} else {
@@ -289,62 +238,22 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 		} else {
 			r.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances = types.StringNull()
 		}
-		if resp.Data.Destination.Metadata.SupportedFeatures.Replay != nil {
-			r.Data.Destination.Metadata.SupportedFeatures.Replay = types.BoolValue(*resp.Data.Destination.Metadata.SupportedFeatures.Replay)
-		} else {
-			r.Data.Destination.Metadata.SupportedFeatures.Replay = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedMethods.Alias != nil {
-			r.Data.Destination.Metadata.SupportedMethods.Alias = types.BoolValue(*resp.Data.Destination.Metadata.SupportedMethods.Alias)
-		} else {
-			r.Data.Destination.Metadata.SupportedMethods.Alias = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedMethods.Group != nil {
-			r.Data.Destination.Metadata.SupportedMethods.Group = types.BoolValue(*resp.Data.Destination.Metadata.SupportedMethods.Group)
-		} else {
-			r.Data.Destination.Metadata.SupportedMethods.Group = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedMethods.Identify != nil {
-			r.Data.Destination.Metadata.SupportedMethods.Identify = types.BoolValue(*resp.Data.Destination.Metadata.SupportedMethods.Identify)
-		} else {
-			r.Data.Destination.Metadata.SupportedMethods.Identify = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedMethods.Pageview != nil {
-			r.Data.Destination.Metadata.SupportedMethods.Pageview = types.BoolValue(*resp.Data.Destination.Metadata.SupportedMethods.Pageview)
-		} else {
-			r.Data.Destination.Metadata.SupportedMethods.Pageview = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedMethods.Track != nil {
-			r.Data.Destination.Metadata.SupportedMethods.Track = types.BoolValue(*resp.Data.Destination.Metadata.SupportedMethods.Track)
-		} else {
-			r.Data.Destination.Metadata.SupportedMethods.Track = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedPlatforms.Browser != nil {
-			r.Data.Destination.Metadata.SupportedPlatforms.Browser = types.BoolValue(*resp.Data.Destination.Metadata.SupportedPlatforms.Browser)
-		} else {
-			r.Data.Destination.Metadata.SupportedPlatforms.Browser = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedPlatforms.Mobile != nil {
-			r.Data.Destination.Metadata.SupportedPlatforms.Mobile = types.BoolValue(*resp.Data.Destination.Metadata.SupportedPlatforms.Mobile)
-		} else {
-			r.Data.Destination.Metadata.SupportedPlatforms.Mobile = types.BoolNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedPlatforms.Server != nil {
-			r.Data.Destination.Metadata.SupportedPlatforms.Server = types.BoolValue(*resp.Data.Destination.Metadata.SupportedPlatforms.Server)
-		} else {
-			r.Data.Destination.Metadata.SupportedPlatforms.Server = types.BoolNull()
-		}
+		r.Data.Destination.Metadata.SupportedFeatures.Replay = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.Replay)
+		r.Data.Destination.Metadata.SupportedMethods.Alias = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Alias)
+		r.Data.Destination.Metadata.SupportedMethods.Group = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Group)
+		r.Data.Destination.Metadata.SupportedMethods.Identify = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Identify)
+		r.Data.Destination.Metadata.SupportedMethods.Pageview = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Pageview)
+		r.Data.Destination.Metadata.SupportedMethods.Track = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Track)
+		r.Data.Destination.Metadata.SupportedPlatforms.Browser = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Browser)
+		r.Data.Destination.Metadata.SupportedPlatforms.Mobile = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Mobile)
+		r.Data.Destination.Metadata.SupportedPlatforms.Server = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Server)
 		r.Data.Destination.Metadata.SupportedRegions = nil
 		for _, v := range resp.Data.Destination.Metadata.SupportedRegions {
 			r.Data.Destination.Metadata.SupportedRegions = append(r.Data.Destination.Metadata.SupportedRegions, types.StringValue(v))
 		}
 		r.Data.Destination.Metadata.Website = types.StringValue(resp.Data.Destination.Metadata.Website)
-		if resp.Data.Destination.Name != nil {
-			r.Data.Destination.Name = types.StringValue(*resp.Data.Destination.Name)
-		} else {
-			r.Data.Destination.Name = types.StringNull()
-		}
-		if r.Data.Destination.Settings == nil && len(resp.Data.Destination.Settings) > 0 {
+		r.Data.Destination.Name = types.StringPointerValue(resp.Data.Destination.Name)
+		if len(resp.Data.Destination.Settings) > 0 {
 			r.Data.Destination.Settings = make(map[string]types.String)
 			for key1, value1 := range resp.Data.Destination.Settings {
 				result1, _ := json.Marshal(value1)

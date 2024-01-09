@@ -27,7 +27,8 @@ resource "segment_add_source_to_tracking_plan_v1_input" "my_addsourcetotrackingp
 - `source_id` (String) The id of the Source associated with the Tracking Plan.
 
 Config API note: analogous to `sourceName`.
-- `tracking_plan_id` (String)
+Requires replacement if changed.
+- `tracking_plan_id` (String) Requires replacement if changed.
 
 ### Read-Only
 
@@ -38,7 +39,6 @@ Config API note: analogous to `sourceName`.
 
 Read-Only:
 
-- `status` (String) must be one of ["SUCCESS"]
-The operation status.
+- `status` (String) The operation status. must be one of ["SUCCESS"]
 
 

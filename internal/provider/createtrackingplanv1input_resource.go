@@ -13,8 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -50,66 +48,41 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"tracking_plan": schema.SingleNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
 						Attributes: map[string]schema.Attribute{
 							"created_at": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The timestamp of this Tracking Plan's creation.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `createTime` + "`" + `.`,
 							},
 							"description": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The Tracking Plan's description.`,
 							},
 							"id": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The Tracking Plan's identifier.` + "\n" +
 									`` + "\n" +
 									`Config API note: analogous to ` + "`" + `name` + "`" + `.`,
 							},
 							"name": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The Tracking Plan's name.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
 							},
 							"slug": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `URL-friendly slug of this Tracking Plan.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `name` + "`" + `.`,
 							},
 							"type": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
-								MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
-									`The Tracking Plan's type.`,
+								Computed:    true,
+								Description: `The Tracking Plan's type. must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]`,
 								Validators: []validator.String{
 									stringvalidator.OneOf(
 										"ENGAGE",
@@ -122,9 +95,6 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 							},
 							"updated_at": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `The timestamp of the last change to the Tracking Plan.` + "\n" +
 									`` + "\n" +
 									`Config API note: equal to ` + "`" + `updateTime` + "`" + `.`,
@@ -140,7 +110,7 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `The Tracking Plan's description.`,
+				Description: `The Tracking Plan's description. Requires replacement if changed. `,
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -149,15 +119,15 @@ func (r *CreateTrackingPlanV1InputResource) Schema(ctx context.Context, req reso
 				Required: true,
 				MarkdownDescription: `The Tracking Plan's name.` + "\n" +
 					`` + "\n" +
-					`Config API note: equal to ` + "`" + `displayName` + "`" + `.`,
+					`Config API note: equal to ` + "`" + `displayName` + "`" + `.` + "\n" +
+					`Requires replacement if changed. `,
 			},
 			"type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
-				MarkdownDescription: `must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]` + "\n" +
-					`The Tracking Plan's type.`,
+				Required:    true,
+				Description: `The Tracking Plan's type. Requires replacement if changed. ; must be one of ["ENGAGE", "LIVE", "PROPERTY_LIBRARY", "RULE_LIBRARY", "TEMPLATE"]`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"ENGAGE",

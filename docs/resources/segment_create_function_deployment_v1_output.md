@@ -23,7 +23,7 @@ resource "segment_create_function_deployment_v1_output" "my_createfunctiondeploy
 
 ### Required
 
-- `function_id` (String)
+- `function_id` (String) Requires replacement if changed.
 
 ### Read-Only
 

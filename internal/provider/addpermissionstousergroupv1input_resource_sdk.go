@@ -59,22 +59,12 @@ func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromOperationsAdd
 		}
 		for permissionsCount, permissionsItem := range resp.Data.Permissions {
 			var permissions1 AccessPermissionV1
-			if len(permissions1.Resources) > len(permissionsItem.Resources) {
-				permissions1.Resources = permissions1.Resources[:len(permissionsItem.Resources)]
-			}
 			for resourcesCount, resourcesItem := range permissionsItem.Resources {
 				var resources1 PermissionResourceV1
 				resources1.ID = types.StringValue(resourcesItem.ID)
-				if len(resources1.Labels) > len(resourcesItem.Labels) {
-					resources1.Labels = resources1.Labels[:len(resourcesItem.Labels)]
-				}
 				for labelsCount, labelsItem := range resourcesItem.Labels {
 					var labels1 LabelV1
-					if labelsItem.Description != nil {
-						labels1.Description = types.StringValue(*labelsItem.Description)
-					} else {
-						labels1.Description = types.StringNull()
-					}
+					labels1.Description = types.StringPointerValue(labelsItem.Description)
 					labels1.Key = types.StringValue(labelsItem.Key)
 					labels1.Value = types.StringValue(labelsItem.Value)
 					if labelsCount+1 > len(resources1.Labels) {

@@ -40,8 +40,8 @@ resource "segment_preview_destination_filter_v1_input" "my_previewdestinationfil
 
 ### Required
 
-- `filter` (Attributes) The filter to preview. (see [below for nested schema](#nestedatt--filter))
-- `payload` (Map of String) The JSON payload to apply the filter to.
+- `filter` (Attributes) The filter to preview. Requires replacement if changed. (see [below for nested schema](#nestedatt--filter))
+- `payload` (Map of String) The JSON payload to apply the filter to. Requires replacement if changed.
 
 ### Read-Only
 
@@ -54,27 +54,31 @@ Segment modifies or nullifies payloads depending on the provided filter actions.
 Required:
 
 - `actions` (Attributes List) The filtering action to take on events that match the "if" statement.
-Action types must be one of: "drop", "allow_properties", "drop_properties" or "sample". (see [below for nested schema](#nestedatt--filter--actions))
+Action types must be one of: "drop", "allow_properties", "drop_properties" or "sample".
+Requires replacement if changed. (see [below for nested schema](#nestedatt--filter--actions))
 - `if` (String) A FQL statement which determines if the provided filter's actions will apply to the provided JSON payload.
 The literal string "all" will result in this filter to all events.
 For guidance on using FQL, see the Segment documentation site.
+Requires replacement if changed.
 
 <a id="nestedatt--filter--actions"></a>
 ### Nested Schema for `filter.actions`
 
 Required:
 
-- `type` (String) must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]
-The kind of Transformation to apply to any matched properties.
+- `type` (String) The kind of Transformation to apply to any matched properties. Requires replacement if changed. ; must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]
 
 Optional:
 
 - `fields` (Map of String) A dictionary of paths to object keys that this filter applies to.
   The literal string '' represents the top level of the object.
+Requires replacement if changed.
 - `path` (String) The JSON path to a property within a payload object from which Segment generates a deterministic
 sampling rate.
+Requires replacement if changed.
 - `percent` (Number) A decimal between 0 and 1 used for 'sample' type events and
 influences the likelihood of sampling to occur.
+Requires replacement if changed.
 
 
 

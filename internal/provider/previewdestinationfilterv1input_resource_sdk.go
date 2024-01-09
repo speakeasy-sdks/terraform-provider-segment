@@ -61,7 +61,7 @@ func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromOperationsPrev
 		r.Data = nil
 	} else {
 		r.Data = &PreviewDestinationFilterV1Output{}
-		if r.Data.InputPayload == nil && len(resp.Data.InputPayload) > 0 {
+		if len(resp.Data.InputPayload) > 0 {
 			r.Data.InputPayload = make(map[string]types.String)
 			for key, value := range resp.Data.InputPayload {
 				result, _ := json.Marshal(value)

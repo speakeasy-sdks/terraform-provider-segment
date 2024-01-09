@@ -14,10 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_numberplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/numberplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -53,70 +49,40 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"user_group": schema.SingleNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
 						Attributes: map[string]schema.Attribute{
 							"id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The id of the user group.`,
 							},
 							"member_count": schema.NumberAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.Number{
-									speakeasy_numberplanmodifier.SuppressDiff(speakeasy_numberplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The number of members in the user group.`,
 							},
 							"name": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The name of the user group.`,
 							},
 							"permissions": schema.ListNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"labels": schema.ListNestedAttribute{
 											Computed: true,
-											PlanModifiers: []planmodifier.List{
-												speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-											},
 											NestedObject: schema.NestedAttributeObject{
 												Attributes: map[string]schema.Attribute{
 													"description": schema.StringAttribute{
-														Computed: true,
-														PlanModifiers: []planmodifier.String{
-															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-														},
+														Computed:    true,
 														Description: `A description of what this label represents.`,
 													},
 													"key": schema.StringAttribute{
-														Computed: true,
-														PlanModifiers: []planmodifier.String{
-															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-														},
+														Computed:    true,
 														Description: `The key identifier for this label.`,
 													},
 													"value": schema.StringAttribute{
-														Computed: true,
-														PlanModifiers: []planmodifier.String{
-															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-														},
+														Computed:    true,
 														Description: `The value of this label.`,
 													},
 												},
@@ -125,44 +91,26 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 										},
 										"resources": schema.ListNestedAttribute{
 											Computed: true,
-											PlanModifiers: []planmodifier.List{
-												speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-											},
 											NestedObject: schema.NestedAttributeObject{
 												Attributes: map[string]schema.Attribute{
 													"id": schema.StringAttribute{
-														Computed: true,
-														PlanModifiers: []planmodifier.String{
-															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-														},
+														Computed:    true,
 														Description: `The id of this resource.`,
 													},
 													"labels": schema.ListNestedAttribute{
 														Computed: true,
-														PlanModifiers: []planmodifier.List{
-															speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-														},
 														NestedObject: schema.NestedAttributeObject{
 															Attributes: map[string]schema.Attribute{
 																"description": schema.StringAttribute{
-																	Computed: true,
-																	PlanModifiers: []planmodifier.String{
-																		speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-																	},
+																	Computed:    true,
 																	Description: `A description of what this label represents.`,
 																},
 																"key": schema.StringAttribute{
-																	Computed: true,
-																	PlanModifiers: []planmodifier.String{
-																		speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-																	},
+																	Computed:    true,
 																	Description: `The key identifier for this label.`,
 																},
 																"value": schema.StringAttribute{
-																	Computed: true,
-																	PlanModifiers: []planmodifier.String{
-																		speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-																	},
+																	Computed:    true,
 																	Description: `The value of this label.`,
 																},
 															},
@@ -170,12 +118,8 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 														Description: `The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions.`,
 													},
 													"type": schema.StringAttribute{
-														Computed: true,
-														PlanModifiers: []planmodifier.String{
-															speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-														},
-														MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
-															`The type for this resource.`,
+														Computed:    true,
+														Description: `The type for this resource. must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]`,
 														Validators: []validator.String{
 															stringvalidator.OneOf(
 																"FUNCTION",
@@ -191,17 +135,11 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 											Description: `The resources associated with this permission.`,
 										},
 										"role_id": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The id of the role associated with this permission.`,
 										},
 										"role_name": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The name of the role associated with this permission.`,
 										},
 									},
@@ -220,13 +158,14 @@ func (r *AddUsersToUserGroupV1InputResource) Schema(ctx context.Context, req res
 				},
 				Required:    true,
 				ElementType: types.StringType,
-				Description: `The email addresses of the users and invites to add.`,
+				Description: `The email addresses of the users and invites to add. Requires replacement if changed. `,
 			},
 			"user_group_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 		},
 	}

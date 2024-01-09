@@ -41,8 +41,8 @@ resource "segment_add_permissions_to_user_group_v1_input" "my_addpermissionstous
 
 ### Required
 
-- `permissions` (Attributes List) The permissions to add. (see [below for nested schema](#nestedatt--permissions))
-- `user_group_id` (String)
+- `permissions` (Attributes List) The permissions to add. Requires replacement if changed. (see [below for nested schema](#nestedatt--permissions))
+- `user_group_id` (String) Requires replacement if changed.
 
 ### Read-Only
 
@@ -53,33 +53,32 @@ resource "segment_add_permissions_to_user_group_v1_input" "my_addpermissionstous
 
 Required:
 
-- `resources` (Attributes List) The resources to link the selected role to. (see [below for nested schema](#nestedatt--permissions--resources))
-- `role_id` (String) The role id of this permission.
+- `resources` (Attributes List) The resources to link the selected role to. Requires replacement if changed. (see [below for nested schema](#nestedatt--permissions--resources))
+- `role_id` (String) The role id of this permission. Requires replacement if changed.
 
 <a id="nestedatt--permissions--resources"></a>
 ### Nested Schema for `permissions.resources`
 
 Required:
 
-- `id` (String) The id of this resource.
-- `type` (String) must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
-The type for this resource.
+- `id` (String) The id of this resource. Requires replacement if changed.
+- `type` (String) The type for this resource. Requires replacement if changed. ; must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
 
 Optional:
 
-- `labels` (Attributes List) The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions. (see [below for nested schema](#nestedatt--permissions--resources--labels))
+- `labels` (Attributes List) The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions. Requires replacement if changed. (see [below for nested schema](#nestedatt--permissions--resources--labels))
 
 <a id="nestedatt--permissions--resources--labels"></a>
 ### Nested Schema for `permissions.resources.labels`
 
 Required:
 
-- `key` (String) The key identifier for this label.
-- `value` (String) The value of this label.
+- `key` (String) The key identifier for this label. Requires replacement if changed.
+- `value` (String) The value of this label. Requires replacement if changed.
 
 Optional:
 
-- `description` (String) A description of what this label represents.
+- `description` (String) A description of what this label represents. Requires replacement if changed.
 
 
 
@@ -107,8 +106,7 @@ Read-Only:
 
 - `id` (String) The id of this resource.
 - `labels` (Attributes List) The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions. (see [below for nested schema](#nestedatt--data--permissions--resources--labels))
-- `type` (String) must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
-The type for this resource.
+- `type` (String) The type for this resource. must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
 
 <a id="nestedatt--data--permissions--resources--labels"></a>
 ### Nested Schema for `data.permissions.resources.type`

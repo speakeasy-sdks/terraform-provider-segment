@@ -63,61 +63,17 @@ func (r *CreateFunctionV1InputResourceModel) RefreshFromOperationsCreateFunction
 		} else {
 			r.Data.Function.BatchMaxCount = types.NumberNull()
 		}
-		if resp.Data.Function.CatalogID != nil {
-			r.Data.Function.CatalogID = types.StringValue(*resp.Data.Function.CatalogID)
-		} else {
-			r.Data.Function.CatalogID = types.StringNull()
-		}
-		if resp.Data.Function.Code != nil {
-			r.Data.Function.Code = types.StringValue(*resp.Data.Function.Code)
-		} else {
-			r.Data.Function.Code = types.StringNull()
-		}
-		if resp.Data.Function.CreatedAt != nil {
-			r.Data.Function.CreatedAt = types.StringValue(*resp.Data.Function.CreatedAt)
-		} else {
-			r.Data.Function.CreatedAt = types.StringNull()
-		}
-		if resp.Data.Function.CreatedBy != nil {
-			r.Data.Function.CreatedBy = types.StringValue(*resp.Data.Function.CreatedBy)
-		} else {
-			r.Data.Function.CreatedBy = types.StringNull()
-		}
-		if resp.Data.Function.DeployedAt != nil {
-			r.Data.Function.DeployedAt = types.StringValue(*resp.Data.Function.DeployedAt)
-		} else {
-			r.Data.Function.DeployedAt = types.StringNull()
-		}
-		if resp.Data.Function.Description != nil {
-			r.Data.Function.Description = types.StringValue(*resp.Data.Function.Description)
-		} else {
-			r.Data.Function.Description = types.StringNull()
-		}
-		if resp.Data.Function.DisplayName != nil {
-			r.Data.Function.DisplayName = types.StringValue(*resp.Data.Function.DisplayName)
-		} else {
-			r.Data.Function.DisplayName = types.StringNull()
-		}
-		if resp.Data.Function.ID != nil {
-			r.Data.Function.ID = types.StringValue(*resp.Data.Function.ID)
-		} else {
-			r.Data.Function.ID = types.StringNull()
-		}
-		if resp.Data.Function.IsLatestVersion != nil {
-			r.Data.Function.IsLatestVersion = types.BoolValue(*resp.Data.Function.IsLatestVersion)
-		} else {
-			r.Data.Function.IsLatestVersion = types.BoolNull()
-		}
-		if resp.Data.Function.LogoURL != nil {
-			r.Data.Function.LogoURL = types.StringValue(*resp.Data.Function.LogoURL)
-		} else {
-			r.Data.Function.LogoURL = types.StringNull()
-		}
-		if resp.Data.Function.PreviewWebhookURL != nil {
-			r.Data.Function.PreviewWebhookURL = types.StringValue(*resp.Data.Function.PreviewWebhookURL)
-		} else {
-			r.Data.Function.PreviewWebhookURL = types.StringNull()
-		}
+		r.Data.Function.CatalogID = types.StringPointerValue(resp.Data.Function.CatalogID)
+		r.Data.Function.Code = types.StringPointerValue(resp.Data.Function.Code)
+		r.Data.Function.CreatedAt = types.StringPointerValue(resp.Data.Function.CreatedAt)
+		r.Data.Function.CreatedBy = types.StringPointerValue(resp.Data.Function.CreatedBy)
+		r.Data.Function.DeployedAt = types.StringPointerValue(resp.Data.Function.DeployedAt)
+		r.Data.Function.Description = types.StringPointerValue(resp.Data.Function.Description)
+		r.Data.Function.DisplayName = types.StringPointerValue(resp.Data.Function.DisplayName)
+		r.Data.Function.ID = types.StringPointerValue(resp.Data.Function.ID)
+		r.Data.Function.IsLatestVersion = types.BoolPointerValue(resp.Data.Function.IsLatestVersion)
+		r.Data.Function.LogoURL = types.StringPointerValue(resp.Data.Function.LogoURL)
+		r.Data.Function.PreviewWebhookURL = types.StringPointerValue(resp.Data.Function.PreviewWebhookURL)
 		if resp.Data.Function.ResourceType != nil {
 			r.Data.Function.ResourceType = types.StringValue(string(*resp.Data.Function.ResourceType))
 		} else {

@@ -40,11 +40,7 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 		}
 		for labelsCount, labelsItem := range resp.Data.Source.Labels {
 			var labels1 LabelV1
-			if labelsItem.Description != nil {
-				labels1.Description = types.StringValue(*labelsItem.Description)
-			} else {
-				labels1.Description = types.StringNull()
-			}
+			labels1.Description = types.StringPointerValue(labelsItem.Description)
 			labels1.Key = types.StringValue(labelsItem.Key)
 			labels1.Value = types.StringValue(labelsItem.Value)
 			if labelsCount+1 > len(r.Data.Source.Labels) {
@@ -62,17 +58,9 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 		r.Data.Source.Metadata.Description = types.StringValue(resp.Data.Source.Metadata.Description)
 		r.Data.Source.Metadata.ID = types.StringValue(resp.Data.Source.Metadata.ID)
 		r.Data.Source.Metadata.IsCloudEventSource = types.BoolValue(resp.Data.Source.Metadata.IsCloudEventSource)
-		if resp.Data.Source.Metadata.Logos.Alt != nil {
-			r.Data.Source.Metadata.Logos.Alt = types.StringValue(*resp.Data.Source.Metadata.Logos.Alt)
-		} else {
-			r.Data.Source.Metadata.Logos.Alt = types.StringNull()
-		}
+		r.Data.Source.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Source.Metadata.Logos.Alt)
 		r.Data.Source.Metadata.Logos.Default = types.StringValue(resp.Data.Source.Metadata.Logos.Default)
-		if resp.Data.Source.Metadata.Logos.Mark != nil {
-			r.Data.Source.Metadata.Logos.Mark = types.StringValue(*resp.Data.Source.Metadata.Logos.Mark)
-		} else {
-			r.Data.Source.Metadata.Logos.Mark = types.StringNull()
-		}
+		r.Data.Source.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Source.Metadata.Logos.Mark)
 		r.Data.Source.Metadata.Name = types.StringValue(resp.Data.Source.Metadata.Name)
 		if len(r.Data.Source.Metadata.Options) > len(resp.Data.Source.Metadata.Options) {
 			r.Data.Source.Metadata.Options = r.Data.Source.Metadata.Options[:len(resp.Data.Source.Metadata.Options)]
@@ -85,16 +73,8 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 				defaultValueResult, _ := json.Marshal(optionsItem.DefaultValue)
 				options1.DefaultValue = types.StringValue(string(defaultValueResult))
 			}
-			if optionsItem.Description != nil {
-				options1.Description = types.StringValue(*optionsItem.Description)
-			} else {
-				options1.Description = types.StringNull()
-			}
-			if optionsItem.Label != nil {
-				options1.Label = types.StringValue(*optionsItem.Label)
-			} else {
-				options1.Label = types.StringNull()
-			}
+			options1.Description = types.StringPointerValue(optionsItem.Description)
+			options1.Label = types.StringPointerValue(optionsItem.Label)
 			options1.Name = types.StringValue(optionsItem.Name)
 			options1.Required = types.BoolValue(optionsItem.Required)
 			options1.Type = types.StringValue(optionsItem.Type)
@@ -110,12 +90,8 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 			}
 		}
 		r.Data.Source.Metadata.Slug = types.StringValue(resp.Data.Source.Metadata.Slug)
-		if resp.Data.Source.Name != nil {
-			r.Data.Source.Name = types.StringValue(*resp.Data.Source.Name)
-		} else {
-			r.Data.Source.Name = types.StringNull()
-		}
-		if r.Data.Source.Settings == nil && len(resp.Data.Source.Settings) > 0 {
+		r.Data.Source.Name = types.StringPointerValue(resp.Data.Source.Name)
+		if len(resp.Data.Source.Settings) > 0 {
 			r.Data.Source.Settings = make(map[string]types.String)
 			for key1, value1 := range resp.Data.Source.Settings {
 				result, _ := json.Marshal(value1)

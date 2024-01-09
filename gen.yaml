@@ -7,7 +7,7 @@ generation:
     nameResolutionDec2023: false
   baseServerURL: ""
 terraform:
-  version: 0.3.0
+  version: 0.3.1
   author: scentregroup
   imports:
     option: openapi

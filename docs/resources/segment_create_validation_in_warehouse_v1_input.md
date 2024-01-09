@@ -27,8 +27,8 @@ resource "segment_create_validation_in_warehouse_v1_input" "my_createvalidationi
 
 ### Required
 
-- `metadata_id` (String) The id of the Warehouse metadata type.
-- `settings` (Map of String) The settings to check.
+- `metadata_id` (String) The id of the Warehouse metadata type. Requires replacement if changed.
+- `settings` (Map of String) The settings to check. Requires replacement if changed.
 
 ### Read-Only
 
@@ -39,7 +39,6 @@ resource "segment_create_validation_in_warehouse_v1_input" "my_createvalidationi
 
 Read-Only:
 
-- `status` (String) must be one of ["CONNECTED", "FAILED"]
-Represents the status for the current connection settings.
+- `status` (String) Represents the status for the current connection settings. must be one of ["CONNECTED", "FAILED"]
 
 

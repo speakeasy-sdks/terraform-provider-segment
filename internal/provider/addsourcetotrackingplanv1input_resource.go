@@ -13,8 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -50,17 +48,10 @@ func (r *AddSourceToTrackingPlanV1InputResource) Schema(ctx context.Context, req
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"status": schema.StringAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.String{
-							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-						},
-						MarkdownDescription: `must be one of ["SUCCESS"]` + "\n" +
-							`The operation status.`,
+						Computed:    true,
+						Description: `The operation status. must be one of ["SUCCESS"]`,
 						Validators: []validator.String{
 							stringvalidator.OneOf(
 								"SUCCESS",
@@ -77,13 +68,15 @@ func (r *AddSourceToTrackingPlanV1InputResource) Schema(ctx context.Context, req
 				Required: true,
 				MarkdownDescription: `The id of the Source associated with the Tracking Plan.` + "\n" +
 					`` + "\n" +
-					`Config API note: analogous to ` + "`" + `sourceName` + "`" + `.`,
+					`Config API note: analogous to ` + "`" + `sourceName` + "`" + `.` + "\n" +
+					`Requires replacement if changed. `,
 			},
 			"tracking_plan_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 		},
 	}

@@ -15,8 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
@@ -52,17 +50,10 @@ func (r *CreateValidationInWarehouseV1InputResource) Schema(ctx context.Context,
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"status": schema.StringAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.String{
-							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-						},
-						MarkdownDescription: `must be one of ["CONNECTED", "FAILED"]` + "\n" +
-							`Represents the status for the current connection settings.`,
+						Computed:    true,
+						Description: `Represents the status for the current connection settings. must be one of ["CONNECTED", "FAILED"]`,
 						Validators: []validator.String{
 							stringvalidator.OneOf(
 								"CONNECTED",
@@ -78,7 +69,7 @@ func (r *CreateValidationInWarehouseV1InputResource) Schema(ctx context.Context,
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The id of the Warehouse metadata type.`,
+				Description: `The id of the Warehouse metadata type. Requires replacement if changed. `,
 			},
 			"settings": schema.MapAttribute{
 				PlanModifiers: []planmodifier.Map{
@@ -86,7 +77,7 @@ func (r *CreateValidationInWarehouseV1InputResource) Schema(ctx context.Context,
 				},
 				Required:    true,
 				ElementType: types.StringType,
-				Description: `The settings to check.`,
+				Description: `The settings to check. Requires replacement if changed. `,
 				Validators: []validator.Map{
 					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 				},

@@ -29,15 +29,16 @@ resource "segment_create_source_v1_input" "my_createsourcev1input" {
 
 ### Required
 
-- `enabled` (Boolean) Enable to allow this Source to send data. Defaults to true.
+- `enabled` (Boolean) Enable to allow this Source to send data. Defaults to true. Requires replacement if changed.
 - `metadata_id` (String) The id of the Source metadata from which this instance of the Source derives.
 
 All Source metadata is available under `/catalog/sources`.
-- `slug` (String) The slug by which to identify the Source in the Segment app.
+Requires replacement if changed.
+- `slug` (String) The slug by which to identify the Source in the Segment app. Requires replacement if changed.
 
 ### Optional
 
-- `settings` (Map of String) A key-value object that contains instance-specific settings for the Source.
+- `settings` (Map of String) A key-value object that contains instance-specific settings for the Source. Requires replacement if changed.
 
 ### Read-Only
 
@@ -121,8 +122,7 @@ Read-Only:
 
 Read-Only:
 
-- `default_value` (String) Parsed as JSON.
-An optional default value for the field.
+- `default_value` (String) An optional default value for the field. Parsed as JSON.
 - `description` (String) An optional short text description of the field.
 - `label` (String) An optional label for this field.
 - `name` (String) The name identifying this option in the context of a Segment Integration.

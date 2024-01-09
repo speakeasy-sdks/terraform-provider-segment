@@ -27,13 +27,12 @@ resource "segment_create_workspace_regulation_v1_input" "my_createworkspaceregul
 
 ### Required
 
-- `regulation_type` (String) must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]
-The regulation type to create.
+- `regulation_type` (String) The regulation type to create. Requires replacement if changed. ; must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]
 - `subject_ids` (List of String) The list of `userId` or `objectId` values of the subjects to regulate.
 
 Config API note: equal to `parent` but allows an array.
-- `subject_type` (String) must be one of ["OBJECT_ID", "USER_ID"]
-The subject type. Use `objectId` for Cloud Source regulations.
+Requires replacement if changed.
+- `subject_type` (String) The subject type. Use `objectId` for Cloud Source regulations. Requires replacement if changed. ; must be one of ["OBJECT_ID", "USER_ID"]
 
 ### Read-Only
 

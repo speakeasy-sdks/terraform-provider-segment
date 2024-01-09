@@ -33,11 +33,7 @@ func (r *CreateLabelV1InputResourceModel) RefreshFromOperationsCreateLabelRespon
 		r.Data = nil
 	} else {
 		r.Data = &CreateLabelV1Output{}
-		if resp.Data.Label.Description != nil {
-			r.Data.Label.Description = types.StringValue(*resp.Data.Label.Description)
-		} else {
-			r.Data.Label.Description = types.StringNull()
-		}
+		r.Data.Label.Description = types.StringPointerValue(resp.Data.Label.Description)
 		r.Data.Label.Key = types.StringValue(resp.Data.Label.Key)
 		r.Data.Label.Value = types.StringValue(resp.Data.Label.Value)
 	}

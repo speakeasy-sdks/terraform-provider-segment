@@ -30,32 +30,12 @@ func (r *CreateTrackingPlanV1InputResourceModel) RefreshFromOperationsCreateTrac
 		r.Data = nil
 	} else {
 		r.Data = &CreateTrackingPlanV1Output{}
-		if resp.Data.TrackingPlan.CreatedAt != nil {
-			r.Data.TrackingPlan.CreatedAt = types.StringValue(*resp.Data.TrackingPlan.CreatedAt)
-		} else {
-			r.Data.TrackingPlan.CreatedAt = types.StringNull()
-		}
-		if resp.Data.TrackingPlan.Description != nil {
-			r.Data.TrackingPlan.Description = types.StringValue(*resp.Data.TrackingPlan.Description)
-		} else {
-			r.Data.TrackingPlan.Description = types.StringNull()
-		}
+		r.Data.TrackingPlan.CreatedAt = types.StringPointerValue(resp.Data.TrackingPlan.CreatedAt)
+		r.Data.TrackingPlan.Description = types.StringPointerValue(resp.Data.TrackingPlan.Description)
 		r.Data.TrackingPlan.ID = types.StringValue(resp.Data.TrackingPlan.ID)
-		if resp.Data.TrackingPlan.Name != nil {
-			r.Data.TrackingPlan.Name = types.StringValue(*resp.Data.TrackingPlan.Name)
-		} else {
-			r.Data.TrackingPlan.Name = types.StringNull()
-		}
-		if resp.Data.TrackingPlan.Slug != nil {
-			r.Data.TrackingPlan.Slug = types.StringValue(*resp.Data.TrackingPlan.Slug)
-		} else {
-			r.Data.TrackingPlan.Slug = types.StringNull()
-		}
+		r.Data.TrackingPlan.Name = types.StringPointerValue(resp.Data.TrackingPlan.Name)
+		r.Data.TrackingPlan.Slug = types.StringPointerValue(resp.Data.TrackingPlan.Slug)
 		r.Data.TrackingPlan.Type = types.StringValue(string(resp.Data.TrackingPlan.Type))
-		if resp.Data.TrackingPlan.UpdatedAt != nil {
-			r.Data.TrackingPlan.UpdatedAt = types.StringValue(*resp.Data.TrackingPlan.UpdatedAt)
-		} else {
-			r.Data.TrackingPlan.UpdatedAt = types.StringNull()
-		}
+		r.Data.TrackingPlan.UpdatedAt = types.StringPointerValue(resp.Data.TrackingPlan.UpdatedAt)
 	}
 }

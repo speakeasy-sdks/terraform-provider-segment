@@ -30,16 +30,9 @@ func (r *CreateUserGroupV1InputResourceModel) RefreshFromOperationsCreateUserGro
 		}
 		for permissionsCount, permissionsItem := range resp.Data.UserGroup.Permissions {
 			var permissions1 PermissionV1
-			if len(permissions1.Labels) > len(permissionsItem.Labels) {
-				permissions1.Labels = permissions1.Labels[:len(permissionsItem.Labels)]
-			}
 			for labelsCount, labelsItem := range permissionsItem.Labels {
 				var labels1 LabelV1
-				if labelsItem.Description != nil {
-					labels1.Description = types.StringValue(*labelsItem.Description)
-				} else {
-					labels1.Description = types.StringNull()
-				}
+				labels1.Description = types.StringPointerValue(labelsItem.Description)
 				labels1.Key = types.StringValue(labelsItem.Key)
 				labels1.Value = types.StringValue(labelsItem.Value)
 				if labelsCount+1 > len(permissions1.Labels) {
@@ -50,22 +43,12 @@ func (r *CreateUserGroupV1InputResourceModel) RefreshFromOperationsCreateUserGro
 					permissions1.Labels[labelsCount].Value = labels1.Value
 				}
 			}
-			if len(permissions1.Resources) > len(permissionsItem.Resources) {
-				permissions1.Resources = permissions1.Resources[:len(permissionsItem.Resources)]
-			}
 			for resourcesCount, resourcesItem := range permissionsItem.Resources {
 				var resources1 PermissionResourceV1
 				resources1.ID = types.StringValue(resourcesItem.ID)
-				if len(resources1.Labels) > len(resourcesItem.Labels) {
-					resources1.Labels = resources1.Labels[:len(resourcesItem.Labels)]
-				}
 				for labelsCount1, labelsItem1 := range resourcesItem.Labels {
 					var labels3 LabelV1
-					if labelsItem1.Description != nil {
-						labels3.Description = types.StringValue(*labelsItem1.Description)
-					} else {
-						labels3.Description = types.StringNull()
-					}
+					labels3.Description = types.StringPointerValue(labelsItem1.Description)
 					labels3.Key = types.StringValue(labelsItem1.Key)
 					labels3.Value = types.StringValue(labelsItem1.Value)
 					if labelsCount1+1 > len(resources1.Labels) {

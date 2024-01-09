@@ -14,8 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -53,15 +51,9 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"regulate_id": schema.StringAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.String{
-							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-						},
+						Computed:    true,
 						Description: `The id of the created regulation.`,
 					},
 				},
@@ -71,9 +63,8 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
-				MarkdownDescription: `must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]` + "\n" +
-					`The regulation type to create.`,
+				Required:    true,
+				Description: `The regulation type to create. Requires replacement if changed. ; must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"DELETE_INTERNAL",
@@ -88,7 +79,8 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 			"subject_ids": schema.ListAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -98,15 +90,15 @@ func (r *CreateSourceRegulationV1InputResource) Schema(ctx context.Context, req 
 				ElementType: types.StringType,
 				MarkdownDescription: `The list of ` + "`" + `userId` + "`" + ` or ` + "`" + `objectId` + "`" + ` values of the subjects to regulate.` + "\n" +
 					`` + "\n" +
-					`Config API note: equal to ` + "`" + `parent` + "`" + ` but allows an array.`,
+					`Config API note: equal to ` + "`" + `parent` + "`" + ` but allows an array.` + "\n" +
+					`Requires replacement if changed. `,
 			},
 			"subject_type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
-				MarkdownDescription: `must be one of ["USER_ID"]` + "\n" +
-					`The subject type.`,
+				Required:    true,
+				Description: `The subject type. Requires replacement if changed. ; must be one of ["USER_ID"]`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"USER_ID",

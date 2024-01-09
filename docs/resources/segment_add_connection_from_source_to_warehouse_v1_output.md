@@ -24,12 +24,11 @@ resource "segment_add_connection_from_source_to_warehouse_v1_output" "my_addconn
 
 ### Required
 
-- `source_id` (String)
-- `warehouse_id` (String)
+- `source_id` (String) Requires replacement if changed.
+- `warehouse_id` (String) Requires replacement if changed.
 
 ### Read-Only
 
-- `status` (String) must be one of ["CONNECTED", "NOT_CONNECTED"]
-The status of the connection between the Source and Warehouse.
+- `status` (String) The status of the connection between the Source and Warehouse. must be one of ["CONNECTED", "NOT_CONNECTED"]
 
 

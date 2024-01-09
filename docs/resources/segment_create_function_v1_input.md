@@ -37,20 +37,21 @@ resource "segment_create_function_v1_input" "my_createfunctionv1input" {
 
 ### Required
 
-- `code` (String) The Function code.
+- `code` (String) The Function code. Requires replacement if changed.
 - `display_name` (String) A display name for this Function.
 
 Note that Destination Functions append the Workspace to the display name.
-- `resource_type` (String) must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]
-The Function type.
+Requires replacement if changed.
+- `resource_type` (String) The Function type.
 
 Config API note: equal to `type`.
+Requires replacement if changed. ; must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]
 
 ### Optional
 
-- `description` (String) A description for this Function.
-- `logo_url` (String) The URL of the logo for this Function.
-- `settings` (Attributes List) The list of settings for this Function. (see [below for nested schema](#nestedatt--settings))
+- `description` (String) A description for this Function. Requires replacement if changed.
+- `logo_url` (String) The URL of the logo for this Function. Requires replacement if changed.
+- `settings` (Attributes List) The list of settings for this Function. Requires replacement if changed. (see [below for nested schema](#nestedatt--settings))
 
 ### Read-Only
 
@@ -61,13 +62,12 @@ Config API note: equal to `type`.
 
 Required:
 
-- `description` (String) A description of this Function Setting.
-- `label` (String) The label for this Function Setting.
-- `name` (String) The name of this Function Setting.
-- `required` (Boolean) Whether this Function Setting is required.
-- `sensitive` (Boolean) Whether this Function Setting contains sensitive information.
-- `type` (String) must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]
-The type of this Function Setting.
+- `description` (String) A description of this Function Setting. Requires replacement if changed.
+- `label` (String) The label for this Function Setting. Requires replacement if changed.
+- `name` (String) The name of this Function Setting. Requires replacement if changed.
+- `required` (Boolean) Whether this Function Setting is required. Requires replacement if changed.
+- `sensitive` (Boolean) Whether this Function Setting contains sensitive information. Requires replacement if changed.
+- `type` (String) The type of this Function Setting. Requires replacement if changed. ; must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]
 
 
 <a id="nestedatt--data"></a>
@@ -94,10 +94,10 @@ Read-Only:
 - `is_latest_version` (Boolean) Whether the deployment of this Function is the latest version.
 - `logo_url` (String) The URL of the logo for this Function.
 - `preview_webhook_url` (String) The preview webhook URL for this Function.
-- `resource_type` (String) must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]
-The Function type.
+- `resource_type` (String) The Function type.
 
 Config API note: equal to `type`.
+must be one of ["DESTINATION", "INSERT_DESTINATION", "SOURCE"]
 - `settings` (Attributes List) The list of settings for this Function. (see [below for nested schema](#nestedatt--data--function--settings))
 
 <a id="nestedatt--data--function--settings"></a>
@@ -110,7 +110,6 @@ Read-Only:
 - `name` (String) The name of this Function Setting.
 - `required` (Boolean) Whether this Function Setting is required.
 - `sensitive` (Boolean) Whether this Function Setting contains sensitive information.
-- `type` (String) must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]
-The type of this Function Setting.
+- `type` (String) The type of this Function Setting. must be one of ["ARRAY", "BOOLEAN", "STRING", "TEXT_MAP"]
 
 

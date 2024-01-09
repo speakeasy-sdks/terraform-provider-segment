@@ -18,8 +18,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_mapplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/mapplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
@@ -55,15 +53,9 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"input_payload": schema.MapAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.Map{
-							speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
-						},
+						Computed:    true,
 						ElementType: types.StringType,
 						Description: `The pre-filter JSON input.`,
 						Validators: []validator.Map{
@@ -71,10 +63,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 						},
 					},
 					"result": schema.SingleNestedAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
+						Computed:    true,
 						Attributes:  map[string]schema.Attribute{},
 						Description: `The filtered JSON output.`,
 					},
@@ -102,7 +91,8 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 									Optional:    true,
 									ElementType: types.StringType,
 									MarkdownDescription: `A dictionary of paths to object keys that this filter applies to.` + "\n" +
-										`  The literal string '' represents the top level of the object.`,
+										`  The literal string '' represents the top level of the object.` + "\n" +
+										`Requires replacement if changed. `,
 									Validators: []validator.Map{
 										mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 									},
@@ -113,7 +103,8 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 									},
 									Optional: true,
 									MarkdownDescription: `The JSON path to a property within a payload object from which Segment generates a deterministic` + "\n" +
-										`sampling rate.`,
+										`sampling rate.` + "\n" +
+										`Requires replacement if changed. `,
 								},
 								"percent": schema.NumberAttribute{
 									PlanModifiers: []planmodifier.Number{
@@ -121,15 +112,15 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 									},
 									Optional: true,
 									MarkdownDescription: `A decimal between 0 and 1 used for 'sample' type events and` + "\n" +
-										`influences the likelihood of sampling to occur.`,
+										`influences the likelihood of sampling to occur.` + "\n" +
+										`Requires replacement if changed. `,
 								},
 								"type": schema.StringAttribute{
 									PlanModifiers: []planmodifier.String{
 										stringplanmodifier.RequiresReplaceIfConfigured(),
 									},
-									Required: true,
-									MarkdownDescription: `must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]` + "\n" +
-										`The kind of Transformation to apply to any matched properties.`,
+									Required:    true,
+									Description: `The kind of Transformation to apply to any matched properties. Requires replacement if changed. ; must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]`,
 									Validators: []validator.String{
 										stringvalidator.OneOf(
 											"ALLOW_PROPERTIES",
@@ -142,7 +133,8 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 							},
 						},
 						MarkdownDescription: `The filtering action to take on events that match the "if" statement.` + "\n" +
-							`Action types must be one of: "drop", "allow_properties", "drop_properties" or "sample".`,
+							`Action types must be one of: "drop", "allow_properties", "drop_properties" or "sample".` + "\n" +
+							`Requires replacement if changed. `,
 					},
 					"if": schema.StringAttribute{
 						PlanModifiers: []planmodifier.String{
@@ -151,10 +143,11 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 						Required: true,
 						MarkdownDescription: `A FQL statement which determines if the provided filter's actions will apply to the provided JSON payload.` + "\n" +
 							`The literal string "all" will result in this filter to all events.` + "\n" +
-							`For guidance on using FQL, see the Segment documentation site.`,
+							`For guidance on using FQL, see the Segment documentation site.` + "\n" +
+							`Requires replacement if changed. `,
 					},
 				},
-				Description: `The filter to preview.`,
+				Description: `The filter to preview. Requires replacement if changed. `,
 			},
 			"payload": schema.MapAttribute{
 				PlanModifiers: []planmodifier.Map{
@@ -162,7 +155,7 @@ func (r *PreviewDestinationFilterV1InputResource) Schema(ctx context.Context, re
 				},
 				Required:    true,
 				ElementType: types.StringType,
-				Description: `The JSON payload to apply the filter to.`,
+				Description: `The JSON payload to apply the filter to. Requires replacement if changed. `,
 				Validators: []validator.Map{
 					mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 				},

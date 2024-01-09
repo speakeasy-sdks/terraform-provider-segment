@@ -14,9 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -52,57 +49,33 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"permissions": schema.ListNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.List{
-							speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-						},
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"resources": schema.ListNestedAttribute{
 									Computed: true,
-									PlanModifiers: []planmodifier.List{
-										speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-									},
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"id": schema.StringAttribute{
-												Computed: true,
-												PlanModifiers: []planmodifier.String{
-													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-												},
+												Computed:    true,
 												Description: `The id of this resource.`,
 											},
 											"labels": schema.ListNestedAttribute{
 												Computed: true,
-												PlanModifiers: []planmodifier.List{
-													speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-												},
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"description": schema.StringAttribute{
-															Computed: true,
-															PlanModifiers: []planmodifier.String{
-																speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-															},
+															Computed:    true,
 															Description: `A description of what this label represents.`,
 														},
 														"key": schema.StringAttribute{
-															Computed: true,
-															PlanModifiers: []planmodifier.String{
-																speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-															},
+															Computed:    true,
 															Description: `The key identifier for this label.`,
 														},
 														"value": schema.StringAttribute{
-															Computed: true,
-															PlanModifiers: []planmodifier.String{
-																speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-															},
+															Computed:    true,
 															Description: `The value of this label.`,
 														},
 													},
@@ -110,12 +83,8 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 												Description: `The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions.`,
 											},
 											"type": schema.StringAttribute{
-												Computed: true,
-												PlanModifiers: []planmodifier.String{
-													speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-												},
-												MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
-													`The type for this resource.`,
+												Computed:    true,
+												Description: `The type for this resource. must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]`,
 												Validators: []validator.String{
 													stringvalidator.OneOf(
 														"FUNCTION",
@@ -131,17 +100,11 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 									Description: `The resources included with this permission.`,
 								},
 								"role_id": schema.StringAttribute{
-									Computed: true,
-									PlanModifiers: []planmodifier.String{
-										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-									},
+									Computed:    true,
 									Description: `The id of the role that applies to this permission.`,
 								},
 								"role_name": schema.StringAttribute{
-									Computed: true,
-									PlanModifiers: []planmodifier.String{
-										speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-									},
+									Computed:    true,
 									Description: `The name of the role that applies to this permission.`,
 								},
 							},
@@ -170,7 +133,7 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 											stringplanmodifier.RequiresReplaceIfConfigured(),
 										},
 										Required:    true,
-										Description: `The id of this resource.`,
+										Description: `The id of this resource. Requires replacement if changed. `,
 									},
 									"labels": schema.ListNestedAttribute{
 										PlanModifiers: []planmodifier.List{
@@ -184,33 +147,32 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Optional:    true,
-													Description: `A description of what this label represents.`,
+													Description: `A description of what this label represents. Requires replacement if changed. `,
 												},
 												"key": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
-													Description: `The key identifier for this label.`,
+													Description: `The key identifier for this label. Requires replacement if changed. `,
 												},
 												"value": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
-													Description: `The value of this label.`,
+													Description: `The value of this label. Requires replacement if changed. `,
 												},
 											},
 										},
-										Description: `The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions.`,
+										Description: `The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions. Requires replacement if changed. `,
 									},
 									"type": schema.StringAttribute{
 										PlanModifiers: []planmodifier.String{
 											stringplanmodifier.RequiresReplaceIfConfigured(),
 										},
-										Required: true,
-										MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
-											`The type for this resource.`,
+										Required:    true,
+										Description: `The type for this resource. Requires replacement if changed. ; must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]`,
 										Validators: []validator.String{
 											stringvalidator.OneOf(
 												"FUNCTION",
@@ -223,24 +185,25 @@ func (r *AddPermissionsToUserV1InputResource) Schema(ctx context.Context, req re
 									},
 								},
 							},
-							Description: `The resources to link the selected role to.`,
+							Description: `The resources to link the selected role to. Requires replacement if changed. `,
 						},
 						"role_id": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The role id of this permission.`,
+							Description: `The role id of this permission. Requires replacement if changed. `,
 						},
 					},
 				},
-				Description: `The permissions to add.`,
+				Description: `The permissions to add. Requires replacement if changed. `,
 			},
 			"user_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 		},
 	}

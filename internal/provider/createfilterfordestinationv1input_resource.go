@@ -18,12 +18,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_boolplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/boolplanmodifier"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_mapplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/mapplanmodifier"
-	speakeasy_numberplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/numberplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
@@ -77,7 +71,8 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 							Optional:    true,
 							ElementType: types.StringType,
 							MarkdownDescription: `A dictionary of paths to object keys that this filter applies to.` + "\n" +
-								`  The literal string '' represents the top level of the object.`,
+								`  The literal string '' represents the top level of the object.` + "\n" +
+								`Requires replacement if changed. `,
 							Validators: []validator.Map{
 								mapvalidator.ValueStringsAre(validators.IsValidJSON()),
 							},
@@ -88,7 +83,8 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 							},
 							Optional: true,
 							MarkdownDescription: `The JSON path to a property within a payload object from which Segment generates a deterministic` + "\n" +
-								`sampling rate.`,
+								`sampling rate.` + "\n" +
+								`Requires replacement if changed. `,
 						},
 						"percent": schema.NumberAttribute{
 							PlanModifiers: []planmodifier.Number{
@@ -96,15 +92,15 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 							},
 							Optional: true,
 							MarkdownDescription: `A decimal between 0 and 1 used for 'sample' type events and` + "\n" +
-								`influences the likelihood of sampling to occur.`,
+								`influences the likelihood of sampling to occur.` + "\n" +
+								`Requires replacement if changed. `,
 						},
 						"type": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
-							Required: true,
-							MarkdownDescription: `must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]` + "\n" +
-								`The kind of Transformation to apply to any matched properties.`,
+							Required:    true,
+							Description: `The kind of Transformation to apply to any matched properties. Requires replacement if changed. ; must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]`,
 							Validators: []validator.String{
 								stringvalidator.OneOf(
 									"ALLOW_PROPERTIES",
@@ -116,32 +112,20 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 						},
 					},
 				},
-				Description: `Actions for the Destination filter.`,
+				Description: `Actions for the Destination filter. Requires replacement if changed. `,
 			},
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"filter": schema.SingleNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
 						Attributes: map[string]schema.Attribute{
 							"actions": schema.ListNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"fields": schema.MapAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.Map{
-												speakeasy_mapplanmodifier.SuppressDiff(speakeasy_mapplanmodifier.Standard),
-											},
+											Computed:    true,
 											ElementType: types.StringType,
 											MarkdownDescription: `A dictionary of paths to object keys that this filter applies to.` + "\n" +
 												`  The literal string '' represents the top level of the object.`,
@@ -151,27 +135,17 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 										},
 										"path": schema.StringAttribute{
 											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
 											MarkdownDescription: `The JSON path to a property within a payload object from which Segment generates a deterministic` + "\n" +
 												`sampling rate.`,
 										},
 										"percent": schema.NumberAttribute{
 											Computed: true,
-											PlanModifiers: []planmodifier.Number{
-												speakeasy_numberplanmodifier.SuppressDiff(speakeasy_numberplanmodifier.Standard),
-											},
 											MarkdownDescription: `A decimal between 0 and 1 used for 'sample' type events and` + "\n" +
 												`influences the likelihood of sampling to occur.`,
 										},
 										"type": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
-											MarkdownDescription: `must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]` + "\n" +
-												`The kind of Transformation to apply to any matched properties.`,
+											Computed:    true,
+											Description: `The kind of Transformation to apply to any matched properties. must be one of ["ALLOW_PROPERTIES", "DROP", "DROP_PROPERTIES", "SAMPLE"]`,
 											Validators: []validator.String{
 												stringvalidator.OneOf(
 													"ALLOW_PROPERTIES",
@@ -186,66 +160,39 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 								Description: `A list of actions this filter performs.`,
 							},
 							"created_at": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The timestamp of this filter's creation.`,
 							},
 							"description": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `A description for this filter.`,
 							},
 							"destination_id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The id of the Destination associated with this filter.`,
 							},
 							"enabled": schema.BoolAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.Bool{
-									speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `When set to true, this filter is active.`,
 							},
 							"id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The unique id of this filter.`,
 							},
 							"if": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `A condition that defines whether to apply this filter to a payload.`,
 							},
 							"source_id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The id of the Source associated with this filter.`,
 							},
 							"title": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `A title for this filter.`,
 							},
 							"updated_at": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The timestamp of this filter's last change.`,
 							},
 						},
@@ -259,41 +206,42 @@ func (r *CreateFilterForDestinationV1InputResource) Schema(ctx context.Context, 
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `The description of the filter.`,
+				Description: `The description of the filter. Requires replacement if changed. `,
 			},
 			"destination_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 			"enabled": schema.BoolAttribute{
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `When set to true, the Destination filter is active.`,
+				Description: `When set to true, the Destination filter is active. Requires replacement if changed. `,
 			},
 			"if": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The filter's condition.`,
+				Description: `The filter's condition. Requires replacement if changed. `,
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The id of the Source associated with this filter.`,
+				Description: `The id of the Source associated with this filter. Requires replacement if changed. `,
 			},
 			"title": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The title of the filter.`,
+				Description: `The title of the filter. Requires replacement if changed. `,
 			},
 		},
 	}

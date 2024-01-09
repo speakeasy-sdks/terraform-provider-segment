@@ -30,8 +30,8 @@ resource "segment_add_labels_to_source_v1_input" "my_addlabelstosourcev1input" {
 
 ### Required
 
-- `labels` (Attributes List) The labels to associate with a Source. (see [below for nested schema](#nestedatt--labels))
-- `source_id` (String)
+- `labels` (Attributes List) The labels to associate with a Source. Requires replacement if changed. (see [below for nested schema](#nestedatt--labels))
+- `source_id` (String) Requires replacement if changed.
 
 ### Read-Only
 
@@ -42,12 +42,12 @@ resource "segment_add_labels_to_source_v1_input" "my_addlabelstosourcev1input" {
 
 Required:
 
-- `key` (String) The key that represents the name of this label.
-- `value` (String) The value associated with the key of this label.
+- `key` (String) The key that represents the name of this label. Requires replacement if changed.
+- `value` (String) The value associated with the key of this label. Requires replacement if changed.
 
 Optional:
 
-- `description` (String) An optional description of the purpose of this label.
+- `description` (String) An optional description of the purpose of this label. Requires replacement if changed.
 
 
 <a id="nestedatt--data"></a>

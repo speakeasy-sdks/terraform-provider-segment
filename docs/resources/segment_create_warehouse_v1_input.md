@@ -29,7 +29,7 @@ resource "segment_create_warehouse_v1_input" "my_createwarehousev1input" {
 
 ### Required
 
-- `metadata_id` (String) The Warehouse metadata to use.
+- `metadata_id` (String) The Warehouse metadata to use. Requires replacement if changed.
 - `settings` (Map of String) A key-value object that contains instance-specific settings for a Warehouse.
 
 Different kinds of Warehouses require different settings. The required and optional settings
@@ -37,11 +37,12 @@ for a Warehouse are described in the `options` object of the associated Warehous
 
 You can find the full list of Warehouse metadata and related settings information in the
 `/catalog/warehouses` endpoint.
+Requires replacement if changed.
 
 ### Optional
 
-- `enabled` (Boolean) Enable to allow this Warehouse to receive data. Defaults to true.
-- `name` (String) An optional human-readable name for this Warehouse.
+- `enabled` (Boolean) Enable to allow this Warehouse to receive data. Defaults to true. Requires replacement if changed.
+- `name` (String) An optional human-readable name for this Warehouse. Requires replacement if changed.
 
 ### Read-Only
 
@@ -94,8 +95,7 @@ Read-Only:
 
 Read-Only:
 
-- `default_value` (String) Parsed as JSON.
-An optional default value for the field.
+- `default_value` (String) An optional default value for the field. Parsed as JSON.
 - `description` (String) An optional short text description of the field.
 - `label` (String) An optional label for this field.
 - `name` (String) The name identifying this option in the context of a Segment Integration.

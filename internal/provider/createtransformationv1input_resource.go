@@ -13,10 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_boolplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/boolplanmodifier"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -58,49 +54,28 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"transformation": schema.SingleNestedAttribute{
 						Computed: true,
-						PlanModifiers: []planmodifier.Object{
-							speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-						},
 						Attributes: map[string]schema.Attribute{
 							"destination_metadata_id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The optional Destination metadata associated with the Transformation.`,
 							},
 							"enabled": schema.BoolAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.Bool{
-									speakeasy_boolplanmodifier.SuppressDiff(speakeasy_boolplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `If the Transformation is enabled.`,
 							},
 							"fql_defined_properties": schema.ListNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"fql": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The FQL expression used to compute the property.`,
 										},
 										"property_name": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The new property name.`,
 										},
 									},
@@ -108,17 +83,11 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 								Description: `Optional array for defining new properties in FQL. Limited to 1 property right now.`,
 							},
 							"id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The id of the Transformation.`,
 							},
 							"if": schema.StringAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
 								MarkdownDescription: `If statement ([FQL](https://segment.com/docs/config-api/fql/)) to match events.` + "\n" +
 									`` + "\n" +
 									`For standard event matchers, use the following:` + "\n" +
@@ -127,38 +96,23 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 									`  Group -\> "type='group'"`,
 							},
 							"name": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The name of the Transformation.`,
 							},
 							"new_event_name": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `Optional new event name for renaming events. Works only for 'track' event type.`,
 							},
 							"property_renames": schema.ListNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"new_name": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The new name to rename the property.`,
 										},
 										"old_name": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The old name of the property.`,
 										},
 									},
@@ -167,24 +121,15 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 							},
 							"property_value_transformations": schema.ListNestedAttribute{
 								Computed: true,
-								PlanModifiers: []planmodifier.List{
-									speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-								},
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"property_paths": schema.ListAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.List{
-												speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-											},
+											Computed:    true,
 											ElementType: types.StringType,
 											Description: `The property paths. The maximum number of paths is 10.`,
 										},
 										"property_value": schema.StringAttribute{
-											Computed: true,
-											PlanModifiers: []planmodifier.String{
-												speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-											},
+											Computed:    true,
 											Description: `The new value of the property paths.`,
 										},
 									},
@@ -192,10 +137,7 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 								Description: `Optional array for transforming properties and values collected by your events. Limited to 10 properties.`,
 							},
 							"source_id": schema.StringAttribute{
-								Computed: true,
-								PlanModifiers: []planmodifier.String{
-									speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-								},
+								Computed:    true,
 								Description: `The Source associated with the Transformation.`,
 							},
 						},
@@ -209,14 +151,14 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `The optional Destination metadata id to be associated with the Transformation.`,
+				Description: `The optional Destination metadata id to be associated with the Transformation. Requires replacement if changed. `,
 			},
 			"enabled": schema.BoolAttribute{
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `If the Transformation should be enabled.`,
+				Description: `If the Transformation should be enabled. Requires replacement if changed. `,
 			},
 			"fql_defined_properties": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -230,18 +172,18 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The FQL expression used to compute the property.`,
+							Description: `The FQL expression used to compute the property. Requires replacement if changed. `,
 						},
 						"property_name": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The new property name.`,
+							Description: `The new property name. Requires replacement if changed. `,
 						},
 					},
 				},
-				Description: `Optional array for defining new properties in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property.`,
+				Description: `Optional array for defining new properties in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property. Requires replacement if changed. `,
 			},
 			"if": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -253,21 +195,22 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 					`For standard event matchers, use the following:` + "\n" +
 					`  Track -\> "event='\<eventName\>'"` + "\n" +
 					`  Identify -\> "type='identify'"` + "\n" +
-					`  Group -\> "type='group'"`,
+					`  Group -\> "type='group'"` + "\n" +
+					`Requires replacement if changed. `,
 			},
 			"name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The name of the Transformation.`,
+				Description: `The name of the Transformation. Requires replacement if changed. `,
 			},
 			"new_event_name": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Optional new event name for renaming events. Works only for 'track' event type.`,
+				Description: `Optional new event name for renaming events. Works only for 'track' event type. Requires replacement if changed. `,
 			},
 			"property_renames": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -281,18 +224,18 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The new name to rename the property.`,
+							Description: `The new name to rename the property. Requires replacement if changed. `,
 						},
 						"old_name": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The old name of the property.`,
+							Description: `The old name of the property. Requires replacement if changed. `,
 						},
 					},
 				},
-				Description: `Optional array for renaming properties collected by your events.`,
+				Description: `Optional array for renaming properties collected by your events. Requires replacement if changed. `,
 			},
 			"property_value_transformations": schema.ListNestedAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -307,25 +250,25 @@ func (r *CreateTransformationV1InputResource) Schema(ctx context.Context, req re
 							},
 							Required:    true,
 							ElementType: types.StringType,
-							Description: `The property paths. The maximum number of paths is 10.`,
+							Description: `The property paths. The maximum number of paths is 10. Requires replacement if changed. `,
 						},
 						"property_value": schema.StringAttribute{
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The new value of the property paths.`,
+							Description: `The new value of the property paths. Requires replacement if changed. `,
 						},
 					},
 				},
-				Description: `Optional array for transforming properties and values collected by your events. Limited to 10 properties.`,
+				Description: `Optional array for transforming properties and values collected by your events. Limited to 10 properties. Requires replacement if changed. `,
 			},
 			"source_id": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The Source to be associated with the Transformation.`,
+				Description: `The Source to be associated with the Transformation. Requires replacement if changed. `,
 			},
 		},
 	}

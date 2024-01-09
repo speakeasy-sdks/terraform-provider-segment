@@ -14,8 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_listplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/listplanmodifier"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -49,15 +47,9 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 		Attributes: map[string]schema.Attribute{
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"emails": schema.ListAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.List{
-							speakeasy_listplanmodifier.SuppressDiff(speakeasy_listplanmodifier.Standard),
-						},
+						Computed:    true,
 						ElementType: types.StringType,
 						Description: `The list of emails invited to the Workspace.`,
 					},
@@ -76,7 +68,7 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							},
 							Required:    true,
-							Description: `The invited user's email to attach the permissions to.`,
+							Description: `The invited user's email to attach the permissions to. Requires replacement if changed. `,
 						},
 						"permissions": schema.ListNestedAttribute{
 							PlanModifiers: []planmodifier.List{
@@ -97,25 +89,25 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Optional:    true,
-													Description: `A description of what this label represents.`,
+													Description: `A description of what this label represents. Requires replacement if changed. `,
 												},
 												"key": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
-													Description: `The key identifier for this label.`,
+													Description: `The key identifier for this label. Requires replacement if changed. `,
 												},
 												"value": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
-													Description: `The value of this label.`,
+													Description: `The value of this label. Requires replacement if changed. `,
 												},
 											},
 										},
-										Description: `The labels that determine which resources to grant users access to.`,
+										Description: `The labels that determine which resources to grant users access to. Requires replacement if changed. `,
 									},
 									"resources": schema.ListNestedAttribute{
 										PlanModifiers: []planmodifier.List{
@@ -129,15 +121,14 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
 													Required:    true,
-													Description: `The id of this resource.`,
+													Description: `The id of this resource. Requires replacement if changed. `,
 												},
 												"type": schema.StringAttribute{
 													PlanModifiers: []planmodifier.String{
 														stringplanmodifier.RequiresReplaceIfConfigured(),
 													},
-													Required: true,
-													MarkdownDescription: `must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]` + "\n" +
-														`The kind of resource this permission applies to.`,
+													Required:    true,
+													Description: `The kind of resource this permission applies to. Requires replacement if changed. ; must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]`,
 													Validators: []validator.String{
 														stringvalidator.OneOf(
 															"FUNCTION",
@@ -150,22 +141,22 @@ func (r *CreateInvitesV1InputResource) Schema(ctx context.Context, req resource.
 												},
 											},
 										},
-										Description: `The resources to grant the invited users access to.`,
+										Description: `The resources to grant the invited users access to. Requires replacement if changed. `,
 									},
 									"role_id": schema.StringAttribute{
 										PlanModifiers: []planmodifier.String{
 											stringplanmodifier.RequiresReplaceIfConfigured(),
 										},
 										Required:    true,
-										Description: `The id of the role.`,
+										Description: `The id of the role. Requires replacement if changed. `,
 									},
 								},
 							},
-							Description: `The permissions to attach to the invited user.`,
+							Description: `The permissions to attach to the invited user. Requires replacement if changed. `,
 						},
 					},
 				},
-				Description: `The list of invites.`,
+				Description: `The list of invites. Requires replacement if changed. `,
 			},
 		},
 	}

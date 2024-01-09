@@ -45,7 +45,7 @@ resource "segment_create_invites_v1_input" "my_createinvitesv1input" {
 
 ### Required
 
-- `invites` (Attributes List) The list of invites. (see [below for nested schema](#nestedatt--invites))
+- `invites` (Attributes List) The list of invites. Requires replacement if changed. (see [below for nested schema](#nestedatt--invites))
 
 ### Read-Only
 
@@ -56,35 +56,35 @@ resource "segment_create_invites_v1_input" "my_createinvitesv1input" {
 
 Required:
 
-- `email` (String) The invited user's email to attach the permissions to.
+- `email` (String) The invited user's email to attach the permissions to. Requires replacement if changed.
 
 Optional:
 
-- `permissions` (Attributes List) The permissions to attach to the invited user. (see [below for nested schema](#nestedatt--invites--permissions))
+- `permissions` (Attributes List) The permissions to attach to the invited user. Requires replacement if changed. (see [below for nested schema](#nestedatt--invites--permissions))
 
 <a id="nestedatt--invites--permissions"></a>
 ### Nested Schema for `invites.permissions`
 
 Required:
 
-- `role_id` (String) The id of the role.
+- `role_id` (String) The id of the role. Requires replacement if changed.
 
 Optional:
 
-- `labels` (Attributes List) The labels that determine which resources to grant users access to. (see [below for nested schema](#nestedatt--invites--permissions--labels))
-- `resources` (Attributes List) The resources to grant the invited users access to. (see [below for nested schema](#nestedatt--invites--permissions--resources))
+- `labels` (Attributes List) The labels that determine which resources to grant users access to. Requires replacement if changed. (see [below for nested schema](#nestedatt--invites--permissions--labels))
+- `resources` (Attributes List) The resources to grant the invited users access to. Requires replacement if changed. (see [below for nested schema](#nestedatt--invites--permissions--resources))
 
 <a id="nestedatt--invites--permissions--labels"></a>
 ### Nested Schema for `invites.permissions.labels`
 
 Required:
 
-- `key` (String) The key identifier for this label.
-- `value` (String) The value of this label.
+- `key` (String) The key identifier for this label. Requires replacement if changed.
+- `value` (String) The value of this label. Requires replacement if changed.
 
 Optional:
 
-- `description` (String) A description of what this label represents.
+- `description` (String) A description of what this label represents. Requires replacement if changed.
 
 
 <a id="nestedatt--invites--permissions--resources"></a>
@@ -92,9 +92,8 @@ Optional:
 
 Required:
 
-- `id` (String) The id of this resource.
-- `type` (String) must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
-The kind of resource this permission applies to.
+- `id` (String) The id of this resource. Requires replacement if changed.
+- `type` (String) The kind of resource this permission applies to. Requires replacement if changed. ; must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
 
 
 

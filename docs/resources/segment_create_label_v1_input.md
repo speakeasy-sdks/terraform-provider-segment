@@ -27,7 +27,7 @@ resource "segment_create_label_v1_input" "my_createlabelv1input" {
 
 ### Required
 
-- `label` (Attributes) The new label to create in the Workspace. (see [below for nested schema](#nestedatt--label))
+- `label` (Attributes) The new label to create in the Workspace. Requires replacement if changed. (see [below for nested schema](#nestedatt--label))
 
 ### Read-Only
 
@@ -38,12 +38,12 @@ resource "segment_create_label_v1_input" "my_createlabelv1input" {
 
 Required:
 
-- `key` (String) The key that represents the name of this label.
-- `value` (String) The value associated with the key of this label.
+- `key` (String) The key that represents the name of this label. Requires replacement if changed.
+- `value` (String) The value associated with the key of this label. Requires replacement if changed.
 
 Optional:
 
-- `description` (String) An optional description of the purpose of this label.
+- `description` (String) An optional description of the purpose of this label. Requires replacement if changed.
 
 
 <a id="nestedatt--data"></a>

@@ -26,8 +26,8 @@ resource "segment_add_users_to_user_group_v1_input" "my_adduserstousergroupv1inp
 
 ### Required
 
-- `emails` (List of String) The email addresses of the users and invites to add.
-- `user_group_id` (String)
+- `emails` (List of String) The email addresses of the users and invites to add. Requires replacement if changed.
+- `user_group_id` (String) Requires replacement if changed.
 
 ### Read-Only
 
@@ -77,8 +77,7 @@ Read-Only:
 
 - `id` (String) The id of this resource.
 - `labels` (Attributes List) The labels that further refine access to this resource. Labels are exclusive to Workspace-level permissions. (see [below for nested schema](#nestedatt--data--user_group--permissions--role_name--labels))
-- `type` (String) must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
-The type for this resource.
+- `type` (String) The type for this resource. must be one of ["FUNCTION", "SOURCE", "SPACE", "WAREHOUSE", "WORKSPACE"]
 
 <a id="nestedatt--data--user_group--permissions--role_name--labels"></a>
 ### Nested Schema for `data.user_group.permissions.role_name.labels`

@@ -14,8 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	speakeasy_objectplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/objectplanmodifier"
-	speakeasy_stringplanmodifier "github.com/scentregroup/terraform-provider-segment/internal/planmodifiers/stringplanmodifier"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
 )
@@ -57,19 +55,13 @@ func (r *CreateCloudSourceRegulationV1InputResource) Schema(ctx context.Context,
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Required:    true,
-				Description: `The Cloud Source collection to regulate.`,
+				Description: `The Cloud Source collection to regulate. Requires replacement if changed. `,
 			},
 			"data": schema.SingleNestedAttribute{
 				Computed: true,
-				PlanModifiers: []planmodifier.Object{
-					speakeasy_objectplanmodifier.SuppressDiff(speakeasy_objectplanmodifier.Standard),
-				},
 				Attributes: map[string]schema.Attribute{
 					"regulate_id": schema.StringAttribute{
-						Computed: true,
-						PlanModifiers: []planmodifier.String{
-							speakeasy_stringplanmodifier.SuppressDiff(speakeasy_stringplanmodifier.Standard),
-						},
+						Computed:    true,
 						Description: `The id of the created regulation.`,
 					},
 				},
@@ -79,9 +71,8 @@ func (r *CreateCloudSourceRegulationV1InputResource) Schema(ctx context.Context,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
-				MarkdownDescription: `must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]` + "\n" +
-					`The regulation type to create.`,
+				Required:    true,
+				Description: `The regulation type to create. Requires replacement if changed. ; must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"DELETE_INTERNAL",
@@ -96,7 +87,8 @@ func (r *CreateCloudSourceRegulationV1InputResource) Schema(ctx context.Context,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
+				Required:    true,
+				Description: `Requires replacement if changed. `,
 			},
 			"subject_ids": schema.ListAttribute{
 				PlanModifiers: []planmodifier.List{
@@ -106,15 +98,15 @@ func (r *CreateCloudSourceRegulationV1InputResource) Schema(ctx context.Context,
 				ElementType: types.StringType,
 				MarkdownDescription: `The list of ` + "`" + `userId` + "`" + ` or ` + "`" + `objectId` + "`" + ` values of the subjects to regulate.` + "\n" +
 					`` + "\n" +
-					`Config API note: equal to ` + "`" + `parent` + "`" + ` but allows an array.`,
+					`Config API note: equal to ` + "`" + `parent` + "`" + ` but allows an array.` + "\n" +
+					`Requires replacement if changed. `,
 			},
 			"subject_type": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
-				Required: true,
-				MarkdownDescription: `must be one of ["OBJECT_ID"]` + "\n" +
-					`The subject type. Must be ` + "`" + `objectId` + "`" + ` for Cloud Sources.`,
+				Required:    true,
+				Description: `The subject type. Must be ` + "`" + `objectId` + "`" + ` for Cloud Sources. Requires replacement if changed. ; must be one of ["OBJECT_ID"]`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"OBJECT_ID",

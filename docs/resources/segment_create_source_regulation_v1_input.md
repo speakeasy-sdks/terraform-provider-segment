@@ -28,14 +28,13 @@ resource "segment_create_source_regulation_v1_input" "my_createsourceregulationv
 
 ### Required
 
-- `regulation_type` (String) must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]
-The regulation type to create.
-- `source_id` (String)
+- `regulation_type` (String) The regulation type to create. Requires replacement if changed. ; must be one of ["DELETE_INTERNAL", "DELETE_ONLY", "SUPPRESS_ONLY", "SUPPRESS_WITH_DELETE", "UNSUPPRESS"]
+- `source_id` (String) Requires replacement if changed.
 - `subject_ids` (List of String) The list of `userId` or `objectId` values of the subjects to regulate.
 
 Config API note: equal to `parent` but allows an array.
-- `subject_type` (String) must be one of ["USER_ID"]
-The subject type.
+Requires replacement if changed.
+- `subject_type` (String) The subject type. Requires replacement if changed. ; must be one of ["USER_ID"]
 
 ### Read-Only
 

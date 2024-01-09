@@ -41,11 +41,7 @@ func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromOperationsAddLabelsTo
 		}
 		for labelsCount, labelsItem := range resp.Data.Labels {
 			var labels1 LabelV1
-			if labelsItem.Description != nil {
-				labels1.Description = types.StringValue(*labelsItem.Description)
-			} else {
-				labels1.Description = types.StringNull()
-			}
+			labels1.Description = types.StringPointerValue(labelsItem.Description)
 			labels1.Key = types.StringValue(labelsItem.Key)
 			labels1.Value = types.StringValue(labelsItem.Value)
 			if labelsCount+1 > len(r.Data.Labels) {

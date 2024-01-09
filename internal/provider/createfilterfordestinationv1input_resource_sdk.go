@@ -70,18 +70,14 @@ func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromOperationsCr
 		}
 		for actionsCount, actionsItem := range resp.Data.Filter.Actions {
 			var actions1 DestinationFilterActionV1
-			if actions1.Fields == nil && len(actionsItem.Fields) > 0 {
+			if len(actionsItem.Fields) > 0 {
 				actions1.Fields = make(map[string]types.String)
 				for key, value := range actionsItem.Fields {
 					result, _ := json.Marshal(value)
 					actions1.Fields[key] = types.StringValue(string(result))
 				}
 			}
-			if actionsItem.Path != nil {
-				actions1.Path = types.StringValue(*actionsItem.Path)
-			} else {
-				actions1.Path = types.StringNull()
-			}
+			actions1.Path = types.StringPointerValue(actionsItem.Path)
 			if actionsItem.Percent != nil {
 				actions1.Percent = types.NumberValue(big.NewFloat(float64(*actionsItem.Percent)))
 			} else {
@@ -98,11 +94,7 @@ func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromOperationsCr
 			}
 		}
 		r.Data.Filter.CreatedAt = types.StringValue(resp.Data.Filter.CreatedAt)
-		if resp.Data.Filter.Description != nil {
-			r.Data.Filter.Description = types.StringValue(*resp.Data.Filter.Description)
-		} else {
-			r.Data.Filter.Description = types.StringNull()
-		}
+		r.Data.Filter.Description = types.StringPointerValue(resp.Data.Filter.Description)
 		r.Data.Filter.DestinationID = types.StringValue(resp.Data.Filter.DestinationID)
 		r.Data.Filter.Enabled = types.BoolValue(resp.Data.Filter.Enabled)
 		r.Data.Filter.ID = types.StringValue(resp.Data.Filter.ID)

@@ -48,23 +48,24 @@ resource "segment_create_transformation_v1_input" "my_createtransformationv1inpu
 
 ### Required
 
-- `enabled` (Boolean) If the Transformation should be enabled.
+- `enabled` (Boolean) If the Transformation should be enabled. Requires replacement if changed.
 - `if` (String) If statement ([FQL](https://segment.com/docs/config-api/fql/)) to match events.
 
 For standard event matchers, use the following:
   Track -\> "event='\<eventName\>'"
   Identify -\> "type='identify'"
   Group -\> "type='group'"
-- `name` (String) The name of the Transformation.
-- `source_id` (String) The Source to be associated with the Transformation.
+Requires replacement if changed.
+- `name` (String) The name of the Transformation. Requires replacement if changed.
+- `source_id` (String) The Source to be associated with the Transformation. Requires replacement if changed.
 
 ### Optional
 
-- `destination_metadata_id` (String) The optional Destination metadata id to be associated with the Transformation.
-- `fql_defined_properties` (Attributes List) Optional array for defining new properties in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property. (see [below for nested schema](#nestedatt--fql_defined_properties))
-- `new_event_name` (String) Optional new event name for renaming events. Works only for 'track' event type.
-- `property_renames` (Attributes List) Optional array for renaming properties collected by your events. (see [below for nested schema](#nestedatt--property_renames))
-- `property_value_transformations` (Attributes List) Optional array for transforming properties and values collected by your events. Limited to 10 properties. (see [below for nested schema](#nestedatt--property_value_transformations))
+- `destination_metadata_id` (String) The optional Destination metadata id to be associated with the Transformation. Requires replacement if changed.
+- `fql_defined_properties` (Attributes List) Optional array for defining new properties in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property. Requires replacement if changed. (see [below for nested schema](#nestedatt--fql_defined_properties))
+- `new_event_name` (String) Optional new event name for renaming events. Works only for 'track' event type. Requires replacement if changed.
+- `property_renames` (Attributes List) Optional array for renaming properties collected by your events. Requires replacement if changed. (see [below for nested schema](#nestedatt--property_renames))
+- `property_value_transformations` (Attributes List) Optional array for transforming properties and values collected by your events. Limited to 10 properties. Requires replacement if changed. (see [below for nested schema](#nestedatt--property_value_transformations))
 
 ### Read-Only
 
@@ -75,8 +76,8 @@ For standard event matchers, use the following:
 
 Required:
 
-- `fql` (String) The FQL expression used to compute the property.
-- `property_name` (String) The new property name.
+- `fql` (String) The FQL expression used to compute the property. Requires replacement if changed.
+- `property_name` (String) The new property name. Requires replacement if changed.
 
 
 <a id="nestedatt--property_renames"></a>
@@ -84,8 +85,8 @@ Required:
 
 Required:
 
-- `new_name` (String) The new name to rename the property.
-- `old_name` (String) The old name of the property.
+- `new_name` (String) The new name to rename the property. Requires replacement if changed.
+- `old_name` (String) The old name of the property. Requires replacement if changed.
 
 
 <a id="nestedatt--property_value_transformations"></a>
@@ -93,8 +94,8 @@ Required:
 
 Required:
 
-- `property_paths` (List of String) The property paths. The maximum number of paths is 10.
-- `property_value` (String) The new value of the property paths.
+- `property_paths` (List of String) The property paths. The maximum number of paths is 10. Requires replacement if changed.
+- `property_value` (String) The new value of the property paths. Requires replacement if changed.
 
 
 <a id="nestedatt--data"></a>
