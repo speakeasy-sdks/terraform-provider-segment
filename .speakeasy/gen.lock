@@ -4,15 +4,15 @@ management:
   docChecksum: bee11ce45bcf3d10017267ce112ac7c4
   docVersion: 36.2.0
   speakeasyVersion: internal
-  generationVersion: 2.237.2
-  releaseVersion: 0.3.4
-  configChecksum: 3963dc1a45564bc409f4a26b53ec779a
+  generationVersion: 2.250.2
+  releaseVersion: 0.4.0
+  configChecksum: 7278c03920a7f051ab0e00dbba79325a
   repoURL: https://github.com/speakeasy-sdks/terraform-provider-segment.git
   repoSubDirectory: .
   published: true
 features:
   terraform:
-    core: 3.8.4
+    core: 3.9.4
     globalSecurity: 2.81.3
     globalServerURLs: 2.82.1
 generatedFiles:
