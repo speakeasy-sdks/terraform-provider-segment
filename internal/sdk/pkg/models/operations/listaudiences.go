@@ -45,12 +45,12 @@ func (o *ListAudiencesResponseBody) GetData() *shared.ListAudiencesAlphaOutput {
 type ListAudiencesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *ListAudiencesResponseBody
 }
@@ -60,6 +60,13 @@ func (o *ListAudiencesResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *ListAudiencesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *ListAudiencesResponse) GetStatusCode() int {
@@ -74,13 +81,6 @@ func (o *ListAudiencesResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ListAudiencesResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *ListAudiencesResponse) GetObject() *ListAudiencesResponseBody {

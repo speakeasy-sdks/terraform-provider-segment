@@ -61,46 +61,48 @@ func (r *CreateFilterForDestinationV1InputResourceModel) ToSharedCreateFilterFor
 }
 
 func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromOperationsCreateFilterForDestinationResponseBody(resp *operations.CreateFilterForDestinationResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateFilterForDestinationV1Output{}
-		if len(r.Data.Filter.Actions) > len(resp.Data.Filter.Actions) {
-			r.Data.Filter.Actions = r.Data.Filter.Actions[:len(resp.Data.Filter.Actions)]
-		}
-		for actionsCount, actionsItem := range resp.Data.Filter.Actions {
-			var actions1 DestinationFilterActionV1
-			if len(actionsItem.Fields) > 0 {
-				actions1.Fields = make(map[string]types.String)
-				for key, value := range actionsItem.Fields {
-					result, _ := json.Marshal(value)
-					actions1.Fields[key] = types.StringValue(string(result))
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateFilterForDestinationV1Output{}
+			if len(r.Data.Filter.Actions) > len(resp.Data.Filter.Actions) {
+				r.Data.Filter.Actions = r.Data.Filter.Actions[:len(resp.Data.Filter.Actions)]
+			}
+			for actionsCount, actionsItem := range resp.Data.Filter.Actions {
+				var actions1 DestinationFilterActionV1
+				if len(actionsItem.Fields) > 0 {
+					actions1.Fields = make(map[string]types.String)
+					for key, value := range actionsItem.Fields {
+						result, _ := json.Marshal(value)
+						actions1.Fields[key] = types.StringValue(string(result))
+					}
+				}
+				actions1.Path = types.StringPointerValue(actionsItem.Path)
+				if actionsItem.Percent != nil {
+					actions1.Percent = types.NumberValue(big.NewFloat(float64(*actionsItem.Percent)))
+				} else {
+					actions1.Percent = types.NumberNull()
+				}
+				actions1.Type = types.StringValue(string(actionsItem.Type))
+				if actionsCount+1 > len(r.Data.Filter.Actions) {
+					r.Data.Filter.Actions = append(r.Data.Filter.Actions, actions1)
+				} else {
+					r.Data.Filter.Actions[actionsCount].Fields = actions1.Fields
+					r.Data.Filter.Actions[actionsCount].Path = actions1.Path
+					r.Data.Filter.Actions[actionsCount].Percent = actions1.Percent
+					r.Data.Filter.Actions[actionsCount].Type = actions1.Type
 				}
 			}
-			actions1.Path = types.StringPointerValue(actionsItem.Path)
-			if actionsItem.Percent != nil {
-				actions1.Percent = types.NumberValue(big.NewFloat(float64(*actionsItem.Percent)))
-			} else {
-				actions1.Percent = types.NumberNull()
-			}
-			actions1.Type = types.StringValue(string(actionsItem.Type))
-			if actionsCount+1 > len(r.Data.Filter.Actions) {
-				r.Data.Filter.Actions = append(r.Data.Filter.Actions, actions1)
-			} else {
-				r.Data.Filter.Actions[actionsCount].Fields = actions1.Fields
-				r.Data.Filter.Actions[actionsCount].Path = actions1.Path
-				r.Data.Filter.Actions[actionsCount].Percent = actions1.Percent
-				r.Data.Filter.Actions[actionsCount].Type = actions1.Type
-			}
+			r.Data.Filter.CreatedAt = types.StringValue(resp.Data.Filter.CreatedAt)
+			r.Data.Filter.Description = types.StringPointerValue(resp.Data.Filter.Description)
+			r.Data.Filter.DestinationID = types.StringValue(resp.Data.Filter.DestinationID)
+			r.Data.Filter.Enabled = types.BoolValue(resp.Data.Filter.Enabled)
+			r.Data.Filter.ID = types.StringValue(resp.Data.Filter.ID)
+			r.Data.Filter.If = types.StringValue(resp.Data.Filter.If)
+			r.Data.Filter.SourceID = types.StringValue(resp.Data.Filter.SourceID)
+			r.Data.Filter.Title = types.StringValue(resp.Data.Filter.Title)
+			r.Data.Filter.UpdatedAt = types.StringValue(resp.Data.Filter.UpdatedAt)
 		}
-		r.Data.Filter.CreatedAt = types.StringValue(resp.Data.Filter.CreatedAt)
-		r.Data.Filter.Description = types.StringPointerValue(resp.Data.Filter.Description)
-		r.Data.Filter.DestinationID = types.StringValue(resp.Data.Filter.DestinationID)
-		r.Data.Filter.Enabled = types.BoolValue(resp.Data.Filter.Enabled)
-		r.Data.Filter.ID = types.StringValue(resp.Data.Filter.ID)
-		r.Data.Filter.If = types.StringValue(resp.Data.Filter.If)
-		r.Data.Filter.SourceID = types.StringValue(resp.Data.Filter.SourceID)
-		r.Data.Filter.Title = types.StringValue(resp.Data.Filter.Title)
-		r.Data.Filter.UpdatedAt = types.StringValue(resp.Data.Filter.UpdatedAt)
 	}
 }

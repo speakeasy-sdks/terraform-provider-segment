@@ -17,10 +17,12 @@ func (r *AddSourceToTrackingPlanV1InputResourceModel) ToSharedAddSourceToTrackin
 }
 
 func (r *AddSourceToTrackingPlanV1InputResourceModel) RefreshFromOperationsAddSourceToTrackingPlanResponseBody(resp *operations.AddSourceToTrackingPlanResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &AddSourceToTrackingPlanV1Output{}
-		r.Data.Status = types.StringValue(string(resp.Data.Status))
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &AddSourceToTrackingPlanV1Output{}
+			r.Data.Status = types.StringValue(string(resp.Data.Status))
+		}
 	}
 }

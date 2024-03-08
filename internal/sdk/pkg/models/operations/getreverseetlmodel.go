@@ -34,12 +34,12 @@ func (o *GetReverseEtlModelResponseBody) GetData() *shared.GetReverseEtlModelOut
 type GetReverseEtlModelResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *GetReverseEtlModelResponseBody
 }
@@ -49,6 +49,13 @@ func (o *GetReverseEtlModelResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *GetReverseEtlModelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *GetReverseEtlModelResponse) GetStatusCode() int {
@@ -63,13 +70,6 @@ func (o *GetReverseEtlModelResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *GetReverseEtlModelResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *GetReverseEtlModelResponse) GetObject() *GetReverseEtlModelResponseBody {

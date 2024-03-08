@@ -26,10 +26,12 @@ func (r *CreateCloudSourceRegulationV1InputResourceModel) ToSharedCreateCloudSou
 }
 
 func (r *CreateCloudSourceRegulationV1InputResourceModel) RefreshFromOperationsCreateCloudSourceRegulationResponseBody(resp *operations.CreateCloudSourceRegulationResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateCloudSourceRegulationV1Output{}
-		r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateCloudSourceRegulationV1Output{}
+			r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
+		}
 	}
 }

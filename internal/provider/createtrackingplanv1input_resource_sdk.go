@@ -26,16 +26,18 @@ func (r *CreateTrackingPlanV1InputResourceModel) ToSharedCreateTrackingPlanV1Inp
 }
 
 func (r *CreateTrackingPlanV1InputResourceModel) RefreshFromOperationsCreateTrackingPlanResponseBody(resp *operations.CreateTrackingPlanResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateTrackingPlanV1Output{}
-		r.Data.TrackingPlan.CreatedAt = types.StringPointerValue(resp.Data.TrackingPlan.CreatedAt)
-		r.Data.TrackingPlan.Description = types.StringPointerValue(resp.Data.TrackingPlan.Description)
-		r.Data.TrackingPlan.ID = types.StringValue(resp.Data.TrackingPlan.ID)
-		r.Data.TrackingPlan.Name = types.StringPointerValue(resp.Data.TrackingPlan.Name)
-		r.Data.TrackingPlan.Slug = types.StringPointerValue(resp.Data.TrackingPlan.Slug)
-		r.Data.TrackingPlan.Type = types.StringValue(string(resp.Data.TrackingPlan.Type))
-		r.Data.TrackingPlan.UpdatedAt = types.StringPointerValue(resp.Data.TrackingPlan.UpdatedAt)
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateTrackingPlanV1Output{}
+			r.Data.TrackingPlan.CreatedAt = types.StringPointerValue(resp.Data.TrackingPlan.CreatedAt)
+			r.Data.TrackingPlan.Description = types.StringPointerValue(resp.Data.TrackingPlan.Description)
+			r.Data.TrackingPlan.ID = types.StringValue(resp.Data.TrackingPlan.ID)
+			r.Data.TrackingPlan.Name = types.StringPointerValue(resp.Data.TrackingPlan.Name)
+			r.Data.TrackingPlan.Slug = types.StringPointerValue(resp.Data.TrackingPlan.Slug)
+			r.Data.TrackingPlan.Type = types.StringValue(string(resp.Data.TrackingPlan.Type))
+			r.Data.TrackingPlan.UpdatedAt = types.StringPointerValue(resp.Data.TrackingPlan.UpdatedAt)
+		}
 	}
 }

@@ -58,13 +58,15 @@ func (r *CreateInvitesV1InputResourceModel) ToSharedCreateInvitesV1Input() *shar
 }
 
 func (r *CreateInvitesV1InputResourceModel) RefreshFromOperationsCreateInvitesResponseBody(resp *operations.CreateInvitesResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateInvitesV1Output{}
-		r.Data.Emails = nil
-		for _, v := range resp.Data.Emails {
-			r.Data.Emails = append(r.Data.Emails, types.StringValue(v))
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateInvitesV1Output{}
+			r.Data.Emails = nil
+			for _, v := range resp.Data.Emails {
+				r.Data.Emails = append(r.Data.Emails, types.StringValue(v))
+			}
 		}
 	}
 }

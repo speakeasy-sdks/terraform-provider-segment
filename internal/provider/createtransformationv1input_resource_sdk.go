@@ -70,61 +70,63 @@ func (r *CreateTransformationV1InputResourceModel) ToSharedCreateTransformationV
 }
 
 func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTransformationResponseBody(resp *operations.CreateTransformationResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateTransformationV1Output{}
-		r.Data.Transformation.DestinationMetadataID = types.StringPointerValue(resp.Data.Transformation.DestinationMetadataID)
-		r.Data.Transformation.Enabled = types.BoolValue(resp.Data.Transformation.Enabled)
-		if len(r.Data.Transformation.FqlDefinedProperties) > len(resp.Data.Transformation.FqlDefinedProperties) {
-			r.Data.Transformation.FqlDefinedProperties = r.Data.Transformation.FqlDefinedProperties[:len(resp.Data.Transformation.FqlDefinedProperties)]
-		}
-		for fqlDefinedPropertiesCount, fqlDefinedPropertiesItem := range resp.Data.Transformation.FqlDefinedProperties {
-			var fqlDefinedProperties1 FQLDefinedPropertyV1
-			fqlDefinedProperties1.Fql = types.StringValue(fqlDefinedPropertiesItem.Fql)
-			fqlDefinedProperties1.PropertyName = types.StringValue(fqlDefinedPropertiesItem.PropertyName)
-			if fqlDefinedPropertiesCount+1 > len(r.Data.Transformation.FqlDefinedProperties) {
-				r.Data.Transformation.FqlDefinedProperties = append(r.Data.Transformation.FqlDefinedProperties, fqlDefinedProperties1)
-			} else {
-				r.Data.Transformation.FqlDefinedProperties[fqlDefinedPropertiesCount].Fql = fqlDefinedProperties1.Fql
-				r.Data.Transformation.FqlDefinedProperties[fqlDefinedPropertiesCount].PropertyName = fqlDefinedProperties1.PropertyName
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateTransformationV1Output{}
+			r.Data.Transformation.DestinationMetadataID = types.StringPointerValue(resp.Data.Transformation.DestinationMetadataID)
+			r.Data.Transformation.Enabled = types.BoolValue(resp.Data.Transformation.Enabled)
+			if len(r.Data.Transformation.FqlDefinedProperties) > len(resp.Data.Transformation.FqlDefinedProperties) {
+				r.Data.Transformation.FqlDefinedProperties = r.Data.Transformation.FqlDefinedProperties[:len(resp.Data.Transformation.FqlDefinedProperties)]
 			}
-		}
-		r.Data.Transformation.ID = types.StringValue(resp.Data.Transformation.ID)
-		r.Data.Transformation.If = types.StringValue(resp.Data.Transformation.If)
-		r.Data.Transformation.Name = types.StringValue(resp.Data.Transformation.Name)
-		r.Data.Transformation.NewEventName = types.StringPointerValue(resp.Data.Transformation.NewEventName)
-		if len(r.Data.Transformation.PropertyRenames) > len(resp.Data.Transformation.PropertyRenames) {
-			r.Data.Transformation.PropertyRenames = r.Data.Transformation.PropertyRenames[:len(resp.Data.Transformation.PropertyRenames)]
-		}
-		for propertyRenamesCount, propertyRenamesItem := range resp.Data.Transformation.PropertyRenames {
-			var propertyRenames1 PropertyRenameV1
-			propertyRenames1.NewName = types.StringValue(propertyRenamesItem.NewName)
-			propertyRenames1.OldName = types.StringValue(propertyRenamesItem.OldName)
-			if propertyRenamesCount+1 > len(r.Data.Transformation.PropertyRenames) {
-				r.Data.Transformation.PropertyRenames = append(r.Data.Transformation.PropertyRenames, propertyRenames1)
-			} else {
-				r.Data.Transformation.PropertyRenames[propertyRenamesCount].NewName = propertyRenames1.NewName
-				r.Data.Transformation.PropertyRenames[propertyRenamesCount].OldName = propertyRenames1.OldName
+			for fqlDefinedPropertiesCount, fqlDefinedPropertiesItem := range resp.Data.Transformation.FqlDefinedProperties {
+				var fqlDefinedProperties1 FQLDefinedPropertyV1
+				fqlDefinedProperties1.Fql = types.StringValue(fqlDefinedPropertiesItem.Fql)
+				fqlDefinedProperties1.PropertyName = types.StringValue(fqlDefinedPropertiesItem.PropertyName)
+				if fqlDefinedPropertiesCount+1 > len(r.Data.Transformation.FqlDefinedProperties) {
+					r.Data.Transformation.FqlDefinedProperties = append(r.Data.Transformation.FqlDefinedProperties, fqlDefinedProperties1)
+				} else {
+					r.Data.Transformation.FqlDefinedProperties[fqlDefinedPropertiesCount].Fql = fqlDefinedProperties1.Fql
+					r.Data.Transformation.FqlDefinedProperties[fqlDefinedPropertiesCount].PropertyName = fqlDefinedProperties1.PropertyName
+				}
 			}
-		}
-		if len(r.Data.Transformation.PropertyValueTransformations) > len(resp.Data.Transformation.PropertyValueTransformations) {
-			r.Data.Transformation.PropertyValueTransformations = r.Data.Transformation.PropertyValueTransformations[:len(resp.Data.Transformation.PropertyValueTransformations)]
-		}
-		for propertyValueTransformationsCount, propertyValueTransformationsItem := range resp.Data.Transformation.PropertyValueTransformations {
-			var propertyValueTransformations1 PropertyValueTransformationV1
-			propertyValueTransformations1.PropertyPaths = nil
-			for _, v := range propertyValueTransformationsItem.PropertyPaths {
-				propertyValueTransformations1.PropertyPaths = append(propertyValueTransformations1.PropertyPaths, types.StringValue(v))
+			r.Data.Transformation.ID = types.StringValue(resp.Data.Transformation.ID)
+			r.Data.Transformation.If = types.StringValue(resp.Data.Transformation.If)
+			r.Data.Transformation.Name = types.StringValue(resp.Data.Transformation.Name)
+			r.Data.Transformation.NewEventName = types.StringPointerValue(resp.Data.Transformation.NewEventName)
+			if len(r.Data.Transformation.PropertyRenames) > len(resp.Data.Transformation.PropertyRenames) {
+				r.Data.Transformation.PropertyRenames = r.Data.Transformation.PropertyRenames[:len(resp.Data.Transformation.PropertyRenames)]
 			}
-			propertyValueTransformations1.PropertyValue = types.StringValue(propertyValueTransformationsItem.PropertyValue)
-			if propertyValueTransformationsCount+1 > len(r.Data.Transformation.PropertyValueTransformations) {
-				r.Data.Transformation.PropertyValueTransformations = append(r.Data.Transformation.PropertyValueTransformations, propertyValueTransformations1)
-			} else {
-				r.Data.Transformation.PropertyValueTransformations[propertyValueTransformationsCount].PropertyPaths = propertyValueTransformations1.PropertyPaths
-				r.Data.Transformation.PropertyValueTransformations[propertyValueTransformationsCount].PropertyValue = propertyValueTransformations1.PropertyValue
+			for propertyRenamesCount, propertyRenamesItem := range resp.Data.Transformation.PropertyRenames {
+				var propertyRenames1 PropertyRenameV1
+				propertyRenames1.NewName = types.StringValue(propertyRenamesItem.NewName)
+				propertyRenames1.OldName = types.StringValue(propertyRenamesItem.OldName)
+				if propertyRenamesCount+1 > len(r.Data.Transformation.PropertyRenames) {
+					r.Data.Transformation.PropertyRenames = append(r.Data.Transformation.PropertyRenames, propertyRenames1)
+				} else {
+					r.Data.Transformation.PropertyRenames[propertyRenamesCount].NewName = propertyRenames1.NewName
+					r.Data.Transformation.PropertyRenames[propertyRenamesCount].OldName = propertyRenames1.OldName
+				}
 			}
+			if len(r.Data.Transformation.PropertyValueTransformations) > len(resp.Data.Transformation.PropertyValueTransformations) {
+				r.Data.Transformation.PropertyValueTransformations = r.Data.Transformation.PropertyValueTransformations[:len(resp.Data.Transformation.PropertyValueTransformations)]
+			}
+			for propertyValueTransformationsCount, propertyValueTransformationsItem := range resp.Data.Transformation.PropertyValueTransformations {
+				var propertyValueTransformations1 PropertyValueTransformationV1
+				propertyValueTransformations1.PropertyPaths = nil
+				for _, v := range propertyValueTransformationsItem.PropertyPaths {
+					propertyValueTransformations1.PropertyPaths = append(propertyValueTransformations1.PropertyPaths, types.StringValue(v))
+				}
+				propertyValueTransformations1.PropertyValue = types.StringValue(propertyValueTransformationsItem.PropertyValue)
+				if propertyValueTransformationsCount+1 > len(r.Data.Transformation.PropertyValueTransformations) {
+					r.Data.Transformation.PropertyValueTransformations = append(r.Data.Transformation.PropertyValueTransformations, propertyValueTransformations1)
+				} else {
+					r.Data.Transformation.PropertyValueTransformations[propertyValueTransformationsCount].PropertyPaths = propertyValueTransformations1.PropertyPaths
+					r.Data.Transformation.PropertyValueTransformations[propertyValueTransformationsCount].PropertyValue = propertyValueTransformations1.PropertyValue
+				}
+			}
+			r.Data.Transformation.SourceID = types.StringValue(resp.Data.Transformation.SourceID)
 		}
-		r.Data.Transformation.SourceID = types.StringValue(resp.Data.Transformation.SourceID)
 	}
 }

@@ -50,12 +50,12 @@ func (o *UpdateProfilesWarehouseForSpaceWarehouseResponseBody) GetData() *shared
 type UpdateProfilesWarehouseForSpaceWarehouseResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *UpdateProfilesWarehouseForSpaceWarehouseResponseBody
 }
@@ -65,6 +65,13 @@ func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetContentType() stri
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetStatusCode() int {
@@ -79,13 +86,6 @@ func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetRawResponse() *htt
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *UpdateProfilesWarehouseForSpaceWarehouseResponse) GetObject() *UpdateProfilesWarehouseForSpaceWarehouseResponseBody {

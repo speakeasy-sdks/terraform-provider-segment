@@ -24,10 +24,12 @@ func (r *CreateWorkspaceRegulationV1InputResourceModel) ToSharedCreateWorkspaceR
 }
 
 func (r *CreateWorkspaceRegulationV1InputResourceModel) RefreshFromOperationsCreateWorkspaceRegulationResponseBody(resp *operations.CreateWorkspaceRegulationResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateCloudSourceRegulationV1Output{}
-		r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateCloudSourceRegulationV1Output{}
+			r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
+		}
 	}
 }

@@ -45,12 +45,12 @@ func (o *ListComputedTraitsResponseBody) GetData() *shared.ListComputedTraitsAlp
 type ListComputedTraitsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *ListComputedTraitsResponseBody
 }
@@ -60,6 +60,13 @@ func (o *ListComputedTraitsResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *ListComputedTraitsResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *ListComputedTraitsResponse) GetStatusCode() int {
@@ -74,13 +81,6 @@ func (o *ListComputedTraitsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ListComputedTraitsResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *ListComputedTraitsResponse) GetObject() *ListComputedTraitsResponseBody {

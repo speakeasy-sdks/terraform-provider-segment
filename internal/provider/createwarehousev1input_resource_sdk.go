@@ -39,53 +39,55 @@ func (r *CreateWarehouseV1InputResourceModel) ToSharedCreateWarehouseV1Input() *
 }
 
 func (r *CreateWarehouseV1InputResourceModel) RefreshFromOperationsCreateWarehouseResponseBody(resp *operations.CreateWarehouseResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateWarehouseV1Output{}
-		r.Data.Warehouse.Enabled = types.BoolValue(resp.Data.Warehouse.Enabled)
-		r.Data.Warehouse.ID = types.StringValue(resp.Data.Warehouse.ID)
-		r.Data.Warehouse.Metadata.Description = types.StringValue(resp.Data.Warehouse.Metadata.Description)
-		r.Data.Warehouse.Metadata.ID = types.StringValue(resp.Data.Warehouse.Metadata.ID)
-		r.Data.Warehouse.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Warehouse.Metadata.Logos.Alt)
-		r.Data.Warehouse.Metadata.Logos.Default = types.StringValue(resp.Data.Warehouse.Metadata.Logos.Default)
-		r.Data.Warehouse.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Warehouse.Metadata.Logos.Mark)
-		r.Data.Warehouse.Metadata.Name = types.StringValue(resp.Data.Warehouse.Metadata.Name)
-		if len(r.Data.Warehouse.Metadata.Options) > len(resp.Data.Warehouse.Metadata.Options) {
-			r.Data.Warehouse.Metadata.Options = r.Data.Warehouse.Metadata.Options[:len(resp.Data.Warehouse.Metadata.Options)]
-		}
-		for optionsCount, optionsItem := range resp.Data.Warehouse.Metadata.Options {
-			var options1 IntegrationOptionBeta
-			if optionsItem.DefaultValue == nil {
-				options1.DefaultValue = types.StringNull()
-			} else {
-				defaultValueResult, _ := json.Marshal(optionsItem.DefaultValue)
-				options1.DefaultValue = types.StringValue(string(defaultValueResult))
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateWarehouseV1Output{}
+			r.Data.Warehouse.Enabled = types.BoolValue(resp.Data.Warehouse.Enabled)
+			r.Data.Warehouse.ID = types.StringValue(resp.Data.Warehouse.ID)
+			r.Data.Warehouse.Metadata.Description = types.StringValue(resp.Data.Warehouse.Metadata.Description)
+			r.Data.Warehouse.Metadata.ID = types.StringValue(resp.Data.Warehouse.Metadata.ID)
+			r.Data.Warehouse.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Warehouse.Metadata.Logos.Alt)
+			r.Data.Warehouse.Metadata.Logos.Default = types.StringValue(resp.Data.Warehouse.Metadata.Logos.Default)
+			r.Data.Warehouse.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Warehouse.Metadata.Logos.Mark)
+			r.Data.Warehouse.Metadata.Name = types.StringValue(resp.Data.Warehouse.Metadata.Name)
+			if len(r.Data.Warehouse.Metadata.Options) > len(resp.Data.Warehouse.Metadata.Options) {
+				r.Data.Warehouse.Metadata.Options = r.Data.Warehouse.Metadata.Options[:len(resp.Data.Warehouse.Metadata.Options)]
 			}
-			options1.Description = types.StringPointerValue(optionsItem.Description)
-			options1.Label = types.StringPointerValue(optionsItem.Label)
-			options1.Name = types.StringValue(optionsItem.Name)
-			options1.Required = types.BoolValue(optionsItem.Required)
-			options1.Type = types.StringValue(optionsItem.Type)
-			if optionsCount+1 > len(r.Data.Warehouse.Metadata.Options) {
-				r.Data.Warehouse.Metadata.Options = append(r.Data.Warehouse.Metadata.Options, options1)
-			} else {
-				r.Data.Warehouse.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
-				r.Data.Warehouse.Metadata.Options[optionsCount].Description = options1.Description
-				r.Data.Warehouse.Metadata.Options[optionsCount].Label = options1.Label
-				r.Data.Warehouse.Metadata.Options[optionsCount].Name = options1.Name
-				r.Data.Warehouse.Metadata.Options[optionsCount].Required = options1.Required
-				r.Data.Warehouse.Metadata.Options[optionsCount].Type = options1.Type
+			for optionsCount, optionsItem := range resp.Data.Warehouse.Metadata.Options {
+				var options1 IntegrationOptionBeta
+				if optionsItem.DefaultValue == nil {
+					options1.DefaultValue = types.StringNull()
+				} else {
+					defaultValueResult, _ := json.Marshal(optionsItem.DefaultValue)
+					options1.DefaultValue = types.StringValue(string(defaultValueResult))
+				}
+				options1.Description = types.StringPointerValue(optionsItem.Description)
+				options1.Label = types.StringPointerValue(optionsItem.Label)
+				options1.Name = types.StringValue(optionsItem.Name)
+				options1.Required = types.BoolValue(optionsItem.Required)
+				options1.Type = types.StringValue(optionsItem.Type)
+				if optionsCount+1 > len(r.Data.Warehouse.Metadata.Options) {
+					r.Data.Warehouse.Metadata.Options = append(r.Data.Warehouse.Metadata.Options, options1)
+				} else {
+					r.Data.Warehouse.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
+					r.Data.Warehouse.Metadata.Options[optionsCount].Description = options1.Description
+					r.Data.Warehouse.Metadata.Options[optionsCount].Label = options1.Label
+					r.Data.Warehouse.Metadata.Options[optionsCount].Name = options1.Name
+					r.Data.Warehouse.Metadata.Options[optionsCount].Required = options1.Required
+					r.Data.Warehouse.Metadata.Options[optionsCount].Type = options1.Type
+				}
 			}
-		}
-		r.Data.Warehouse.Metadata.Slug = types.StringValue(resp.Data.Warehouse.Metadata.Slug)
-		if len(resp.Data.Warehouse.Settings) > 0 {
-			r.Data.Warehouse.Settings = make(map[string]types.String)
-			for key, value := range resp.Data.Warehouse.Settings {
-				result, _ := json.Marshal(value)
-				r.Data.Warehouse.Settings[key] = types.StringValue(string(result))
+			r.Data.Warehouse.Metadata.Slug = types.StringValue(resp.Data.Warehouse.Metadata.Slug)
+			if len(resp.Data.Warehouse.Settings) > 0 {
+				r.Data.Warehouse.Settings = make(map[string]types.String)
+				for key, value := range resp.Data.Warehouse.Settings {
+					result, _ := json.Marshal(value)
+					r.Data.Warehouse.Settings[key] = types.StringValue(string(result))
+				}
 			}
+			r.Data.Warehouse.WorkspaceID = types.StringValue(resp.Data.Warehouse.WorkspaceID)
 		}
-		r.Data.Warehouse.WorkspaceID = types.StringValue(resp.Data.Warehouse.WorkspaceID)
 	}
 }

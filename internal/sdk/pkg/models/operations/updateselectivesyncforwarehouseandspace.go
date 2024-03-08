@@ -50,12 +50,12 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponseBody) GetData() *shared.
 type UpdateSelectiveSyncForWarehouseAndSpaceResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *UpdateSelectiveSyncForWarehouseAndSpaceResponseBody
 }
@@ -65,6 +65,13 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponse) GetContentType() strin
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponse) GetStatusCode() int {
@@ -79,13 +86,6 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponse) GetRawResponse() *http
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceResponse) GetObject() *UpdateSelectiveSyncForWarehouseAndSpaceResponseBody {

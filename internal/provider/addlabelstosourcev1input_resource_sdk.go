@@ -32,24 +32,26 @@ func (r *AddLabelsToSourceV1InputResourceModel) ToSharedAddLabelsToSourceV1Input
 }
 
 func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromOperationsAddLabelsToSourceResponseBody(resp *operations.AddLabelsToSourceResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &AddLabelsToSourceV1Output{}
-		if len(r.Data.Labels) > len(resp.Data.Labels) {
-			r.Data.Labels = r.Data.Labels[:len(resp.Data.Labels)]
-		}
-		for labelsCount, labelsItem := range resp.Data.Labels {
-			var labels1 LabelV1
-			labels1.Description = types.StringPointerValue(labelsItem.Description)
-			labels1.Key = types.StringValue(labelsItem.Key)
-			labels1.Value = types.StringValue(labelsItem.Value)
-			if labelsCount+1 > len(r.Data.Labels) {
-				r.Data.Labels = append(r.Data.Labels, labels1)
-			} else {
-				r.Data.Labels[labelsCount].Description = labels1.Description
-				r.Data.Labels[labelsCount].Key = labels1.Key
-				r.Data.Labels[labelsCount].Value = labels1.Value
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &AddLabelsToSourceV1Output{}
+			if len(r.Data.Labels) > len(resp.Data.Labels) {
+				r.Data.Labels = r.Data.Labels[:len(resp.Data.Labels)]
+			}
+			for labelsCount, labelsItem := range resp.Data.Labels {
+				var labels1 LabelV1
+				labels1.Description = types.StringPointerValue(labelsItem.Description)
+				labels1.Key = types.StringValue(labelsItem.Key)
+				labels1.Value = types.StringValue(labelsItem.Value)
+				if labelsCount+1 > len(r.Data.Labels) {
+					r.Data.Labels = append(r.Data.Labels, labels1)
+				} else {
+					r.Data.Labels[labelsCount].Description = labels1.Description
+					r.Data.Labels[labelsCount].Key = labels1.Key
+					r.Data.Labels[labelsCount].Value = labels1.Value
+				}
 			}
 		}
 	}

@@ -42,12 +42,12 @@ func (o *RemoveProfilesWarehouseFromSpaceResponseBody) GetData() *shared.RemoveP
 type RemoveProfilesWarehouseFromSpaceResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *RemoveProfilesWarehouseFromSpaceResponseBody
 }
@@ -57,6 +57,13 @@ func (o *RemoveProfilesWarehouseFromSpaceResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *RemoveProfilesWarehouseFromSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *RemoveProfilesWarehouseFromSpaceResponse) GetStatusCode() int {
@@ -71,13 +78,6 @@ func (o *RemoveProfilesWarehouseFromSpaceResponse) GetRawResponse() *http.Respon
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *RemoveProfilesWarehouseFromSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *RemoveProfilesWarehouseFromSpaceResponse) GetObject() *RemoveProfilesWarehouseFromSpaceResponseBody {

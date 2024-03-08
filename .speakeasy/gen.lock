@@ -3,17 +3,17 @@ id: e45083e7-62bb-4774-bcda-024fa318e32c
 management:
   docChecksum: bee11ce45bcf3d10017267ce112ac7c4
   docVersion: 36.2.0
-  speakeasyVersion: internal
-  generationVersion: 2.250.2
-  releaseVersion: 0.4.0
-  configChecksum: 7278c03920a7f051ab0e00dbba79325a
+  speakeasyVersion: 1.204.1
+  generationVersion: 2.279.1
+  releaseVersion: 0.5.0
+  configChecksum: e6a0bffb088604e92fc917f4f2664ae0
   repoURL: https://github.com/speakeasy-sdks/terraform-provider-segment.git
   repoSubDirectory: .
   published: true
 features:
   terraform:
-    core: 3.9.4
-    globalSecurity: 2.81.3
+    core: 3.10.2
+    globalSecurity: 2.81.5
     globalServerURLs: 2.82.1
 generatedFiles:
   - internal/sdk/workspaces.go

@@ -8,5 +8,7 @@ import (
 )
 
 func (r *CreateFunctionDeploymentV1OutputResourceModel) RefreshFromSharedCreateFunctionDeploymentV1Output(resp *shared.CreateFunctionDeploymentV1Output) {
-	r.FunctionDeployment.Status = types.StringValue(string(resp.FunctionDeployment.Status))
+	if resp != nil {
+		r.FunctionDeployment.Status = types.StringValue(string(resp.FunctionDeployment.Status))
+	}
 }

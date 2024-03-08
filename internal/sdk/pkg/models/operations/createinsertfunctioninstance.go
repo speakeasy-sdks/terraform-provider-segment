@@ -23,12 +23,12 @@ func (o *CreateInsertFunctionInstanceResponseBody) GetData() *shared.CreateInser
 type CreateInsertFunctionInstanceResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *CreateInsertFunctionInstanceResponseBody
 }
@@ -38,6 +38,13 @@ func (o *CreateInsertFunctionInstanceResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *CreateInsertFunctionInstanceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *CreateInsertFunctionInstanceResponse) GetStatusCode() int {
@@ -52,13 +59,6 @@ func (o *CreateInsertFunctionInstanceResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *CreateInsertFunctionInstanceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *CreateInsertFunctionInstanceResponse) GetObject() *CreateInsertFunctionInstanceResponseBody {

@@ -42,12 +42,12 @@ func (o *BatchQueryMessagingSubscriptionsForSpaceResponseBody) GetData() *shared
 type BatchQueryMessagingSubscriptionsForSpaceResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *BatchQueryMessagingSubscriptionsForSpaceResponseBody
 }
@@ -57,6 +57,13 @@ func (o *BatchQueryMessagingSubscriptionsForSpaceResponse) GetContentType() stri
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *BatchQueryMessagingSubscriptionsForSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *BatchQueryMessagingSubscriptionsForSpaceResponse) GetStatusCode() int {
@@ -71,13 +78,6 @@ func (o *BatchQueryMessagingSubscriptionsForSpaceResponse) GetRawResponse() *htt
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *BatchQueryMessagingSubscriptionsForSpaceResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *BatchQueryMessagingSubscriptionsForSpaceResponse) GetObject() *BatchQueryMessagingSubscriptionsForSpaceResponseBody {

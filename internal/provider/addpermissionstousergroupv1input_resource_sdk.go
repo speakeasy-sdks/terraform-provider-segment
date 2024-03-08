@@ -50,48 +50,50 @@ func (r *AddPermissionsToUserGroupV1InputResourceModel) ToSharedAddPermissionsTo
 }
 
 func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromOperationsAddPermissionsToUserGroupResponseBody(resp *operations.AddPermissionsToUserGroupResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &AddPermissionsToUserGroupV1Output{}
-		if len(r.Data.Permissions) > len(resp.Data.Permissions) {
-			r.Data.Permissions = r.Data.Permissions[:len(resp.Data.Permissions)]
-		}
-		for permissionsCount, permissionsItem := range resp.Data.Permissions {
-			var permissions1 AccessPermissionV1
-			for resourcesCount, resourcesItem := range permissionsItem.Resources {
-				var resources1 PermissionResourceV1
-				resources1.ID = types.StringValue(resourcesItem.ID)
-				for labelsCount, labelsItem := range resourcesItem.Labels {
-					var labels1 LabelV1
-					labels1.Description = types.StringPointerValue(labelsItem.Description)
-					labels1.Key = types.StringValue(labelsItem.Key)
-					labels1.Value = types.StringValue(labelsItem.Value)
-					if labelsCount+1 > len(resources1.Labels) {
-						resources1.Labels = append(resources1.Labels, labels1)
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &AddPermissionsToUserGroupV1Output{}
+			if len(r.Data.Permissions) > len(resp.Data.Permissions) {
+				r.Data.Permissions = r.Data.Permissions[:len(resp.Data.Permissions)]
+			}
+			for permissionsCount, permissionsItem := range resp.Data.Permissions {
+				var permissions1 AccessPermissionV1
+				for resourcesCount, resourcesItem := range permissionsItem.Resources {
+					var resources1 PermissionResourceV1
+					resources1.ID = types.StringValue(resourcesItem.ID)
+					for labelsCount, labelsItem := range resourcesItem.Labels {
+						var labels1 LabelV1
+						labels1.Description = types.StringPointerValue(labelsItem.Description)
+						labels1.Key = types.StringValue(labelsItem.Key)
+						labels1.Value = types.StringValue(labelsItem.Value)
+						if labelsCount+1 > len(resources1.Labels) {
+							resources1.Labels = append(resources1.Labels, labels1)
+						} else {
+							resources1.Labels[labelsCount].Description = labels1.Description
+							resources1.Labels[labelsCount].Key = labels1.Key
+							resources1.Labels[labelsCount].Value = labels1.Value
+						}
+					}
+					resources1.Type = types.StringValue(string(resourcesItem.Type))
+					if resourcesCount+1 > len(permissions1.Resources) {
+						permissions1.Resources = append(permissions1.Resources, resources1)
 					} else {
-						resources1.Labels[labelsCount].Description = labels1.Description
-						resources1.Labels[labelsCount].Key = labels1.Key
-						resources1.Labels[labelsCount].Value = labels1.Value
+						permissions1.Resources[resourcesCount].ID = resources1.ID
+						permissions1.Resources[resourcesCount].Labels = resources1.Labels
+						permissions1.Resources[resourcesCount].Type = resources1.Type
 					}
 				}
-				resources1.Type = types.StringValue(string(resourcesItem.Type))
-				if resourcesCount+1 > len(permissions1.Resources) {
-					permissions1.Resources = append(permissions1.Resources, resources1)
+				permissions1.RoleID = types.StringValue(permissionsItem.RoleID)
+				permissions1.RoleName = types.StringValue(permissionsItem.RoleName)
+				if permissionsCount+1 > len(r.Data.Permissions) {
+					r.Data.Permissions = append(r.Data.Permissions, permissions1)
 				} else {
-					permissions1.Resources[resourcesCount].ID = resources1.ID
-					permissions1.Resources[resourcesCount].Labels = resources1.Labels
-					permissions1.Resources[resourcesCount].Type = resources1.Type
+					r.Data.Permissions[permissionsCount].Resources = permissions1.Resources
+					r.Data.Permissions[permissionsCount].RoleID = permissions1.RoleID
+					r.Data.Permissions[permissionsCount].RoleName = permissions1.RoleName
 				}
-			}
-			permissions1.RoleID = types.StringValue(permissionsItem.RoleID)
-			permissions1.RoleName = types.StringValue(permissionsItem.RoleName)
-			if permissionsCount+1 > len(r.Data.Permissions) {
-				r.Data.Permissions = append(r.Data.Permissions, permissions1)
-			} else {
-				r.Data.Permissions[permissionsCount].Resources = permissions1.Resources
-				r.Data.Permissions[permissionsCount].RoleID = permissions1.RoleID
-				r.Data.Permissions[permissionsCount].RoleName = permissions1.RoleName
 			}
 		}
 	}

@@ -24,10 +24,12 @@ func (r *CreateSourceRegulationV1InputResourceModel) ToSharedCreateSourceRegulat
 }
 
 func (r *CreateSourceRegulationV1InputResourceModel) RefreshFromOperationsCreateSourceRegulationResponseBody(resp *operations.CreateSourceRegulationResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateCloudSourceRegulationV1Output{}
-		r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateCloudSourceRegulationV1Output{}
+			r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
+		}
 	}
 }

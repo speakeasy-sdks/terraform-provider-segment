@@ -42,224 +42,226 @@ func (r *CreateDestinationV1InputResourceModel) ToSharedCreateDestinationV1Input
 }
 
 func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDestinationResponseBody(resp *operations.CreateDestinationResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateDestinationV1Output{}
-		r.Data.Destination.Enabled = types.BoolValue(resp.Data.Destination.Enabled)
-		r.Data.Destination.ID = types.StringValue(resp.Data.Destination.ID)
-		if len(r.Data.Destination.Metadata.Actions) > len(resp.Data.Destination.Metadata.Actions) {
-			r.Data.Destination.Metadata.Actions = r.Data.Destination.Metadata.Actions[:len(resp.Data.Destination.Metadata.Actions)]
-		}
-		for actionsCount, actionsItem := range resp.Data.Destination.Metadata.Actions {
-			var actions1 DestinationMetadataActionV1
-			actions1.DefaultTrigger = types.StringPointerValue(actionsItem.DefaultTrigger)
-			actions1.Description = types.StringValue(actionsItem.Description)
-			for fieldsCount, fieldsItem := range actionsItem.Fields {
-				var fields1 DestinationMetadataActionFieldV1
-				fields1.AllowNull = types.BoolValue(fieldsItem.AllowNull)
-				if fieldsItem.Choices == nil {
-					fields1.Choices = types.StringNull()
-				} else {
-					choicesResult, _ := json.Marshal(fieldsItem.Choices)
-					fields1.Choices = types.StringValue(string(choicesResult))
-				}
-				if fieldsItem.DefaultValue == nil {
-					fields1.DefaultValue = types.StringNull()
-				} else {
-					defaultValueResult, _ := json.Marshal(fieldsItem.DefaultValue)
-					fields1.DefaultValue = types.StringValue(string(defaultValueResult))
-				}
-				fields1.Description = types.StringValue(fieldsItem.Description)
-				fields1.Dynamic = types.BoolValue(fieldsItem.Dynamic)
-				fields1.FieldKey = types.StringValue(fieldsItem.FieldKey)
-				fields1.ID = types.StringValue(fieldsItem.ID)
-				fields1.Label = types.StringValue(fieldsItem.Label)
-				fields1.Multiple = types.BoolValue(fieldsItem.Multiple)
-				fields1.Placeholder = types.StringPointerValue(fieldsItem.Placeholder)
-				fields1.Required = types.BoolValue(fieldsItem.Required)
-				fields1.SortOrder = types.NumberValue(big.NewFloat(float64(fieldsItem.SortOrder)))
-				fields1.Type = types.StringValue(string(fieldsItem.Type))
-				if fieldsCount+1 > len(actions1.Fields) {
-					actions1.Fields = append(actions1.Fields, fields1)
-				} else {
-					actions1.Fields[fieldsCount].AllowNull = fields1.AllowNull
-					actions1.Fields[fieldsCount].Choices = fields1.Choices
-					actions1.Fields[fieldsCount].DefaultValue = fields1.DefaultValue
-					actions1.Fields[fieldsCount].Description = fields1.Description
-					actions1.Fields[fieldsCount].Dynamic = fields1.Dynamic
-					actions1.Fields[fieldsCount].FieldKey = fields1.FieldKey
-					actions1.Fields[fieldsCount].ID = fields1.ID
-					actions1.Fields[fieldsCount].Label = fields1.Label
-					actions1.Fields[fieldsCount].Multiple = fields1.Multiple
-					actions1.Fields[fieldsCount].Placeholder = fields1.Placeholder
-					actions1.Fields[fieldsCount].Required = fields1.Required
-					actions1.Fields[fieldsCount].SortOrder = fields1.SortOrder
-					actions1.Fields[fieldsCount].Type = fields1.Type
-				}
-			}
-			actions1.Hidden = types.BoolValue(actionsItem.Hidden)
-			actions1.ID = types.StringValue(actionsItem.ID)
-			actions1.Name = types.StringValue(actionsItem.Name)
-			actions1.Platform = types.StringValue(string(actionsItem.Platform))
-			actions1.Slug = types.StringValue(actionsItem.Slug)
-			if actionsCount+1 > len(r.Data.Destination.Metadata.Actions) {
-				r.Data.Destination.Metadata.Actions = append(r.Data.Destination.Metadata.Actions, actions1)
-			} else {
-				r.Data.Destination.Metadata.Actions[actionsCount].DefaultTrigger = actions1.DefaultTrigger
-				r.Data.Destination.Metadata.Actions[actionsCount].Description = actions1.Description
-				r.Data.Destination.Metadata.Actions[actionsCount].Fields = actions1.Fields
-				r.Data.Destination.Metadata.Actions[actionsCount].Hidden = actions1.Hidden
-				r.Data.Destination.Metadata.Actions[actionsCount].ID = actions1.ID
-				r.Data.Destination.Metadata.Actions[actionsCount].Name = actions1.Name
-				r.Data.Destination.Metadata.Actions[actionsCount].Platform = actions1.Platform
-				r.Data.Destination.Metadata.Actions[actionsCount].Slug = actions1.Slug
-			}
-		}
-		r.Data.Destination.Metadata.Categories = nil
-		for _, v := range resp.Data.Destination.Metadata.Categories {
-			r.Data.Destination.Metadata.Categories = append(r.Data.Destination.Metadata.Categories, types.StringValue(v))
-		}
-		if len(r.Data.Destination.Metadata.Components) > len(resp.Data.Destination.Metadata.Components) {
-			r.Data.Destination.Metadata.Components = r.Data.Destination.Metadata.Components[:len(resp.Data.Destination.Metadata.Components)]
-		}
-		for componentsCount, componentsItem := range resp.Data.Destination.Metadata.Components {
-			var components1 DestinationMetadataComponentV1
-			components1.Code = types.StringValue(componentsItem.Code)
-			if componentsItem.Owner != nil {
-				components1.Owner = types.StringValue(string(*componentsItem.Owner))
-			} else {
-				components1.Owner = types.StringNull()
-			}
-			components1.Type = types.StringValue(string(componentsItem.Type))
-			if componentsCount+1 > len(r.Data.Destination.Metadata.Components) {
-				r.Data.Destination.Metadata.Components = append(r.Data.Destination.Metadata.Components, components1)
-			} else {
-				r.Data.Destination.Metadata.Components[componentsCount].Code = components1.Code
-				r.Data.Destination.Metadata.Components[componentsCount].Owner = components1.Owner
-				r.Data.Destination.Metadata.Components[componentsCount].Type = components1.Type
-			}
-		}
-		if len(r.Data.Destination.Metadata.Contacts) > len(resp.Data.Destination.Metadata.Contacts) {
-			r.Data.Destination.Metadata.Contacts = r.Data.Destination.Metadata.Contacts[:len(resp.Data.Destination.Metadata.Contacts)]
-		}
-		for contactsCount, contactsItem := range resp.Data.Destination.Metadata.Contacts {
-			var contacts1 Contact
-			contacts1.Email = types.StringValue(contactsItem.Email)
-			contacts1.IsPrimary = types.BoolPointerValue(contactsItem.IsPrimary)
-			contacts1.Name = types.StringPointerValue(contactsItem.Name)
-			contacts1.Role = types.StringPointerValue(contactsItem.Role)
-			if contactsCount+1 > len(r.Data.Destination.Metadata.Contacts) {
-				r.Data.Destination.Metadata.Contacts = append(r.Data.Destination.Metadata.Contacts, contacts1)
-			} else {
-				r.Data.Destination.Metadata.Contacts[contactsCount].Email = contacts1.Email
-				r.Data.Destination.Metadata.Contacts[contactsCount].IsPrimary = contacts1.IsPrimary
-				r.Data.Destination.Metadata.Contacts[contactsCount].Name = contacts1.Name
-				r.Data.Destination.Metadata.Contacts[contactsCount].Role = contacts1.Role
-			}
-		}
-		r.Data.Destination.Metadata.Description = types.StringValue(resp.Data.Destination.Metadata.Description)
-		r.Data.Destination.Metadata.ID = types.StringValue(resp.Data.Destination.Metadata.ID)
-		r.Data.Destination.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Destination.Metadata.Logos.Alt)
-		r.Data.Destination.Metadata.Logos.Default = types.StringValue(resp.Data.Destination.Metadata.Logos.Default)
-		r.Data.Destination.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Destination.Metadata.Logos.Mark)
-		r.Data.Destination.Metadata.Name = types.StringValue(resp.Data.Destination.Metadata.Name)
-		if len(r.Data.Destination.Metadata.Options) > len(resp.Data.Destination.Metadata.Options) {
-			r.Data.Destination.Metadata.Options = r.Data.Destination.Metadata.Options[:len(resp.Data.Destination.Metadata.Options)]
-		}
-		for optionsCount, optionsItem := range resp.Data.Destination.Metadata.Options {
-			var options1 IntegrationOptionBeta
-			if optionsItem.DefaultValue == nil {
-				options1.DefaultValue = types.StringNull()
-			} else {
-				defaultValueResult1, _ := json.Marshal(optionsItem.DefaultValue)
-				options1.DefaultValue = types.StringValue(string(defaultValueResult1))
-			}
-			options1.Description = types.StringPointerValue(optionsItem.Description)
-			options1.Label = types.StringPointerValue(optionsItem.Label)
-			options1.Name = types.StringValue(optionsItem.Name)
-			options1.Required = types.BoolValue(optionsItem.Required)
-			options1.Type = types.StringValue(optionsItem.Type)
-			if optionsCount+1 > len(r.Data.Destination.Metadata.Options) {
-				r.Data.Destination.Metadata.Options = append(r.Data.Destination.Metadata.Options, options1)
-			} else {
-				r.Data.Destination.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
-				r.Data.Destination.Metadata.Options[optionsCount].Description = options1.Description
-				r.Data.Destination.Metadata.Options[optionsCount].Label = options1.Label
-				r.Data.Destination.Metadata.Options[optionsCount].Name = options1.Name
-				r.Data.Destination.Metadata.Options[optionsCount].Required = options1.Required
-				r.Data.Destination.Metadata.Options[optionsCount].Type = options1.Type
-			}
-		}
-		r.Data.Destination.Metadata.PartnerOwned = types.BoolPointerValue(resp.Data.Destination.Metadata.PartnerOwned)
-		if len(r.Data.Destination.Metadata.Presets) > len(resp.Data.Destination.Metadata.Presets) {
-			r.Data.Destination.Metadata.Presets = r.Data.Destination.Metadata.Presets[:len(resp.Data.Destination.Metadata.Presets)]
-		}
-		for presetsCount, presetsItem := range resp.Data.Destination.Metadata.Presets {
-			var presets1 DestinationMetadataSubscriptionPresetV1
-			presets1.ActionID = types.StringValue(presetsItem.ActionID)
-			if len(presetsItem.Fields) > 0 {
-				presets1.Fields = make(map[string]types.String)
-				for key, value := range presetsItem.Fields {
-					result, _ := json.Marshal(value)
-					presets1.Fields[key] = types.StringValue(string(result))
-				}
-			}
-			presets1.Name = types.StringValue(presetsItem.Name)
-			presets1.Trigger = types.StringValue(presetsItem.Trigger)
-			if presetsCount+1 > len(r.Data.Destination.Metadata.Presets) {
-				r.Data.Destination.Metadata.Presets = append(r.Data.Destination.Metadata.Presets, presets1)
-			} else {
-				r.Data.Destination.Metadata.Presets[presetsCount].ActionID = presets1.ActionID
-				r.Data.Destination.Metadata.Presets[presetsCount].Fields = presets1.Fields
-				r.Data.Destination.Metadata.Presets[presetsCount].Name = presets1.Name
-				r.Data.Destination.Metadata.Presets[presetsCount].Trigger = presets1.Trigger
-			}
-		}
-		r.Data.Destination.Metadata.PreviousNames = nil
-		for _, v := range resp.Data.Destination.Metadata.PreviousNames {
-			r.Data.Destination.Metadata.PreviousNames = append(r.Data.Destination.Metadata.PreviousNames, types.StringValue(v))
-		}
-		r.Data.Destination.Metadata.RegionEndpoints = nil
-		for _, v := range resp.Data.Destination.Metadata.RegionEndpoints {
-			r.Data.Destination.Metadata.RegionEndpoints = append(r.Data.Destination.Metadata.RegionEndpoints, types.StringValue(v))
-		}
-		r.Data.Destination.Metadata.Slug = types.StringValue(resp.Data.Destination.Metadata.Slug)
-		r.Data.Destination.Metadata.Status = types.StringValue(string(resp.Data.Destination.Metadata.Status))
-		r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling)
-		r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic)
-		if resp.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances != nil {
-			r.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances = types.StringValue(string(*resp.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances))
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
 		} else {
-			r.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances = types.StringNull()
-		}
-		if resp.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances != nil {
-			r.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances = types.StringValue(string(*resp.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances))
-		} else {
-			r.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances = types.StringNull()
-		}
-		r.Data.Destination.Metadata.SupportedFeatures.Replay = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.Replay)
-		r.Data.Destination.Metadata.SupportedMethods.Alias = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Alias)
-		r.Data.Destination.Metadata.SupportedMethods.Group = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Group)
-		r.Data.Destination.Metadata.SupportedMethods.Identify = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Identify)
-		r.Data.Destination.Metadata.SupportedMethods.Pageview = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Pageview)
-		r.Data.Destination.Metadata.SupportedMethods.Track = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Track)
-		r.Data.Destination.Metadata.SupportedPlatforms.Browser = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Browser)
-		r.Data.Destination.Metadata.SupportedPlatforms.Mobile = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Mobile)
-		r.Data.Destination.Metadata.SupportedPlatforms.Server = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Server)
-		r.Data.Destination.Metadata.SupportedRegions = nil
-		for _, v := range resp.Data.Destination.Metadata.SupportedRegions {
-			r.Data.Destination.Metadata.SupportedRegions = append(r.Data.Destination.Metadata.SupportedRegions, types.StringValue(v))
-		}
-		r.Data.Destination.Metadata.Website = types.StringValue(resp.Data.Destination.Metadata.Website)
-		r.Data.Destination.Name = types.StringPointerValue(resp.Data.Destination.Name)
-		if len(resp.Data.Destination.Settings) > 0 {
-			r.Data.Destination.Settings = make(map[string]types.String)
-			for key1, value1 := range resp.Data.Destination.Settings {
-				result1, _ := json.Marshal(value1)
-				r.Data.Destination.Settings[key1] = types.StringValue(string(result1))
+			r.Data = &CreateDestinationV1Output{}
+			r.Data.Destination.Enabled = types.BoolValue(resp.Data.Destination.Enabled)
+			r.Data.Destination.ID = types.StringValue(resp.Data.Destination.ID)
+			if len(r.Data.Destination.Metadata.Actions) > len(resp.Data.Destination.Metadata.Actions) {
+				r.Data.Destination.Metadata.Actions = r.Data.Destination.Metadata.Actions[:len(resp.Data.Destination.Metadata.Actions)]
 			}
+			for actionsCount, actionsItem := range resp.Data.Destination.Metadata.Actions {
+				var actions1 DestinationMetadataActionV1
+				actions1.DefaultTrigger = types.StringPointerValue(actionsItem.DefaultTrigger)
+				actions1.Description = types.StringValue(actionsItem.Description)
+				for fieldsCount, fieldsItem := range actionsItem.Fields {
+					var fields1 DestinationMetadataActionFieldV1
+					fields1.AllowNull = types.BoolValue(fieldsItem.AllowNull)
+					if fieldsItem.Choices == nil {
+						fields1.Choices = types.StringNull()
+					} else {
+						choicesResult, _ := json.Marshal(fieldsItem.Choices)
+						fields1.Choices = types.StringValue(string(choicesResult))
+					}
+					if fieldsItem.DefaultValue == nil {
+						fields1.DefaultValue = types.StringNull()
+					} else {
+						defaultValueResult, _ := json.Marshal(fieldsItem.DefaultValue)
+						fields1.DefaultValue = types.StringValue(string(defaultValueResult))
+					}
+					fields1.Description = types.StringValue(fieldsItem.Description)
+					fields1.Dynamic = types.BoolValue(fieldsItem.Dynamic)
+					fields1.FieldKey = types.StringValue(fieldsItem.FieldKey)
+					fields1.ID = types.StringValue(fieldsItem.ID)
+					fields1.Label = types.StringValue(fieldsItem.Label)
+					fields1.Multiple = types.BoolValue(fieldsItem.Multiple)
+					fields1.Placeholder = types.StringPointerValue(fieldsItem.Placeholder)
+					fields1.Required = types.BoolValue(fieldsItem.Required)
+					fields1.SortOrder = types.NumberValue(big.NewFloat(float64(fieldsItem.SortOrder)))
+					fields1.Type = types.StringValue(string(fieldsItem.Type))
+					if fieldsCount+1 > len(actions1.Fields) {
+						actions1.Fields = append(actions1.Fields, fields1)
+					} else {
+						actions1.Fields[fieldsCount].AllowNull = fields1.AllowNull
+						actions1.Fields[fieldsCount].Choices = fields1.Choices
+						actions1.Fields[fieldsCount].DefaultValue = fields1.DefaultValue
+						actions1.Fields[fieldsCount].Description = fields1.Description
+						actions1.Fields[fieldsCount].Dynamic = fields1.Dynamic
+						actions1.Fields[fieldsCount].FieldKey = fields1.FieldKey
+						actions1.Fields[fieldsCount].ID = fields1.ID
+						actions1.Fields[fieldsCount].Label = fields1.Label
+						actions1.Fields[fieldsCount].Multiple = fields1.Multiple
+						actions1.Fields[fieldsCount].Placeholder = fields1.Placeholder
+						actions1.Fields[fieldsCount].Required = fields1.Required
+						actions1.Fields[fieldsCount].SortOrder = fields1.SortOrder
+						actions1.Fields[fieldsCount].Type = fields1.Type
+					}
+				}
+				actions1.Hidden = types.BoolValue(actionsItem.Hidden)
+				actions1.ID = types.StringValue(actionsItem.ID)
+				actions1.Name = types.StringValue(actionsItem.Name)
+				actions1.Platform = types.StringValue(string(actionsItem.Platform))
+				actions1.Slug = types.StringValue(actionsItem.Slug)
+				if actionsCount+1 > len(r.Data.Destination.Metadata.Actions) {
+					r.Data.Destination.Metadata.Actions = append(r.Data.Destination.Metadata.Actions, actions1)
+				} else {
+					r.Data.Destination.Metadata.Actions[actionsCount].DefaultTrigger = actions1.DefaultTrigger
+					r.Data.Destination.Metadata.Actions[actionsCount].Description = actions1.Description
+					r.Data.Destination.Metadata.Actions[actionsCount].Fields = actions1.Fields
+					r.Data.Destination.Metadata.Actions[actionsCount].Hidden = actions1.Hidden
+					r.Data.Destination.Metadata.Actions[actionsCount].ID = actions1.ID
+					r.Data.Destination.Metadata.Actions[actionsCount].Name = actions1.Name
+					r.Data.Destination.Metadata.Actions[actionsCount].Platform = actions1.Platform
+					r.Data.Destination.Metadata.Actions[actionsCount].Slug = actions1.Slug
+				}
+			}
+			r.Data.Destination.Metadata.Categories = nil
+			for _, v := range resp.Data.Destination.Metadata.Categories {
+				r.Data.Destination.Metadata.Categories = append(r.Data.Destination.Metadata.Categories, types.StringValue(v))
+			}
+			if len(r.Data.Destination.Metadata.Components) > len(resp.Data.Destination.Metadata.Components) {
+				r.Data.Destination.Metadata.Components = r.Data.Destination.Metadata.Components[:len(resp.Data.Destination.Metadata.Components)]
+			}
+			for componentsCount, componentsItem := range resp.Data.Destination.Metadata.Components {
+				var components1 DestinationMetadataComponentV1
+				components1.Code = types.StringValue(componentsItem.Code)
+				if componentsItem.Owner != nil {
+					components1.Owner = types.StringValue(string(*componentsItem.Owner))
+				} else {
+					components1.Owner = types.StringNull()
+				}
+				components1.Type = types.StringValue(string(componentsItem.Type))
+				if componentsCount+1 > len(r.Data.Destination.Metadata.Components) {
+					r.Data.Destination.Metadata.Components = append(r.Data.Destination.Metadata.Components, components1)
+				} else {
+					r.Data.Destination.Metadata.Components[componentsCount].Code = components1.Code
+					r.Data.Destination.Metadata.Components[componentsCount].Owner = components1.Owner
+					r.Data.Destination.Metadata.Components[componentsCount].Type = components1.Type
+				}
+			}
+			if len(r.Data.Destination.Metadata.Contacts) > len(resp.Data.Destination.Metadata.Contacts) {
+				r.Data.Destination.Metadata.Contacts = r.Data.Destination.Metadata.Contacts[:len(resp.Data.Destination.Metadata.Contacts)]
+			}
+			for contactsCount, contactsItem := range resp.Data.Destination.Metadata.Contacts {
+				var contacts1 Contact
+				contacts1.Email = types.StringValue(contactsItem.Email)
+				contacts1.IsPrimary = types.BoolPointerValue(contactsItem.IsPrimary)
+				contacts1.Name = types.StringPointerValue(contactsItem.Name)
+				contacts1.Role = types.StringPointerValue(contactsItem.Role)
+				if contactsCount+1 > len(r.Data.Destination.Metadata.Contacts) {
+					r.Data.Destination.Metadata.Contacts = append(r.Data.Destination.Metadata.Contacts, contacts1)
+				} else {
+					r.Data.Destination.Metadata.Contacts[contactsCount].Email = contacts1.Email
+					r.Data.Destination.Metadata.Contacts[contactsCount].IsPrimary = contacts1.IsPrimary
+					r.Data.Destination.Metadata.Contacts[contactsCount].Name = contacts1.Name
+					r.Data.Destination.Metadata.Contacts[contactsCount].Role = contacts1.Role
+				}
+			}
+			r.Data.Destination.Metadata.Description = types.StringValue(resp.Data.Destination.Metadata.Description)
+			r.Data.Destination.Metadata.ID = types.StringValue(resp.Data.Destination.Metadata.ID)
+			r.Data.Destination.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Destination.Metadata.Logos.Alt)
+			r.Data.Destination.Metadata.Logos.Default = types.StringValue(resp.Data.Destination.Metadata.Logos.Default)
+			r.Data.Destination.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Destination.Metadata.Logos.Mark)
+			r.Data.Destination.Metadata.Name = types.StringValue(resp.Data.Destination.Metadata.Name)
+			if len(r.Data.Destination.Metadata.Options) > len(resp.Data.Destination.Metadata.Options) {
+				r.Data.Destination.Metadata.Options = r.Data.Destination.Metadata.Options[:len(resp.Data.Destination.Metadata.Options)]
+			}
+			for optionsCount, optionsItem := range resp.Data.Destination.Metadata.Options {
+				var options1 IntegrationOptionBeta
+				if optionsItem.DefaultValue == nil {
+					options1.DefaultValue = types.StringNull()
+				} else {
+					defaultValueResult1, _ := json.Marshal(optionsItem.DefaultValue)
+					options1.DefaultValue = types.StringValue(string(defaultValueResult1))
+				}
+				options1.Description = types.StringPointerValue(optionsItem.Description)
+				options1.Label = types.StringPointerValue(optionsItem.Label)
+				options1.Name = types.StringValue(optionsItem.Name)
+				options1.Required = types.BoolValue(optionsItem.Required)
+				options1.Type = types.StringValue(optionsItem.Type)
+				if optionsCount+1 > len(r.Data.Destination.Metadata.Options) {
+					r.Data.Destination.Metadata.Options = append(r.Data.Destination.Metadata.Options, options1)
+				} else {
+					r.Data.Destination.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
+					r.Data.Destination.Metadata.Options[optionsCount].Description = options1.Description
+					r.Data.Destination.Metadata.Options[optionsCount].Label = options1.Label
+					r.Data.Destination.Metadata.Options[optionsCount].Name = options1.Name
+					r.Data.Destination.Metadata.Options[optionsCount].Required = options1.Required
+					r.Data.Destination.Metadata.Options[optionsCount].Type = options1.Type
+				}
+			}
+			r.Data.Destination.Metadata.PartnerOwned = types.BoolPointerValue(resp.Data.Destination.Metadata.PartnerOwned)
+			if len(r.Data.Destination.Metadata.Presets) > len(resp.Data.Destination.Metadata.Presets) {
+				r.Data.Destination.Metadata.Presets = r.Data.Destination.Metadata.Presets[:len(resp.Data.Destination.Metadata.Presets)]
+			}
+			for presetsCount, presetsItem := range resp.Data.Destination.Metadata.Presets {
+				var presets1 DestinationMetadataSubscriptionPresetV1
+				presets1.ActionID = types.StringValue(presetsItem.ActionID)
+				if len(presetsItem.Fields) > 0 {
+					presets1.Fields = make(map[string]types.String)
+					for key, value := range presetsItem.Fields {
+						result, _ := json.Marshal(value)
+						presets1.Fields[key] = types.StringValue(string(result))
+					}
+				}
+				presets1.Name = types.StringValue(presetsItem.Name)
+				presets1.Trigger = types.StringValue(presetsItem.Trigger)
+				if presetsCount+1 > len(r.Data.Destination.Metadata.Presets) {
+					r.Data.Destination.Metadata.Presets = append(r.Data.Destination.Metadata.Presets, presets1)
+				} else {
+					r.Data.Destination.Metadata.Presets[presetsCount].ActionID = presets1.ActionID
+					r.Data.Destination.Metadata.Presets[presetsCount].Fields = presets1.Fields
+					r.Data.Destination.Metadata.Presets[presetsCount].Name = presets1.Name
+					r.Data.Destination.Metadata.Presets[presetsCount].Trigger = presets1.Trigger
+				}
+			}
+			r.Data.Destination.Metadata.PreviousNames = nil
+			for _, v := range resp.Data.Destination.Metadata.PreviousNames {
+				r.Data.Destination.Metadata.PreviousNames = append(r.Data.Destination.Metadata.PreviousNames, types.StringValue(v))
+			}
+			r.Data.Destination.Metadata.RegionEndpoints = nil
+			for _, v := range resp.Data.Destination.Metadata.RegionEndpoints {
+				r.Data.Destination.Metadata.RegionEndpoints = append(r.Data.Destination.Metadata.RegionEndpoints, types.StringValue(v))
+			}
+			r.Data.Destination.Metadata.Slug = types.StringValue(resp.Data.Destination.Metadata.Slug)
+			r.Data.Destination.Metadata.Status = types.StringValue(string(resp.Data.Destination.Metadata.Status))
+			r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundling)
+			r.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.BrowserUnbundlingPublic)
+			if resp.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances != nil {
+				r.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances = types.StringValue(string(*resp.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances))
+			} else {
+				r.Data.Destination.Metadata.SupportedFeatures.CloudModeInstances = types.StringNull()
+			}
+			if resp.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances != nil {
+				r.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances = types.StringValue(string(*resp.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances))
+			} else {
+				r.Data.Destination.Metadata.SupportedFeatures.DeviceModeInstances = types.StringNull()
+			}
+			r.Data.Destination.Metadata.SupportedFeatures.Replay = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedFeatures.Replay)
+			r.Data.Destination.Metadata.SupportedMethods.Alias = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Alias)
+			r.Data.Destination.Metadata.SupportedMethods.Group = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Group)
+			r.Data.Destination.Metadata.SupportedMethods.Identify = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Identify)
+			r.Data.Destination.Metadata.SupportedMethods.Pageview = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Pageview)
+			r.Data.Destination.Metadata.SupportedMethods.Track = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedMethods.Track)
+			r.Data.Destination.Metadata.SupportedPlatforms.Browser = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Browser)
+			r.Data.Destination.Metadata.SupportedPlatforms.Mobile = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Mobile)
+			r.Data.Destination.Metadata.SupportedPlatforms.Server = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Server)
+			r.Data.Destination.Metadata.SupportedRegions = nil
+			for _, v := range resp.Data.Destination.Metadata.SupportedRegions {
+				r.Data.Destination.Metadata.SupportedRegions = append(r.Data.Destination.Metadata.SupportedRegions, types.StringValue(v))
+			}
+			r.Data.Destination.Metadata.Website = types.StringValue(resp.Data.Destination.Metadata.Website)
+			r.Data.Destination.Name = types.StringPointerValue(resp.Data.Destination.Name)
+			if len(resp.Data.Destination.Settings) > 0 {
+				r.Data.Destination.Settings = make(map[string]types.String)
+				for key1, value1 := range resp.Data.Destination.Settings {
+					result1, _ := json.Marshal(value1)
+					r.Data.Destination.Settings[key1] = types.StringValue(string(result1))
+				}
+			}
+			r.Data.Destination.SourceID = types.StringValue(resp.Data.Destination.SourceID)
 		}
-		r.Data.Destination.SourceID = types.StringValue(resp.Data.Destination.SourceID)
 	}
 }

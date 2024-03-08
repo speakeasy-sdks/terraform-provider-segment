@@ -29,80 +29,82 @@ func (r *CreateSourceV1InputResourceModel) ToSharedCreateSourceV1Input() *shared
 }
 
 func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResponseBody(resp *operations.CreateSourceResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateSourceV1Output{}
-		r.Data.Source.Enabled = types.BoolValue(resp.Data.Source.Enabled)
-		r.Data.Source.ID = types.StringValue(resp.Data.Source.ID)
-		if len(r.Data.Source.Labels) > len(resp.Data.Source.Labels) {
-			r.Data.Source.Labels = r.Data.Source.Labels[:len(resp.Data.Source.Labels)]
-		}
-		for labelsCount, labelsItem := range resp.Data.Source.Labels {
-			var labels1 LabelV1
-			labels1.Description = types.StringPointerValue(labelsItem.Description)
-			labels1.Key = types.StringValue(labelsItem.Key)
-			labels1.Value = types.StringValue(labelsItem.Value)
-			if labelsCount+1 > len(r.Data.Source.Labels) {
-				r.Data.Source.Labels = append(r.Data.Source.Labels, labels1)
-			} else {
-				r.Data.Source.Labels[labelsCount].Description = labels1.Description
-				r.Data.Source.Labels[labelsCount].Key = labels1.Key
-				r.Data.Source.Labels[labelsCount].Value = labels1.Value
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateSourceV1Output{}
+			r.Data.Source.Enabled = types.BoolValue(resp.Data.Source.Enabled)
+			r.Data.Source.ID = types.StringValue(resp.Data.Source.ID)
+			if len(r.Data.Source.Labels) > len(resp.Data.Source.Labels) {
+				r.Data.Source.Labels = r.Data.Source.Labels[:len(resp.Data.Source.Labels)]
 			}
-		}
-		r.Data.Source.Metadata.Categories = nil
-		for _, v := range resp.Data.Source.Metadata.Categories {
-			r.Data.Source.Metadata.Categories = append(r.Data.Source.Metadata.Categories, types.StringValue(v))
-		}
-		r.Data.Source.Metadata.Description = types.StringValue(resp.Data.Source.Metadata.Description)
-		r.Data.Source.Metadata.ID = types.StringValue(resp.Data.Source.Metadata.ID)
-		r.Data.Source.Metadata.IsCloudEventSource = types.BoolValue(resp.Data.Source.Metadata.IsCloudEventSource)
-		r.Data.Source.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Source.Metadata.Logos.Alt)
-		r.Data.Source.Metadata.Logos.Default = types.StringValue(resp.Data.Source.Metadata.Logos.Default)
-		r.Data.Source.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Source.Metadata.Logos.Mark)
-		r.Data.Source.Metadata.Name = types.StringValue(resp.Data.Source.Metadata.Name)
-		if len(r.Data.Source.Metadata.Options) > len(resp.Data.Source.Metadata.Options) {
-			r.Data.Source.Metadata.Options = r.Data.Source.Metadata.Options[:len(resp.Data.Source.Metadata.Options)]
-		}
-		for optionsCount, optionsItem := range resp.Data.Source.Metadata.Options {
-			var options1 IntegrationOptionBeta
-			if optionsItem.DefaultValue == nil {
-				options1.DefaultValue = types.StringNull()
-			} else {
-				defaultValueResult, _ := json.Marshal(optionsItem.DefaultValue)
-				options1.DefaultValue = types.StringValue(string(defaultValueResult))
+			for labelsCount, labelsItem := range resp.Data.Source.Labels {
+				var labels1 LabelV1
+				labels1.Description = types.StringPointerValue(labelsItem.Description)
+				labels1.Key = types.StringValue(labelsItem.Key)
+				labels1.Value = types.StringValue(labelsItem.Value)
+				if labelsCount+1 > len(r.Data.Source.Labels) {
+					r.Data.Source.Labels = append(r.Data.Source.Labels, labels1)
+				} else {
+					r.Data.Source.Labels[labelsCount].Description = labels1.Description
+					r.Data.Source.Labels[labelsCount].Key = labels1.Key
+					r.Data.Source.Labels[labelsCount].Value = labels1.Value
+				}
 			}
-			options1.Description = types.StringPointerValue(optionsItem.Description)
-			options1.Label = types.StringPointerValue(optionsItem.Label)
-			options1.Name = types.StringValue(optionsItem.Name)
-			options1.Required = types.BoolValue(optionsItem.Required)
-			options1.Type = types.StringValue(optionsItem.Type)
-			if optionsCount+1 > len(r.Data.Source.Metadata.Options) {
-				r.Data.Source.Metadata.Options = append(r.Data.Source.Metadata.Options, options1)
-			} else {
-				r.Data.Source.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
-				r.Data.Source.Metadata.Options[optionsCount].Description = options1.Description
-				r.Data.Source.Metadata.Options[optionsCount].Label = options1.Label
-				r.Data.Source.Metadata.Options[optionsCount].Name = options1.Name
-				r.Data.Source.Metadata.Options[optionsCount].Required = options1.Required
-				r.Data.Source.Metadata.Options[optionsCount].Type = options1.Type
+			r.Data.Source.Metadata.Categories = nil
+			for _, v := range resp.Data.Source.Metadata.Categories {
+				r.Data.Source.Metadata.Categories = append(r.Data.Source.Metadata.Categories, types.StringValue(v))
 			}
-		}
-		r.Data.Source.Metadata.Slug = types.StringValue(resp.Data.Source.Metadata.Slug)
-		r.Data.Source.Name = types.StringPointerValue(resp.Data.Source.Name)
-		if len(resp.Data.Source.Settings) > 0 {
-			r.Data.Source.Settings = make(map[string]types.String)
-			for key1, value1 := range resp.Data.Source.Settings {
-				result, _ := json.Marshal(value1)
-				r.Data.Source.Settings[key1] = types.StringValue(string(result))
+			r.Data.Source.Metadata.Description = types.StringValue(resp.Data.Source.Metadata.Description)
+			r.Data.Source.Metadata.ID = types.StringValue(resp.Data.Source.Metadata.ID)
+			r.Data.Source.Metadata.IsCloudEventSource = types.BoolValue(resp.Data.Source.Metadata.IsCloudEventSource)
+			r.Data.Source.Metadata.Logos.Alt = types.StringPointerValue(resp.Data.Source.Metadata.Logos.Alt)
+			r.Data.Source.Metadata.Logos.Default = types.StringValue(resp.Data.Source.Metadata.Logos.Default)
+			r.Data.Source.Metadata.Logos.Mark = types.StringPointerValue(resp.Data.Source.Metadata.Logos.Mark)
+			r.Data.Source.Metadata.Name = types.StringValue(resp.Data.Source.Metadata.Name)
+			if len(r.Data.Source.Metadata.Options) > len(resp.Data.Source.Metadata.Options) {
+				r.Data.Source.Metadata.Options = r.Data.Source.Metadata.Options[:len(resp.Data.Source.Metadata.Options)]
 			}
-		}
-		r.Data.Source.Slug = types.StringValue(resp.Data.Source.Slug)
-		r.Data.Source.WorkspaceID = types.StringValue(resp.Data.Source.WorkspaceID)
-		r.Data.Source.WriteKeys = nil
-		for _, v := range resp.Data.Source.WriteKeys {
-			r.Data.Source.WriteKeys = append(r.Data.Source.WriteKeys, types.StringValue(v))
+			for optionsCount, optionsItem := range resp.Data.Source.Metadata.Options {
+				var options1 IntegrationOptionBeta
+				if optionsItem.DefaultValue == nil {
+					options1.DefaultValue = types.StringNull()
+				} else {
+					defaultValueResult, _ := json.Marshal(optionsItem.DefaultValue)
+					options1.DefaultValue = types.StringValue(string(defaultValueResult))
+				}
+				options1.Description = types.StringPointerValue(optionsItem.Description)
+				options1.Label = types.StringPointerValue(optionsItem.Label)
+				options1.Name = types.StringValue(optionsItem.Name)
+				options1.Required = types.BoolValue(optionsItem.Required)
+				options1.Type = types.StringValue(optionsItem.Type)
+				if optionsCount+1 > len(r.Data.Source.Metadata.Options) {
+					r.Data.Source.Metadata.Options = append(r.Data.Source.Metadata.Options, options1)
+				} else {
+					r.Data.Source.Metadata.Options[optionsCount].DefaultValue = options1.DefaultValue
+					r.Data.Source.Metadata.Options[optionsCount].Description = options1.Description
+					r.Data.Source.Metadata.Options[optionsCount].Label = options1.Label
+					r.Data.Source.Metadata.Options[optionsCount].Name = options1.Name
+					r.Data.Source.Metadata.Options[optionsCount].Required = options1.Required
+					r.Data.Source.Metadata.Options[optionsCount].Type = options1.Type
+				}
+			}
+			r.Data.Source.Metadata.Slug = types.StringValue(resp.Data.Source.Metadata.Slug)
+			r.Data.Source.Name = types.StringPointerValue(resp.Data.Source.Name)
+			if len(resp.Data.Source.Settings) > 0 {
+				r.Data.Source.Settings = make(map[string]types.String)
+				for key1, value1 := range resp.Data.Source.Settings {
+					result, _ := json.Marshal(value1)
+					r.Data.Source.Settings[key1] = types.StringValue(string(result))
+				}
+			}
+			r.Data.Source.Slug = types.StringValue(resp.Data.Source.Slug)
+			r.Data.Source.WorkspaceID = types.StringValue(resp.Data.Source.WorkspaceID)
+			r.Data.Source.WriteKeys = nil
+			for _, v := range resp.Data.Source.WriteKeys {
+				r.Data.Source.WriteKeys = append(r.Data.Source.WriteKeys, types.StringValue(v))
+			}
 		}
 	}
 }

@@ -29,12 +29,14 @@ func (r *CreateLabelV1InputResourceModel) ToSharedCreateLabelV1Input() *shared.C
 }
 
 func (r *CreateLabelV1InputResourceModel) RefreshFromOperationsCreateLabelResponseBody(resp *operations.CreateLabelResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateLabelV1Output{}
-		r.Data.Label.Description = types.StringPointerValue(resp.Data.Label.Description)
-		r.Data.Label.Key = types.StringValue(resp.Data.Label.Key)
-		r.Data.Label.Value = types.StringValue(resp.Data.Label.Value)
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateLabelV1Output{}
+			r.Data.Label.Description = types.StringPointerValue(resp.Data.Label.Description)
+			r.Data.Label.Key = types.StringValue(resp.Data.Label.Key)
+			r.Data.Label.Value = types.StringValue(resp.Data.Label.Value)
+		}
 	}
 }

@@ -42,12 +42,12 @@ func (o *RemoveSubscriptionFromDestinationResponseBody) GetData() *shared.Remove
 type RemoveSubscriptionFromDestinationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Resource not found
+	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Resource not found
-	RequestErrorEnvelope *shared.RequestErrorEnvelope
 	// OK
 	Object *RemoveSubscriptionFromDestinationResponseBody
 }
@@ -57,6 +57,13 @@ func (o *RemoveSubscriptionFromDestinationResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *RemoveSubscriptionFromDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
+	if o == nil {
+		return nil
+	}
+	return o.RequestErrorEnvelope
 }
 
 func (o *RemoveSubscriptionFromDestinationResponse) GetStatusCode() int {
@@ -71,13 +78,6 @@ func (o *RemoveSubscriptionFromDestinationResponse) GetRawResponse() *http.Respo
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *RemoveSubscriptionFromDestinationResponse) GetRequestErrorEnvelope() *shared.RequestErrorEnvelope {
-	if o == nil {
-		return nil
-	}
-	return o.RequestErrorEnvelope
 }
 
 func (o *RemoveSubscriptionFromDestinationResponse) GetObject() *RemoveSubscriptionFromDestinationResponseBody {

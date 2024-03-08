@@ -57,21 +57,23 @@ func (r *PreviewDestinationFilterV1InputResourceModel) ToSharedPreviewDestinatio
 }
 
 func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromOperationsPreviewDestinationFilterResponseBody(resp *operations.PreviewDestinationFilterResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &PreviewDestinationFilterV1Output{}
-		if len(resp.Data.InputPayload) > 0 {
-			r.Data.InputPayload = make(map[string]types.String)
-			for key, value := range resp.Data.InputPayload {
-				result, _ := json.Marshal(value)
-				r.Data.InputPayload[key] = types.StringValue(string(result))
-			}
-		}
-		if resp.Data.Result == nil {
-			r.Data.Result = nil
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
 		} else {
-			r.Data.Result = &Result{}
+			r.Data = &PreviewDestinationFilterV1Output{}
+			if len(resp.Data.InputPayload) > 0 {
+				r.Data.InputPayload = make(map[string]types.String)
+				for key, value := range resp.Data.InputPayload {
+					result, _ := json.Marshal(value)
+					r.Data.InputPayload[key] = types.StringValue(string(result))
+				}
+			}
+			if resp.Data.Result == nil {
+				r.Data.Result = nil
+			} else {
+				r.Data.Result = &Result{}
+			}
 		}
 	}
 }

@@ -25,10 +25,12 @@ func (r *CreateValidationInWarehouseV1InputResourceModel) ToSharedCreateValidati
 }
 
 func (r *CreateValidationInWarehouseV1InputResourceModel) RefreshFromOperationsCreateValidationInWarehouseResponseBody(resp *operations.CreateValidationInWarehouseResponseBody) {
-	if resp.Data == nil {
-		r.Data = nil
-	} else {
-		r.Data = &CreateValidationInWarehouseV1Output{}
-		r.Data.Status = types.StringValue(string(resp.Data.Status))
+	if resp != nil {
+		if resp.Data == nil {
+			r.Data = nil
+		} else {
+			r.Data = &CreateValidationInWarehouseV1Output{}
+			r.Data.Status = types.StringValue(string(resp.Data.Status))
+		}
 	}
 }

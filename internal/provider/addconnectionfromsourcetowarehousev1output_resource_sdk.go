@@ -8,5 +8,7 @@ import (
 )
 
 func (r *AddConnectionFromSourceToWarehouseV1OutputResourceModel) RefreshFromSharedAddConnectionFromSourceToWarehouseV1Output(resp *shared.AddConnectionFromSourceToWarehouseV1Output) {
-	r.Status = types.StringValue(string(resp.Status))
+	if resp != nil {
+		r.Status = types.StringValue(string(resp.Status))
+	}
 }
