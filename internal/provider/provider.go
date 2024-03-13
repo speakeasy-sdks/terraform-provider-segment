@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	"net/http"
 )
 
 var _ provider.Provider = &SegmentProvider{}
@@ -78,6 +79,7 @@ func (p *SegmentProvider) Configure(ctx context.Context, req provider.ConfigureR
 	opts := []sdk.SDKOption{
 		sdk.WithServerURL(ServerURL),
 		sdk.WithSecurity(security),
+		sdk.WithClient(http.DefaultClient),
 	}
 	client := sdk.New(opts...)
 
