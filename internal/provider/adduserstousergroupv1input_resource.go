@@ -14,8 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -33,9 +34,9 @@ type AddUsersToUserGroupV1InputResource struct {
 
 // AddUsersToUserGroupV1InputResourceModel describes the resource data model.
 type AddUsersToUserGroupV1InputResourceModel struct {
-	Data        *AddUsersToUserGroupV1Output `tfsdk:"data"`
-	Emails      []types.String               `tfsdk:"emails"`
-	UserGroupID types.String                 `tfsdk:"user_group_id"`
+	Data        *tfTypes.AddUsersToUserGroupV1Output `tfsdk:"data"`
+	Emails      []types.String                       `tfsdk:"emails"`
+	UserGroupID types.String                         `tfsdk:"user_group_id"`
 }
 
 func (r *AddUsersToUserGroupV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

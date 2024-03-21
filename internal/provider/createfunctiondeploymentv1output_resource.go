@@ -13,8 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -32,8 +33,8 @@ type CreateFunctionDeploymentV1OutputResource struct {
 
 // CreateFunctionDeploymentV1OutputResourceModel describes the resource data model.
 type CreateFunctionDeploymentV1OutputResourceModel struct {
-	FunctionDeployment AddSourceToTrackingPlanV1Output `tfsdk:"function_deployment"`
-	FunctionID         types.String                    `tfsdk:"function_id"`
+	FunctionDeployment tfTypes.AddSourceToTrackingPlanV1Output `tfsdk:"function_deployment"`
+	FunctionID         types.String                            `tfsdk:"function_id"`
 }
 
 func (r *CreateFunctionDeploymentV1OutputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

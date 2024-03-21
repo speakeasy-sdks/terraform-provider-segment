@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
@@ -34,11 +35,11 @@ type CreateSourceV1InputResource struct {
 
 // CreateSourceV1InputResourceModel describes the resource data model.
 type CreateSourceV1InputResourceModel struct {
-	Data       *CreateSourceV1Output   `tfsdk:"data"`
-	Enabled    types.Bool              `tfsdk:"enabled"`
-	MetadataID types.String            `tfsdk:"metadata_id"`
-	Settings   map[string]types.String `tfsdk:"settings"`
-	Slug       types.String            `tfsdk:"slug"`
+	Data       *tfTypes.CreateSourceV1Output `tfsdk:"data"`
+	Enabled    types.Bool                    `tfsdk:"enabled"`
+	MetadataID types.String                  `tfsdk:"metadata_id"`
+	Settings   map[string]types.String       `tfsdk:"settings"`
+	Slug       types.String                  `tfsdk:"slug"`
 }
 
 func (r *CreateSourceV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

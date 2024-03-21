@@ -6,13 +6,14 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/sdkerrors"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/utils"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/internal/hooks"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/internal/utils"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/errors"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 	"io"
 	"net/http"
-	"strings"
+	"net/url"
 )
 
 // IAMRoles - A role gives a user access to resources within a Workspace. Roles are additive, and can combine to configure a custom policy for a Team Member or a Group. A policy is at least one role plus one resource applied to an individual user or group.
@@ -29,6 +30,12 @@ func newIAMRoles(sdkConfig sdkConfiguration) *IAMRoles {
 // ListRoles - List Roles
 // Returns a list of Roles available to apply to permissions for users and/or groups.
 func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRequest, opts ...operations.Option) (*operations.ListRolesResponse, error) {
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listRoles",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -40,9 +47,12 @@ func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRe
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/roles"
+	opURL, err := url.JoinPath(baseURL, "/roles")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
@@ -52,20 +62,47 @@ func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRe
 		req.Header.Set("Accept", "application/json;q=1, application/vnd.segment.v1+json;q=0.8, application/vnd.segment.v1alpha+json;q=0.5, application/vnd.segment.v1beta+json;q=0")
 	}
 
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	res := &operations.ListRolesResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
 	}
 
 	rawBody, err := io.ReadAll(httpRes.Body)
@@ -75,38 +112,31 @@ func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRe
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.ListRolesResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
-		RawResponse: httpRes,
-	}
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out operations.ListRolesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
 			res.TwoHundredApplicationJSONObject = &out
-		case utils.MatchContentType(contentType, `application/vnd.segment.v1+json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/vnd.segment.v1+json`):
 			var out operations.ListRolesIAMRolesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
 			res.TwoHundredApplicationVndSegmentV1PlusJSONObject = &out
-		case utils.MatchContentType(contentType, `application/vnd.segment.v1alpha+json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/vnd.segment.v1alpha+json`):
 			var out operations.ListRolesIAMRolesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
 			res.TwoHundredApplicationVndSegmentV1alphaPlusJSONObject = &out
-		case utils.MatchContentType(contentType, `application/vnd.segment.v1beta+json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/vnd.segment.v1beta+json`):
 			var out operations.ListRolesIAMRolesResponse200ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -114,7 +144,7 @@ func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRe
 
 			res.TwoHundredApplicationVndSegmentV1betaPlusJSONObject = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, errors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
@@ -122,7 +152,7 @@ func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRe
 		fallthrough
 	case httpRes.StatusCode == 429:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.RequestErrorEnvelope
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -130,8 +160,10 @@ func (s *IAMRoles) ListRoles(ctx context.Context, request operations.ListRolesRe
 
 			res.RequestErrorEnvelope = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, errors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	default:
+		return nil, errors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

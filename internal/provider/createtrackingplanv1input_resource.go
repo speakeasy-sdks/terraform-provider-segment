@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -31,10 +32,10 @@ type CreateTrackingPlanV1InputResource struct {
 
 // CreateTrackingPlanV1InputResourceModel describes the resource data model.
 type CreateTrackingPlanV1InputResourceModel struct {
-	Data        *CreateTrackingPlanV1Output `tfsdk:"data"`
-	Description types.String                `tfsdk:"description"`
-	Name        types.String                `tfsdk:"name"`
-	Type        types.String                `tfsdk:"type"`
+	Data        *tfTypes.CreateTrackingPlanV1Output `tfsdk:"data"`
+	Description types.String                        `tfsdk:"description"`
+	Name        types.String                        `tfsdk:"name"`
+	Type        types.String                        `tfsdk:"type"`
 }
 
 func (r *CreateTrackingPlanV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

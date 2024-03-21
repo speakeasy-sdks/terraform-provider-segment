@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateWorkspaceRegulationV1InputResourceModel) ToSharedCreateWorkspaceRegulationV1Input() *shared.CreateWorkspaceRegulationV1Input {
@@ -28,7 +29,7 @@ func (r *CreateWorkspaceRegulationV1InputResourceModel) RefreshFromOperationsCre
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateCloudSourceRegulationV1Output{}
+			r.Data = &tfTypes.CreateCloudSourceRegulationV1Output{}
 			r.Data.RegulateID = types.StringValue(resp.Data.RegulateID)
 		}
 	}

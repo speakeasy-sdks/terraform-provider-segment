@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -30,8 +31,8 @@ type CreateLabelV1InputResource struct {
 
 // CreateLabelV1InputResourceModel describes the resource data model.
 type CreateLabelV1InputResourceModel struct {
-	Data  *CreateLabelV1Output `tfsdk:"data"`
-	Label LabelV1              `tfsdk:"label"`
+	Data  *tfTypes.CreateLabelV1Output `tfsdk:"data"`
+	Label tfTypes.LabelV1              `tfsdk:"label"`
 }
 
 func (r *CreateLabelV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

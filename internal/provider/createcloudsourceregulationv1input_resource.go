@@ -14,8 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -33,12 +34,12 @@ type CreateCloudSourceRegulationV1InputResource struct {
 
 // CreateCloudSourceRegulationV1InputResourceModel describes the resource data model.
 type CreateCloudSourceRegulationV1InputResourceModel struct {
-	Collection     types.String                         `tfsdk:"collection"`
-	Data           *CreateCloudSourceRegulationV1Output `tfsdk:"data"`
-	RegulationType types.String                         `tfsdk:"regulation_type"`
-	SourceID       types.String                         `tfsdk:"source_id"`
-	SubjectIds     []types.String                       `tfsdk:"subject_ids"`
-	SubjectType    types.String                         `tfsdk:"subject_type"`
+	Collection     types.String                                 `tfsdk:"collection"`
+	Data           *tfTypes.CreateCloudSourceRegulationV1Output `tfsdk:"data"`
+	RegulationType types.String                                 `tfsdk:"regulation_type"`
+	SourceID       types.String                                 `tfsdk:"source_id"`
+	SubjectIds     []types.String                               `tfsdk:"subject_ids"`
+	SubjectType    types.String                                 `tfsdk:"subject_type"`
 }
 
 func (r *CreateCloudSourceRegulationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

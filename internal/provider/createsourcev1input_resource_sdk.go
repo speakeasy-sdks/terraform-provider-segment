@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateSourceV1InputResourceModel) ToSharedCreateSourceV1Input() *shared.CreateSourceV1Input {
@@ -33,14 +34,14 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateSourceV1Output{}
+			r.Data = &tfTypes.CreateSourceV1Output{}
 			r.Data.Source.Enabled = types.BoolValue(resp.Data.Source.Enabled)
 			r.Data.Source.ID = types.StringValue(resp.Data.Source.ID)
 			if len(r.Data.Source.Labels) > len(resp.Data.Source.Labels) {
 				r.Data.Source.Labels = r.Data.Source.Labels[:len(resp.Data.Source.Labels)]
 			}
 			for labelsCount, labelsItem := range resp.Data.Source.Labels {
-				var labels1 LabelV1
+				var labels1 tfTypes.LabelV1
 				labels1.Description = types.StringPointerValue(labelsItem.Description)
 				labels1.Key = types.StringValue(labelsItem.Key)
 				labels1.Value = types.StringValue(labelsItem.Value)
@@ -67,7 +68,7 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 				r.Data.Source.Metadata.Options = r.Data.Source.Metadata.Options[:len(resp.Data.Source.Metadata.Options)]
 			}
 			for optionsCount, optionsItem := range resp.Data.Source.Metadata.Options {
-				var options1 IntegrationOptionBeta
+				var options1 tfTypes.IntegrationOptionBeta
 				if optionsItem.DefaultValue == nil {
 					options1.DefaultValue = types.StringNull()
 				} else {

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -32,10 +33,10 @@ type CreateWorkspaceRegulationV1InputResource struct {
 
 // CreateWorkspaceRegulationV1InputResourceModel describes the resource data model.
 type CreateWorkspaceRegulationV1InputResourceModel struct {
-	Data           *CreateCloudSourceRegulationV1Output `tfsdk:"data"`
-	RegulationType types.String                         `tfsdk:"regulation_type"`
-	SubjectIds     []types.String                       `tfsdk:"subject_ids"`
-	SubjectType    types.String                         `tfsdk:"subject_type"`
+	Data           *tfTypes.CreateCloudSourceRegulationV1Output `tfsdk:"data"`
+	RegulationType types.String                                 `tfsdk:"regulation_type"`
+	SubjectIds     []types.String                               `tfsdk:"subject_ids"`
+	SubjectType    types.String                                 `tfsdk:"subject_type"`
 }
 
 func (r *CreateWorkspaceRegulationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

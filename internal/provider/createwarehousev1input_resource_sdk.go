@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateWarehouseV1InputResourceModel) ToSharedCreateWarehouseV1Input() *shared.CreateWarehouseV1Input {
@@ -43,7 +44,7 @@ func (r *CreateWarehouseV1InputResourceModel) RefreshFromOperationsCreateWarehou
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateWarehouseV1Output{}
+			r.Data = &tfTypes.CreateWarehouseV1Output{}
 			r.Data.Warehouse.Enabled = types.BoolValue(resp.Data.Warehouse.Enabled)
 			r.Data.Warehouse.ID = types.StringValue(resp.Data.Warehouse.ID)
 			r.Data.Warehouse.Metadata.Description = types.StringValue(resp.Data.Warehouse.Metadata.Description)
@@ -56,7 +57,7 @@ func (r *CreateWarehouseV1InputResourceModel) RefreshFromOperationsCreateWarehou
 				r.Data.Warehouse.Metadata.Options = r.Data.Warehouse.Metadata.Options[:len(resp.Data.Warehouse.Metadata.Options)]
 			}
 			for optionsCount, optionsItem := range resp.Data.Warehouse.Metadata.Options {
-				var options1 IntegrationOptionBeta
+				var options1 tfTypes.IntegrationOptionBeta
 				if optionsItem.DefaultValue == nil {
 					options1.DefaultValue = types.StringNull()
 				} else {

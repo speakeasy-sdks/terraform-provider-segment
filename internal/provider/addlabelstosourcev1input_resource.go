@@ -12,8 +12,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -31,9 +32,9 @@ type AddLabelsToSourceV1InputResource struct {
 
 // AddLabelsToSourceV1InputResourceModel describes the resource data model.
 type AddLabelsToSourceV1InputResourceModel struct {
-	Data     *AddLabelsToSourceV1Output `tfsdk:"data"`
-	Labels   []LabelV1                  `tfsdk:"labels"`
-	SourceID types.String               `tfsdk:"source_id"`
+	Data     *tfTypes.AddLabelsToSourceV1Output `tfsdk:"data"`
+	Labels   []tfTypes.LabelV1                  `tfsdk:"labels"`
+	SourceID types.String                       `tfsdk:"source_id"`
 }
 
 func (r *AddLabelsToSourceV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

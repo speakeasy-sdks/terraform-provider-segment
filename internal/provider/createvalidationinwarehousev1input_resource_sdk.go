@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateValidationInWarehouseV1InputResourceModel) ToSharedCreateValidationInWarehouseV1Input() *shared.CreateValidationInWarehouseV1Input {
@@ -29,7 +30,7 @@ func (r *CreateValidationInWarehouseV1InputResourceModel) RefreshFromOperationsC
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateValidationInWarehouseV1Output{}
+			r.Data = &tfTypes.CreateValidationInWarehouseV1Output{}
 			r.Data.Status = types.StringValue(string(resp.Data.Status))
 		}
 	}

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -32,8 +33,8 @@ type CreateInvitesV1InputResource struct {
 
 // CreateInvitesV1InputResourceModel describes the resource data model.
 type CreateInvitesV1InputResourceModel struct {
-	Data    *CreateInvitesV1Output `tfsdk:"data"`
-	Invites []InviteV1             `tfsdk:"invites"`
+	Data    *tfTypes.CreateInvitesV1Output `tfsdk:"data"`
+	Invites []tfTypes.InviteV1             `tfsdk:"invites"`
 }
 
 func (r *CreateInvitesV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

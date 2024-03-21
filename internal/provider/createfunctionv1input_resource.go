@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -33,13 +34,13 @@ type CreateFunctionV1InputResource struct {
 
 // CreateFunctionV1InputResourceModel describes the resource data model.
 type CreateFunctionV1InputResourceModel struct {
-	Code         types.String            `tfsdk:"code"`
-	Data         *CreateFunctionV1Output `tfsdk:"data"`
-	Description  types.String            `tfsdk:"description"`
-	DisplayName  types.String            `tfsdk:"display_name"`
-	LogoURL      types.String            `tfsdk:"logo_url"`
-	ResourceType types.String            `tfsdk:"resource_type"`
-	Settings     []FunctionSettingV1     `tfsdk:"settings"`
+	Code         types.String                    `tfsdk:"code"`
+	Data         *tfTypes.CreateFunctionV1Output `tfsdk:"data"`
+	Description  types.String                    `tfsdk:"description"`
+	DisplayName  types.String                    `tfsdk:"display_name"`
+	LogoURL      types.String                    `tfsdk:"logo_url"`
+	ResourceType types.String                    `tfsdk:"resource_type"`
+	Settings     []tfTypes.FunctionSettingV1     `tfsdk:"settings"`
 }
 
 func (r *CreateFunctionV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

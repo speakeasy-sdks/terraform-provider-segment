@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
@@ -37,9 +38,9 @@ type PreviewDestinationFilterV1InputResource struct {
 
 // PreviewDestinationFilterV1InputResourceModel describes the resource data model.
 type PreviewDestinationFilterV1InputResourceModel struct {
-	Data    *PreviewDestinationFilterV1Output     `tfsdk:"data"`
-	Filter  PreviewDestinationFilterV1InputFilter `tfsdk:"filter"`
-	Payload map[string]types.String               `tfsdk:"payload"`
+	Data    *tfTypes.PreviewDestinationFilterV1Output     `tfsdk:"data"`
+	Filter  tfTypes.PreviewDestinationFilterV1InputFilter `tfsdk:"filter"`
+	Payload map[string]types.String                       `tfsdk:"payload"`
 }
 
 func (r *PreviewDestinationFilterV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

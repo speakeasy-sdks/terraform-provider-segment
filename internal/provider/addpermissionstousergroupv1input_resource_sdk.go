@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *AddPermissionsToUserGroupV1InputResourceModel) ToSharedAddPermissionsToUserGroupV1Input() *shared.AddPermissionsToUserGroupV1Input {
@@ -54,17 +55,17 @@ func (r *AddPermissionsToUserGroupV1InputResourceModel) RefreshFromOperationsAdd
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &AddPermissionsToUserGroupV1Output{}
+			r.Data = &tfTypes.AddPermissionsToUserGroupV1Output{}
 			if len(r.Data.Permissions) > len(resp.Data.Permissions) {
 				r.Data.Permissions = r.Data.Permissions[:len(resp.Data.Permissions)]
 			}
 			for permissionsCount, permissionsItem := range resp.Data.Permissions {
-				var permissions1 AccessPermissionV1
+				var permissions1 tfTypes.AccessPermissionV1
 				for resourcesCount, resourcesItem := range permissionsItem.Resources {
-					var resources1 PermissionResourceV1
+					var resources1 tfTypes.PermissionResourceV1
 					resources1.ID = types.StringValue(resourcesItem.ID)
 					for labelsCount, labelsItem := range resourcesItem.Labels {
-						var labels1 LabelV1
+						var labels1 tfTypes.LabelV1
 						labels1.Description = types.StringPointerValue(labelsItem.Description)
 						labels1.Key = types.StringValue(labelsItem.Key)
 						labels1.Value = types.StringValue(labelsItem.Value)

@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *PreviewDestinationFilterV1InputResourceModel) ToSharedPreviewDestinationFilterV1Input() *shared.PreviewDestinationFilterV1Input {
@@ -61,7 +62,7 @@ func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromOperationsPrev
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &PreviewDestinationFilterV1Output{}
+			r.Data = &tfTypes.PreviewDestinationFilterV1Output{}
 			if len(resp.Data.InputPayload) > 0 {
 				r.Data.InputPayload = make(map[string]types.String)
 				for key, value := range resp.Data.InputPayload {
@@ -72,7 +73,7 @@ func (r *PreviewDestinationFilterV1InputResourceModel) RefreshFromOperationsPrev
 			if resp.Data.Result == nil {
 				r.Data.Result = nil
 			} else {
-				r.Data.Result = &Result{}
+				r.Data.Result = &tfTypes.Result{}
 			}
 		}
 	}

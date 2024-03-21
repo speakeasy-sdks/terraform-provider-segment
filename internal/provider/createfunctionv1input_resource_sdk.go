@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 	"math/big"
 )
 
@@ -58,7 +59,7 @@ func (r *CreateFunctionV1InputResourceModel) RefreshFromOperationsCreateFunction
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateFunctionV1Output{}
+			r.Data = &tfTypes.CreateFunctionV1Output{}
 			if resp.Data.Function.BatchMaxCount != nil {
 				r.Data.Function.BatchMaxCount = types.NumberValue(big.NewFloat(float64(*resp.Data.Function.BatchMaxCount)))
 			} else {
@@ -84,7 +85,7 @@ func (r *CreateFunctionV1InputResourceModel) RefreshFromOperationsCreateFunction
 				r.Data.Function.Settings = r.Data.Function.Settings[:len(resp.Data.Function.Settings)]
 			}
 			for settingsCount, settingsItem := range resp.Data.Function.Settings {
-				var settings1 FunctionSettingV1
+				var settings1 tfTypes.FunctionSettingV1
 				settings1.Description = types.StringValue(settingsItem.Description)
 				settings1.Label = types.StringValue(settingsItem.Label)
 				settings1.Name = types.StringValue(settingsItem.Name)

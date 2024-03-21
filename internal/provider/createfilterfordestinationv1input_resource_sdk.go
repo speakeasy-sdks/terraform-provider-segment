@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 	"math/big"
 )
 
@@ -65,12 +66,12 @@ func (r *CreateFilterForDestinationV1InputResourceModel) RefreshFromOperationsCr
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateFilterForDestinationV1Output{}
+			r.Data = &tfTypes.CreateFilterForDestinationV1Output{}
 			if len(r.Data.Filter.Actions) > len(resp.Data.Filter.Actions) {
 				r.Data.Filter.Actions = r.Data.Filter.Actions[:len(resp.Data.Filter.Actions)]
 			}
 			for actionsCount, actionsItem := range resp.Data.Filter.Actions {
-				var actions1 DestinationFilterActionV1
+				var actions1 tfTypes.DestinationFilterActionV1
 				if len(actionsItem.Fields) > 0 {
 					actions1.Fields = make(map[string]types.String)
 					for key, value := range actionsItem.Fields {

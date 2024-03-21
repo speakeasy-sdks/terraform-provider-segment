@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -31,8 +32,8 @@ type CreateUserGroupV1InputResource struct {
 
 // CreateUserGroupV1InputResourceModel describes the resource data model.
 type CreateUserGroupV1InputResourceModel struct {
-	Data *AddUsersToUserGroupV1Output `tfsdk:"data"`
-	Name types.String                 `tfsdk:"name"`
+	Data *tfTypes.AddUsersToUserGroupV1Output `tfsdk:"data"`
+	Name types.String                         `tfsdk:"name"`
 }
 
 func (r *CreateUserGroupV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

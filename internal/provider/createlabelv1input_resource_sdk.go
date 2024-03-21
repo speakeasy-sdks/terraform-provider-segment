@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateLabelV1InputResourceModel) ToSharedCreateLabelV1Input() *shared.CreateLabelV1Input {
@@ -33,7 +34,7 @@ func (r *CreateLabelV1InputResourceModel) RefreshFromOperationsCreateLabelRespon
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateLabelV1Output{}
+			r.Data = &tfTypes.CreateLabelV1Output{}
 			r.Data.Label.Description = types.StringPointerValue(resp.Data.Label.Description)
 			r.Data.Label.Key = types.StringValue(resp.Data.Label.Key)
 			r.Data.Label.Value = types.StringValue(resp.Data.Label.Value)

@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 	"math/big"
 )
 
@@ -22,7 +23,7 @@ func (r *CreateUserGroupV1InputResourceModel) RefreshFromOperationsCreateUserGro
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &AddUsersToUserGroupV1Output{}
+			r.Data = &tfTypes.AddUsersToUserGroupV1Output{}
 			r.Data.UserGroup.ID = types.StringValue(resp.Data.UserGroup.ID)
 			r.Data.UserGroup.MemberCount = types.NumberValue(big.NewFloat(float64(resp.Data.UserGroup.MemberCount)))
 			r.Data.UserGroup.Name = types.StringValue(resp.Data.UserGroup.Name)
@@ -30,9 +31,9 @@ func (r *CreateUserGroupV1InputResourceModel) RefreshFromOperationsCreateUserGro
 				r.Data.UserGroup.Permissions = r.Data.UserGroup.Permissions[:len(resp.Data.UserGroup.Permissions)]
 			}
 			for permissionsCount, permissionsItem := range resp.Data.UserGroup.Permissions {
-				var permissions1 PermissionV1
+				var permissions1 tfTypes.PermissionV1
 				for labelsCount, labelsItem := range permissionsItem.Labels {
-					var labels1 LabelV1
+					var labels1 tfTypes.LabelV1
 					labels1.Description = types.StringPointerValue(labelsItem.Description)
 					labels1.Key = types.StringValue(labelsItem.Key)
 					labels1.Value = types.StringValue(labelsItem.Value)
@@ -45,10 +46,10 @@ func (r *CreateUserGroupV1InputResourceModel) RefreshFromOperationsCreateUserGro
 					}
 				}
 				for resourcesCount, resourcesItem := range permissionsItem.Resources {
-					var resources1 PermissionResourceV1
+					var resources1 tfTypes.PermissionResourceV1
 					resources1.ID = types.StringValue(resourcesItem.ID)
 					for labelsCount1, labelsItem1 := range resourcesItem.Labels {
-						var labels3 LabelV1
+						var labels3 tfTypes.LabelV1
 						labels3.Description = types.StringPointerValue(labelsItem1.Description)
 						labels3.Key = types.StringValue(labelsItem1.Key)
 						labels3.Value = types.StringValue(labelsItem1.Value)

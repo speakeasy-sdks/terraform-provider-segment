@@ -18,8 +18,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
 
@@ -38,14 +39,14 @@ type CreateFilterForDestinationV1InputResource struct {
 
 // CreateFilterForDestinationV1InputResourceModel describes the resource data model.
 type CreateFilterForDestinationV1InputResourceModel struct {
-	Actions       []DestinationFilterActionV1         `tfsdk:"actions"`
-	Data          *CreateFilterForDestinationV1Output `tfsdk:"data"`
-	Description   types.String                        `tfsdk:"description"`
-	DestinationID types.String                        `tfsdk:"destination_id"`
-	Enabled       types.Bool                          `tfsdk:"enabled"`
-	If            types.String                        `tfsdk:"if"`
-	SourceID      types.String                        `tfsdk:"source_id"`
-	Title         types.String                        `tfsdk:"title"`
+	Actions       []tfTypes.DestinationFilterActionV1         `tfsdk:"actions"`
+	Data          *tfTypes.CreateFilterForDestinationV1Output `tfsdk:"data"`
+	Description   types.String                                `tfsdk:"description"`
+	DestinationID types.String                                `tfsdk:"destination_id"`
+	Enabled       types.Bool                                  `tfsdk:"enabled"`
+	If            types.String                                `tfsdk:"if"`
+	SourceID      types.String                                `tfsdk:"source_id"`
+	Title         types.String                                `tfsdk:"title"`
 }
 
 func (r *CreateFilterForDestinationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

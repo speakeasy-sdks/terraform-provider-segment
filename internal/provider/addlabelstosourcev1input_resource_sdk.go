@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *AddLabelsToSourceV1InputResourceModel) ToSharedAddLabelsToSourceV1Input() *shared.AddLabelsToSourceV1Input {
@@ -36,12 +37,12 @@ func (r *AddLabelsToSourceV1InputResourceModel) RefreshFromOperationsAddLabelsTo
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &AddLabelsToSourceV1Output{}
+			r.Data = &tfTypes.AddLabelsToSourceV1Output{}
 			if len(r.Data.Labels) > len(resp.Data.Labels) {
 				r.Data.Labels = r.Data.Labels[:len(resp.Data.Labels)]
 			}
 			for labelsCount, labelsItem := range resp.Data.Labels {
-				var labels1 LabelV1
+				var labels1 tfTypes.LabelV1
 				labels1.Description = types.StringPointerValue(labelsItem.Description)
 				labels1.Key = types.StringValue(labelsItem.Key)
 				labels1.Value = types.StringValue(labelsItem.Value)

@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 	"github.com/scentregroup/terraform-provider-segment/internal/validators"
 )
@@ -34,9 +35,9 @@ type CreateValidationInWarehouseV1InputResource struct {
 
 // CreateValidationInWarehouseV1InputResourceModel describes the resource data model.
 type CreateValidationInWarehouseV1InputResourceModel struct {
-	Data       *CreateValidationInWarehouseV1Output `tfsdk:"data"`
-	MetadataID types.String                         `tfsdk:"metadata_id"`
-	Settings   map[string]types.String              `tfsdk:"settings"`
+	Data       *tfTypes.CreateValidationInWarehouseV1Output `tfsdk:"data"`
+	MetadataID types.String                                 `tfsdk:"metadata_id"`
+	Settings   map[string]types.String                      `tfsdk:"settings"`
 }
 
 func (r *CreateValidationInWarehouseV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

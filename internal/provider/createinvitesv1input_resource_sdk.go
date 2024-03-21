@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateInvitesV1InputResourceModel) ToSharedCreateInvitesV1Input() *shared.CreateInvitesV1Input {
@@ -62,7 +63,7 @@ func (r *CreateInvitesV1InputResourceModel) RefreshFromOperationsCreateInvitesRe
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateInvitesV1Output{}
+			r.Data = &tfTypes.CreateInvitesV1Output{}
 			r.Data.Emails = nil
 			for _, v := range resp.Data.Emails {
 				r.Data.Emails = append(r.Data.Emails, types.StringValue(v))

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
 )
 
@@ -31,16 +32,16 @@ type CreateTransformationV1InputResource struct {
 
 // CreateTransformationV1InputResourceModel describes the resource data model.
 type CreateTransformationV1InputResourceModel struct {
-	Data                         *CreateTransformationV1Output   `tfsdk:"data"`
-	DestinationMetadataID        types.String                    `tfsdk:"destination_metadata_id"`
-	Enabled                      types.Bool                      `tfsdk:"enabled"`
-	FqlDefinedProperties         []FQLDefinedPropertyV1          `tfsdk:"fql_defined_properties"`
-	If                           types.String                    `tfsdk:"if"`
-	Name                         types.String                    `tfsdk:"name"`
-	NewEventName                 types.String                    `tfsdk:"new_event_name"`
-	PropertyRenames              []PropertyRenameV1              `tfsdk:"property_renames"`
-	PropertyValueTransformations []PropertyValueTransformationV1 `tfsdk:"property_value_transformations"`
-	SourceID                     types.String                    `tfsdk:"source_id"`
+	Data                         *tfTypes.CreateTransformationV1Output   `tfsdk:"data"`
+	DestinationMetadataID        types.String                            `tfsdk:"destination_metadata_id"`
+	Enabled                      types.Bool                              `tfsdk:"enabled"`
+	FqlDefinedProperties         []tfTypes.FQLDefinedPropertyV1          `tfsdk:"fql_defined_properties"`
+	If                           types.String                            `tfsdk:"if"`
+	Name                         types.String                            `tfsdk:"name"`
+	NewEventName                 types.String                            `tfsdk:"new_event_name"`
+	PropertyRenames              []tfTypes.PropertyRenameV1              `tfsdk:"property_renames"`
+	PropertyValueTransformations []tfTypes.PropertyValueTransformationV1 `tfsdk:"property_value_transformations"`
+	SourceID                     types.String                            `tfsdk:"source_id"`
 }
 
 func (r *CreateTransformationV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

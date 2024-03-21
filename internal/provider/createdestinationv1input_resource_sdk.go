@@ -5,8 +5,9 @@ package provider
 import (
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 	"math/big"
 )
 
@@ -46,18 +47,18 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateDestinationV1Output{}
+			r.Data = &tfTypes.CreateDestinationV1Output{}
 			r.Data.Destination.Enabled = types.BoolValue(resp.Data.Destination.Enabled)
 			r.Data.Destination.ID = types.StringValue(resp.Data.Destination.ID)
 			if len(r.Data.Destination.Metadata.Actions) > len(resp.Data.Destination.Metadata.Actions) {
 				r.Data.Destination.Metadata.Actions = r.Data.Destination.Metadata.Actions[:len(resp.Data.Destination.Metadata.Actions)]
 			}
 			for actionsCount, actionsItem := range resp.Data.Destination.Metadata.Actions {
-				var actions1 DestinationMetadataActionV1
+				var actions1 tfTypes.DestinationMetadataActionV1
 				actions1.DefaultTrigger = types.StringPointerValue(actionsItem.DefaultTrigger)
 				actions1.Description = types.StringValue(actionsItem.Description)
 				for fieldsCount, fieldsItem := range actionsItem.Fields {
-					var fields1 DestinationMetadataActionFieldV1
+					var fields1 tfTypes.DestinationMetadataActionFieldV1
 					fields1.AllowNull = types.BoolValue(fieldsItem.AllowNull)
 					if fieldsItem.Choices == nil {
 						fields1.Choices = types.StringNull()
@@ -125,7 +126,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				r.Data.Destination.Metadata.Components = r.Data.Destination.Metadata.Components[:len(resp.Data.Destination.Metadata.Components)]
 			}
 			for componentsCount, componentsItem := range resp.Data.Destination.Metadata.Components {
-				var components1 DestinationMetadataComponentV1
+				var components1 tfTypes.DestinationMetadataComponentV1
 				components1.Code = types.StringValue(componentsItem.Code)
 				if componentsItem.Owner != nil {
 					components1.Owner = types.StringValue(string(*componentsItem.Owner))
@@ -145,7 +146,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				r.Data.Destination.Metadata.Contacts = r.Data.Destination.Metadata.Contacts[:len(resp.Data.Destination.Metadata.Contacts)]
 			}
 			for contactsCount, contactsItem := range resp.Data.Destination.Metadata.Contacts {
-				var contacts1 Contact
+				var contacts1 tfTypes.Contact
 				contacts1.Email = types.StringValue(contactsItem.Email)
 				contacts1.IsPrimary = types.BoolPointerValue(contactsItem.IsPrimary)
 				contacts1.Name = types.StringPointerValue(contactsItem.Name)
@@ -169,7 +170,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				r.Data.Destination.Metadata.Options = r.Data.Destination.Metadata.Options[:len(resp.Data.Destination.Metadata.Options)]
 			}
 			for optionsCount, optionsItem := range resp.Data.Destination.Metadata.Options {
-				var options1 IntegrationOptionBeta
+				var options1 tfTypes.IntegrationOptionBeta
 				if optionsItem.DefaultValue == nil {
 					options1.DefaultValue = types.StringNull()
 				} else {
@@ -197,7 +198,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 				r.Data.Destination.Metadata.Presets = r.Data.Destination.Metadata.Presets[:len(resp.Data.Destination.Metadata.Presets)]
 			}
 			for presetsCount, presetsItem := range resp.Data.Destination.Metadata.Presets {
-				var presets1 DestinationMetadataSubscriptionPresetV1
+				var presets1 tfTypes.DestinationMetadataSubscriptionPresetV1
 				presets1.ActionID = types.StringValue(presetsItem.ActionID)
 				if len(presetsItem.Fields) > 0 {
 					presets1.Fields = make(map[string]types.String)

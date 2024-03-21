@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateTransformationV1InputResourceModel) ToSharedCreateTransformationV1Input() *shared.CreateTransformationV1Input {
@@ -74,14 +75,14 @@ func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTr
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &CreateTransformationV1Output{}
+			r.Data = &tfTypes.CreateTransformationV1Output{}
 			r.Data.Transformation.DestinationMetadataID = types.StringPointerValue(resp.Data.Transformation.DestinationMetadataID)
 			r.Data.Transformation.Enabled = types.BoolValue(resp.Data.Transformation.Enabled)
 			if len(r.Data.Transformation.FqlDefinedProperties) > len(resp.Data.Transformation.FqlDefinedProperties) {
 				r.Data.Transformation.FqlDefinedProperties = r.Data.Transformation.FqlDefinedProperties[:len(resp.Data.Transformation.FqlDefinedProperties)]
 			}
 			for fqlDefinedPropertiesCount, fqlDefinedPropertiesItem := range resp.Data.Transformation.FqlDefinedProperties {
-				var fqlDefinedProperties1 FQLDefinedPropertyV1
+				var fqlDefinedProperties1 tfTypes.FQLDefinedPropertyV1
 				fqlDefinedProperties1.Fql = types.StringValue(fqlDefinedPropertiesItem.Fql)
 				fqlDefinedProperties1.PropertyName = types.StringValue(fqlDefinedPropertiesItem.PropertyName)
 				if fqlDefinedPropertiesCount+1 > len(r.Data.Transformation.FqlDefinedProperties) {
@@ -99,7 +100,7 @@ func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTr
 				r.Data.Transformation.PropertyRenames = r.Data.Transformation.PropertyRenames[:len(resp.Data.Transformation.PropertyRenames)]
 			}
 			for propertyRenamesCount, propertyRenamesItem := range resp.Data.Transformation.PropertyRenames {
-				var propertyRenames1 PropertyRenameV1
+				var propertyRenames1 tfTypes.PropertyRenameV1
 				propertyRenames1.NewName = types.StringValue(propertyRenamesItem.NewName)
 				propertyRenames1.OldName = types.StringValue(propertyRenamesItem.OldName)
 				if propertyRenamesCount+1 > len(r.Data.Transformation.PropertyRenames) {
@@ -113,7 +114,7 @@ func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTr
 				r.Data.Transformation.PropertyValueTransformations = r.Data.Transformation.PropertyValueTransformations[:len(resp.Data.Transformation.PropertyValueTransformations)]
 			}
 			for propertyValueTransformationsCount, propertyValueTransformationsItem := range resp.Data.Transformation.PropertyValueTransformations {
-				var propertyValueTransformations1 PropertyValueTransformationV1
+				var propertyValueTransformations1 tfTypes.PropertyValueTransformationV1
 				propertyValueTransformations1.PropertyPaths = nil
 				for _, v := range propertyValueTransformationsItem.PropertyPaths {
 					propertyValueTransformations1.PropertyPaths = append(propertyValueTransformations1.PropertyPaths, types.StringValue(v))

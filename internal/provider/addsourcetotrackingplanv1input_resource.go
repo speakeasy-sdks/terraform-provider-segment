@@ -13,8 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -32,9 +33,9 @@ type AddSourceToTrackingPlanV1InputResource struct {
 
 // AddSourceToTrackingPlanV1InputResourceModel describes the resource data model.
 type AddSourceToTrackingPlanV1InputResourceModel struct {
-	Data           *AddSourceToTrackingPlanV1Output `tfsdk:"data"`
-	SourceID       types.String                     `tfsdk:"source_id"`
-	TrackingPlanID types.String                     `tfsdk:"tracking_plan_id"`
+	Data           *tfTypes.AddSourceToTrackingPlanV1Output `tfsdk:"data"`
+	SourceID       types.String                             `tfsdk:"source_id"`
+	TrackingPlanID types.String                             `tfsdk:"tracking_plan_id"`
 }
 
 func (r *AddSourceToTrackingPlanV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

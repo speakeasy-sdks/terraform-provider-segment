@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *AddSourceToTrackingPlanV1InputResourceModel) ToSharedAddSourceToTrackingPlanV1Input() *shared.AddSourceToTrackingPlanV1Input {
@@ -21,7 +22,7 @@ func (r *AddSourceToTrackingPlanV1InputResourceModel) RefreshFromOperationsAddSo
 		if resp.Data == nil {
 			r.Data = nil
 		} else {
-			r.Data = &AddSourceToTrackingPlanV1Output{}
+			r.Data = &tfTypes.AddSourceToTrackingPlanV1Output{}
 			r.Data.Status = types.StringValue(string(resp.Data.Status))
 		}
 	}

@@ -4,7 +4,7 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/shared"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/shared"
 )
 
 func (r *CreateFunctionDeploymentV1OutputResourceModel) RefreshFromSharedCreateFunctionDeploymentV1Output(resp *shared.CreateFunctionDeploymentV1Output) {

@@ -14,8 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/scentregroup/terraform-provider-segment/internal/provider/types"
 	"github.com/scentregroup/terraform-provider-segment/internal/sdk"
-	"github.com/scentregroup/terraform-provider-segment/internal/sdk/pkg/models/operations"
+	"github.com/scentregroup/terraform-provider-segment/internal/sdk/models/operations"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -33,9 +34,9 @@ type AddPermissionsToUserGroupV1InputResource struct {
 
 // AddPermissionsToUserGroupV1InputResourceModel describes the resource data model.
 type AddPermissionsToUserGroupV1InputResourceModel struct {
-	Data        *AddPermissionsToUserGroupV1Output `tfsdk:"data"`
-	Permissions []PermissionInputV1                `tfsdk:"permissions"`
-	UserGroupID types.String                       `tfsdk:"user_group_id"`
+	Data        *tfTypes.AddPermissionsToUserGroupV1Output `tfsdk:"data"`
+	Permissions []tfTypes.PermissionInputV1                `tfsdk:"permissions"`
+	UserGroupID types.String                               `tfsdk:"user_group_id"`
 }
 
 func (r *AddPermissionsToUserGroupV1InputResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
