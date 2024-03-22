@@ -118,7 +118,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 					r.Data.Destination.Metadata.Actions[actionsCount].Slug = actions1.Slug
 				}
 			}
-			r.Data.Destination.Metadata.Categories = nil
+			r.Data.Destination.Metadata.Categories = []types.String{}
 			for _, v := range resp.Data.Destination.Metadata.Categories {
 				r.Data.Destination.Metadata.Categories = append(r.Data.Destination.Metadata.Categories, types.StringValue(v))
 			}
@@ -218,11 +218,11 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 					r.Data.Destination.Metadata.Presets[presetsCount].Trigger = presets1.Trigger
 				}
 			}
-			r.Data.Destination.Metadata.PreviousNames = nil
+			r.Data.Destination.Metadata.PreviousNames = []types.String{}
 			for _, v := range resp.Data.Destination.Metadata.PreviousNames {
 				r.Data.Destination.Metadata.PreviousNames = append(r.Data.Destination.Metadata.PreviousNames, types.StringValue(v))
 			}
-			r.Data.Destination.Metadata.RegionEndpoints = nil
+			r.Data.Destination.Metadata.RegionEndpoints = []types.String{}
 			for _, v := range resp.Data.Destination.Metadata.RegionEndpoints {
 				r.Data.Destination.Metadata.RegionEndpoints = append(r.Data.Destination.Metadata.RegionEndpoints, types.StringValue(v))
 			}
@@ -249,7 +249,7 @@ func (r *CreateDestinationV1InputResourceModel) RefreshFromOperationsCreateDesti
 			r.Data.Destination.Metadata.SupportedPlatforms.Browser = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Browser)
 			r.Data.Destination.Metadata.SupportedPlatforms.Mobile = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Mobile)
 			r.Data.Destination.Metadata.SupportedPlatforms.Server = types.BoolPointerValue(resp.Data.Destination.Metadata.SupportedPlatforms.Server)
-			r.Data.Destination.Metadata.SupportedRegions = nil
+			r.Data.Destination.Metadata.SupportedRegions = []types.String{}
 			for _, v := range resp.Data.Destination.Metadata.SupportedRegions {
 				r.Data.Destination.Metadata.SupportedRegions = append(r.Data.Destination.Metadata.SupportedRegions, types.StringValue(v))
 			}

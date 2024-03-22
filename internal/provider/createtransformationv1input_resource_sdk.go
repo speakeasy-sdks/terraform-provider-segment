@@ -115,7 +115,7 @@ func (r *CreateTransformationV1InputResourceModel) RefreshFromOperationsCreateTr
 			}
 			for propertyValueTransformationsCount, propertyValueTransformationsItem := range resp.Data.Transformation.PropertyValueTransformations {
 				var propertyValueTransformations1 tfTypes.PropertyValueTransformationV1
-				propertyValueTransformations1.PropertyPaths = nil
+				propertyValueTransformations1.PropertyPaths = []types.String{}
 				for _, v := range propertyValueTransformationsItem.PropertyPaths {
 					propertyValueTransformations1.PropertyPaths = append(propertyValueTransformations1.PropertyPaths, types.StringValue(v))
 				}

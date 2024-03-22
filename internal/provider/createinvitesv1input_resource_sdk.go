@@ -64,7 +64,7 @@ func (r *CreateInvitesV1InputResourceModel) RefreshFromOperationsCreateInvitesRe
 			r.Data = nil
 		} else {
 			r.Data = &tfTypes.CreateInvitesV1Output{}
-			r.Data.Emails = nil
+			r.Data.Emails = []types.String{}
 			for _, v := range resp.Data.Emails {
 				r.Data.Emails = append(r.Data.Emails, types.StringValue(v))
 			}

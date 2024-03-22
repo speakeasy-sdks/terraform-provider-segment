@@ -53,7 +53,7 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 					r.Data.Source.Labels[labelsCount].Value = labels1.Value
 				}
 			}
-			r.Data.Source.Metadata.Categories = nil
+			r.Data.Source.Metadata.Categories = []types.String{}
 			for _, v := range resp.Data.Source.Metadata.Categories {
 				r.Data.Source.Metadata.Categories = append(r.Data.Source.Metadata.Categories, types.StringValue(v))
 			}
@@ -102,7 +102,7 @@ func (r *CreateSourceV1InputResourceModel) RefreshFromOperationsCreateSourceResp
 			}
 			r.Data.Source.Slug = types.StringValue(resp.Data.Source.Slug)
 			r.Data.Source.WorkspaceID = types.StringValue(resp.Data.Source.WorkspaceID)
-			r.Data.Source.WriteKeys = nil
+			r.Data.Source.WriteKeys = []types.String{}
 			for _, v := range resp.Data.Source.WriteKeys {
 				r.Data.Source.WriteKeys = append(r.Data.Source.WriteKeys, types.StringValue(v))
 			}
