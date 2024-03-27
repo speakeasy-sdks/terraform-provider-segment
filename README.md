@@ -16,7 +16,7 @@ terraform {
   required_providers {
     segment = {
       source  = "scentregroup/segment"
-      version = "0.6.1"
+      version = "0.7.0"
     }
   }
 }
